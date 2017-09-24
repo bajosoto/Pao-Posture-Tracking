@@ -13,9 +13,8 @@
 #include <string.h>
 #include <signal.h>
 #include <inttypes.h>
-#include "../comm-prot/sm/uart-sm.h"			// TODO: Make this tidier in the makefile. It's 4am and I'm getting lazy
-#include "../comm-prot/pc/pc-key-rx.h"			// TODO: Make this tidier in the makefile. It's 4am and I'm getting lazy
-#include "../comm-prot/pc/pc-js-rx.h"
+#include "uart-sm.h"
+#include "pc-key-rx.h"	
 #include <ncurses.h>
 
 /*------------------------------------------------------------
@@ -44,7 +43,7 @@ void rs232_open(void) {
 #ifdef __linux__
 	fd_RS232 = open("/dev/ttyUSB0", O_RDWR | O_NOCTTY);  // Hardcode your serial port here, or request it as an argument at runtime /dev/bus/usb/002/003 /dev/ttyUSB0
 #elif __APPLE__
-	fd_RS232 = open("/dev/cu.usbserial-DN00P2TJ", O_RDWR | O_NONBLOCK);  // Hardcode your serial port here, or request it as an argument at runtime
+	fd_RS232 = open("/dev/cu.usbmodem14211", O_RDWR | O_NONBLOCK);  // Hardcode your serial port here, or request it as an argument at runtime
 #else
 #   error "Unknown compiler"
 #endif 	
@@ -145,30 +144,14 @@ int main(int argc, char **argv)
 {
 	char c;
 	int i;
-	int jsDetected= 0;
 	
 	initInterface();
-	dispMsg("Welcome to Tequila Drone!");
+	dispMsg("Welcome to Pao Terminal!");
 
 	dispMsg("Opening serial interface...");
 	rs232_open();
 	dispMsg("Serial interface connected.");
 
-	/* Initialize Joystick */	
-	dispMsg("Detecting Joystick..."); 
-	jsDetected = initJS();
-	if(jsDetected) {
-		dispMsg("Joystick detected");
-	} else {
-		dispMsg("Joystick not detected");
-	}
-
-	if(has_key(KEY_UP)) {
-		dispMsg("This console doesn't support arrow keys");
-	} else {
-		dispMsg("This console supports arrow keys");
-	}
-	
 	while(waitForUser);
 
 	// Initialize timer
@@ -183,14 +166,6 @@ int main(int argc, char **argv)
 
 		if ((c = rs232_getchar_nb()) != -1) {
 			setrxByte(c);
-		}
-
-		if(sendJsInput) {
-			sendJsInput = 0;
-			if(jsDetected){
-				jsInput();	//Read joystick values and update roll, pitch, yaw, throttle and fire
-				sendMessagePc(MSG03_JOYSTICK);
-			}
 		}
 	}
 
