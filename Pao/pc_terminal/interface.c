@@ -79,40 +79,45 @@ void introScreen() {
 
 	int y = (maxY - 28) / 2;
 	int xDrone = (maxX - 50) / 2;
-	int xLogo = (maxX - 130) / 2;
-	
-	mvprintw(y + 0, xDrone, "          `/osyso:`             :+syso/.          \n");    
-	mvprintw(y + 1, xDrone, "        -hmo:-.-/smy.        `smy/-..:odd:        \n");
-	mvprintw(y + 2, xDrone, "       /N+         oN:      .my`        :Ns       \n");
-	mvprintw(y + 3, xDrone, "      `Ns   /dNd-   hm      hm   .hNm+   /M-      \n");
-	mvprintw(y + 4, xDrone, "      .M+   sMMMd`  sN      dd  `yMMMh   :M:      \n");
-	mvprintw(y + 5, xDrone, "       ym.   .:+NNs-/+      :o.oNNs:-   `dd       \n");
-	mvprintw(y + 6, xDrone, "        oNo-    `sMMms:.``.:odMMh.    .+my`       \n");
-	mvprintw(y + 7, xDrone, "         `+yddddh.:NMMMMMMMMMMM+`yddddh+.         \n");
-	mvprintw(y + 8, xDrone, "                   /MMMMMMMMMMs                   \n");
-	mvprintw(y + 9, xDrone, "                   `MMMMMMMMMM-                   \n");
-	mvprintw(y + 10, xDrone, "                   /MMMMMMMMMMs                   \n");
-	mvprintw(y + 11, xDrone, "         `+yddddh.:NMMMMMMMMMMM+`hddddh+.         \n");
-	mvprintw(y + 12, xDrone, "        oNs-    `sNMms/.``.:odMMh.    .+my`       \n");
-	mvprintw(y + 13, xDrone, "       ym.   -:+NNy-/+      :o.oNNs:-   `dd       \n");
-	mvprintw(y + 14, xDrone, "      .M+   sMMMd`  sN      dd  `yMMMh   :M:      \n");
-	mvprintw(y + 15, xDrone, "      `Ns   :dmh-   hm      hm   .hmd+   /M-      \n");
-	mvprintw(y + 16, xDrone, "       /N+         oN:      .my`        :Ns       \n");
-	mvprintw(y + 17, xDrone, "        -hmo:-.-/smy.        `smy/-..:odd:        \n");
-	mvprintw(y + 18, xDrone, "          `/osyso:`             :+syso/.          \n"); 
-
+	int xLogo = (maxX - 18) / 2;
+	                                              
+	mvprintw(y + 0, xDrone, "                 `````````````                      \n");
+	mvprintw(y + 1, xDrone, "               `` ```````````````                   \n");
+	mvprintw(y + 2, xDrone, "             ``  `````````````````                  \n");
+	mvprintw(y + 3, xDrone, "            ``  ```````````````````.                \n");
+	mvprintw(y + 4, xDrone, "           `` ```````````````````````               \n");
+	mvprintw(y + 5, xDrone, "          `` `````````````````````````              \n");
+	mvprintw(y + 6, xDrone, "         ```````````..-----..``````````             \n");
+	mvprintw(y + 7, xDrone, "        `````````-/////////////-````````            \n");
+	mvprintw(y + 8, xDrone, "       ````````:/+/////////////+/:```````           \n");
+	mvprintw(y + 9, xDrone, "       ``````./+///////////////////.``````          \n");
+	mvprintw(y + 10, xDrone, "      ```````++////////////////////+``   `         \n"); 
+	mvprintw(y + 11, xDrone, "      ``````:+//////////////////////:`   `         \n"); 
+	mvprintw(y + 12, xDrone, "      ``````//////////:::::://///////    `         \n"); 
+	mvprintw(y + 13, xDrone, "      ``````//////:::::::::::::::://:              \n"); 
+	mvprintw(y + 14, xDrone, "       `````.+/::::::::::::::::::::/.              \n"); 
+	mvprintw(y + 15, xDrone, "        ```` -/:::::::::::::::::::/-               \n"); 
+	mvprintw(y + 16, xDrone, "         ```  .::---------------::.                \n"); 
+	mvprintw(y + 17, xDrone, "          ``    .:--------------.                  \n"); 
+	mvprintw(y + 18, xDrone, "                  `..-------..`                    \n"); 
+                                                  
+                                                  
 	attron(COLOR_PAIR(1));
-	mvprintw(y + 20, xLogo, " _________  _______   ________  ___  ___  ___  ___       ________          ________  ________  ________  ________   _______      \n");
-	mvprintw(y + 21, xLogo, "|\\___   ___\\\\  ___ \\ |\\   __  \\|\\  \\|\\  \\|\\  \\|\\  \\     |\\   __  \\        |\\   ___ \\|\\   __  \\|\\   __  \\|\\   ___  \\|\\  ___ \\     \n");
-	mvprintw(y + 22, xLogo, "\\|___ \\  \\_\\ \\   __/|\\ \\  \\|\\  \\ \\  \\\\\\  \\ \\  \\ \\  \\    \\ \\  \\|\\  \\       \\ \\  \\_|\\ \\ \\  \\|\\  \\ \\  \\|\\  \\ \\  \\\\ \\  \\ \\   __/|    \n");
-	mvprintw(y + 23, xLogo, "     \\ \\  \\ \\ \\  \\_|/_\\ \\  \\\\\\  \\ \\  \\\\\\  \\ \\  \\ \\  \\    \\ \\   __  \\       \\ \\  \\ \\\\ \\ \\   _  _\\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\  \\_|/__  \n");
-	mvprintw(y + 24, xLogo, "      \\ \\  \\ \\ \\  \\_|\\ \\ \\  \\\\\\  \\ \\  \\\\\\  \\ \\  \\ \\  \\____\\ \\  \\ \\  \\       \\ \\  \\_\\\\ \\ \\  \\\\  \\\\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\  \\_|\\ \\ \n");
-	mvprintw(y + 25, xLogo, "       \\ \\__\\ \\ \\_______\\ \\_____  \\ \\_______\\ \\__\\ \\_______\\ \\__\\ \\__\\       \\ \\_______\\ \\__\\\\ _\\\\ \\_______\\ \\__\\\\ \\__\\ \\_______\\\n");
-	mvprintw(y + 26, xLogo, "        \\|__|  \\|_______|\\|___| \\__\\|_______|\\|__|\\|_______|\\|__|\\|__|        \\|_______|\\|__|\\|__|\\|_______|\\|__| \\|__|\\|_______|\n");
-	mvprintw(y + 27, xLogo, "                               \\|__|                                                                                             \n");                                                                                                                   
+	mvprintw(y + 20, xLogo, "                  ");
+	mvprintw(y + 21, xLogo, "                  ");
+	mvprintw(y + 22, xLogo, " .--.  .       /  ");
+	mvprintw(y + 23, xLogo, " |   )/ \\   .--.  ");
+	mvprintw(y + 24, xLogo, " |--'/___\\ |    | ");
+	mvprintw(y + 25, xLogo, " |  /     \\:    ; ");
+	mvprintw(y + 26, xLogo, " ' '       ``--'  ");
+	mvprintw(y + 27, xLogo, "                  ");                                                                                                                
 	attroff(COLOR_PAIR(1));
 	refresh();
 }
+
+
+                
+
 
 void continueScreen() {
 
