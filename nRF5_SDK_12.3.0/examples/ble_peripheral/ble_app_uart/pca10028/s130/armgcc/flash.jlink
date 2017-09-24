@@ -1,0 +1,4 @@
+loadbin _build/nrf51422_xxac.bin 
+r
+g
+exit

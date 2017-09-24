@@ -1,0 +1,30 @@
+# Hardcoded
+OUTPUT_FILENAME := nrf51422_xxac
+FLASH_START_ADDR = 0x1b000
+#  FLASH_START_ADDR = 0x0
+
+# FLASH_START_ADDR = $(shell $(OBJDUMP) -h         $(OUTPUT_DIRECTORYf)/$(OUTPUT_FILENAME).out -j .text | grep .text | awk '{print $$4}')
+
+JLINK_OPTS = -device nrf51822 -if swd -speed 4000
+JLINK = JLinkExe $(JLINK_OPTS)
+
+flash-sd-310: sd-310.jlink
+	$(JLINK) sd-310.jlink
+
+sd-310.jlink:
+	printf "loadbin $(SDK_ROOT)/components/softdevice/s130/hex/s130_nrf51_2.0.1_softdevice.hex 0\nr\ng\nexit\n" > sd-310.jlink
+
+flash-jlink: flash.jlink
+	$(JLINK) flash.jlink
+
+flash.jlink:
+	printf "loadbin $(OUTPUT_DIRECTORY)/$(OUTPUT_FILENAME).bin $(FLASH_START_ADDR)\nr\ng\nexit\n" > flash.jlink
+
+erase-all: erase-all.jlink
+	$(JLINK) erase-all.jlink
+
+erase-all.jlink:
+	# Write to NVMC to enable erase, do erase all, wait for completion. reset
+	printf "w4 4001e504 2\nw4 4001e50c 1\nsleep 100\nr\nexit\n" > erase-all.jlink
+
+.PHONY:  flash-jlink flash.jlink erase-all erase-all.jlink
