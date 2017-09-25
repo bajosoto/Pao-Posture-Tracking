@@ -11,6 +11,8 @@
 #include <inttypes.h>
 
 void msg00_status_ans();
+void msg01_quit_ans();
+void msg02_sensor_vals();
 
 int16_t unfoldSI16(int index);
 
@@ -18,10 +20,32 @@ int16_t unfoldSI16(int index);
 MsgType msgTable[TOTAL_ES_MESSAGES] = {
 	/* Action Name */		/* Length */
 	{{msg00_status_ans}, 	0},				// 00: Performs some action
+	{{msg01_quit_ans}, 		0}, 			// 01: Answer shutdown request
+	{{msg02_sensor_vals}, 	18}, 			// 02: Sensor values to display
 };
 
 void msg00_status_ans() {
 	dispMsg("Pong!");
+}
+
+void msg01_quit_ans() {
+	dispMsg("Board has shut down. Terminating program...");
+	demo_running = 0;
+}
+
+void msg02_sensor_vals() {
+	int16_t s0 = unfoldSI16(0);
+	int16_t s1 = unfoldSI16(1);
+	int16_t s2 = unfoldSI16(2);
+	int16_t s3 = unfoldSI16(3);
+	int16_t s4 = unfoldSI16(4);
+	int16_t s5 = unfoldSI16(5);
+	dispVal(DISP_AX, s0);
+	dispVal(DISP_AY, s1);
+	dispVal(DISP_AZ, s2);
+	dispVal(DISP_P, s3);
+	dispVal(DISP_Q, s4);
+	dispVal(DISP_R, s5);
 }
 
 int16_t unfoldSI16(int index) {

@@ -6,6 +6,7 @@
 
 #include "es-uart-tx.h"
 #include "uart-sm.h"
+#include "mpu_interface.h"
 
 void stringCpy(char * inString);
 void splitSI16(int16_t c, int index);
@@ -22,8 +23,18 @@ void sendMessageEs(TxMsgEs msgType){
 		switch (msgType){
 	
 			case MSG00_STATUS_ANS:
+			case MSG01_QUIT_ANS:
 				//txBuff[0] = smCurrState;
 				sendPacket(msgType, 0);
+				break;
+			case MSG02_SENSOR_VALS:
+				splitSI16(getMpuVal(ACC_X), 0);
+				splitSI16(getMpuVal(ACC_Y), 1);
+				splitSI16(getMpuVal(ACC_Z), 2);
+				splitSI16(getMpuVal(GYR_X), 3);
+				splitSI16(getMpuVal(GYR_Y), 4);
+				splitSI16(getMpuVal(GYR_Z), 5);
+				sendPacket(msgType, 18);
 				break;
 			case TOTAL_ES_MESSAGES:					// Only including this to avoid the warning [-Wswitch]
 				break;
