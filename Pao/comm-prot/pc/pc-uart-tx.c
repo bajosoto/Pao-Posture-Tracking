@@ -22,6 +22,7 @@ void sendMessagePc(TxMsgPc msgType){
 		switch (msgType){
 	
 			case MSG00_STATUS:
+			case MSG01_QUIT:
 				sendPacket(msgType, 0);
 				break;
 			case TOTAL_PC_MESSAGES:					// Only including this to avoid the warning [-Wswitch]

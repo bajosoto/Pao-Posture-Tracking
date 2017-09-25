@@ -10,5 +10,8 @@
 #include "uart.h"
 #include "uart-sm.h"
 #include "app_mpu.h"
+#include "mpu_interface.h"
+
+int programRunning;
 
 #endif /* PAO_H__ */

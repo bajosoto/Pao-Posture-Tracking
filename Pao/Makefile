@@ -65,6 +65,7 @@ SRC_FILES += \
   $(PROJ_DIR)/drivers/app_mpu.c \
   $(SDK_ROOT)/components/drivers_nrf/twi_master/nrf_drv_twi.c \
   $(PROJ_DIR)/drivers/nrf_drv_mpu_twi.c \
+  $(PROJ_DIR)/modules/mpu_interface.c \
 
   # $(PROJ_DIR)/comm-prot/sm/uart-sm.c \
   # $(PROJ_DIR)/comm-prot/es/es-uart-rx.c \
@@ -197,7 +198,8 @@ INC_FOLDERS += \
   $(PROJ_DIR)/comm-prot/sm \
   $(PROJ_DIR)/comm-prot/es \
   $(PROJ_DIR)/comm-prot/pc \
-  $(SDK_ROOT)/components/drivers_nrf/twi_master/
+  $(SDK_ROOT)/components/drivers_nrf/twi_master/ \
+  $(PROJ_DIR)/modules/
 
   # $(PROJ_DIR)/comm-prot/sm \
   # $(PROJ_DIR)/comm-prot/es \
