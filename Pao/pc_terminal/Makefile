@@ -8,14 +8,16 @@ SRC_FILES += \
   ../comm-prot/pc/pc-key-rx.c \
   ../comm-prot/pc/pc-uart-rx.c \
   ../comm-prot/pc/pc-uart-tx.c \
-  interface.c \
-  pc_terminal.c
+  modules/interface.c \
+  modules/rs232_interface.c \
+  pc_terminal.c 
 
 INC_DIRS += \
   ./ \
   ../comm-prot/sm \
   ../comm-prot/pc \
-  ../comm-prot/es
+  ../comm-prot/es \
+  modules
 
 INC_PARAMS=$(foreach d, $(INC_DIRS), -I$d)
 
