@@ -8,8 +8,10 @@
 #include "es-uart-tx.h"
 #include "uart-sm.h"
 #include <inttypes.h>
+#include "pao.h"
 
 void msg00_status();
+void msg01_quit();
 
 int16_t unfoldSI16(int index);
 
@@ -17,11 +19,17 @@ int16_t unfoldSI16(int index);
 MsgType msgTable[TOTAL_PC_MESSAGES] = {
 	/* Action Name */		/* Length */
 	{{msg00_status}, 		0},				// 00:	Requests board status
+	{{msg01_quit}, 			0}, 			// 01:	Request board shutdown
 };			
 
 void msg00_status() {
 
 	sendMessageEs(MSG00_STATUS_ANS);
+}
+
+void msg01_quit() {
+	programRunning = 0;
+	sendMessageEs(MSG01_QUIT_ANS);
 }
 
 int16_t unfoldSI16(int index) {

@@ -3,6 +3,8 @@
 
 typedef enum TxMsgEs_t { 
 	MSG00_STATUS_ANS,			// 00:	Answer status to terminal
+	MSG01_QUIT_ANS, 			// 01:	Answer shutdown request
+	MSG02_SENSOR_VALS,			// 02:	Sensor values to display
 	TOTAL_ES_MESSAGES
 } TxMsgEs;
 

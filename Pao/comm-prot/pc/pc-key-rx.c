@@ -26,7 +26,7 @@ void keyInput(int c) {
 		case KEY_CLOSE:
 		case 27:										// 'ESC':	Program termination
 			dispMsg("Program terminating.");
-			//sendMessagePc(MSG01_QUIT);
+			sendMessagePc(MSG01_QUIT);
 			break;
 
 		default:	
