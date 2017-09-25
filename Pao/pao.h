@@ -9,5 +9,6 @@
 #include "boards.h"
 #include "uart.h"
 #include "uart-sm.h"
+#include "app_mpu.h"
 
 #endif /* PAO_H__ */

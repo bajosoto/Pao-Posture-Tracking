@@ -10,8 +10,9 @@ int main(void)
     bsp_board_leds_init();
     bsp_board_buttons_init();
     uart_service_init();
+    mpu_setup();
 
-    printf("Hello!\n\r");
+    // printf("Hello!\n\r");
 
     /* Toggle LEDs. */
     while (true) {
@@ -19,7 +20,6 @@ int main(void)
         uint8_t cr;
         
         if (app_uart_get(&cr) == NRF_SUCCESS){
-            //app_uart_put(cr);
             setrxByte(cr);
         }
 
