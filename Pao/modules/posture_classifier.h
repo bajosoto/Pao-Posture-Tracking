@@ -2,16 +2,18 @@
 #define POSTURE_CLASSIFIER_H
 
 typedef enum{
-	POSTURE_STANDING_UPRIGHT=0,
-	POSTURE_STANDING_CROUCHED,
-	POSTURE_SITTING_UPRIGHT,
-	POSTURE_SITTING_CROUCHED,
-	POSTURE_SITTING_CONFIDENT,
-	POSTURE_STANDING_CONFIDENT,
-	POSTURE_SITTING_UNCONFIDENT,
-	POSTURE_STANDING_UNCONFIDENT,
-	N_POSTURES
+	POSTURE_HEALTHY=0,
+	POSTURE_UNHEALTHY,
+	/*POSTURE_CONFIDENT,
+	POSTURE_UNCONFIDENT,*/
+	POSTURE_REJECTED,
+	POSTURE_NCLASSES
 }__attribute__((packed)) posture_t;
+
+
+/*Classificatons that are lower than this threshold
+don't get classified at all (rejected)*/
+#define REJECT_THRESHOLD 0.01
 
 /**
  * [postc_classify returns the classified posture given
