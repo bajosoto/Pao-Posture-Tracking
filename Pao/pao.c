@@ -41,6 +41,7 @@ int main(void)
             bsp_board_led_invert(0);
             timer = 0;
         }
+        timer++;
     }
 }
 
