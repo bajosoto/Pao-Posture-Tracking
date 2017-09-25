@@ -30,7 +30,9 @@ posture_t postc_classify(int* sample);
  * @date   2017-09-25
  * @param  samples    [[n x m] array every line corresponds to one sample]
  * @param  buffer     [output buffer, 1d array with n elements]
+ * @param  n_samples  [number of samples]
+ * 
  */
-void postc_classify(int** samples,posture_t* buffer);
+void postc_classify(int** samples,posture_t* buffer,int n_samples);
 
 #endif
