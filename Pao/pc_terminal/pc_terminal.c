@@ -40,43 +40,45 @@ void rs232_open(void) {
   	char 		*name;
   	int 		result;
   	struct termios	tty;
+
+	dispMsg("Opening serial interface...");
+
 #ifdef __linux__
-	fd_RS232 = open("/dev/ttyACM0", O_RDWR | O_NOCTTY);  // Hardcode your serial port here, or request it as an argument at runtime /dev/bus/usb/002/003 /dev/ttyUSB0
+	fd_RS232 = open("/dev/ttyACM0", O_RDWR | O_NOCTTY);  
 #elif __APPLE__
-	fd_RS232 = open("/dev/cu.usbmodem1411", O_RDWR | O_NONBLOCK);  // Hardcode your serial port here, or request it as an argument at runtime
+	fd_RS232 = open("/dev/cu.usbmodem1411", O_RDWR | O_NONBLOCK);  
+	if(fd_RS232 < 0) {
+		fd_RS232 = open("/dev/cu.usbmodem14211", O_RDWR | O_NONBLOCK);  // Mac sometimes mounts it here
+	}
 #else
 #   error "Unknown compiler"
 #endif 	
 
-	assert(fd_RS232>=0);
+	if(fd_RS232 >= 0) {
 
-  	result = isatty(fd_RS232);
-  	assert(result == 1);
+  		result = isatty(fd_RS232);
+  		assert(result == 1);
+	  	name = ttyname(fd_RS232);
+	  	assert(name != 0);
+	  	result = tcgetattr(fd_RS232, &tty);
+		assert(result == 0);
+		tty.c_iflag = IGNBRK; /* ignore break condition */
+		tty.c_oflag = 0;
+		tty.c_lflag = 0;
+		tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS8; /* 8 bits-per-character */
+		tty.c_cflag |= CLOCAL | CREAD; /* Ignore model status + read input */
+		cfsetospeed(&tty, B115200);
+		cfsetispeed(&tty, B115200);
+		tty.c_cc[VMIN]  = 0;
+		tty.c_cc[VTIME] = 1; // added timeout
+		tty.c_iflag &= ~(IXON|IXOFF|IXANY);
+		result = tcsetattr (fd_RS232, TCSANOW, &tty); /* non-canonical */
+		tcflush(fd_RS232, TCIOFLUSH); /* flush I/O buffer */
 
-  	name = ttyname(fd_RS232);
-  	assert(name != 0);
-
-  	result = tcgetattr(fd_RS232, &tty);
-	assert(result == 0);
-
-	tty.c_iflag = IGNBRK; /* ignore break condition */
-	tty.c_oflag = 0;
-	tty.c_lflag = 0;
-
-	tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS8; /* 8 bits-per-character */
-	tty.c_cflag |= CLOCAL | CREAD; /* Ignore model status + read input */
-
-	cfsetospeed(&tty, B115200);
-	cfsetispeed(&tty, B115200);
-
-	tty.c_cc[VMIN]  = 0;
-	tty.c_cc[VTIME] = 1; // added timeout
-
-	tty.c_iflag &= ~(IXON|IXOFF|IXANY);
-
-	result = tcsetattr (fd_RS232, TCSANOW, &tty); /* non-canonical */
-
-	tcflush(fd_RS232, TCIOFLUSH); /* flush I/O buffer */
+		dispMsg("Serial interface connected.");
+	} else {
+		dispMsg("Serial interface connection failed");
+	}
 }
 
 void rs232_close(void) {
@@ -144,33 +146,35 @@ int main(int argc, char **argv)
 {
 	char c;
 	int i;
-	
+
 	initInterface();
-	dispMsg("Welcome to Pao Terminal!");
-
-	dispMsg("Opening serial interface...");
-	rs232_open();
-	dispMsg("Serial interface connected.");
-
+	
 	while(waitForUser);
 
-	// Initialize timer
-	signal(SIGALRM, periodicMessage);
-	ualarm(200000, 0);
+	dispMsg("Welcome to Pao Terminal!");
 
-	/* send & receive */
-	while(demo_running) {
-		if ((i = readCommand()) != -1) {
-			keyInput(i);
+	rs232_open();
+
+	if(fd_RS232 >= 0) {
+		// Initialize timer
+		signal(SIGALRM, periodicMessage);
+		ualarm(200000, 0);
+	
+		/* send & receive */
+		while(demo_running) {
+			if ((i = readCommand()) != -1) {
+				keyInput(i);
+			}
+	
+			if ((c = rs232_getchar_nb()) != -1) {
+				setrxByte(c);
+			}
 		}
 
-		if ((c = rs232_getchar_nb()) != -1) {
-			setrxByte(c);
-		}
+		dispMsg("Closing serial interface...");
+		rs232_close();
 	}
 
-	dispMsg("Closing serial interface...");
-	rs232_close();
 	dispMsg("Press any key to exit");
 	timeout(-1);
 	getch();
