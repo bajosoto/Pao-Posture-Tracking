@@ -41,7 +41,7 @@ void rs232_open(void) {
   	int 		result;
   	struct termios	tty;
 #ifdef __linux__
-	fd_RS232 = open("/dev/ttyUSB0", O_RDWR | O_NOCTTY);  // Hardcode your serial port here, or request it as an argument at runtime /dev/bus/usb/002/003 /dev/ttyUSB0
+	fd_RS232 = open("/dev/ttyACM0", O_RDWR | O_NOCTTY);  // Hardcode your serial port here, or request it as an argument at runtime /dev/bus/usb/002/003 /dev/ttyUSB0
 #elif __APPLE__
 	fd_RS232 = open("/dev/cu.usbmodem1411", O_RDWR | O_NONBLOCK);  // Hardcode your serial port here, or request it as an argument at runtime
 #else

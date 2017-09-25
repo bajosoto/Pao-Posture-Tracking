@@ -1,6 +1,6 @@
 
 CC=gcc
-CFLAGS = -g -Wall -lm -std=c99
+CFLAGS = -g -Wall -lm
 LIBS += -lncurses
 
 SRC_FILES += \
