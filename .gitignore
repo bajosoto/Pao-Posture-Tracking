@@ -72,3 +72,6 @@ Pao/_build/*
 
 # Mac
 .DS_Store
+
+# Executable
+Pao/pc_terminal/pc-terminal

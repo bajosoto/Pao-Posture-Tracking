@@ -1,7 +1,7 @@
 
 CC=gcc
-CFLAGS = -g -Wall -lm
-CFLAGS += -lncurses
+CFLAGS = -g -Wall -lm -std=c99
+LIBS += -lncurses
 
 SRC_FILES += \
   ../comm-prot/sm/uart-sm.c \
@@ -30,7 +30,7 @@ EXEC = ./pc-terminal
 #TODO: Make a proper makefile
 
 all:
-	$(CC) $(CFLAGS) $(INC_PARAMS) $(SRC_FILES) $(CUSTOMFLAGS) -o $(EXEC) 
+	$(CC) $(CFLAGS) $(INC_PARAMS) $(SRC_FILES) $(CUSTOMFLAGS) $(LIBS) -o $(EXEC) 
 
 run: all
 	$(EXEC)
