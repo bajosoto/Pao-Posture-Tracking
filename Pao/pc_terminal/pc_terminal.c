@@ -43,7 +43,7 @@ void rs232_open(void) {
 #ifdef __linux__
 	fd_RS232 = open("/dev/ttyUSB0", O_RDWR | O_NOCTTY);  // Hardcode your serial port here, or request it as an argument at runtime /dev/bus/usb/002/003 /dev/ttyUSB0
 #elif __APPLE__
-	fd_RS232 = open("/dev/cu.usbmodem14211", O_RDWR | O_NONBLOCK);  // Hardcode your serial port here, or request it as an argument at runtime
+	fd_RS232 = open("/dev/cu.usbmodem1411", O_RDWR | O_NONBLOCK);  // Hardcode your serial port here, or request it as an argument at runtime
 #else
 #   error "Unknown compiler"
 #endif 	

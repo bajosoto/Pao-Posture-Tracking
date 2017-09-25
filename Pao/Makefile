@@ -260,6 +260,11 @@ include $(TEMPLATE_PATH)/Makefile.common
 
 $(foreach target, $(TARGETS), $(call define_target, $(target)))
 
+test-all: erase flash_softdevice flash 
+
+test: flash
+	cd pc_terminal && $(MAKE) run
+
 # Flash the program
 flash: $(OUTPUT_DIRECTORY)/nrf51422_xxac.hex
 	@echo Flashing: $<
