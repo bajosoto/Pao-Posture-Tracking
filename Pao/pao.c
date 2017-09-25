@@ -19,7 +19,8 @@ int main(void)
         uint8_t cr;
         
         if (app_uart_get(&cr) == NRF_SUCCESS){
-            app_uart_put(cr);
+            //app_uart_put(cr);
+            setrxByte(cr);
         }
 
         for(int i = 0; i < BUTTONS_NUMBER; i++) {

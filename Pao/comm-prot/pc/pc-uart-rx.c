@@ -9,7 +9,6 @@
 #include <stdio.h> //TODO: Delete. Messages should be logged not displayed
 #include "uart-sm.h"
 #include <inttypes.h>
-#include "pc_terminal.h"
 
 void msg00_status_ans();
 

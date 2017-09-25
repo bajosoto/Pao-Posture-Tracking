@@ -7,7 +7,6 @@
 #include "pc-uart-tx.h"
 #include "uart-sm.h"
 #include <inttypes.h>
-#include "pc_terminal.h"
 
 void splitSI16(int16_t c, int index);
 

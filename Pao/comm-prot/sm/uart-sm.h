@@ -5,13 +5,11 @@
 #ifdef BUILD_PC
 	#include "pc-uart-rx.h"
 	#include "pc-uart-tx.h"
-	#include "es-uart-tx.h"
 	#include "pc_terminal.h" 
 	#include "interface.h"
 #elif defined BUILD_ES
 	#include "es-uart-rx.h"
 	#include "es-uart-tx.h"
-	#include "pc-uart-tx.h"
 	#include <stdio.h>
 #endif
 #include <inttypes.h>

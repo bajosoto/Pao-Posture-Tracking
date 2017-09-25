@@ -1,7 +1,7 @@
 #ifndef ES_UART_RX_H_
 #define ES_UART_RX_H_
 
-#include "pc-uart-tx.h"
+#define TOTAL_PC_MESSAGES  1
 
 // Name holder for actions (to avoid dereferencing everywhere)
 typedef void (*Action)();

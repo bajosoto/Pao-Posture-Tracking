@@ -58,6 +58,9 @@ SRC_FILES += \
   $(SDK_ROOT)/components/toolchain/gcc/gcc_startup_nrf51.S \
   $(SDK_ROOT)/components/toolchain/system_nrf51.c \
   $(PROJ_DIR)/pao.c \
+  $(PROJ_DIR)/comm-prot/sm/uart-sm.c \
+  $(PROJ_DIR)/comm-prot/es/es-uart-rx.c \
+  $(PROJ_DIR)/comm-prot/es/es-uart-tx.c \
   $(PROJ_DIR)/drivers/uart.c \
 
   # $(PROJ_DIR)/comm-prot/sm/uart-sm.c \
@@ -187,7 +190,10 @@ INC_FOLDERS += \
   $(SDK_ROOT)/components/drivers_nrf/hal \
   $(SDK_ROOT)/components/libraries/log/src \
   $(PROJ_DIR) \
-  $(PROJ_DIR)/drivers
+  $(PROJ_DIR)/drivers \
+  $(PROJ_DIR)/comm-prot/sm \
+  $(PROJ_DIR)/comm-prot/es \
+  $(PROJ_DIR)/comm-prot/pc \
 
   # $(PROJ_DIR)/comm-prot/sm \
   # $(PROJ_DIR)/comm-prot/es \
@@ -218,7 +224,7 @@ CFLAGS += -fno-builtin --short-enums
 # ===========================
 # Custom flags
 # ===========================
-# CFLAGS += -DBUILD_ES
+CFLAGS += -DBUILD_ES
 
 # C++ flags common to all targets
 CXXFLAGS += \
@@ -263,7 +269,7 @@ $(foreach target, $(TARGETS), $(call define_target, $(target)))
 test-all: erase flash_softdevice flash 
 
 test: flash
-	cd pc_terminal && $(MAKE) run
+	cd pc_terminal && $(MAKE) run && reset && clear
 
 # Flash the program
 flash: $(OUTPUT_DIRECTORY)/nrf51422_xxac.hex

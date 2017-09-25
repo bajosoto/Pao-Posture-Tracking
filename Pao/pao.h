@@ -8,5 +8,6 @@
 #include "nrf_delay.h"
 #include "boards.h"
 #include "uart.h"
+#include "uart-sm.h"
 
 #endif /* PAO_H__ */
