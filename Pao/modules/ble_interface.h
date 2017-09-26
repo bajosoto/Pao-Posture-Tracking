@@ -17,6 +17,7 @@
 #include "app_util_platform.h"
 #include "bsp.h"
 #include "bsp_btn_ble.h"
+#include "es-uart-tx.h"
 
 /**@brief Function for the GAP initialization.
  *
@@ -44,4 +45,5 @@ void advertising_init(void);
 
 void app_timer_init_sergio();
 
+uint8_t getBleStatus();
 #endif /* BLE_INTERFACE_H__ */

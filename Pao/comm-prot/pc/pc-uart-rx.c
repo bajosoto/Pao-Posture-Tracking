@@ -13,6 +13,7 @@
 void msg00_status_ans();
 void msg01_quit_ans();
 void msg02_sensor_vals();
+void msg03_ble_status();
 
 int16_t unfoldSI16(int index);
 
@@ -22,6 +23,7 @@ MsgType msgTable[TOTAL_ES_MESSAGES] = {
 	{{msg00_status_ans}, 	0},				// 00: Performs some action
 	{{msg01_quit_ans}, 		0}, 			// 01: Answer shutdown request
 	{{msg02_sensor_vals}, 	18}, 			// 02: Sensor values to display
+	{{msg03_ble_status}, 	1}, 			// 03: BLE connection status change 
 };
 
 void msg00_status_ans() {
@@ -46,6 +48,21 @@ void msg02_sensor_vals() {
 	dispVal(DISP_P, s3);
 	dispVal(DISP_Q, s4);
 	dispVal(DISP_R, s5);
+}
+
+void msg03_ble_status() {
+
+	switch(rxBuff[0]) {
+		case 0: 
+			dispMsg("BLE device disconnected");
+			break;
+		case 1:
+			dispMsg("BLE device connected");
+			break;
+		default:
+			dispMsg("Unknown BLE status");
+			break;
+	}
 }
 
 int16_t unfoldSI16(int index) {

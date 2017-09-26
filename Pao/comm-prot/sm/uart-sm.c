@@ -254,7 +254,7 @@ void sendAck() {
 void sendNack() {
 
 	#ifdef BUILD_PC
-		dispMsg("nack");
+		//dispMsg("nack");
 	#endif
 	sendChar('?');
 }

@@ -38,6 +38,7 @@ static uint16_t                         m_conn_handle = BLE_CONN_HANDLE_INVALID;
 
 static ble_uuid_t                       m_adv_uuids[] = {{BLE_UUID_NUS_SERVICE, NUS_SERVICE_UUID_TYPE}};  /**< Universally unique service identifier. */
 
+static uint8_t                          ble_conn_status = 0;
 
 /**@brief Function for assert macro callback.
  *
@@ -237,12 +238,16 @@ static void on_ble_evt(ble_evt_t * p_ble_evt)
         case BLE_GAP_EVT_CONNECTED:
             //err_code = bsp_indication_set(BSP_INDICATE_CONNECTED);
             //APP_ERROR_CHECK(err_code);
+            ble_conn_status = 1;
+            sendMessageEs(MSG03_BLE_STATUS);
             m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
             break; // BLE_GAP_EVT_CONNECTED
 
         case BLE_GAP_EVT_DISCONNECTED:
             //err_code = bsp_indication_set(BSP_INDICATE_IDLE);
             //APP_ERROR_CHECK(err_code);
+            ble_conn_status = 0;
+            sendMessageEs(MSG03_BLE_STATUS);
             m_conn_handle = BLE_CONN_HANDLE_INVALID;
             break; // BLE_GAP_EVT_DISCONNECTED
 
@@ -549,5 +554,10 @@ void advertising_init(void)
 void app_timer_init_sergio() {
 
     APP_TIMER_INIT(APP_TIMER_PRESCALER, APP_TIMER_OP_QUEUE_SIZE, false);
+}
+
+uint8_t getBleStatus() {
+
+    return ble_conn_status;
 }
 
