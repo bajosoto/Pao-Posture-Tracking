@@ -11,6 +11,9 @@
 #include "uart-sm.h"
 #include "app_mpu.h"
 #include "mpu_interface.h"
+#include "ble_interface.h"
+#include "nrf_log.h"
+#include "nrf_log_ctrl.h"
 
 int programRunning;
 

@@ -9,12 +9,25 @@ int programRunning = 1;
 int main(void)
 {
     uint16_t timer = 0;
+    uint32_t err_code;
 
     /* Configure board. */
     bsp_board_leds_init();
     bsp_board_buttons_init();
     uart_service_init();
+    //NRF_LOG_INIT(NULL);  // TODO_SERGIO: Using LOG to find RAM start and end address
     mpu_setup();
+
+    // Bluetooth
+    app_timer_init_sergio();
+    ble_stack_init();
+    gap_params_init();
+    services_init();
+    advertising_init();
+    conn_params_init();
+
+    err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
+    APP_ERROR_CHECK(err_code);
 
     /* Toggle LEDs. */
     while (programRunning) {
