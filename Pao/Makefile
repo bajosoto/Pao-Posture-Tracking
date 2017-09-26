@@ -9,8 +9,10 @@ PROJ_DIR := .
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Darwin)
 CMD_LINE_TOOLS_PATH = ../tools/nRF5x-Command-Line-Tools-OSX
+CHMOD_DEV :=  
 else
 CMD_LINE_TOOLS_PATH = ../tools/nRF5x-Command-Line-Tools-Linux-x86_64
+CHMOD_DEV := sudo chmod 777 /dev/ttyACM0 &&
 # Phil, change this to ../tools/nRF5x-Command-Line-Tools-Linux-i386 if you're using 32-bit
 endif
 
@@ -274,10 +276,10 @@ include $(TEMPLATE_PATH)/Makefile.common
 
 $(foreach target, $(TARGETS), $(call define_target, $(target)))
 
-test-all: erase flash_softdevice flash 
+test-all: erase flash_softdevice test 
 
 test: flash
-	cd pc_terminal && $(MAKE) run && reset && clear
+	$(CHMOD_DEV) cd pc_terminal && $(MAKE) run && reset && clear
 
 # Flash the program
 flash: $(OUTPUT_DIRECTORY)/nrf51422_xxac.hex
