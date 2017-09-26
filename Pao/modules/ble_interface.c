@@ -101,10 +101,11 @@ static void nus_data_handler(ble_nus_t * p_nus, uint8_t * p_data, uint16_t lengt
 {
     for (uint32_t i = 0; i < length; i++)
     {
-        while (app_uart_put(p_data[i]) != NRF_SUCCESS);
+        bleInput(p_data[i]);
+        //while (app_uart_put(p_data[i]) != NRF_SUCCESS);
     }
-    while (app_uart_put('\r') != NRF_SUCCESS);
-    while (app_uart_put('\n') != NRF_SUCCESS);
+    //while (app_uart_put('\r') != NRF_SUCCESS);
+    //while (app_uart_put('\n') != NRF_SUCCESS);
 }
 /**@snippet [Handling the data received over BLE] */
 
@@ -559,5 +560,10 @@ void app_timer_init_sergio() {
 uint8_t getBleStatus() {
 
     return ble_conn_status;
+}
+
+void sendMsgBle(char *string) {
+
+    ble_nus_string_send(&m_nus, (uint8_t *)string, strlen(string));
 }
 

@@ -61,6 +61,7 @@ SRC_FILES += \
   $(PROJ_DIR)/comm-prot/sm/uart-sm.c \
   $(PROJ_DIR)/comm-prot/es/es-uart-rx.c \
   $(PROJ_DIR)/comm-prot/es/es-uart-tx.c \
+  $(PROJ_DIR)/comm-prot/es/es-ble-rx.c \
   $(PROJ_DIR)/drivers/uart.c \
   $(PROJ_DIR)/drivers/app_mpu.c \
   $(SDK_ROOT)/components/drivers_nrf/twi_master/nrf_drv_twi.c \

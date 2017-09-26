@@ -38,15 +38,18 @@ int main(void)
             setrxByte(cr);
         }
 
-        for(int i = 0; i < BUTTONS_NUMBER; i++) {
-            if(bsp_board_button_state_get(i)) {
-                printf("Pressed Button %d\r\n", i);
-                bsp_board_led_invert(i);
+        if(timer % 50 == 0) {
+            if(bsp_board_button_state_get(3)) {
+                sendMsgBle("Tiny Rick!");
             }
+            // for(int i = 0; i < BUTTONS_NUMBER; i++) {
+            //     if(bsp_board_button_state_get(i)) {
+            //         printf("Pressed Button %d\r\n", i);
+            //         bsp_board_led_invert(i);
+            //     }
+            // }
         }
-        nrf_delay_ms(5);
-
-        if(timer % 40 == 0) {
+        if(timer % 20 == 0) {
             getMpuSensors();
             sendMessageEs(MSG02_SENSOR_VALS);
         }
@@ -54,6 +57,8 @@ int main(void)
             bsp_board_led_invert(0);
             timer = 0;
         }
+
+        nrf_delay_ms(5);
         timer++;
     }
 }

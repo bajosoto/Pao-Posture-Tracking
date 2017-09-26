@@ -39,6 +39,10 @@ void sendMessageEs(TxMsgEs msgType){
 			case MSG03_BLE_STATUS:
 				txBuff[0] = getBleStatus();
 				sendPacket(msgType, 1);
+				break;
+			case MSG04_PICKLE_RICK:
+				sendPacket(msgType, 0);
+				break;
 			case TOTAL_ES_MESSAGES:					// Only including this to avoid the warning [-Wswitch]
 				break;
 			default:
