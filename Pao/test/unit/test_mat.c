@@ -19,17 +19,28 @@ static void test_linking(void **state)
 
 static void test_matmult_2d(void **state){
 	float mat1[2][2] = {
-		{1, 0},
-		{0, 1}
+		{1.0, 0.0},
+		{0.0, 1.0}
 	};
 	float mat2[2][2] = {
-		{1, 0},
-		{0, 1}
+		{1.0, 0.0},
+		{0.0, 1.0}
 	};
-	float buffer[2][2];
+	float buffer[2][2]= {
+		{0.0, 0.0},
+		{0.0, 0.0}
+	};
+	int row = 2,col=2;
+	for(uint8_t j = 0; j < col; j++){
+		printf("-");
+	}
+	printf("\n");
+
+
+	mat_print(mat1,2,2);
 	mat_multiply(mat1,2,2,mat2,2,2,buffer);
-	for(int i=0;i<2;i++){
-		for(int j=0;j<2;i++){
+	for(int i = 0; i < 2; i++){
+		for(int j = 0; j < 2; j++){
 			assert_true(mat1[i][j] == buffer[i][j]);
 		}
 	}

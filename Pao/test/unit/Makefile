@@ -41,7 +41,7 @@ LINK.c = $(CC) $(CFLAGS)
 .PHONY: all objs help directories
 .SUFFIXES:
 
-all: directories test-pccomm
+all: directories test-matmult
 
 run: all
 	./runtests.sh
@@ -50,7 +50,7 @@ run: all
 %.o:%.c
 	$(COMPILE.c) $< -o $(BUILD_DIR)/$@
 
-test-pccomm:$(OBJS_TEST_PCCOMM)
+test-matmult:$(OBJS_TEST_PCCOMM)
 	$(LINK.c) $(addprefix $(BUILD_DIR)/, $(OBJS)) -o $@ $(LDFLAGS)
 
 clean:
