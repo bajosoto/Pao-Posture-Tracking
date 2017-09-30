@@ -30,18 +30,42 @@ static void test_matmult_2d(void **state){
 		{0.0, 0.0},
 		{0.0, 0.0}
 	};
-	int row = 2,col=2;
-	for(uint8_t j = 0; j < col; j++){
-		printf("-");
-	}
-	printf("\n");
 
-
-	mat_print(mat1,2,2);
-	mat_multiply(mat1,2,2,mat2,2,2,buffer);
+	mat_multiply(2,2,mat1,2,2,mat2,buffer);
 	for(int i = 0; i < 2; i++){
 		for(int j = 0; j < 2; j++){
 			assert_true(mat1[i][j] == buffer[i][j]);
+		}
+	}
+}
+
+static void test_matmult_3d(void **state){
+	#define d 3
+	float mat1[d][d] = {
+		{1.0, 2.0, 3.0},
+		{4.0, 5.0, 6.0},
+		{7.0, 8.0, 9.0}
+	};
+	float mat2[d][d] = {
+		{1.0, 0.0, 0.5},
+		{0.0, 1.0, 0.0},
+		{0.0, 0.0, 1.0}
+	};
+	float buffer[d][d] = {
+		{0.0, 0.0, 0.0},
+		{0.0, 0.0, 0.0},
+		{0.0, 0.0, 0.0}
+	};
+	float result[d][d] = {
+		{1.0, 2.0, 3.5},
+		{4.0, 5.0, 8.0},
+		{7.0, 8.0, 12.5}
+	};
+
+	mat_multiply(d,d,mat1,d,d,mat2,buffer);
+	for(int i = 0; i < d; i++){
+		for(int j = 0; j < d; j++){
+			assert_true(result[i][j] == buffer[i][j]);
 		}
 	}
 } 
