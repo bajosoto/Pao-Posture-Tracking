@@ -1,14 +1,23 @@
 import Nifty
 
+func mean(matrix: Matrix<Double>)->Matrix<Double>{
+	var sum:Matrix<Double> = zeros(1,matrix.columns)
+	for i in 0..<matrix.rows{
+		print("\(matrix[i,0..<matrix.columns])")
+        sum = sum + matrix[i]
+    }
+    return sum/matrix.rows
+}
+
 func cov(matrix: Matrix<Double>) -> Matrix<Double>{
-	var sum_covariance:Matrix<Double> = zeros(matrix.rows, matrix.rows)
+	var sum:Matrix<Double> = zeros(matrix.rows, matrix.rows)
 
     for i in 0..<matrix.rows{
-        //sum_covariance += multiply(-(matrix[i,...],mean(matrix)),transpose(matrix[i,...],mean(matrix))
+        sum = sum + (matrix[i]-mean(matrix:matrix))*(transpose(matrix[i]-mean(matrix:matrix)))
     }
 
 
-    return sum_covariance/matrix.rows
+    return sum/matrix.rows
 }
 
 
