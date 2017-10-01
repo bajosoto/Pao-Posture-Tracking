@@ -57,8 +57,11 @@ class utilsTests: XCTestCase {
     }
 
     func testUnique(){
-    	let labels = Vector<Double>([1,1,1,2,2,2,4,4,4,5,5,5,4,4,3,4,4])	
-    	XCTAssertTrue(unique(vector:labels)==5)
+    	let labels = Vector<Int>([1,1,1,2,2,2,4,4,4,5,5,5,4,4,3,4,4])	
+    	let result = [1,2,4,5,3]
+    	XCTAssertTrue(unique(vector:labels).count==5)
+    	XCTAssertEqual(unique(vector:labels),result)
+
     }
 
 	static var allTests : [(String, (utilsTests) -> () throws -> Void)] {
