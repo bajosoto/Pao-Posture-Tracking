@@ -4,19 +4,27 @@ import Nifty
 
 class utilsTests: XCTestCase {
 
-	func testMean(){
+	func testMeanRow(){
 		let A = Matrix<Double>([[1, 1],[2, 2]])
         let Solution = Matrix<Double>([[1.5, 1.5]])
 	    let B = mean_row(matrix:A)
 	    XCTAssertTrue(B==Solution,"\(B)")    
 	}
 
-	func testMean2(){
+	func testMeanRow2(){
 		let A = Matrix<Double>([[1, 2],[3, 4]])
         let Solution = Matrix<Double>([[2, 3]])
 	    let B = mean_row(matrix:A)
 	    XCTAssertTrue(B==Solution,"\(B)")    
 	}
+
+	func testMeanCol(){
+		let A = Matrix<Double>([[1, 1],[2, 2]])
+        let Solution = Matrix<Double>([[1, 2]])
+	    let B = mean_col(matrix:A)
+	    XCTAssertTrue(B==Solution,"\(B)")    
+	}
+
 
 	func testTranspose(){
 
@@ -37,7 +45,7 @@ class utilsTests: XCTestCase {
 		let A = Matrix<Double>([[1, 2],[3, 4]])
 
         var Solution = Matrix<Double>([[3], [4]])
-	    var B:Matrix = transpose(A[1])
+	    var B:Matrix = transpose(A[1,0...1])
 	    XCTAssertTrue(B==Solution,"\(B)")    	
 	}
 
@@ -51,8 +59,9 @@ class utilsTests: XCTestCase {
 
 	static var allTests : [(String, (utilsTests) -> () throws -> Void)] {
         return [
-        	("testMean",testMean),
-        	("testMean2",testMean2),
+        	("testMeanRow",testMeanRow),
+        	("testMeanRow2",testMeanRow2),
+        	("testMeanCol",testMeanRow2),
         	("testTranspose",testTranspose), 	
         	("testTranspose1",testTranspose1), 	
         	("testTranspose2",testTranspose2), 	
