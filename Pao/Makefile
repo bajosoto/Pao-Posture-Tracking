@@ -51,6 +51,8 @@ SRC_FILES += \
   $(SDK_ROOT)/components/libraries/util/nrf_assert.c \
   $(SDK_ROOT)/components/libraries/uart/retarget.c \
   $(SDK_ROOT)/components/libraries/util/sdk_errors.c \
+  $(SDK_ROOT)/components/libraries/fds/fds.c \
+  $(SDK_ROOT)/components/libraries/fstorage/fstorage.c \
   $(SDK_ROOT)/components/boards/boards.c \
   $(SDK_ROOT)/components/drivers_nrf/common/nrf_drv_common.c \
   $(SDK_ROOT)/components/drivers_nrf/uart/nrf_drv_uart.c \
@@ -69,6 +71,7 @@ SRC_FILES += \
   $(PROJ_DIR)/drivers/nrf_drv_mpu_twi.c \
   $(PROJ_DIR)/modules/mpu_interface.c \
   $(PROJ_DIR)/modules/debug-interface.c \
+  $(PROJ_DIR)/modules/fstorage_interface.c \
 
   # $(PROJ_DIR)/comm-prot/sm/uart-sm.c \
   # $(PROJ_DIR)/comm-prot/es/es-uart-rx.c \

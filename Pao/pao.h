@@ -12,6 +12,7 @@
 #include "app_mpu.h"
 #include "mpu_interface.h"
 #include "debug-interface.h"
+#include "fstorage_interface.h"
 
 int programRunning;
 

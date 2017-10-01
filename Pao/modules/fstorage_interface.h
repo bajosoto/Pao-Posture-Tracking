@@ -5,8 +5,6 @@
 #include "fstorage.h"
 #include "section_vars.h"
 #include "fds.h"
-#include "peer_manager.h"
-#include "ble_conn_state.h"
 #include "debug-interface.h"
 #include "app_mpu.h"
 
@@ -33,8 +31,5 @@ void initFdsAccelVariables();
 
 //Simple event handler to handle errors during initialization write and update for fds. - by odt
 void fds_evt_handler(fds_evt_t const * const p_fds_evt);
-
-//Replace device manager initialization with peer manager. - by odt
-void peer_manager_init(bool erase_bonds);
 
 #endif

@@ -3084,87 +3084,87 @@
 
 // // <e> FDS_ENABLED - fds - Flash data storage module
 // //==========================================================
-// #ifndef FDS_ENABLED
-// #define FDS_ENABLED 0
-// #endif
-// #if  FDS_ENABLED
-// // <o> FDS_OP_QUEUE_SIZE - Size of the internal queue. 
-// #ifndef FDS_OP_QUEUE_SIZE
-// #define FDS_OP_QUEUE_SIZE 4
-// #endif
+#ifndef FDS_ENABLED
+#define FDS_ENABLED 1
+#endif
+#if  FDS_ENABLED
+// <o> FDS_OP_QUEUE_SIZE - Size of the internal queue. 
+#ifndef FDS_OP_QUEUE_SIZE
+#define FDS_OP_QUEUE_SIZE 4
+#endif
 
-// // <o> FDS_CHUNK_QUEUE_SIZE - Determines how many @ref fds_record_chunk_t structures can be buffered at any time. 
-// #ifndef FDS_CHUNK_QUEUE_SIZE
-// #define FDS_CHUNK_QUEUE_SIZE 8
-// #endif
+// <o> FDS_CHUNK_QUEUE_SIZE - Determines how many @ref fds_record_chunk_t structures can be buffered at any time. 
+#ifndef FDS_CHUNK_QUEUE_SIZE
+#define FDS_CHUNK_QUEUE_SIZE 8
+#endif
 
-// // <o> FDS_MAX_USERS - Maximum number of callbacks that can be registered. 
-// #ifndef FDS_MAX_USERS
-// #define FDS_MAX_USERS 8
-// #endif
+// <o> FDS_MAX_USERS - Maximum number of callbacks that can be registered. 
+#ifndef FDS_MAX_USERS
+#define FDS_MAX_USERS 8
+#endif
 
-// // <o> FDS_VIRTUAL_PAGES - Number of virtual flash pages to use. 
-// // <i> One of the virtual pages is reserved by the system for garbage collection.
-// // <i> Therefore, the minimum is two virtual pages: one page to store data and
-// // <i> one page to be used by the system for garbage collection. The total amount
-// // <i> of flash memory that is used by FDS amounts to @ref FDS_VIRTUAL_PAGES
-// // <i> @ref FDS_VIRTUAL_PAGE_SIZE * 4 bytes.
+// <o> FDS_VIRTUAL_PAGES - Number of virtual flash pages to use. 
+// <i> One of the virtual pages is reserved by the system for garbage collection.
+// <i> Therefore, the minimum is two virtual pages: one page to store data and
+// <i> one page to be used by the system for garbage collection. The total amount
+// <i> of flash memory that is used by FDS amounts to @ref FDS_VIRTUAL_PAGES
+// <i> @ref FDS_VIRTUAL_PAGE_SIZE * 4 bytes.
 
-// #ifndef FDS_VIRTUAL_PAGES
-// #define FDS_VIRTUAL_PAGES 3
-// #endif
+#ifndef FDS_VIRTUAL_PAGES
+#define FDS_VIRTUAL_PAGES 3
+#endif
 
-// // <o> FDS_VIRTUAL_PAGE_SIZE  - The size of a virtual page of flash memory, expressed in number of 4-byte words.
+// <o> FDS_VIRTUAL_PAGE_SIZE  - The size of a virtual page of flash memory, expressed in number of 4-byte words.
  
 
-// // <i> By default, a virtual page is the same size as a physical page.
-// // <i> The size of a virtual page must be a multiple of the size of a physical page.
-// // <256=> 256 
-// // <512=> 512 
-// // <1024=> 1024 
+// <i> By default, a virtual page is the same size as a physical page.
+// <i> The size of a virtual page must be a multiple of the size of a physical page.
+// <256=> 256 
+// <512=> 512 
+// <1024=> 1024 
 
-// #ifndef FDS_VIRTUAL_PAGE_SIZE
-// #define FDS_VIRTUAL_PAGE_SIZE 256
-// #endif
+#ifndef FDS_VIRTUAL_PAGE_SIZE
+#define FDS_VIRTUAL_PAGE_SIZE 256
+#endif
 
-// #endif //FDS_ENABLED
+#endif //FDS_ENABLED
 // // </e>
 
 // // <e> FSTORAGE_ENABLED - fstorage - Flash storage module
 // //==========================================================
-// #ifndef FSTORAGE_ENABLED
-// #define FSTORAGE_ENABLED 0
-// #endif
-// #if  FSTORAGE_ENABLED
-// // <o> FS_QUEUE_SIZE - Configures the size of the internal queue. 
-// // <i> Increase this if there are many users, or if it is likely that many
-// // <i> operation will be queued at once without waiting for the previous operations
-// // <i> to complete. In general, increase the queue size if you frequently receive
-// // <i> @ref FS_ERR_QUEUE_FULL errors when calling @ref fs_store or @ref fs_erase.
+#ifndef FSTORAGE_ENABLED
+#define FSTORAGE_ENABLED 1
+#endif
+#if  FSTORAGE_ENABLED
+// <o> FS_QUEUE_SIZE - Configures the size of the internal queue. 
+// <i> Increase this if there are many users, or if it is likely that many
+// <i> operation will be queued at once without waiting for the previous operations
+// <i> to complete. In general, increase the queue size if you frequently receive
+// <i> @ref FS_ERR_QUEUE_FULL errors when calling @ref fs_store or @ref fs_erase.
 
-// #ifndef FS_QUEUE_SIZE
-// #define FS_QUEUE_SIZE 4
-// #endif
+#ifndef FS_QUEUE_SIZE
+#define FS_QUEUE_SIZE 4
+#endif
 
-// // <o> FS_OP_MAX_RETRIES - Number attempts to execute an operation if the SoftDevice fails. 
-// // <i> Increase this value if events return the @ref FS_ERR_OPERATION_TIMEOUT
-// // <i> error often. The SoftDevice may fail to schedule flash access due to high BLE activity.
+// <o> FS_OP_MAX_RETRIES - Number attempts to execute an operation if the SoftDevice fails. 
+// <i> Increase this value if events return the @ref FS_ERR_OPERATION_TIMEOUT
+// <i> error often. The SoftDevice may fail to schedule flash access due to high BLE activity.
 
-// #ifndef FS_OP_MAX_RETRIES
-// #define FS_OP_MAX_RETRIES 3
-// #endif
+#ifndef FS_OP_MAX_RETRIES
+#define FS_OP_MAX_RETRIES 3
+#endif
 
-// // <o> FS_MAX_WRITE_SIZE_WORDS - Maximum number of words to be written to flash in a single operation. 
-// // <i> Tweaking this value can increase the chances of the SoftDevice being
-// // <i> able to fit flash operations in between radio activity. This value is bound by the
-// // <i> maximum number of words which the SoftDevice can write to flash in a single call to
-// // <i> @ref sd_flash_write, which is 256 words for nRF51 ICs and 1024 words for nRF52 ICs.
+// <o> FS_MAX_WRITE_SIZE_WORDS - Maximum number of words to be written to flash in a single operation. 
+// <i> Tweaking this value can increase the chances of the SoftDevice being
+// <i> able to fit flash operations in between radio activity. This value is bound by the
+// <i> maximum number of words which the SoftDevice can write to flash in a single call to
+// <i> @ref sd_flash_write, which is 256 words for nRF51 ICs and 1024 words for nRF52 ICs.
 
-// #ifndef FS_MAX_WRITE_SIZE_WORDS
-// #define FS_MAX_WRITE_SIZE_WORDS 256
-// #endif
+#ifndef FS_MAX_WRITE_SIZE_WORDS
+#define FS_MAX_WRITE_SIZE_WORDS 256
+#endif
 
-// #endif //FSTORAGE_ENABLED
+#endif //FSTORAGE_ENABLED
 // // </e>
 
 // // <q> HARDFAULT_HANDLER_ENABLED  - hardfault_default - HardFault default handler for debugging and release
