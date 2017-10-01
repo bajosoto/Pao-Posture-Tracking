@@ -29,33 +29,37 @@ class utilsTests: XCTestCase {
 	func testTranspose(){
 
 		let A = Matrix<Double>([[1, 2],[3, 4]])
-        var Solution = Matrix<Double>([[1, 3],[2, 4]])
-	    var B = A^
+        let Solution = Matrix<Double>([[1, 3],[2, 4]])
+	    let B = A^
 	    XCTAssertTrue(B==Solution,"\(B)")    	
 	}
 	func testTranspose1(){
 		let A = Matrix<Double>([[1, 2],[3, 4]])
 
-        var Solution = Matrix<Double>([[1], [2]])
-	    var B:Matrix = A[0,0...1]^
+        let Solution = Matrix<Double>([[1], [2]])
+	    let B:Matrix = A[0,0...1]^
 	    XCTAssertTrue(B==Solution,"\(B)")    	
 
 	}
 	func testTranspose2(){
 		let A = Matrix<Double>([[1, 2],[3, 4]])
 
-        var Solution = Matrix<Double>([[3], [4]])
-	    var B:Matrix = transpose(A[1,0...1])
+        let Solution = Matrix<Double>([[3], [4]])
+	    let B:Matrix = transpose(A[1,0...1])
 	    XCTAssertTrue(B==Solution,"\(B)")    	
 	}
 
-
 	func testCov(){
-	        let A = Matrix<Double>([[1, 2],[3, 4]])
-	        let Solution = Matrix<Double>([[0.5, 0.5],[0.5, 0.5]])
-	        let B = cov(matrix:A);
-	        XCTAssertTrue(B==Solution,"\(B)")
-	    }
+        let A = Matrix<Double>([[1, 2],[3, 4]])
+        let Solution = Matrix<Double>([[0.5, 0.5],[0.5, 0.5]])
+        let B = cov(matrix:A);
+        XCTAssertTrue(B==Solution,"\(B)")
+    }
+
+    func testUnique(){
+    	let labels = Vector<Double>([1,1,1,2,2,2,4,4,4,5,5,5,4,4,3,4,4])	
+    	XCTAssertTrue(unique(vector:labels)==5)
+    }
 
 	static var allTests : [(String, (utilsTests) -> () throws -> Void)] {
         return [
@@ -65,8 +69,9 @@ class utilsTests: XCTestCase {
         	("testTranspose",testTranspose), 	
         	("testTranspose1",testTranspose1), 	
         	("testTranspose2",testTranspose2), 	
-
         	("testCov",testCov),
+        	("testUnique",testUnique),
+
     	]
 	}
 }
