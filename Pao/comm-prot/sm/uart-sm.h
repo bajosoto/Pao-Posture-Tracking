@@ -19,7 +19,7 @@
 // Maximum number of tries to send a message
 #define MAX_TX_ATTEMPTS		5
 // Message buffer max length
-#define BUFFER_SIZE      28
+#define BUFFER_SIZE      100
 
 // Valid States
 typedef enum State_t { 
