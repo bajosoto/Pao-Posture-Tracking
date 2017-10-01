@@ -9,6 +9,7 @@
 #include "uart-sm.h"
 #include <inttypes.h>
 #include "pao.h"
+#include "debug-interface.h"
 
 void msg00_status();
 void msg01_quit();
@@ -24,7 +25,8 @@ MsgType msgTable[TOTAL_PC_MESSAGES] = {
 
 void msg00_status() {
 
-	sendMessageEs(MSG00_STATUS_ANS);
+	//sendMessageEs(MSG00_STATUS_ANS);
+	debugMsg("hello from pao");
 }
 
 void msg01_quit() {

@@ -68,6 +68,7 @@ SRC_FILES += \
   $(SDK_ROOT)/components/drivers_nrf/twi_master/nrf_drv_twi.c \
   $(PROJ_DIR)/drivers/nrf_drv_mpu_twi.c \
   $(PROJ_DIR)/modules/mpu_interface.c \
+  $(PROJ_DIR)/modules/debug-interface.c \
 
   # $(PROJ_DIR)/comm-prot/sm/uart-sm.c \
   # $(PROJ_DIR)/comm-prot/es/es-uart-rx.c \
