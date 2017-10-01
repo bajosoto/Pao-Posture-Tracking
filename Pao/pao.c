@@ -16,6 +16,21 @@ int main(void)
     uart_service_init();
     mpu_setup();
 
+    ret_code_t ret1 = fds_register(fds_evt_handler);
+    if (ret1 == FDS_SUCCESS)
+    {
+        debugMsg("Reg fds evt handler succeed.\r\n");
+    }
+    if (ret1 != FDS_SUCCESS)
+    {
+        debugMsg("Reg fds evt handler fail.\r\n");
+    }
+    ret_code_t ret = fds_init();
+    if (ret != FDS_SUCCESS)
+    {
+        debugMsg("Fds init fail.\r\n");
+    }
+
     /* Toggle LEDs. */
     while (programRunning) {
 
