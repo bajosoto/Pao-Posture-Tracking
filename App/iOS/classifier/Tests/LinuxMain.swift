@@ -2,6 +2,6 @@ import XCTest
 @testable import classifierTests
 
 XCTMain([
-     testCase(operatorTests.allTests),
-     testCase(utilsTests.allTests),
+     testCase(OperatorTests.allTests),
+     testCase(UtilsTests.allTests),
 ])
