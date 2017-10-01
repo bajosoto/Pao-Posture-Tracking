@@ -5,11 +5,42 @@ import Nifty
 class utilsTests: XCTestCase {
 
 	func testMean(){
-		let A = Matrix<Double>([[1, 1],[3, 3]])
+		let A = Matrix<Double>([[1, 1],[2, 2]])
         let Solution = Matrix<Double>([[1.5, 1.5]])
-	    let B = mean(matrix:A)
+	    let B = mean_row(matrix:A)
 	    XCTAssertTrue(B==Solution,"\(B)")    
 	}
+
+	func testMean2(){
+		let A = Matrix<Double>([[1, 2],[3, 4]])
+        let Solution = Matrix<Double>([[2, 3]])
+	    let B = mean_row(matrix:A)
+	    XCTAssertTrue(B==Solution,"\(B)")    
+	}
+
+	func testTranspose(){
+
+		let A = Matrix<Double>([[1, 2],[3, 4]])
+        var Solution = Matrix<Double>([[1, 3],[2, 4]])
+	    var B = A^
+	    XCTAssertTrue(B==Solution,"\(B)")    	
+	}
+	func testTranspose1(){
+		let A = Matrix<Double>([[1, 2],[3, 4]])
+
+        var Solution = Matrix<Double>([[1], [2]])
+	    var B:Matrix = A[0,0...1]^
+	    XCTAssertTrue(B==Solution,"\(B)")    	
+
+	}
+	func testTranspose2(){
+		let A = Matrix<Double>([[1, 2],[3, 4]])
+
+        var Solution = Matrix<Double>([[3], [4]])
+	    var B:Matrix = transpose(A[1])
+	    XCTAssertTrue(B==Solution,"\(B)")    	
+	}
+
 
 	func testCov(){
 	        let A = Matrix<Double>([[1, 2],[3, 4]])
@@ -21,6 +52,11 @@ class utilsTests: XCTestCase {
 	static var allTests : [(String, (utilsTests) -> () throws -> Void)] {
         return [
         	("testMean",testMean),
+        	("testMean2",testMean2),
+        	("testTranspose",testTranspose), 	
+        	("testTranspose1",testTranspose1), 	
+        	("testTranspose2",testTranspose2), 	
+
         	("testCov",testCov),
     	]
 	}
