@@ -31,7 +31,7 @@ func *(matrix: Matrix<Double>, mul:Double) -> Matrix<Double>{
 	var result:Matrix<Double> = zeros(matrix.rows, matrix.columns)
 	for i in 0..<matrix.rows{
 		for n in 0..<matrix.columns{
-			result = matrix[i,n]*mul
+			result[i,n] = matrix[i,n]*mul
 		}
 	}
 	return result
