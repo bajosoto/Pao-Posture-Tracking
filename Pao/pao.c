@@ -9,12 +9,25 @@ int programRunning = 1;
 int main(void)
 {
     uint16_t timer = 0;
+    uint32_t err_code;
 
     /* Configure board. */
     bsp_board_leds_init();
     bsp_board_buttons_init();
     uart_service_init();
+    //NRF_LOG_INIT(NULL);  // TODO_SERGIO: Using LOG to find RAM start and end address
     mpu_setup();
+
+    // Bluetooth
+    app_timer_init_sergio();
+    ble_stack_init();
+    gap_params_init();
+    services_init();
+    advertising_init();
+    conn_params_init();
+
+    err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
+    APP_ERROR_CHECK(err_code);
 
     /* Toggle LEDs. */
     while (programRunning) {
@@ -25,15 +38,18 @@ int main(void)
             setrxByte(cr);
         }
 
-        for(int i = 0; i < BUTTONS_NUMBER; i++) {
-            if(bsp_board_button_state_get(i)) {
-                printf("Pressed Button %d\r\n", i);
-                bsp_board_led_invert(i);
+        if(timer % 50 == 0) {
+            if(bsp_board_button_state_get(3)) {
+                sendMsgBle("Tiny Rick!");
             }
+            // for(int i = 0; i < BUTTONS_NUMBER; i++) {
+            //     if(bsp_board_button_state_get(i)) {
+            //         printf("Pressed Button %d\r\n", i);
+            //         bsp_board_led_invert(i);
+            //     }
+            // }
         }
-        nrf_delay_ms(5);
-
-        if(timer % 40 == 0) {
+        if(timer % 20 == 0) {
             getMpuSensors();
             sendMessageEs(MSG02_SENSOR_VALS);
         }
@@ -41,6 +57,8 @@ int main(void)
             bsp_board_led_invert(0);
             timer = 0;
         }
+
+        nrf_delay_ms(5);
         timer++;
     }
 }

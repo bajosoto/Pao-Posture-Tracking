@@ -7,6 +7,7 @@
 #include "es-uart-tx.h"
 #include "uart-sm.h"
 #include "mpu_interface.h"
+#include "ble_interface.h"
 #include "debug-interface.h"
 
 void stringCpy(char * inString);
@@ -25,7 +26,6 @@ void sendMessageEs(TxMsgEs msgType){
 	
 			case MSG00_STATUS_ANS:
 			case MSG01_QUIT_ANS:
-				//txBuff[0] = smCurrState;
 				sendPacket(msgType, 0);
 				break;
 			case MSG02_SENSOR_VALS:
@@ -37,7 +37,13 @@ void sendMessageEs(TxMsgEs msgType){
 				splitSI16(getMpuVal(GYR_Z), 5);
 				sendPacket(msgType, 18);
 				break;
-			case MSG03_DBG_MSG:
+			case MSG03_BLE_STATUS:
+				txBuff[0] = getBleStatus();
+				sendPacket(msgType, 1);
+				break;
+			case MSG04_PICKLE_RICK:
+				sendPacket(msgType, 0);
+			case MSG05_DBG_MSG:
 				for(int i = 0; i < MAX_DBG_MSG_LENGTH; i++) {
 					txBuff[i] = dbgMsg[i];
 				}

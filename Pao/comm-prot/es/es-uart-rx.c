@@ -26,7 +26,7 @@ MsgType msgTable[TOTAL_PC_MESSAGES] = {
 void msg00_status() {
 
 	//sendMessageEs(MSG00_STATUS_ANS);
-	debugMsg("hello from pao");
+	debugMsg("Hello from pao");
 }
 
 void msg01_quit() {
