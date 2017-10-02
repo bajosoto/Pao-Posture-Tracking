@@ -71,6 +71,7 @@ void msg03_ble_status() {
 
 void msg04_pickle_rick() {
 	dispMsg("Pickle Rick!");
+}
 
 void msg05_dbg_msg() {
 	dispMsg("%s", rxBuff);

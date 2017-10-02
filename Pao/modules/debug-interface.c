@@ -14,6 +14,6 @@ void debugMsg(const char* format, ... ) {
 
 	strcpy(dbgMsg, msg);
 
-	sendMessageEs(MSG03_DBG_MSG);
+	sendMessageEs(MSG05_DBG_MSG);
 }
 

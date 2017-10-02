@@ -9,7 +9,7 @@
 void bleInput(uint8_t c) {
 	switch(c) {
 		case '1':										// '.'	:	Request status from board			
-			bsp_board_led_invert(3);
+			bsp_board_led_invert(1);
 			break;
 		case '2':										// '.'	:	Request status from board			
 			sendMessageEs(MSG04_PICKLE_RICK);
