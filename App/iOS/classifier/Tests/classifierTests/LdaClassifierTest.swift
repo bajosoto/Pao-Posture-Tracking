@@ -18,6 +18,19 @@ class LdaClassifierTest: XCTestCase {
         
     }
 
+    func testCov(){
+
+        let samples = Matrix<Double>([[1,2,3],
+                                      [4,5,6],
+                                      [7,8,9]])
+        let labels = Vector([1,1,2])
+        let dataset =  Dataset(samples:samples,labels:labels)
+        let cov = LdaClassifier.estimate_covariance(dataset:dataset)
+
+        XCTAssertTrue(cov == Matrix<Double>([[1,1,1],[1,1,1],[1,1,1]]))
+        
+    }
+
 
     static var allTests : [(String, (LdaClassifierTest) -> () throws -> Void)] {
         return [
