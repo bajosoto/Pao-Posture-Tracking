@@ -31,6 +31,20 @@ class LdaClassifierTest: XCTestCase {
         
     }
 
+    func testPrior(){
+        let samples = Matrix<Double>([[1,2,3],
+                                      [4,5,6],
+                                      [7,8,9],
+                                      [7,8,9]])
+        let labels = Vector([1,1,2])
+        let dataset =  Dataset(samples:samples,labels:labels)
+        let priors = LdaClassifier.estimate_priors(dataset:dataset)
+
+        XCTAssertTrue(priors[0]==0.5)
+        XCTAssertTrue(priors[1]==0.5)
+
+    }
+
 
     static var allTests : [(String, (LdaClassifierTest) -> () throws -> Void)] {
         return [
