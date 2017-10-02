@@ -15,6 +15,7 @@ void msg01_quit_ans();
 void msg02_sensor_vals();
 void msg03_ble_status();
 void msg04_pickle_rick();
+void msg05_dbg_msg();
 
 int16_t unfoldSI16(int index);
 
@@ -26,6 +27,7 @@ MsgType msgTable[TOTAL_ES_MESSAGES] = {
 	{{msg02_sensor_vals}, 	18}, 			// 02: Sensor values to display
 	{{msg03_ble_status}, 	1}, 			// 03: BLE connection status change 
 	{{msg04_pickle_rick}, 	0}, 			// 04: Pickle rick
+	{{msg05_dbg_msg}, 		100}, 			// 02: Sensor values to display
 };
 
 void msg00_status_ans() {
@@ -69,6 +71,9 @@ void msg03_ble_status() {
 
 void msg04_pickle_rick() {
 	dispMsg("Pickle Rick!");
+
+void msg05_dbg_msg() {
+	dispMsg("%s", rxBuff);
 }
 
 int16_t unfoldSI16(int index) {

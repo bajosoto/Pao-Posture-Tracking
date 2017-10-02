@@ -14,6 +14,7 @@
 #include "ble_interface.h"
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
+#include "debug-interface.h"
 
 int programRunning;
 

@@ -8,6 +8,7 @@
 #include "uart-sm.h"
 #include "mpu_interface.h"
 #include "ble_interface.h"
+#include "debug-interface.h"
 
 void stringCpy(char * inString);
 void splitSI16(int16_t c, int index);
@@ -42,6 +43,11 @@ void sendMessageEs(TxMsgEs msgType){
 				break;
 			case MSG04_PICKLE_RICK:
 				sendPacket(msgType, 0);
+			case MSG05_DBG_MSG:
+				for(int i = 0; i < MAX_DBG_MSG_LENGTH; i++) {
+					txBuff[i] = dbgMsg[i];
+				}
+				sendPacket(msgType, MAX_DBG_MSG_LENGTH);
 				break;
 			case TOTAL_ES_MESSAGES:					// Only including this to avoid the warning [-Wswitch]
 				break;

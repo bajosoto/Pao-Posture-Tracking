@@ -7,6 +7,8 @@ typedef enum TxMsgEs_t {
 	MSG02_SENSOR_VALS,			// 02:	Sensor values to display
 	MSG03_BLE_STATUS,			// 03:	BLE connection status change
 	MSG04_PICKLE_RICK,			// 04:	Pickle Rick	
+	MSG05_DBG_MSG,				// 05:	Debugging message
+
 	TOTAL_ES_MESSAGES
 } TxMsgEs;
 
