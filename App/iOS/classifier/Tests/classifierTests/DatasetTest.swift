@@ -9,16 +9,16 @@ class DatasetTest: XCTestCase {
     	let samples = Matrix<Double>([[1,2,3],
     								  [4,5,6],
     								  [7,8,9]])
-    	let labels = Vector([1,1,2])
+    	let labels = [1,1,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         XCTAssertEqual(dataset.dim,3)
         XCTAssertEqual(dataset.nSamples,3)
-        XCTAssertEqual(dataset.classes,[1,2])
+        XCTAssertEqual(dataset.classes,[2,1])
     }
 
     func testClassSamples(){
     	let samples = Matrix<Double>([[1,2,3],[4,5,6],[7,8,9]])
-    	let labels = Vector([1,1,2])
+    	let labels = [1,1,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let result1 = dataset.class_samples(class_id:2)
         let result2 = dataset.class_samples(class_id:1)

@@ -1,9 +1,9 @@
 import Nifty
 struct Dataset{
 	public let samples:Matrix<Double>
-	public let labels:Vector<Int>
+	public let labels:[Int]
 	
-	init(samples: Matrix<Double>, labels: Vector<Int>){
+	init(samples: Matrix<Double>, labels: [Int]){
 		self.samples = samples
 		self.labels = labels
 	}
@@ -15,7 +15,7 @@ struct Dataset{
 		return samples.rows
 	}
 	var classes:[Int]{
-		return unique(vector:labels)
+		return unique(list:labels)
 	}
 
 	public func class_samples(class_id:Int) -> Matrix<Double>{
@@ -31,7 +31,7 @@ struct Dataset{
 			if(labels[i] == class_id){
 				class_samples[n,0..<self.dim] = samples[i,0..<self.dim]
 				n+=1
-				
+
 			}
 		}
 

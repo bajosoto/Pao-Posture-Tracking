@@ -5,14 +5,18 @@ class LdaClassifier: Classifier{
 	let covariance : Matrix<Double>
 	let priors: [Double]
 
-	required init(trainset: Dataset,labels: Vector<Int>){
+	required init(trainset: Dataset){
 		means = LdaClassifier.estimate_means(dataset:trainset)
 		covariance = LdaClassifier.estimate_covariance(dataset:trainset)
 		priors = LdaClassifier.estimate_priors(dataset:trainset)
 	}
 
-	func classify(samples: Matrix<Double>)->Vector<Int>{
-		return Vector<Int>([1])
+	func classify(samples: Matrix<Double>)->[Int]{
+		var labelsFound = [Int]()
+		for i in 0..<samples.count{
+			labelsFound.append(self.classifySample(sample:samples[i,0..<samples.columns]))
+		}
+		return labelsFound
 	}
 
 	func classifySample(sample: Matrix<Double>)->Int{
