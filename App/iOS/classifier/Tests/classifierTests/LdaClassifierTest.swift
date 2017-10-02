@@ -36,7 +36,7 @@ class LdaClassifierTest: XCTestCase {
                                       [4,5,6],
                                       [7,8,9],
                                       [7,8,9]])
-        let labels = Vector([1,1,2])
+        let labels = Vector([1,1,2,2])
         let dataset =  Dataset(samples:samples,labels:labels)
         let priors = LdaClassifier.estimate_priors(dataset:dataset)
 
@@ -45,10 +45,28 @@ class LdaClassifierTest: XCTestCase {
 
     }
 
+    func testLDA(){
+        let samples = Matrix<Double>([[1,2,3],
+                                      [1,2,3],
+                                      [7,8,9],
+                                      [7,8,9]])
+        let labels = Vector([1,1,2,2])
+        let dataset =  Dataset(samples:samples,labels:labels)
+        let ldc = LdaClassifier(trainset:dataset,labels:labels)
+
+        XCTAssertTrue(ldc.classifySample(sample:Matrix([[1,2,3]]))==1)
+        XCTAssertTrue(ldc.classifySample(sample:Matrix([[7,8,9]]))==2)
+
+        
+    }
+
 
     static var allTests : [(String, (LdaClassifierTest) -> () throws -> Void)] {
         return [
         	("testMeans",testMeans),
+            ("testCov",testCov),
+            ("testPrior",testPrior),
+            ("testLDA", testLDA)
 
         ]
     }
