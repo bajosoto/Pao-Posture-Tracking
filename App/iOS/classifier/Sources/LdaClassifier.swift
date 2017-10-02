@@ -6,9 +6,9 @@ class LdaClassifier: Classifier{
 	let priors: [Double]
 	let classes: [Int]
 
-	required init(trainset: Dataset){
+	required init(trainset: Dataset,regularizer: Double = 0.0001){
 		means = LdaClassifier.estimateMeans(dataset:trainset)
-		covariance = LdaClassifier.estimateCov(dataset:trainset)
+		covariance = LdaClassifier.estimateCov(dataset:trainset,regularizer:regularizer)
 		priors = LdaClassifier.estimatePriors(dataset:trainset)
 		classes = trainset.classes
 	}
@@ -48,8 +48,8 @@ class LdaClassifier: Classifier{
 		return means
 	}
 
-	static func estimateCov(dataset: Dataset)->Matrix<Double>{
-		return cov(matrix:dataset.samples)
+	static func estimateCov(dataset: Dataset,regularizer: Double)->Matrix<Double>{
+		return cov(matrix:dataset.samples)+eye(dataset.dim,dataset.dim)*regularizer;
 	}
 
 	static func estimatePriors(dataset: Dataset) -> [Double]{
