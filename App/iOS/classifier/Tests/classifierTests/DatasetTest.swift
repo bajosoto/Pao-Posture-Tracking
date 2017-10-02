@@ -13,8 +13,7 @@ class DatasetTest: XCTestCase {
         let dataset =  Dataset(samples:samples,labels:labels)
         XCTAssertEqual(dataset.dim,3)
         XCTAssertEqual(dataset.nSamples,3)
-        XCTAssertEqual(dataset.classes,[2,1])
-        print(dataset.classes.count)
+        XCTAssertEqual(dataset.classes,[1,2])
     }
 
     func testClassSamples(){

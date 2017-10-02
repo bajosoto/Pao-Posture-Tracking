@@ -43,8 +43,8 @@ class LdaClassifierTest: XCTestCase {
         let dataset =  Dataset(samples:samples,labels:labels)
         let priors = LdaClassifier.estimate_priors(dataset:dataset)
 
-        XCTAssertTrue(priors[0]==0.5)
-        XCTAssertTrue(priors[1]==0.5)
+        XCTAssertTrue(priors[0]==0.5,"Priors_0 = \(priors[0])")
+        XCTAssertTrue(priors[1]==0.5,"Priors_1 = \(priors[1])")
 
     }
 

@@ -52,7 +52,7 @@ class LdaClassifier: Classifier{
 	static func estimate_priors(dataset: Dataset) -> [Double]{
 		var priors = [Double]()
 		for i in dataset.classes{
-			priors.append(Double(dataset.classSamples(class_id:i).rows)/Double(dataset.samples.count)) 
+			priors.append(Double(dataset.classSamples(class_id:i).rows)/Double(dataset.samples.rows)) 
 		}
 		return priors	
 	}
