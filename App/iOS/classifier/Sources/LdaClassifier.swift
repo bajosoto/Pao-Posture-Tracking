@@ -15,28 +15,46 @@ class LdaClassifier: Classifier{
 
 	func classify(samples: Matrix<Double>)->[Int]{
 		var labelsFound = [Int]()
-		for i in 0..<samples.count{
+		for i in 0..<samples.rows{
+			print("Iclassify = \n \(i)")
+			print("sample = \n (\(samples[i,0..<samples.columns])")
 			labelsFound.append(self.classifySample(sample:samples[i,0..<samples.columns]))
 		}
 		return labelsFound
 	}
 
 	func classifySample(sample: Matrix<Double>)->Int{
-		var pdfs = [Int]()
-		for i in self.classes{
+		var maxI = 0
+		var max:Double = -Double.greatestFiniteMagnitude
+		for i in 0..<self.classes.count{
+			print("I = \n \(i)")
+
 			print("Sample = \n \(sample)")
-			print("InvConv = \n\(inv(self.covariance))")
+			//print("InvConv = \n\(inv(self.covariance))")
 			print("Mean = \n \(self.means[i])")
 			
-			var a = (sample^)*inv(self.covariance)*self.means[i]
+			var a = ((sample)*inv(self.covariance))*self.means[i]^
 			var b = log(priors[i])
-			var c = (self.means[i]^)*inv(self.covariance)*self.means[i] 
-			print("A = \n \(a)")
+			var c = self.means[i]*inv(self.covariance)*self.means[i]^
+			print("A = \n \(a[0,0])")
 			print("B = \n\(b)")
 			print("C = \n \(c)")
-			//pdfs.append( a+b  - c)
+
+			var aScalar:Double = a[0,0]
+			//var bScalar:Double = b[0,0]
+			var cScalar:Double = c[0,0]
+
+			var pdf = (aScalar + b - cScalar)
+			print("Pdf = \n \(pdf)")
+			
+			if (pdf > max){
+				print("Imax = \n \(i)")
+
+				maxI = self.classes[i]
+				max = pdf
+			}
 		}
-		return self.classes[pdfs.max()!]
+		return maxI
 
 	}
 	
