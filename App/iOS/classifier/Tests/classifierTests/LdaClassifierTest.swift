@@ -8,13 +8,11 @@ class LdaClassifierTest: XCTestCase {
 
     	let samples = Matrix<Double>([[1,2,3],
     								  [4,5,6],
+                                      [7,8,9],
     								  [7,8,9]])
-    	let labels = [1,1,2]
+    	let labels = [1,1,2,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let means = LdaClassifier.estimateMeans(dataset:dataset)
-
-        print("\(means[0])")
-        print("\(means[1])")
 
         XCTAssertTrue(means[0] == Matrix<Double>([[2.5,3.5,4.5]]),"\(means[0])")
         XCTAssertTrue(means[1] == Matrix<Double>([[7,8,9]]),"\(means[1])")
@@ -25,12 +23,13 @@ class LdaClassifierTest: XCTestCase {
 
         let samples = Matrix<Double>([[1,2,3],
                                       [4,5,6],
+                                      [7,8,9],
                                       [7,8,9]])
-        let labels = [1,1,2]
+        let labels = [1,1,2,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let cov = LdaClassifier.estimateCov(dataset:dataset)
 
-        XCTAssertTrue(cov == Matrix<Double>([[1,1,1],[1,1,1],[1,1,1]]))
+        XCTAssertTrue(cov == Matrix<Double>([[8.25,8.25,8.25],[8.25,8.25,8.25],[8.25,8.25,8.25]]))
         
     }
 
@@ -41,7 +40,7 @@ class LdaClassifierTest: XCTestCase {
                                       [7,8,9]])
         let labels = [1,1,2,2]
         let dataset =  Dataset(samples:samples,labels:labels)
-        let priors = LdaClassifier.estimate_priors(dataset:dataset)
+        let priors = LdaClassifier.estimatePriors(dataset:dataset)
 
         XCTAssertTrue(priors[0]==0.5,"Priors_0 = \(priors[0])")
         XCTAssertTrue(priors[1]==0.5,"Priors_1 = \(priors[1])")
@@ -56,7 +55,7 @@ class LdaClassifierTest: XCTestCase {
         let labels = [1,1,2,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let ldc = LdaClassifier(trainset:dataset)
-
+        print("Classifying\n");
         XCTAssertTrue(ldc.classifySample(sample:Matrix([[1,2,3]]))==1)
         XCTAssertTrue(ldc.classifySample(sample:Matrix([[7,8,9]]))==2)
 

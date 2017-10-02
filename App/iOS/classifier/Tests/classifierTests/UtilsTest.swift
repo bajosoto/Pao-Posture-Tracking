@@ -51,7 +51,7 @@ class UtilsTest: XCTestCase {
 
 	func testCov(){
         let A = Matrix<Double>([[1, 2],[3, 4]])
-        let Solution = Matrix<Double>([[0.5, 0.5],[0.5, 0.5]])
+        let Solution = Matrix<Double>([[2, 2],[2, 2]])
         let B = cov(matrix:A);
         XCTAssertTrue(B==Solution,"\(B)")
     }

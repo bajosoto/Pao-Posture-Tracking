@@ -15,8 +15,8 @@ func mean_col(matrix: Matrix<Double>)->Matrix<Double>{
 func cov(matrix: Matrix<Double>) -> Matrix<Double>{
 	var sum:Matrix<Double> = zeros(matrix.columns, matrix.columns)
 
-    for i in 0..<matrix.columns{
-        sum = sum + ((matrix[0..<matrix.rows,i]-mean_col(matrix:matrix)))*(matrix[0..<matrix.rows,i]-mean_col(matrix:matrix))^
+    for i in 0..<matrix.rows{
+        sum = sum + (matrix[i,0..<matrix.columns]-mean_row(matrix:matrix))^ * ((matrix[i,0..<matrix.columns]-mean_row(matrix:matrix)))
     }
 
     return sum/(matrix.rows-1)
