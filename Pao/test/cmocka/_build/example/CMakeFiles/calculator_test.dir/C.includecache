@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/cmocka.h
+
+/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/calculator.c
+config.h
+/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/config.h
+assert.h
+-
+malloc.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+
+/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/calculator_test.c
+stdarg.h
+-
+stddef.h
+-
+setjmp.h
+-
+cmocka.h
+/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/cmocka.h
+stdio.h
+-
+
+config.h
+
