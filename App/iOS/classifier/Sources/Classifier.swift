@@ -1,5 +1,5 @@
 import Nifty
 protocol Classifier {
-	func train(trainset: Dataset)
-	func classify(sample: Vector<Double>)
+	init(trainset:Dataset)
+	func classify(samples: Matrix<Double>)->Vector<Int>
 }

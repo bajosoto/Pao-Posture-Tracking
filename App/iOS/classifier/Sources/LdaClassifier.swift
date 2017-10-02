@@ -1,24 +1,28 @@
 import Nifty
 class LdaClassifier: Classifier{
 	
-	var means: [Vector<Double>]()
-	var covariance: [Matrix<Double>]()
+	var means = [Matrix<Double>]()
+	var covariance : Matrix<Double>
 
-	func init(trainset: Dataset){
-		means = estimate_means(trainset:trainset)
-		covariances = estimate_covariances(trainset:covariances)
+	required init(trainset: Dataset){
+		means = LdaClassifier.estimate_means(dataset:trainset)
+		covariance = LdaClassifier.estimate_covariance(dataset:trainset)
 	}
 
-	func classify(sample: Vector<Double>){
-
+	func classify(samples: Matrix<Double>)->Vector<Int>{
+		return Vector<Int>([1])
 	}
 	
-	static func estimate_means(trainset: Dataset)->Vector<Double>{
-		
+	static func estimate_means(dataset: Dataset)->[Matrix<Double>]{
+		var means = [Matrix<Double>]()
+		for i in 0 ..< dataset.classes.count{
+			means.append(mean_row(matrix:(dataset.class_samples(class_id:i)))) 
+		}
+		return means
 	}
 
-	static func estimate_covariance(trainset: Dataset, means: Vector<Double>){
-		
+	static func estimate_covariance(dataset: Dataset)->Matrix<Double>{
+		return cov(matrix:dataset.samples)
 	}
         
 }
