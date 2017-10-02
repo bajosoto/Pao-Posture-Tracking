@@ -18,7 +18,7 @@ struct Dataset{
 		return unique(list:labels)
 	}
 
-	public func class_samples(class_id:Int) -> Matrix<Double>{
+	public func classSamples(class_id:Int) -> Matrix<Double>{
 		var count = 0
 		for i in 0..<labels.count{
 			if(labels[i] == class_id){
@@ -26,16 +26,16 @@ struct Dataset{
 			}
 		}
 		var n = 0
-		var class_samples:Matrix<Double> = zeros(count,self.dim)
+		var classSamples:Matrix<Double> = zeros(count,self.dim)
 		for i in 0..<labels.count{
 			if(labels[i] == class_id){
-				class_samples[n,0..<self.dim] = samples[i,0..<self.dim]
+				classSamples[n,0..<self.dim] = samples[i,0..<self.dim]
 				n+=1
 
 			}
 		}
 
-		return class_samples
+		return classSamples
 	}
 
 }

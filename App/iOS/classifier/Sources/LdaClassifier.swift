@@ -4,11 +4,13 @@ class LdaClassifier: Classifier{
 	let means : [Matrix<Double>]
 	let covariance : Matrix<Double>
 	let priors: [Double]
+	let classes: [Int]
 
 	required init(trainset: Dataset){
-		means = LdaClassifier.estimate_means(dataset:trainset)
-		covariance = LdaClassifier.estimate_covariance(dataset:trainset)
+		means = LdaClassifier.estimateMeans(dataset:trainset)
+		covariance = LdaClassifier.estimateCov(dataset:trainset)
 		priors = LdaClassifier.estimate_priors(dataset:trainset)
+		classes = trainset.classes
 	}
 
 	func classify(samples: Matrix<Double>)->[Int]{
@@ -21,7 +23,7 @@ class LdaClassifier: Classifier{
 
 	func classifySample(sample: Matrix<Double>)->Int{
 		var pdfs = [Int]()
-		for i in 0 ..< means.count{
+		for i in self.classes{
 			var a = (sample^)*inv(covariance)*self.means[i]
 			var b = log(priors[i])
 			var c = (means[i]^)*inv(covariance)*means[i] 
@@ -30,26 +32,27 @@ class LdaClassifier: Classifier{
 			print("\(c)")
 			//pdfs.append( a+b  - c)
 		}
-		return pdfs.max()!
+		return self.classes[pdfs.max()!]
 
 	}
 	
-	static func estimate_means(dataset: Dataset)->[Matrix<Double>]{
+	static func estimateMeans(dataset: Dataset)->[Matrix<Double>]{
 		var means = [Matrix<Double>]()
-		for i in 0 ..< dataset.classes.count{
-			means.append(mean_row(matrix:(dataset.class_samples(class_id:i)))) 
+		for i in dataset.classes{
+			print("Count=\(dataset.classes.count), Sample=\(dataset.classSamples(class_id:i))")
+			means.append(mean_row(matrix:(dataset.classSamples(class_id:i)))) 
 		}
 		return means
 	}
 
-	static func estimate_covariance(dataset: Dataset)->Matrix<Double>{
+	static func estimateCov(dataset: Dataset)->Matrix<Double>{
 		return cov(matrix:dataset.samples)
 	}
 
 	static func estimate_priors(dataset: Dataset) -> [Double]{
 		var priors = [Double]()
-		for i in 0 ..< dataset.classes.count{
-			priors.append(Double(dataset.class_samples(class_id:i).rows)/Double(dataset.samples.count)) 
+		for i in dataset.classes{
+			priors.append(Double(dataset.classSamples(class_id:i).rows)/Double(dataset.samples.count)) 
 		}
 		return priors	
 	}

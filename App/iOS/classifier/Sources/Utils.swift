@@ -22,6 +22,6 @@ func cov(matrix: Matrix<Double>) -> Matrix<Double>{
     return sum/(matrix.rows-1)
 }
 
-func unique<T:Hashable>(list: [T])->[T]{
-	return Array<T>(Set<T>(list))
+func unique<T where T:Comparable, T:Hashable>(list: [T])->[T]{
+	return (Array<T>(Set<T>(list))).sorted(by:<)
 }

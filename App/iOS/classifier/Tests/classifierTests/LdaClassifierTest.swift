@@ -11,10 +11,13 @@ class LdaClassifierTest: XCTestCase {
     								  [7,8,9]])
     	let labels = [1,1,2]
         let dataset =  Dataset(samples:samples,labels:labels)
-        let means = LdaClassifier.estimate_means(dataset:dataset)
+        let means = LdaClassifier.estimateMeans(dataset:dataset)
 
-        XCTAssertTrue(means[0] == Matrix<Double>([[2.5,3.5,4.5]]))
-        XCTAssertTrue(means[1] == Matrix<Double>([[7,8,9]]))
+        print("\(means[0])")
+        print("\(means[1])")
+
+        XCTAssertTrue(means[0] == Matrix<Double>([[2.5,3.5,4.5]]),"\(means[0])")
+        XCTAssertTrue(means[1] == Matrix<Double>([[7,8,9]]),"\(means[1])")
         
     }
 
@@ -25,7 +28,7 @@ class LdaClassifierTest: XCTestCase {
                                       [7,8,9]])
         let labels = [1,1,2]
         let dataset =  Dataset(samples:samples,labels:labels)
-        let cov = LdaClassifier.estimate_covariance(dataset:dataset)
+        let cov = LdaClassifier.estimateCov(dataset:dataset)
 
         XCTAssertTrue(cov == Matrix<Double>([[1,1,1],[1,1,1],[1,1,1]]))
         
