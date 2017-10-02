@@ -30,11 +30,19 @@ class ViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var valueToWriteTextField: UITextField!
     @IBOutlet weak var notifiedValueLabel: UILabel!
     
+    // IB outlet to Pao Finding View
+    @IBOutlet weak var paoFindingViewIB: PaoFindingView!
+    // Timer we'll use to refresh the Pao Finding animation
+    fileprivate var clockTimer : Timer!
+    
     var dataCharacteristicTx : Characteristic?
     var dataCharacteristicRx : Characteristic?
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // Setup the Pao Finding animation timer
+        clockTimer = Timer.scheduledTimer( timeInterval: 0.03, target: self, selector: #selector(ViewController.advancePaoFindingAnimation), userInfo: nil, repeats: true)
         
         let serviceUUID = CBUUID(string:"6e400001-b5a3-f393-e0a9-e50e24dcca9e")
         var peripheral: Peripheral?
@@ -190,6 +198,12 @@ class ViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        clockTimer.invalidate()
+        clockTimer = nil
+    }
+    
     @IBAction func onWriteTapped(_ sender: Any) {
         self.write()
     }
@@ -228,6 +242,12 @@ class ViewController: UIViewController, UITextViewDelegate {
         writeFuture?.onFailure(completion: { (e) in
             print("write failed")
         })
+    }
+    
+    // Advance the finding pao animation
+    @objc func advancePaoFindingAnimation() {
+        // No need to call setNeedsDisplay() since we do that in the setter for animationProgress
+        paoFindingViewIB.animationProgress += 0.015
     }
     
 }

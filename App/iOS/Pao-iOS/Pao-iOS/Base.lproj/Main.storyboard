@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="S8g-l8-DCA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="S8g-l8-DCA">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SimpleBleCentral" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Pao_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -22,6 +22,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6z-hl-OYN" customClass="PaoFindingView" customModule="Pao_iOS" customModuleProvider="target">
+                                <rect key="frame" x="62" y="197" width="250" height="250"/>
+                                <color key="backgroundColor" red="0.94901960784313721" green="0.98431372549019602" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="5SC-7z-VNh"/>
+                                    <constraint firstAttribute="height" constant="250" id="99x-Em-b1D"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJD-Vg-srP" userLabel="ScanView">
                                 <rect key="frame" x="67" y="269" width="240" height="128"/>
                                 <subviews>
@@ -35,7 +43,6 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="A8H-Or-p2l"/>
                                     <constraint firstAttribute="trailing" secondItem="mFF-RO-P0l" secondAttribute="trailing" id="D9h-KU-hBU"/>
@@ -111,11 +118,13 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.98431372549019602" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Rlg-TN-fWz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="1Vi-47-Xi3"/>
                             <constraint firstItem="Rlg-TN-fWz" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="1q9-fR-BQE"/>
                             <constraint firstItem="yJD-Vg-srP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3Uw-Me-uzZ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="h6z-hl-OYN" secondAttribute="bottom" constant="220" id="3gV-1d-KwQ"/>
+                            <constraint firstItem="h6z-hl-OYN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PN7-bS-AqD"/>
                             <constraint firstItem="Rlg-TN-fWz" firstAttribute="centerX" secondItem="yJD-Vg-srP" secondAttribute="centerX" id="WSC-R5-h4A"/>
                             <constraint firstItem="Rlg-TN-fWz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="uF1-HT-sHO"/>
                             <constraint firstItem="yJD-Vg-srP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="vsA-ag-Bi8"/>
@@ -127,6 +136,7 @@
                         <outlet property="connectionStatusLabel" destination="mFF-RO-P0l" id="cja-K8-swT"/>
                         <outlet property="loadingView" destination="yJD-Vg-srP" id="sPJ-Nu-1Fg"/>
                         <outlet property="notifiedValueLabel" destination="4zQ-qV-7GJ" id="7cg-bG-SP3"/>
+                        <outlet property="paoFindingViewIB" destination="h6z-hl-OYN" id="lVr-qh-K4t"/>
                         <outlet property="valueLabel" destination="i6J-iR-xPp" id="8jz-Fd-PVf"/>
                         <outlet property="valueToWriteTextField" destination="LDV-JX-lMG" id="nf0-L5-lGk"/>
                         <outlet property="view" destination="8bC-Xf-vdC" id="5fw-fv-ClV"/>
@@ -142,7 +152,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="S8g-l8-DCA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="j7X-XD-YgV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
