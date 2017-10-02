@@ -27,7 +27,7 @@ class LdaClassifierTest: XCTestCase {
                                       [7,8,9]])
         let labels = [1,1,2,2]
         let dataset =  Dataset(samples:samples,labels:labels)
-        let cov = LdaClassifier.estimateCov(dataset:dataset)
+        let cov = LdaClassifier.estimateCov(dataset:dataset,regularizer:0.0)
 
         XCTAssertTrue(cov == Matrix<Double>([[8.25,8.25,8.25],[8.25,8.25,8.25],[8.25,8.25,8.25]]))
         
