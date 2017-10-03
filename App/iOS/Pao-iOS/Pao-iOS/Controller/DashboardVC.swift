@@ -10,26 +10,20 @@ import UIKit
 
 class DashboardVC: UIViewController {
 
+    @IBOutlet weak var dashScrollView: UIScrollView!
+    @IBOutlet weak var profilePicImg: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Round off profile picture
+        profilePicImg.layer.cornerRadius = profilePicImg.frame.size.width / 2
+        profilePicImg.layer.borderWidth = 3.0
+        let blueColor = UIColor(red: 124/255, green: 188/255, blue: 232/255, alpha: 1.0)
+        profilePicImg.layer.borderColor = blueColor.cgColor
+//        dashScrollView.addSubview(dashElementsView)
+//        dashElementsView.center = dashScrollView.center
+//        dashScrollView.contentSize = dashElementsView.size
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

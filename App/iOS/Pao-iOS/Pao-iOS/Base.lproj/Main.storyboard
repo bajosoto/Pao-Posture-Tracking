@@ -22,7 +22,7 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="BLE View">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -97,11 +97,11 @@
                         <viewControllerLayoutGuide type="top" id="hkC-2X-Em8"/>
                         <viewControllerLayoutGuide type="bottom" id="xgL-fZ-Gfy"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="88g-ng-7Qy">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <view key="view" contentMode="scaleToFill" id="88g-ng-7Qy" userLabel="Dashboard View">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wEw-hi-gN9">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wEw-hi-gN9" userLabel="Title Bar">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="paó" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxp-pX-TOp">
@@ -117,24 +117,65 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.48500110710968797" green="0.73559677441524396" blue="0.91040959052588832" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="nxp-pX-TOp" firstAttribute="centerX" secondItem="wEw-hi-gN9" secondAttribute="centerX" id="5v2-p3-gEU"/>
                                     <constraint firstAttribute="height" constant="54" id="HmA-IY-1Zq"/>
-                                    <constraint firstItem="nxp-pX-TOp" firstAttribute="centerY" secondItem="wEw-hi-gN9" secondAttribute="centerY" id="KXR-EO-8Zh"/>
+                                    <constraint firstItem="nxp-pX-TOp" firstAttribute="centerX" secondItem="wEw-hi-gN9" secondAttribute="centerX" id="bdR-qE-51r"/>
+                                    <constraint firstItem="nxp-pX-TOp" firstAttribute="centerY" secondItem="wEw-hi-gN9" secondAttribute="centerY" id="yKV-3a-ysj"/>
                                 </constraints>
                             </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MCe-UH-yHg">
+                                <rect key="frame" x="0.0" y="54" width="414" height="1146"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zy7-xb-3Ui" userLabel="Dash Elements View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-pic" translatesAutoresizingMaskIntoConstraints="NO" id="CrR-mW-rTG">
+                                                <rect key="frame" x="147" y="27" width="120" height="120"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="120" id="UDl-Pt-t4G"/>
+                                                    <constraint firstAttribute="height" constant="120" id="nvs-xc-itM"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="CrR-mW-rTG" firstAttribute="top" secondItem="zy7-xb-3Ui" secondAttribute="top" constant="27" id="KRA-jr-Ybq"/>
+                                            <constraint firstItem="CrR-mW-rTG" firstAttribute="centerX" secondItem="zy7-xb-3Ui" secondAttribute="centerX" id="QSA-jW-zov"/>
+                                            <constraint firstAttribute="height" constant="1000" id="cWw-Al-dYc"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="zy7-xb-3Ui" firstAttribute="top" secondItem="MCe-UH-yHg" secondAttribute="top" id="0ut-BL-KUb"/>
+                                    <constraint firstItem="zy7-xb-3Ui" firstAttribute="leading" secondItem="MCe-UH-yHg" secondAttribute="leading" id="8mn-n1-d8g"/>
+                                    <constraint firstAttribute="bottom" secondItem="zy7-xb-3Ui" secondAttribute="bottom" id="DaF-6w-9gY"/>
+                                    <constraint firstAttribute="trailing" secondItem="zy7-xb-3Ui" secondAttribute="trailing" id="E3Y-r9-9iK"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.94901960780000005" green="0.98431372549999996" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="wEw-hi-gN9" firstAttribute="leading" secondItem="88g-ng-7Qy" secondAttribute="leading" id="JZJ-nC-azH"/>
-                            <constraint firstItem="wEw-hi-gN9" firstAttribute="top" secondItem="88g-ng-7Qy" secondAttribute="top" id="hWa-mG-7Bp"/>
-                            <constraint firstAttribute="trailing" secondItem="wEw-hi-gN9" secondAttribute="trailing" id="py6-nC-zQb"/>
+                            <constraint firstItem="xgL-fZ-Gfy" firstAttribute="top" secondItem="MCe-UH-yHg" secondAttribute="bottom" id="Bcw-ZS-ton"/>
+                            <constraint firstItem="MCe-UH-yHg" firstAttribute="top" secondItem="wEw-hi-gN9" secondAttribute="bottom" id="JmU-ZS-OUE"/>
+                            <constraint firstItem="wEw-hi-gN9" firstAttribute="top" secondItem="88g-ng-7Qy" secondAttribute="top" id="Jwc-h2-YIM"/>
+                            <constraint firstItem="wEw-hi-gN9" firstAttribute="leading" secondItem="88g-ng-7Qy" secondAttribute="leading" id="QnD-VY-WpF"/>
+                            <constraint firstItem="zy7-xb-3Ui" firstAttribute="width" secondItem="88g-ng-7Qy" secondAttribute="width" id="W7F-2v-1ik"/>
+                            <constraint firstItem="MCe-UH-yHg" firstAttribute="leading" secondItem="88g-ng-7Qy" secondAttribute="leading" id="g8P-xb-7il"/>
+                            <constraint firstAttribute="trailing" secondItem="wEw-hi-gN9" secondAttribute="trailing" id="wAX-8t-NRV"/>
+                            <constraint firstAttribute="trailing" secondItem="MCe-UH-yHg" secondAttribute="trailing" id="yJM-Ed-TGb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="paó" id="ggJ-GM-Jgg"/>
+                    <size key="freeformSize" width="414" height="1200"/>
+                    <connections>
+                        <outlet property="dashScrollView" destination="MCe-UH-yHg" id="0s1-3X-uwc"/>
+                        <outlet property="profilePicImg" destination="CrR-mW-rTG" id="ecO-4g-VIi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KgD-2p-T8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1511.5942028985507" y="773.64130434782612"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="profile-pic" width="459" height="459"/>
+    </resources>
 </document>
