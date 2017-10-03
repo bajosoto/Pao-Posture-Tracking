@@ -57,26 +57,36 @@
                                     <constraint firstItem="mFF-RO-P0l" firstAttribute="top" secondItem="k29-WB-LhM" secondAttribute="bottom" constant="8" id="qks-Ea-rhH"/>
                                 </constraints>
                             </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6DP-m4-cNX" userLabel="FadeOut">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.98431372549999996" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.94901960784313721" green="0.98431372549019602" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="yJD-Vg-srP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3Uw-Me-uzZ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="h6z-hl-OYN" secondAttribute="bottom" constant="250" id="3gV-1d-KwQ"/>
+                            <constraint firstAttribute="trailing" secondItem="6DP-m4-cNX" secondAttribute="trailing" id="5F9-gl-652"/>
+                            <constraint firstItem="6DP-m4-cNX" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Cs6-F8-se3"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yJD-Vg-srP" secondAttribute="bottom" constant="50" id="H3n-a5-5uH"/>
                             <constraint firstItem="h6z-hl-OYN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PN7-bS-AqD"/>
+                            <constraint firstItem="6DP-m4-cNX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="emW-Iu-enh"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="6DP-m4-cNX" secondAttribute="bottom" id="lxc-Xv-tah"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7ts-pn-jWh"/>
                     <connections>
+                        <outlet property="fadeOut" destination="6DP-m4-cNX" id="u8w-jh-4kA"/>
                         <outlet property="loadingView" destination="yJD-Vg-srP" id="sPJ-Nu-1Fg"/>
                         <outlet property="paoEggView" destination="h6z-hl-OYN" id="74c-6I-Hmc"/>
                         <outlet property="scanStatusLbl" destination="mFF-RO-P0l" id="0xA-oM-JZ2"/>
+                        <outlet property="spinnningIndicator" destination="k29-WB-LhM" id="OUS-Vv-9Ff"/>
                         <outlet property="view" destination="8bC-Xf-vdC" id="5fw-fv-ClV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="814" y="774"/>
+            <point key="canvasLocation" x="813.04347826086962" y="773.64130434782612"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ggU-ss-3pZ">
