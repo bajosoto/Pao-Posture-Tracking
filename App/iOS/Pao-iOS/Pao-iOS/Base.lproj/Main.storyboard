@@ -68,9 +68,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="7ts-pn-jWh"/>
                     <connections>
-                        <outlet property="connectionStatusLabel" destination="mFF-RO-P0l" id="cja-K8-swT"/>
                         <outlet property="loadingView" destination="yJD-Vg-srP" id="sPJ-Nu-1Fg"/>
                         <outlet property="paoEggView" destination="h6z-hl-OYN" id="74c-6I-Hmc"/>
+                        <outlet property="scanStatusLbl" destination="mFF-RO-P0l" id="0xA-oM-JZ2"/>
                         <outlet property="view" destination="8bC-Xf-vdC" id="5fw-fv-ClV"/>
                     </connections>
                 </viewController>

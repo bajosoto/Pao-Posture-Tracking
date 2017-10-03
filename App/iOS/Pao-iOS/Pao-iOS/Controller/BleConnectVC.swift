@@ -13,14 +13,12 @@ import CoreBluetooth
 class BleConnectVC: UIViewController, UITextViewDelegate, bleConnectionResponder {
     
     @IBOutlet weak var loadingView: UIView!
-    @IBOutlet weak var characteristicView: UIView!
-    @IBOutlet weak var connectionStatusLabel: UILabel!
-    
+    @IBOutlet weak var scanStatusLbl: UILabel!
     // IB outlet to Pao Finding View
     @IBOutlet weak var paoEggView: PaoFindingView!
     // Timer we'll use to refresh the Pao Finding animation
     fileprivate var clockTimer : Timer!
-    // Ble Connection holding the connection to found Pao
+    // Ble Connection holding the connection to find Pao
     var bleConn: BleConnection?
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,6 +50,7 @@ class BleConnectVC: UIViewController, UITextViewDelegate, bleConnectionResponder
     
     func onPaoFound() {
         print("A pao was found! ============================")
+        scanStatusLbl.text = "Pao found! :)"
     }
     
 }
