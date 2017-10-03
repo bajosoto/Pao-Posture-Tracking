@@ -31,7 +31,7 @@ class PaoFindingView: UIView {
     
     override func draw(_ rect: CGRect) {
         // TODO: 250 is hardcoded and won't display properly on other resolutions
-        PaoFindingDraw.drawPaoEggCanvas(frame: CGRect(x: 0, y: 0, width: 250, height: 250), time: animationProgress)
+        PaoDrawings.drawPaoEggCanvas(frame: CGRect(x: 0, y: 0, width: 250, height: 250), time: animationProgress)
     }
 
 }
