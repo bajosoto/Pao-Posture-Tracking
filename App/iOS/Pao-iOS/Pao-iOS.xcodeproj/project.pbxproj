@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		038A0CEE387CA640F9B20DEC /* Pods_Pao_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F507ADCA9AF73B05A9849F44 /* Pods_Pao_iOS.framework */; };
 		4942F10E1F811B5500F378A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942F10D1F811B5500F378A9 /* AppDelegate.swift */; };
-		4942F1101F811B5500F378A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942F10F1F811B5500F378A9 /* ViewController.swift */; };
+		4942F1101F811B5500F378A9 /* BleConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942F10F1F811B5500F378A9 /* BleConnectVC.swift */; };
 		4942F1131F811B5500F378A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4942F1111F811B5500F378A9 /* Main.storyboard */; };
 		4942F1151F811B5500F378A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4942F1141F811B5500F378A9 /* Assets.xcassets */; };
 		4942F1181F811B5500F378A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4942F1161F811B5500F378A9 /* LaunchScreen.storyboard */; };
@@ -21,7 +21,7 @@
 /* Begin PBXFileReference section */
 		4942F10A1F811B5500F378A9 /* Pao-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pao-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4942F10D1F811B5500F378A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4942F10F1F811B5500F378A9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4942F10F1F811B5500F378A9 /* BleConnectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleConnectVC.swift; sourceTree = "<group>"; };
 		4942F1121F811B5500F378A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4942F1141F811B5500F378A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4942F1171F811B5500F378A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -108,7 +108,7 @@
 		495142751F82C86C00A2921E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				4942F10F1F811B5500F378A9 /* ViewController.swift */,
+				4942F10F1F811B5500F378A9 /* BleConnectVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -250,7 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4942F1101F811B5500F378A9 /* ViewController.swift in Sources */,
+				4942F1101F811B5500F378A9 /* BleConnectVC.swift in Sources */,
 				4951427B1F82CAA300A2921E /* PaoFindingView.swift in Sources */,
 				4942F10E1F811B5500F378A9 /* AppDelegate.swift in Sources */,
 				495142771F82C8FE00A2921E /* PaoFindingDraw.swift in Sources */,

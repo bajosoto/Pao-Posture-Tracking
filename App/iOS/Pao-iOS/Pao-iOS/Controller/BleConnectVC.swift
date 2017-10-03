@@ -10,7 +10,7 @@ import UIKit
 import BlueCapKit
 import CoreBluetooth
 
-class ViewController: UIViewController, UITextViewDelegate {
+class BleConnectVC: UIViewController, UITextViewDelegate {
     
     public enum AppError : Error {
         case dataCharactertisticNotFound
@@ -42,7 +42,7 @@ class ViewController: UIViewController, UITextViewDelegate {
         super.viewDidAppear(animated)
         
         // Setup the Pao Finding animation timer
-        clockTimer = Timer.scheduledTimer( timeInterval: 0.03, target: self, selector: #selector(ViewController.advancePaoFindingAnimation), userInfo: nil, repeats: true)
+        clockTimer = Timer.scheduledTimer( timeInterval: 0.03, target: self, selector: #selector(BleConnectVC.advancePaoFindingAnimation), userInfo: nil, repeats: true)
         
         let serviceUUID = CBUUID(string:"6e400001-b5a3-f393-e0a9-e50e24dcca9e")
         var peripheral: Peripheral?
