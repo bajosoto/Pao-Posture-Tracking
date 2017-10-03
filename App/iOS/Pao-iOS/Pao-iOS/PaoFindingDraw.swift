@@ -17,11 +17,9 @@ public class PaoFindingDraw : NSObject {
 
     //// Drawing Methods
 
-    @objc public dynamic class func drawPaoEggCanvas(frame: CGRect = CGRect(x: 0, y: 0, width: 250, height: 250), time: CGFloat = 1) {
+    @objc public dynamic class func drawPaoEggCanvas(frame: CGRect = CGRect(x: 0, y: 0, width: 250, height: 250), time: CGFloat = 0) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
-        // This non-generic function dramatically improves compilation times of complex expressions.
-        func fastFloor(_ x: CGFloat) -> CGFloat { return floor(x) }
 
         //// Color Declarations
         let paoBlue = UIColor(red: 0.475, green: 0.749, blue: 0.906, alpha: 1.000)
@@ -44,6 +42,7 @@ public class PaoFindingDraw : NSObject {
 
         //// Variable Declarations
         let timeinverse: CGFloat = 1 - time
+        let sinoftime: CGFloat = sin(360 * time * CGFloat.pi/180) * 8
 
         //// Water Drawing
         context.saveGState()
@@ -82,21 +81,26 @@ public class PaoFindingDraw : NSObject {
         context.restoreGState()
 
 
+        //// PaoEgg
+        context.saveGState()
+        context.translateBy(x: frame.minX + 0.50000 * frame.width, y: frame.minY + 0.77992 * frame.height)
+        context.rotate(by: -sinoftime * CGFloat.pi/180)
+
+
+
         //// Oval Drawing
         let ovalPath = UIBezierPath()
-        ovalPath.move(to: CGPoint(x: frame.minX + 0.78667 * frame.width, y: frame.minY + 0.47341 * frame.height))
-        ovalPath.addCurve(to: CGPoint(x: frame.minX + 0.50000 * frame.width, y: frame.minY + 0.80000 * frame.height), controlPoint1: CGPoint(x: frame.minX + 0.78667 * frame.width, y: frame.minY + 0.65378 * frame.height), controlPoint2: CGPoint(x: frame.minX + 0.65832 * frame.width, y: frame.minY + 0.80000 * frame.height))
-        ovalPath.addCurve(to: CGPoint(x: frame.minX + 0.21333 * frame.width, y: frame.minY + 0.47341 * frame.height), controlPoint1: CGPoint(x: frame.minX + 0.34168 * frame.width, y: frame.minY + 0.80000 * frame.height), controlPoint2: CGPoint(x: frame.minX + 0.21333 * frame.width, y: frame.minY + 0.65378 * frame.height))
-        ovalPath.addCurve(to: CGPoint(x: frame.minX + 0.50000 * frame.width, y: frame.minY + 0.08667 * frame.height), controlPoint1: CGPoint(x: frame.minX + 0.21333 * frame.width, y: frame.minY + 0.29304 * frame.height), controlPoint2: CGPoint(x: frame.minX + 0.35232 * frame.width, y: frame.minY + 0.08667 * frame.height))
-        ovalPath.addCurve(to: CGPoint(x: frame.minX + 0.78667 * frame.width, y: frame.minY + 0.47341 * frame.height), controlPoint1: CGPoint(x: frame.minX + 0.64768 * frame.width, y: frame.minY + 0.08667 * frame.height), controlPoint2: CGPoint(x: frame.minX + 0.78667 * frame.width, y: frame.minY + 0.29304 * frame.height))
+        ovalPath.move(to: CGPoint(x: 71.67, y: -76.63))
+        ovalPath.addCurve(to: CGPoint(x: -0, y: 5.02), controlPoint1: CGPoint(x: 71.67, y: -31.53), controlPoint2: CGPoint(x: 39.58, y: 5.02))
+        ovalPath.addCurve(to: CGPoint(x: -71.67, y: -76.63), controlPoint1: CGPoint(x: -39.58, y: 5.02), controlPoint2: CGPoint(x: -71.67, y: -31.53))
+        ovalPath.addCurve(to: CGPoint(x: 0, y: -173.31), controlPoint1: CGPoint(x: -71.67, y: -121.72), controlPoint2: CGPoint(x: -36.92, y: -173.31))
+        ovalPath.addCurve(to: CGPoint(x: 71.67, y: -76.63), controlPoint1: CGPoint(x: 36.92, y: -173.31), controlPoint2: CGPoint(x: 71.67, y: -121.72))
         ovalPath.close()
         context.saveGState()
         ovalPath.addClip()
-        let ovalBounds: CGRect = ovalPath.cgPath.boundingBoxOfPath
-        let ovalResizeRatio: CGFloat = min(ovalBounds.width / 143.33, ovalBounds.height / 178.33)
         context.drawRadialGradient(gradient,
-            startCenter: CGPoint(x: ovalBounds.midX + 24.31 * ovalResizeRatio, y: ovalBounds.midY + 54.41 * ovalResizeRatio), startRadius: 51.59 * ovalResizeRatio,
-            endCenter: CGPoint(x: ovalBounds.midX + -4.34 * ovalResizeRatio, y: ovalBounds.midY + 10.9 * ovalResizeRatio), endRadius: 108.21 * ovalResizeRatio,
+            startCenter: CGPoint(x: 24.31, y: -29.74), startRadius: 51.59,
+            endCenter: CGPoint(x: -4.34, y: -73.25), endRadius: 108.21,
             options: [.drawsBeforeStartLocation, .drawsAfterEndLocation])
         context.restoreGState()
         paoButtonCenter2.setStroke()
@@ -106,13 +110,13 @@ public class PaoFindingDraw : NSObject {
 
 
         //// Oval 2 Drawing
-        let oval2Path = UIBezierPath(ovalIn: CGRect(x: frame.minX + fastFloor(frame.width * 0.29200 + 0.5), y: frame.minY + fastFloor(frame.height * 0.30000 + 0.5), width: fastFloor(frame.width * 0.70800 + 0.5) - fastFloor(frame.width * 0.29200 + 0.5), height: fastFloor(frame.height * 0.72000 + 0.5) - fastFloor(frame.height * 0.30000 + 0.5)))
+        let oval2Path = UIBezierPath(ovalIn: CGRect(x: -52, y: -119.98, width: 104, height: 105))
         paoButtonCenter2.setFill()
         oval2Path.fill()
 
 
         //// Oval 3 Drawing
-        let oval3Path = UIBezierPath(ovalIn: CGRect(x: frame.minX + fastFloor(frame.width * 0.30800 + 0.5), y: frame.minY + fastFloor(frame.height * 0.31200 + 0.5), width: fastFloor(frame.width * 0.69200 + 0.5) - fastFloor(frame.width * 0.30800 + 0.5), height: fastFloor(frame.height * 0.70800 + 0.5) - fastFloor(frame.height * 0.31200 + 0.5)))
+        let oval3Path = UIBezierPath(ovalIn: CGRect(x: -48, y: -116.98, width: 96, height: 99))
         context.saveGState()
         context.setShadow(offset: shadow.shadowOffset, blur: shadow.shadowBlurRadius, color: (shadow.shadowColor as! UIColor).cgColor)
         paoButtonCenter.setFill()
@@ -126,17 +130,76 @@ public class PaoFindingDraw : NSObject {
         context.setAlpha(0.4)
 
         let bezier2Path = UIBezierPath()
-        bezier2Path.move(to: CGPoint(x: frame.minX + 0.60053 * frame.width, y: frame.minY + 0.11757 * frame.height))
-        bezier2Path.addCurve(to: CGPoint(x: frame.minX + 0.78667 * frame.width, y: frame.minY + 0.47341 * frame.height), controlPoint1: CGPoint(x: frame.minX + 0.70509 * frame.width, y: frame.minY + 0.18179 * frame.height), controlPoint2: CGPoint(x: frame.minX + 0.78667 * frame.width, y: frame.minY + 0.33523 * frame.height))
-        bezier2Path.addCurve(to: CGPoint(x: frame.minX + 0.54744 * frame.width, y: frame.minY + 0.79555 * frame.height), controlPoint1: CGPoint(x: frame.minX + 0.78667 * frame.width, y: frame.minY + 0.63537 * frame.height), controlPoint2: CGPoint(x: frame.minX + 0.68318 * frame.width, y: frame.minY + 0.76980 * frame.height))
-        bezier2Path.addCurve(to: CGPoint(x: frame.minX + 0.67374 * frame.width, y: frame.minY + 0.69687 * frame.height), controlPoint1: CGPoint(x: frame.minX + 0.58687 * frame.width, y: frame.minY + 0.77422 * frame.height), controlPoint2: CGPoint(x: frame.minX + 0.63500 * frame.width, y: frame.minY + 0.74285 * frame.height))
-        bezier2Path.addCurve(to: CGPoint(x: frame.minX + 0.71717 * frame.width, y: frame.minY + 0.31871 * frame.height), controlPoint1: CGPoint(x: frame.minX + 0.76061 * frame.width, y: frame.minY + 0.59373 * frame.height), controlPoint2: CGPoint(x: frame.minX + 0.75192 * frame.width, y: frame.minY + 0.43044 * frame.height))
-        bezier2Path.addCurve(to: CGPoint(x: frame.minX + 0.60053 * frame.width, y: frame.minY + 0.11757 * frame.height), controlPoint1: CGPoint(x: frame.minX + 0.68983 * frame.width, y: frame.minY + 0.23082 * frame.height), controlPoint2: CGPoint(x: frame.minX + 0.65636 * frame.width, y: frame.minY + 0.18120 * frame.height))
+        bezier2Path.move(to: CGPoint(x: 25.13, y: -165.59))
+        bezier2Path.addCurve(to: CGPoint(x: 71.67, y: -76.63), controlPoint1: CGPoint(x: 51.27, y: -149.53), controlPoint2: CGPoint(x: 71.67, y: -111.17))
+        bezier2Path.addCurve(to: CGPoint(x: 11.86, y: 3.91), controlPoint1: CGPoint(x: 71.67, y: -36.14), controlPoint2: CGPoint(x: 45.8, y: -2.53))
+        bezier2Path.addCurve(to: CGPoint(x: 43.43, y: -20.76), controlPoint1: CGPoint(x: 21.72, y: -1.42), controlPoint2: CGPoint(x: 33.75, y: -9.27))
+        bezier2Path.addCurve(to: CGPoint(x: 54.29, y: -115.3), controlPoint1: CGPoint(x: 65.15, y: -46.55), controlPoint2: CGPoint(x: 62.98, y: -87.37))
+        bezier2Path.addCurve(to: CGPoint(x: 25.13, y: -165.59), controlPoint1: CGPoint(x: 47.46, y: -137.28), controlPoint2: CGPoint(x: 39.09, y: -149.68))
         bezier2Path.close()
         highlight.setFill()
         bezier2Path.fill()
 
         context.restoreGState()
+
+
+
+        context.restoreGState()
     }
 
+    @objc public dynamic class func drawCanvas1(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 1080, height: 1920), resizing: ResizingBehavior = .aspectFit) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 1080, height: 1920), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 1080, y: resizedFrame.height / 1920)
+        
+        context.restoreGState()
+
+    }
+
+
+
+
+    @objc(PaoFindingDrawResizingBehavior)
+    public enum ResizingBehavior: Int {
+        case aspectFit /// The content is proportionally resized to fit into the target rectangle.
+        case aspectFill /// The content is proportionally resized to completely fill the target rectangle.
+        case stretch /// The content is stretched to match the entire target rectangle.
+        case center /// The content is centered in the target rectangle, but it is NOT resized.
+
+        public func apply(rect: CGRect, target: CGRect) -> CGRect {
+            if rect == target || target == CGRect.zero {
+                return rect
+            }
+
+            var scales = CGSize.zero
+            scales.width = abs(target.width / rect.width)
+            scales.height = abs(target.height / rect.height)
+
+            switch self {
+                case .aspectFit:
+                    scales.width = min(scales.width, scales.height)
+                    scales.height = scales.width
+                case .aspectFill:
+                    scales.width = max(scales.width, scales.height)
+                    scales.height = scales.width
+                case .stretch:
+                    break
+                case .center:
+                    scales.width = 1
+                    scales.height = 1
+            }
+
+            var result = rect.standardized
+            result.size.width *= scales.width
+            result.size.height *= scales.height
+            result.origin.x = target.minX + (target.width - result.width) / 2
+            result.origin.y = target.minY + (target.height - result.height) / 2
+            return result
+        }
+    }
 }

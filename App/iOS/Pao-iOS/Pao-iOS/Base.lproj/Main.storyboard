@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="S8g-l8-DCA">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,11 +19,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6z-hl-OYN" customClass="PaoFindingView" customModule="Pao_iOS" customModuleProvider="target">
-                                <rect key="frame" x="62" y="197" width="250" height="250"/>
+                                <rect key="frame" x="82" y="266" width="250" height="250"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.98431372549019602" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="5SC-7z-VNh"/>
@@ -31,7 +31,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJD-Vg-srP" userLabel="ScanView">
-                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                                <rect key="frame" x="87" y="528" width="240" height="128"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="k29-WB-LhM">
                                         <rect key="frame" x="110" y="54" width="20" height="20"/>
@@ -54,7 +54,7 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rlg-TN-fWz" userLabel="ManipulationView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="414.66666666666669" height="672"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6J-iR-xPp">
                                         <rect key="frame" x="8" y="36" width="84" height="21"/>
@@ -63,13 +63,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EC0E characteristic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ztQ-Dw-WpB">
-                                        <rect key="frame" x="112" y="8" width="151" height="21"/>
+                                        <rect key="frame" x="132" y="8" width="151" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nsk-Wo-KrX">
-                                        <rect key="frame" x="156" y="169" width="63" height="34"/>
+                                        <rect key="frame" x="176" y="169" width="63" height="34"/>
                                         <color key="backgroundColor" red="0.27397273167166025" green="0.13352979745668303" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Refresh"/>
                                         <connections>
@@ -83,7 +83,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LDV-JX-lMG">
-                                        <rect key="frame" x="213" y="121" width="150" height="30"/>
+                                        <rect key="frame" x="213.00000000000003" y="121" width="189.66666666666671" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
@@ -124,10 +124,10 @@
                             <constraint firstItem="Rlg-TN-fWz" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="1q9-fR-BQE"/>
                             <constraint firstItem="yJD-Vg-srP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3Uw-Me-uzZ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="h6z-hl-OYN" secondAttribute="bottom" constant="220" id="3gV-1d-KwQ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yJD-Vg-srP" secondAttribute="bottom" constant="80" id="H3n-a5-5uH"/>
                             <constraint firstItem="h6z-hl-OYN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PN7-bS-AqD"/>
                             <constraint firstItem="Rlg-TN-fWz" firstAttribute="centerX" secondItem="yJD-Vg-srP" secondAttribute="centerX" id="WSC-R5-h4A"/>
                             <constraint firstItem="Rlg-TN-fWz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="uF1-HT-sHO"/>
-                            <constraint firstItem="yJD-Vg-srP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="vsA-ag-Bi8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7ts-pn-jWh"/>
@@ -152,7 +152,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="S8g-l8-DCA" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="j7X-XD-YgV">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
