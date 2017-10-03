@@ -82,16 +82,17 @@
                         <outlet property="scanStatusLbl" destination="mFF-RO-P0l" id="0xA-oM-JZ2"/>
                         <outlet property="spinnningIndicator" destination="k29-WB-LhM" id="OUS-Vv-9Ff"/>
                         <outlet property="view" destination="8bC-Xf-vdC" id="5fw-fv-ClV"/>
+                        <segue destination="3wQ-he-Asj" kind="presentation" identifier="toDashboard" modalTransitionStyle="crossDissolve" id="zac-85-14X"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="813.04347826086962" y="773.64130434782612"/>
         </scene>
-        <!--View Controller-->
+        <!--Dashboard-->
         <scene sceneID="ggU-ss-3pZ">
             <objects>
-                <viewController id="3wQ-he-Asj" sceneMemberID="viewController">
+                <viewController title="Dashboard" id="3wQ-he-Asj" customClass="DashboardVC" customModule="Pao_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hkC-2X-Em8"/>
                         <viewControllerLayoutGuide type="bottom" id="xgL-fZ-Gfy"/>
@@ -99,12 +100,41 @@
                     <view key="view" contentMode="scaleToFill" id="88g-ng-7Qy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wEw-hi-gN9">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="paó" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxp-pX-TOp">
+                                        <rect key="frame" x="87" y="7" width="240" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="hAM-Yp-rSr"/>
+                                            <constraint firstAttribute="width" constant="240" id="uUg-C3-huU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="36"/>
+                                        <color key="textColor" red="0.94901960780000005" green="0.98431372549999996" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.48500110710968797" green="0.73559677441524396" blue="0.91040959052588832" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="nxp-pX-TOp" firstAttribute="centerX" secondItem="wEw-hi-gN9" secondAttribute="centerX" id="5v2-p3-gEU"/>
+                                    <constraint firstAttribute="height" constant="54" id="HmA-IY-1Zq"/>
+                                    <constraint firstItem="nxp-pX-TOp" firstAttribute="centerY" secondItem="wEw-hi-gN9" secondAttribute="centerY" id="KXR-EO-8Zh"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.98431372549999996" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wEw-hi-gN9" firstAttribute="leading" secondItem="88g-ng-7Qy" secondAttribute="leading" id="JZJ-nC-azH"/>
+                            <constraint firstItem="wEw-hi-gN9" firstAttribute="top" secondItem="88g-ng-7Qy" secondAttribute="top" id="hWa-mG-7Bp"/>
+                            <constraint firstAttribute="trailing" secondItem="wEw-hi-gN9" secondAttribute="trailing" id="py6-nC-zQb"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="paó" id="ggJ-GM-Jgg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KgD-2p-T8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1709" y="775"/>
+            <point key="canvasLocation" x="1511.5942028985507" y="773.64130434782612"/>
         </scene>
     </scenes>
 </document>

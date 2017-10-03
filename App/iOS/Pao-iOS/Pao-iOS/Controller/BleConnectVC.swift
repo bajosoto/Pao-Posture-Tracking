@@ -39,13 +39,6 @@ class BleConnectVC: UIViewController, UITextViewDelegate, bleConnectionResponder
         clockTimer = Timer.scheduledTimer( timeInterval: 0.03, target: self, selector: #selector(BleConnectVC.advancePaoFindingAnimation), userInfo: nil, repeats: true)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        
-        super.viewDidDisappear(animated)
-        clockTimer.invalidate()
-        clockTimer = nil
-    }
-    
     // Advance the finding pao animation
     @objc func advancePaoFindingAnimation() {
         // No need to call setNeedsDisplay() since we do that in the setter for animationProgress
@@ -54,7 +47,11 @@ class BleConnectVC: UIViewController, UITextViewDelegate, bleConnectionResponder
             if fadeOut.alpha < 1 {
                 fadeOut.alpha += 0.025  // (1/0.025) * 30ms = 1.2s transition
             } else {
+                // Stop timer
+                clockTimer.invalidate()
+                clockTimer = nil
                 // Perform segue
+                performSegue(withIdentifier: "toDashboard", sender: nil)
             }
         }
     }
