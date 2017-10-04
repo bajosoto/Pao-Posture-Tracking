@@ -18,6 +18,7 @@
 		495A76411F84437100E1B5C4 /* PaoDrawings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A76401F84437100E1B5C4 /* PaoDrawings.swift */; };
 		495CDACA1F84450B00B0D7B9 /* PaoPostureBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */; };
 		497245E11F84551800697B60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 497245E01F84551800697B60 /* Assets.xcassets */; };
+		49BDDD201F84EAC80052FA32 /* PostureEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BDDD1F1F84EAC80052FA32 /* PostureEntry.swift */; };
 		49F1AB471F811C8700148162 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F1AB461F811C8700148162 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		495A76401F84437100E1B5C4 /* PaoDrawings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaoDrawings.swift; path = "Pao-iOS/PaoDrawings.swift"; sourceTree = SOURCE_ROOT; };
 		495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoPostureBarView.swift; sourceTree = "<group>"; };
 		497245E01F84551800697B60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49BDDD1F1F84EAC80052FA32 /* PostureEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostureEntry.swift; sourceTree = "<group>"; };
 		49F1AB461F811C8700148162 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		7B2DA017E3B105073B5AB5BA /* Pods-Pao-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pao-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pao-iOS/Pods-Pao-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		92BA08F6ADB8FE059A8650BE /* Pods-Pao-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pao-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pao-iOS/Pods-Pao-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				495A76381F83BD1300E1B5C4 /* BleConnection.swift */,
+				49BDDD1F1F84EAC80052FA32 /* PostureEntry.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				495A76411F84437100E1B5C4 /* PaoDrawings.swift in Sources */,
+				49BDDD201F84EAC80052FA32 /* PostureEntry.swift in Sources */,
 				495CDACA1F84450B00B0D7B9 /* PaoPostureBarView.swift in Sources */,
 				4942F1101F811B5500F378A9 /* BleConnectVC.swift in Sources */,
 				495A763D1F83FD2200E1B5C4 /* DashboardVC.swift in Sources */,

@@ -1,9 +1,9 @@
 //
-//  ViewController.swift
-//  SimpleBleCentral
+//  BleConnectVC.swift
+//  Pao
 //
-//  Created by yassine benabbas on 22/01/2017.
-//  Copyright © 2017 yassine benabbas. All rights reserved.
+//  Created by Sergio Soto on 02/10/2017.
+//  Copyright © 2017 Sergio Soto. All rights reserved.
 //
 
 import UIKit

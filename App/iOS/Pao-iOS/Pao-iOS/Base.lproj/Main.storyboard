@@ -200,19 +200,39 @@
                                                     <constraint firstAttribute="width" constant="40" id="ELk-rc-iCB"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4x-IL-rxg" userLabel="TestButton">
+                                                <rect key="frame" x="147" y="27" width="120" height="120"/>
+                                                <connections>
+                                                    <action selector="onTestBtnPress:" destination="3wQ-he-Asj" eventType="touchUpInside" id="RzB-w5-kjC"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dBk-FU-NrV" userLabel="Plot" customClass="LineChartView" customModule="Charts">
+                                                <rect key="frame" x="26" y="295" width="362" height="184"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="184" id="L5C-Pa-2EE"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="Yhv-75-Xsr" firstAttribute="centerX" secondItem="zy7-xb-3Ui" secondAttribute="centerX" id="7bV-DN-BDP"/>
+                                            <constraint firstItem="v4x-IL-rxg" firstAttribute="width" secondItem="CrR-mW-rTG" secondAttribute="width" id="8UX-wh-2vH"/>
                                             <constraint firstItem="IYC-MU-fN9" firstAttribute="centerY" secondItem="Yhv-75-Xsr" secondAttribute="centerY" id="AxI-qS-Xz7"/>
                                             <constraint firstItem="ORK-Tx-3Yy" firstAttribute="centerY" secondItem="Yhv-75-Xsr" secondAttribute="centerY" id="Bo6-6j-XDx"/>
                                             <constraint firstItem="Yhv-75-Xsr" firstAttribute="leading" secondItem="ORK-Tx-3Yy" secondAttribute="trailing" constant="2" id="Bpd-TD-PbB"/>
                                             <constraint firstItem="wXx-Ce-uVQ" firstAttribute="top" secondItem="CrR-mW-rTG" secondAttribute="bottom" constant="14" id="GOe-t3-cBf"/>
                                             <constraint firstItem="CrR-mW-rTG" firstAttribute="top" secondItem="zy7-xb-3Ui" secondAttribute="top" constant="27" id="KRA-jr-Ybq"/>
+                                            <constraint firstItem="dBk-FU-NrV" firstAttribute="leading" secondItem="zy7-xb-3Ui" secondAttribute="leading" constant="26" id="OOT-Mb-bF9"/>
                                             <constraint firstItem="CrR-mW-rTG" firstAttribute="centerX" secondItem="zy7-xb-3Ui" secondAttribute="centerX" id="QSA-jW-zov"/>
                                             <constraint firstItem="IYC-MU-fN9" firstAttribute="leading" secondItem="Yhv-75-Xsr" secondAttribute="trailing" constant="2" id="RZh-Tx-3bw"/>
+                                            <constraint firstItem="v4x-IL-rxg" firstAttribute="centerY" secondItem="CrR-mW-rTG" secondAttribute="centerY" id="bNs-5B-L02"/>
                                             <constraint firstAttribute="height" constant="1000" id="cWw-Al-dYc"/>
+                                            <constraint firstItem="v4x-IL-rxg" firstAttribute="centerX" secondItem="CrR-mW-rTG" secondAttribute="centerX" id="dlc-gs-sGx"/>
                                             <constraint firstItem="wXx-Ce-uVQ" firstAttribute="centerX" secondItem="zy7-xb-3Ui" secondAttribute="centerX" id="eBX-mB-qhn"/>
+                                            <constraint firstItem="dBk-FU-NrV" firstAttribute="top" secondItem="Yhv-75-Xsr" secondAttribute="bottom" constant="36" id="iQ4-eu-WrT"/>
+                                            <constraint firstAttribute="trailing" secondItem="dBk-FU-NrV" secondAttribute="trailing" constant="26" id="ohT-Kt-PSk"/>
                                             <constraint firstItem="Yhv-75-Xsr" firstAttribute="top" secondItem="wXx-Ce-uVQ" secondAttribute="bottom" constant="18" id="pjR-PB-ma0"/>
+                                            <constraint firstItem="v4x-IL-rxg" firstAttribute="height" secondItem="CrR-mW-rTG" secondAttribute="height" id="tDe-6Q-SpI"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -241,6 +261,7 @@
                     <connections>
                         <outlet property="dashScrollView" destination="MCe-UH-yHg" id="0s1-3X-uwc"/>
                         <outlet property="postureBar" destination="Yhv-75-Xsr" id="A9z-T7-BFB"/>
+                        <outlet property="postureChart" destination="dBk-FU-NrV" id="8ph-HD-ggW"/>
                         <outlet property="profilePicImg" destination="CrR-mW-rTG" id="ecO-4g-VIi"/>
                     </connections>
                 </viewController>
