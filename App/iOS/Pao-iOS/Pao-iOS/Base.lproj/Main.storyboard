@@ -173,7 +173,7 @@
                                                     <constraint firstAttribute="width" constant="240" id="fp3-EA-pup"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="36"/>
-                                                <color key="textColor" white="0.37528436713748509" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="0.45098039215686275" green="0.45098039215686275" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yhv-75-Xsr" customClass="PaoPostureBarView" customModule="Pao_iOS" customModuleProvider="target">
