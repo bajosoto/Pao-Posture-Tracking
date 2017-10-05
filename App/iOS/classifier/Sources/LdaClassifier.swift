@@ -1,12 +1,12 @@
 import Nifty
 class LdaClassifier: Classifier{
 	
-	let means : [Matrix<Double>]
-	let covariance : Matrix<Double>
-	let priors: [Double]
-	let classes: [Int]
-	var lnPriors 	= [Double]()
-	var covMeans 	= [Matrix<(Double)>]()
+	let means 		 : [Matrix<Double>]
+	let covariance 	 : Matrix<Double>
+	let priors 	 	 : [Double]
+	let classes 	 : [Int]
+	var lnPriors 	 = [Double]()
+	var covMeans 	 = [Matrix<(Double)>]()
 	var meanCovMeans = [Double]()
 
 	required init(trainset: Dataset,regularizer: Double = 0.0001){

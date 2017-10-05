@@ -27,6 +27,7 @@ func unique<T where T:Comparable, T:Hashable>(list: [T])->[T]{
 }
 
 func ln(x: Double)->Double{
-    return log(x)/log(2.7182818284)
+    let euler = 2.7182818284
+    return log(x)/log(euler)
 
 }
