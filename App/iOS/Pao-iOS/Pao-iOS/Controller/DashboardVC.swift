@@ -135,6 +135,7 @@ class DashboardVC: UIViewController {
         
         let xaxis = postureChart.xAxis
         xaxis.valueFormatter = axisFormatDelegate
+        
     }
     
     func getPostureEntriesFromDatabase() -> Results<PostureEntry> {

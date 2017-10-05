@@ -153,7 +153,7 @@
                                     <constraint firstItem="nxp-pX-TOp" firstAttribute="centerY" secondItem="wEw-hi-gN9" secondAttribute="centerY" id="yKV-3a-ysj"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MCe-UH-yHg">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" translatesAutoresizingMaskIntoConstraints="NO" id="MCe-UH-yHg">
                                 <rect key="frame" x="0.0" y="54" width="414" height="1146"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zy7-xb-3Ui" userLabel="Dash Elements View">
@@ -213,6 +213,26 @@
                                                     <constraint firstAttribute="height" constant="184" id="L5C-Pa-2EE"/>
                                                 </constraints>
                                             </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="W4n-Tk-Sat">
+                                                <rect key="frame" x="26" y="511" width="362" height="120"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yYh-qF-rbj" customClass="PaoSittingGoalView" customModule="Pao_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="102" height="120"/>
+                                                        <color key="backgroundColor" red="0.94901960780000005" green="0.98431372549999996" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPX-r2-PC2" customClass="PaoStandingGoalView" customModule="Pao_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="130" y="0.0" width="102" height="120"/>
+                                                        <color key="backgroundColor" red="0.94901960780000005" green="0.98431372549999996" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQe-pm-dvt" customClass="PaoMovingGoalView" customModule="Pao_iOS" customModuleProvider="target">
+                                                        <rect key="frame" x="260" y="0.0" width="102" height="120"/>
+                                                        <color key="backgroundColor" red="0.94901960780000005" green="0.98431372549999996" blue="0.99607843139999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="oLw-mF-iJI"/>
+                                                </constraints>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="Yhv-75-Xsr" firstAttribute="centerX" secondItem="zy7-xb-3Ui" secondAttribute="centerX" id="7bV-DN-BDP"/>
@@ -227,11 +247,14 @@
                                             <constraint firstItem="IYC-MU-fN9" firstAttribute="leading" secondItem="Yhv-75-Xsr" secondAttribute="trailing" constant="2" id="RZh-Tx-3bw"/>
                                             <constraint firstItem="v4x-IL-rxg" firstAttribute="centerY" secondItem="CrR-mW-rTG" secondAttribute="centerY" id="bNs-5B-L02"/>
                                             <constraint firstAttribute="height" constant="1000" id="cWw-Al-dYc"/>
+                                            <constraint firstItem="W4n-Tk-Sat" firstAttribute="top" secondItem="dBk-FU-NrV" secondAttribute="bottom" constant="32" id="cYQ-2j-WCz"/>
                                             <constraint firstItem="v4x-IL-rxg" firstAttribute="centerX" secondItem="CrR-mW-rTG" secondAttribute="centerX" id="dlc-gs-sGx"/>
                                             <constraint firstItem="wXx-Ce-uVQ" firstAttribute="centerX" secondItem="zy7-xb-3Ui" secondAttribute="centerX" id="eBX-mB-qhn"/>
                                             <constraint firstItem="dBk-FU-NrV" firstAttribute="top" secondItem="Yhv-75-Xsr" secondAttribute="bottom" constant="36" id="iQ4-eu-WrT"/>
+                                            <constraint firstAttribute="trailing" secondItem="W4n-Tk-Sat" secondAttribute="trailing" constant="26" id="ogr-35-IcE"/>
                                             <constraint firstAttribute="trailing" secondItem="dBk-FU-NrV" secondAttribute="trailing" constant="26" id="ohT-Kt-PSk"/>
                                             <constraint firstItem="Yhv-75-Xsr" firstAttribute="top" secondItem="wXx-Ce-uVQ" secondAttribute="bottom" constant="18" id="pjR-PB-ma0"/>
+                                            <constraint firstItem="W4n-Tk-Sat" firstAttribute="leading" secondItem="zy7-xb-3Ui" secondAttribute="leading" constant="26" id="qwV-Lc-024"/>
                                             <constraint firstItem="v4x-IL-rxg" firstAttribute="height" secondItem="CrR-mW-rTG" secondAttribute="height" id="tDe-6Q-SpI"/>
                                         </constraints>
                                     </view>
