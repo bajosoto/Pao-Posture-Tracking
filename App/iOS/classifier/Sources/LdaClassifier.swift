@@ -34,7 +34,7 @@ class LdaClassifier: Classifier{
 			print("Mean = \n \(self.means[i])")
 			
 			var a = ((sample)*inv(self.covariance))*self.means[i]^
-			var b = log(priors[i])
+			var b = ln(x:priors[i])
 			var c = self.means[i]*inv(self.covariance)*self.means[i]^
 			print("A = \n \(a[0,0])")
 			print("B = \n\(b)")
@@ -44,7 +44,7 @@ class LdaClassifier: Classifier{
 			//var bScalar:Double = b[0,0]
 			var cScalar:Double = c[0,0]
 
-			var pdf = (aScalar + b - cScalar)
+			var pdf = priors[i]*(aScalar + b - 0.5*cScalar)
 			print("Pdf = \n \(pdf)")
 			
 			if (pdf > max){

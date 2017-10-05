@@ -64,6 +64,12 @@ class UtilsTest: XCTestCase {
 
     }
 
+    func testLn(){
+          XCTAssertTrue(ln(x:2) <= 0.693148,"Was\(ln(x:2))")
+          XCTAssertTrue(ln(x:2) >= 0.693146,"Was\(ln(x:2))")      
+    }
+
+
 	static var allTests : [(String, (UtilsTest) -> () throws -> Void)] {
         return [
         	("testMeanRow",testMeanRow),
@@ -74,6 +80,7 @@ class UtilsTest: XCTestCase {
         	("testTranspose2",testTranspose2), 	
         	("testCov",testCov),
         	("testUnique",testUnique),
+            ("testLn",testLn)
 
     	]
 	}

@@ -25,3 +25,8 @@ func cov(matrix: Matrix<Double>) -> Matrix<Double>{
 func unique<T where T:Comparable, T:Hashable>(list: [T])->[T]{
 	return (Array<T>(Set<T>(list))).sorted(by:<)
 }
+
+func ln(x: Double)->Double{
+    return log(x)/log(2.7182818284)
+
+}

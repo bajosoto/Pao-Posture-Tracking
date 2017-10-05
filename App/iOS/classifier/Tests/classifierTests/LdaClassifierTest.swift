@@ -48,17 +48,17 @@ class LdaClassifierTest: XCTestCase {
     }
 
     func testLDA(){
-        let samples = Matrix<Double>([[1,2,3],
-                                      [1,2,3],
-                                      [7,8,9],
-                                      [7,8,9]])
+        let samples = Matrix<Double>([[1,2],
+                                      [1,2],
+                                      [7,8],
+                                      [7,8]])
         let labels = [1,1,2,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let ldc = LdaClassifier(trainset:dataset)
         print("Classifying\n");
-        let res1 = ldc.classifySample(sample:Matrix([[1,2,3]]))
+        let res1 = ldc.classifySample(sample:Matrix([[1,2]]))
         XCTAssertTrue(res1==1,"Res1: \(res1)")
-        let res2 = ldc.classifySample(sample:Matrix([[7,8,9]]))
+        let res2 = ldc.classifySample(sample:Matrix([[7,8]]))
         XCTAssertTrue(res2==2,"Res2: \(res2)")
 
         
@@ -78,20 +78,20 @@ class LdaClassifierTest: XCTestCase {
         let labels = [1,1,1,1,1,2,2,2,2,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let ldc = LdaClassifier(trainset:dataset)
-        let testsamples = Matrix<Double>([  [-1,-2],
-                                            [-1,-2],
+        let testsamples = Matrix<Double>([  [-15,-3],
                                             [-19,-21],
                                             [7,8],
                                             [15,9]])
         let results = ldc.classify(samples:testsamples)
-        XCTAssertTrue(results[0]==1)
-        XCTAssertTrue(results[1]==1)
-        XCTAssertTrue(results[2]==2)
-        XCTAssertTrue(results[2]==2)
+        XCTAssertTrue(results[0]==1,"Was:\(results[0])")
+        XCTAssertTrue(results[1]==1,"Was:\(results[1])")
+        XCTAssertTrue(results[2]==2,"Was:\(results[2])")
+        XCTAssertTrue(results[3]==2,"Was:\(results[3])")
 
         
     }
 
+    
 
 
     static var allTests : [(String, (LdaClassifierTest) -> () throws -> Void)] {
@@ -100,7 +100,7 @@ class LdaClassifierTest: XCTestCase {
             ("testCov",testCov),
             ("testPrior",testPrior),
             ("testLDA", testLDA),
-            //("testLDA2", testLDA2)
+            ("testLDA2", testLDA2),
 
         ]
     }
