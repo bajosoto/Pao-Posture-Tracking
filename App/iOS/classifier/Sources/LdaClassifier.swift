@@ -5,56 +5,55 @@ class LdaClassifier: Classifier{
 	let covariance : Matrix<Double>
 	let priors: [Double]
 	let classes: [Int]
+	var lnPriors 	= [Double]()
+	var covMeans 	= [Matrix<(Double)>]()
+	var meanCovMeans = [Double]()
 
 	required init(trainset: Dataset,regularizer: Double = 0.0001){
 		means = LdaClassifier.estimateMeans(dataset:trainset)
 		covariance = LdaClassifier.estimateCov(dataset:trainset,regularizer:regularizer)
 		priors = LdaClassifier.estimatePriors(dataset:trainset)
 		classes = trainset.classes
+		for i in 0 ..< self.classes.count {
+			meanCovMeans.append(0.5*outerProd(vector:self.means[i],matrix:inv(self.covariance)))
+			lnPriors.append(ln(x:priors[i]))
+			covMeans.append(inv(self.covariance)*self.means[i]^)
+		}
 	}
 
 	func classify(samples: Matrix<Double>)->[Int]{
 		var labelsFound = [Int]()
 		for i in 0..<samples.rows{
-			print("Iclassify = \n \(i)")
-			print("sample = \n (\(samples[i,0..<samples.columns])")
 			labelsFound.append(self.classifySample(sample:samples[i,0..<samples.columns]))
+			
 		}
 		return labelsFound
 	}
 
-	func classifySample(sample: Matrix<Double>)->Int{
-		var maxI = 0
-		var max:Double = -Double.greatestFiniteMagnitude
+	private func outerProd(vector: Matrix<Double>,matrix: Matrix<Double>)->Double{
+
+		let v: Matrix<Double> = vector*matrix*vector^
+		return v[0,0] //the result is scalar but still stored in datatype matrix -.-
+	}
+
+	private func classifySample(sample: Matrix<Double>)->Int{
+		var maxArg = 0
+		var maxPosterior:Double = -Double.greatestFiniteMagnitude
 		for i in 0..<self.classes.count{
-			print("I = \n \(i)")
-
-			print("Sample = \n \(sample)")
-			//print("InvConv = \n\(inv(self.covariance))")
-			print("Mean = \n \(self.means[i])")
 			
-			var a = ((sample)*inv(self.covariance))*self.means[i]^
-			var b = ln(x:priors[i])
-			var c = self.means[i]*inv(self.covariance)*self.means[i]^
-			print("A = \n \(a[0,0])")
-			print("B = \n\(b)")
-			print("C = \n \(c)")
+			//just multiplying a vector with a matrix here and the result is a sampleDepPartScalar
+			//this beatiful api doesnt seem to allow it nicer
+			let sampleDepPartMat:Matrix<Double> = sample*covMeans[i] 
+			let sampleDepPartScalar: Double = sampleDepPartMat[0,0] 
 
-			var aScalar:Double = a[0,0]
-			//var bScalar:Double = b[0,0]
-			var cScalar:Double = c[0,0]
-
-			var pdf = priors[i]*(aScalar + b - 0.5*cScalar)
-			print("Pdf = \n \(pdf)")
+			let classPosterior = priors[i]*(sampleDepPartScalar-meanCovMeans[i]+lnPriors[i])
 			
-			if (pdf > max){
-				print("Imax = \n \(i)")
-
-				maxI = self.classes[i]
-				max = pdf
+			if (classPosterior > maxPosterior){
+				maxArg = self.classes[i]
+				maxPosterior = classPosterior
 			}
 		}
-		return maxI
+		return maxArg
 
 	}
 	
