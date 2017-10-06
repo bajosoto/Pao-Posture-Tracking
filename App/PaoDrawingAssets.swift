@@ -181,651 +181,6 @@ public class PaoDrawingAssets : NSObject {
         context.restoreGState()
     }
 
-    public dynamic class func drawScanningView(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 414, height: 736), resizing: ResizingBehavior = .aspectFit) {
-        //// General Declarations
-        let context = UIGraphicsGetCurrentContext()!
-        
-        //// Resize to Target Frame
-        context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 414, height: 736), target: targetFrame)
-        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 414, y: resizedFrame.height / 736)
-
-
-        //// Color Declarations
-        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
-
-        //// Symbol 2 Drawing
-        let symbol2Rect = CGRect(x: 0, y: 0, width: 414, height: 736)
-        context.saveGState()
-        context.clip(to: symbol2Rect)
-        context.translateBy(x: symbol2Rect.minX, y: symbol2Rect.minY)
-
-        PaoDrawingAssets.drawPaoBackground(frame: CGRect(origin: .zero, size: symbol2Rect.size), resizing: .stretch)
-        context.restoreGState()
-
-
-        //// Symbol Drawing
-        let symbolRect = CGRect(x: 82, y: 243, width: 250, height: 250)
-        context.saveGState()
-        context.clip(to: symbolRect)
-        context.translateBy(x: symbolRect.minX, y: symbolRect.minY)
-
-        PaoDrawingAssets.drawPaoEgg(frame: CGRect(x: 0, y: 0, width: symbolRect.width, height: symbolRect.height), time: 0)
-        context.restoreGState()
-
-
-        //// Text Drawing
-        let textRect = CGRect(x: 108.5, y: 612.3, width: 197, height: 45.81)
-        let textTextContent = "Scanning for paó..."
-        let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .center
-        let textFontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Book", size: 20)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: textStyle]
-
-        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: textRect)
-        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
-        context.restoreGState()
-
-
-        //// Symbol 3 Drawing
-        let symbol3Rect = CGRect(x: 0, y: 0, width: 414, height: 28)
-        context.saveGState()
-        context.clip(to: symbol3Rect)
-        context.translateBy(x: symbol3Rect.minX, y: symbol3Rect.minY)
-
-        PaoDrawingAssets.drawPaoTitleBar(frame: CGRect(origin: .zero, size: symbol3Rect.size), resizing: .stretch)
-        context.restoreGState()
-        
-        context.restoreGState()
-
-    }
-
-    public dynamic class func drawDashboardView(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 414, height: 736), resizing: ResizingBehavior = .aspectFit) {
-        //// General Declarations
-        let context = UIGraphicsGetCurrentContext()!
-        
-        //// Resize to Target Frame
-        context.saveGState()
-        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 414, height: 736), target: targetFrame)
-        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
-        context.scaleBy(x: resizedFrame.width / 414, y: resizedFrame.height / 736)
-
-
-        //// Color Declarations
-        let paoBarBlue = UIColor(red: 0.024, green: 0.671, blue: 0.925, alpha: 1.000)
-        let paoBarGreen = UIColor(red: 0.184, green: 0.886, blue: 0.686, alpha: 1.000)
-        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
-
-        //// Gradient Declarations
-        let paoBarGradient = CGGradient(colorsSpace: nil, colors: [paoBarBlue.cgColor, paoBarGreen.cgColor] as CFArray, locations: [0, 1])!
-
-        //// Symbol Drawing
-        let symbolRect = CGRect(x: 0, y: 0, width: 414, height: 736)
-        context.saveGState()
-        context.clip(to: symbolRect)
-        context.translateBy(x: symbolRect.minX, y: symbolRect.minY)
-
-        PaoDrawingAssets.drawPaoBackground(frame: CGRect(origin: .zero, size: symbolRect.size), resizing: .stretch)
-        context.restoreGState()
-
-
-        //// Symbol 2 Drawing
-        let symbol2Rect = CGRect(x: 164.6, y: 73.63, width: 84.8, height: 84.8)
-        context.saveGState()
-        context.clip(to: symbol2Rect)
-        context.translateBy(x: symbol2Rect.minX, y: symbol2Rect.minY)
-
-        PaoDrawingAssets.drawPaoProfilePic(frame: CGRect(origin: .zero, size: symbol2Rect.size), resizing: .stretch)
-        context.restoreGState()
-
-
-        //// Symbol 4 Drawing
-        let symbol4Rect = CGRect(x: 0, y: 0, width: 414, height: 28)
-        context.saveGState()
-        context.clip(to: symbol4Rect)
-        context.translateBy(x: symbol4Rect.minX, y: symbol4Rect.minY)
-
-        PaoDrawingAssets.drawPaoTitleBar(frame: CGRect(origin: .zero, size: symbol4Rect.size), resizing: .stretch)
-        context.restoreGState()
-
-
-        //// paoBar
-        //// Symbol 3 Drawing
-        let symbol3Rect = CGRect(x: 57, y: 202.23, width: 300, height: 20)
-        context.saveGState()
-        context.clip(to: symbol3Rect)
-        context.translateBy(x: symbol3Rect.minX, y: symbol3Rect.minY)
-
-        PaoDrawingAssets.drawPaoPostureBar(frame: CGRect(origin: .zero, size: symbol3Rect.size), resizing: .stretch, currentPosture: 1)
-        context.restoreGState()
-
-
-        //// Symbol 5 Drawing
-        let symbol5Rect = CGRect(x: 25.08, y: 186, width: 40.16, height: 52.45)
-        context.saveGState()
-        context.clip(to: symbol5Rect)
-        context.translateBy(x: symbol5Rect.minX, y: symbol5Rect.minY)
-
-        PaoDrawingAssets.drawPaoManSlouching(frame: CGRect(origin: .zero, size: symbol5Rect.size), resizing: .stretch)
-        context.restoreGState()
-
-
-        //// Symbol 6 Drawing
-        let symbol6Rect = CGRect(x: 347, y: 186, width: 40.16, height: 52.45)
-        context.saveGState()
-        context.clip(to: symbol6Rect)
-        context.translateBy(x: symbol6Rect.minX, y: symbol6Rect.minY)
-
-        PaoDrawingAssets.drawPaoManNotSlouching(frame: CGRect(origin: .zero, size: symbol6Rect.size), resizing: .stretch)
-        context.restoreGState()
-
-
-        //// paoTitle 2 Drawing
-        context.saveGState()
-        context.setAlpha(0.5)
-
-        let paoTitle2Rect = CGRect(x: 158.41, y: 216.64, width: 97.18, height: 20.81)
-        let paoTitle2TextContent = "NOW"
-        let paoTitle2Style = NSMutableParagraphStyle()
-        paoTitle2Style.alignment = .center
-        let paoTitle2FontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Heavy", size: 15)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: paoTitle2Style]
-
-        let paoTitle2TextHeight: CGFloat = paoTitle2TextContent.boundingRect(with: CGSize(width: paoTitle2Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: paoTitle2FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: paoTitle2Rect)
-        paoTitle2TextContent.draw(in: CGRect(x: paoTitle2Rect.minX, y: paoTitle2Rect.minY + (paoTitle2Rect.height - paoTitle2TextHeight) / 2, width: paoTitle2Rect.width, height: paoTitle2TextHeight), withAttributes: paoTitle2FontAttributes)
-        context.restoreGState()
-
-        context.restoreGState()
-
-
-
-
-        //// paoPostSitting
-        //// Symbol 7 Drawing
-        let symbol7Rect = CGRect(x: 36.2, y: 278.7, width: 80, height: 80)
-        context.saveGState()
-        context.clip(to: symbol7Rect)
-        context.translateBy(x: symbol7Rect.minX, y: symbol7Rect.minY)
-
-        PaoDrawingAssets.drawPaoSittingGoal(frame: CGRect(origin: .zero, size: symbol7Rect.size), resizing: .stretch, postureGoalPercentage: 0.55)
-        context.restoreGState()
-
-
-        //// paoTitle Drawing
-        context.saveGState()
-        context.setAlpha(0.5)
-
-        let paoTitleRect = CGRect(x: 27.61, y: 344.7, width: 97.18, height: 20.81)
-        let paoTitleTextContent = "SITTING"
-        let paoTitleStyle = NSMutableParagraphStyle()
-        paoTitleStyle.alignment = .center
-        let paoTitleFontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Heavy", size: 15)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: paoTitleStyle]
-
-        let paoTitleTextHeight: CGFloat = paoTitleTextContent.boundingRect(with: CGSize(width: paoTitleRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: paoTitleFontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: paoTitleRect)
-        paoTitleTextContent.draw(in: CGRect(x: paoTitleRect.minX, y: paoTitleRect.minY + (paoTitleRect.height - paoTitleTextHeight) / 2, width: paoTitleRect.width, height: paoTitleTextHeight), withAttributes: paoTitleFontAttributes)
-        context.restoreGState()
-
-        context.restoreGState()
-
-
-
-
-        //// paoPostStanding
-        //// Symbol 8 Drawing
-        let symbol8Rect = CGRect(x: 166.8, y: 278.7, width: 80, height: 80)
-        context.saveGState()
-        context.clip(to: symbol8Rect)
-        context.translateBy(x: symbol8Rect.minX, y: symbol8Rect.minY)
-
-        PaoDrawingAssets.drawPaoStandingGoal(frame: CGRect(origin: .zero, size: symbol8Rect.size), resizing: .stretch, postureGoalPercentage: 0.3)
-        context.restoreGState()
-
-
-        //// paoTitle 3 Drawing
-        context.saveGState()
-        context.setAlpha(0.5)
-
-        let paoTitle3Rect = CGRect(x: 158.21, y: 344.7, width: 97.18, height: 20.81)
-        let paoTitle3TextContent = "STANDING"
-        let paoTitle3Style = NSMutableParagraphStyle()
-        paoTitle3Style.alignment = .center
-        let paoTitle3FontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Heavy", size: 15)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: paoTitle3Style]
-
-        let paoTitle3TextHeight: CGFloat = paoTitle3TextContent.boundingRect(with: CGSize(width: paoTitle3Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: paoTitle3FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: paoTitle3Rect)
-        paoTitle3TextContent.draw(in: CGRect(x: paoTitle3Rect.minX, y: paoTitle3Rect.minY + (paoTitle3Rect.height - paoTitle3TextHeight) / 2, width: paoTitle3Rect.width, height: paoTitle3TextHeight), withAttributes: paoTitle3FontAttributes)
-        context.restoreGState()
-
-        context.restoreGState()
-
-
-
-
-        //// paoPostMoving
-        //// Symbol 9 Drawing
-        let symbol9Rect = CGRect(x: 297.8, y: 278.7, width: 80, height: 80)
-        context.saveGState()
-        context.clip(to: symbol9Rect)
-        context.translateBy(x: symbol9Rect.minX, y: symbol9Rect.minY)
-
-        PaoDrawingAssets.drawPaoMovingGoal(frame: CGRect(origin: .zero, size: symbol9Rect.size), resizing: .stretch, postureGoalPercentage: 0.6)
-        context.restoreGState()
-
-
-        //// paoTitle 4 Drawing
-        context.saveGState()
-        context.setAlpha(0.5)
-
-        let paoTitle4Rect = CGRect(x: 289.21, y: 344.7, width: 97.18, height: 20.81)
-        let paoTitle4TextContent = "MOVING"
-        let paoTitle4Style = NSMutableParagraphStyle()
-        paoTitle4Style.alignment = .center
-        let paoTitle4FontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Heavy", size: 15)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: paoTitle4Style]
-
-        let paoTitle4TextHeight: CGFloat = paoTitle4TextContent.boundingRect(with: CGSize(width: paoTitle4Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: paoTitle4FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: paoTitle4Rect)
-        paoTitle4TextContent.draw(in: CGRect(x: paoTitle4Rect.minX, y: paoTitle4Rect.minY + (paoTitle4Rect.height - paoTitle4TextHeight) / 2, width: paoTitle4Rect.width, height: paoTitle4TextHeight), withAttributes: paoTitle4FontAttributes)
-        context.restoreGState()
-
-        context.restoreGState()
-
-
-
-
-        //// paoGraph
-        //// Bezier Drawing
-        context.saveGState()
-        context.setAlpha(0.2)
-
-        let bezierPath = UIBezierPath()
-        bezierPath.move(to: CGPoint(x: 59.98, y: 424.39))
-        bezierPath.addLine(to: CGPoint(x: 59.98, y: 542.45))
-        paoTextWhite.setStroke()
-        bezierPath.lineWidth = 1
-        bezierPath.lineCapStyle = .round
-        bezierPath.lineJoinStyle = .round
-        bezierPath.stroke()
-
-        context.restoreGState()
-
-
-        //// Bezier 2 Drawing
-        context.saveGState()
-        context.setAlpha(0.2)
-
-        let bezier2Path = UIBezierPath()
-        bezier2Path.move(to: CGPoint(x: 102.2, y: 424.39))
-        bezier2Path.addLine(to: CGPoint(x: 102.2, y: 542.45))
-        paoTextWhite.setStroke()
-        bezier2Path.lineWidth = 1
-        bezier2Path.lineCapStyle = .round
-        bezier2Path.lineJoinStyle = .round
-        bezier2Path.stroke()
-
-        context.restoreGState()
-
-
-        //// Bezier 3 Drawing
-        context.saveGState()
-        context.setAlpha(0.2)
-
-        let bezier3Path = UIBezierPath()
-        bezier3Path.move(to: CGPoint(x: 144.2, y: 424.39))
-        bezier3Path.addLine(to: CGPoint(x: 144.2, y: 542.45))
-        paoTextWhite.setStroke()
-        bezier3Path.lineWidth = 1
-        bezier3Path.lineCapStyle = .round
-        bezier3Path.lineJoinStyle = .round
-        bezier3Path.stroke()
-
-        context.restoreGState()
-
-
-        //// Bezier 4 Drawing
-        context.saveGState()
-        context.setAlpha(0.2)
-
-        let bezier4Path = UIBezierPath()
-        bezier4Path.move(to: CGPoint(x: 186.2, y: 424.39))
-        bezier4Path.addLine(to: CGPoint(x: 186.2, y: 542.45))
-        paoTextWhite.setStroke()
-        bezier4Path.lineWidth = 1
-        bezier4Path.lineCapStyle = .round
-        bezier4Path.lineJoinStyle = .round
-        bezier4Path.stroke()
-
-        context.restoreGState()
-
-
-        //// Bezier 5 Drawing
-        context.saveGState()
-        context.setAlpha(0.2)
-
-        let bezier5Path = UIBezierPath()
-        bezier5Path.move(to: CGPoint(x: 228.2, y: 424.39))
-        bezier5Path.addLine(to: CGPoint(x: 228.2, y: 542.45))
-        paoTextWhite.setStroke()
-        bezier5Path.lineWidth = 1
-        bezier5Path.lineCapStyle = .round
-        bezier5Path.lineJoinStyle = .round
-        bezier5Path.stroke()
-
-        context.restoreGState()
-
-
-        //// Bezier 6 Drawing
-        context.saveGState()
-        context.setAlpha(0.2)
-
-        let bezier6Path = UIBezierPath()
-        bezier6Path.move(to: CGPoint(x: 270.2, y: 424.39))
-        bezier6Path.addLine(to: CGPoint(x: 270.2, y: 542.45))
-        paoTextWhite.setStroke()
-        bezier6Path.lineWidth = 1
-        bezier6Path.lineCapStyle = .round
-        bezier6Path.lineJoinStyle = .round
-        bezier6Path.stroke()
-
-        context.restoreGState()
-
-
-        //// Bezier 7 Drawing
-        context.saveGState()
-        context.setAlpha(0.2)
-
-        let bezier7Path = UIBezierPath()
-        bezier7Path.move(to: CGPoint(x: 312.2, y: 424.39))
-        bezier7Path.addLine(to: CGPoint(x: 312.2, y: 542.45))
-        paoTextWhite.setStroke()
-        bezier7Path.lineWidth = 1
-        bezier7Path.lineCapStyle = .round
-        bezier7Path.lineJoinStyle = .round
-        bezier7Path.stroke()
-
-        context.restoreGState()
-
-
-        //// Bezier 8 Drawing
-        context.saveGState()
-        context.setAlpha(0.2)
-
-        let bezier8Path = UIBezierPath()
-        bezier8Path.move(to: CGPoint(x: 354.02, y: 424.39))
-        bezier8Path.addLine(to: CGPoint(x: 354.02, y: 542.45))
-        paoTextWhite.setStroke()
-        bezier8Path.lineWidth = 1
-        bezier8Path.lineCapStyle = .round
-        bezier8Path.lineJoinStyle = .round
-        bezier8Path.stroke()
-
-        context.restoreGState()
-
-
-        //// Bezier 9 Drawing
-        context.saveGState()
-        context.setAlpha(0.2)
-
-        let bezier9Path = UIBezierPath()
-        bezier9Path.move(to: CGPoint(x: 47.77, y: 483.45))
-        bezier9Path.addLine(to: CGPoint(x: 368.02, y: 483.45))
-        paoTextWhite.setStroke()
-        bezier9Path.lineWidth = 1
-        bezier9Path.lineCapStyle = .round
-        bezier9Path.lineJoinStyle = .round
-        bezier9Path.stroke()
-
-        context.restoreGState()
-
-
-        //// paoTitle 5 Drawing
-        context.saveGState()
-        context.setAlpha(0.3)
-
-        let paoTitle5Rect = CGRect(x: 41.79, y: 403.58, width: 36.38, height: 20.81)
-        let paoTitle5TextContent = "09:00"
-        let paoTitle5Style = NSMutableParagraphStyle()
-        paoTitle5Style.alignment = .center
-        let paoTitle5FontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 10)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: paoTitle5Style]
-
-        let paoTitle5Inset: CGRect = paoTitle5Rect.insetBy(dx: 0, dy: 1)
-        let paoTitle5TextHeight: CGFloat = paoTitle5TextContent.boundingRect(with: CGSize(width: paoTitle5Inset.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: paoTitle5FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: paoTitle5Inset)
-        paoTitle5TextContent.draw(in: CGRect(x: paoTitle5Inset.minX, y: paoTitle5Inset.minY + (paoTitle5Inset.height - paoTitle5TextHeight) / 2, width: paoTitle5Inset.width, height: paoTitle5TextHeight), withAttributes: paoTitle5FontAttributes)
-        context.restoreGState()
-
-        context.restoreGState()
-
-
-        //// paoTitle 6 Drawing
-        context.saveGState()
-        context.setAlpha(0.3)
-
-        let paoTitle6Rect = CGRect(x: 84.01, y: 403.58, width: 36.38, height: 20.81)
-        let paoTitle6TextContent = "10:00"
-        let paoTitle6Style = NSMutableParagraphStyle()
-        paoTitle6Style.alignment = .center
-        let paoTitle6FontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 10)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: paoTitle6Style]
-
-        let paoTitle6Inset: CGRect = paoTitle6Rect.insetBy(dx: 0, dy: 1)
-        let paoTitle6TextHeight: CGFloat = paoTitle6TextContent.boundingRect(with: CGSize(width: paoTitle6Inset.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: paoTitle6FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: paoTitle6Inset)
-        paoTitle6TextContent.draw(in: CGRect(x: paoTitle6Inset.minX, y: paoTitle6Inset.minY + (paoTitle6Inset.height - paoTitle6TextHeight) / 2, width: paoTitle6Inset.width, height: paoTitle6TextHeight), withAttributes: paoTitle6FontAttributes)
-        context.restoreGState()
-
-        context.restoreGState()
-
-
-        //// paoTitle 7 Drawing
-        context.saveGState()
-        context.setAlpha(0.3)
-
-        let paoTitle7Rect = CGRect(x: 126.01, y: 403.58, width: 36.38, height: 20.81)
-        let paoTitle7TextContent = "11:00"
-        let paoTitle7Style = NSMutableParagraphStyle()
-        paoTitle7Style.alignment = .center
-        let paoTitle7FontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 10)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: paoTitle7Style]
-
-        let paoTitle7Inset: CGRect = paoTitle7Rect.insetBy(dx: 0, dy: 1)
-        let paoTitle7TextHeight: CGFloat = paoTitle7TextContent.boundingRect(with: CGSize(width: paoTitle7Inset.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: paoTitle7FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: paoTitle7Inset)
-        paoTitle7TextContent.draw(in: CGRect(x: paoTitle7Inset.minX, y: paoTitle7Inset.minY + (paoTitle7Inset.height - paoTitle7TextHeight) / 2, width: paoTitle7Inset.width, height: paoTitle7TextHeight), withAttributes: paoTitle7FontAttributes)
-        context.restoreGState()
-
-        context.restoreGState()
-
-
-        //// paoTitle 8 Drawing
-        context.saveGState()
-        context.setAlpha(0.3)
-
-        let paoTitle8Rect = CGRect(x: 168.01, y: 403.58, width: 36.38, height: 20.81)
-        let paoTitle8TextContent = "12:00"
-        let paoTitle8Style = NSMutableParagraphStyle()
-        paoTitle8Style.alignment = .center
-        let paoTitle8FontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 10)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: paoTitle8Style]
-
-        let paoTitle8Inset: CGRect = paoTitle8Rect.insetBy(dx: 0, dy: 1)
-        let paoTitle8TextHeight: CGFloat = paoTitle8TextContent.boundingRect(with: CGSize(width: paoTitle8Inset.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: paoTitle8FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: paoTitle8Inset)
-        paoTitle8TextContent.draw(in: CGRect(x: paoTitle8Inset.minX, y: paoTitle8Inset.minY + (paoTitle8Inset.height - paoTitle8TextHeight) / 2, width: paoTitle8Inset.width, height: paoTitle8TextHeight), withAttributes: paoTitle8FontAttributes)
-        context.restoreGState()
-
-        context.restoreGState()
-
-
-        //// paoTitle 9 Drawing
-        context.saveGState()
-        context.setAlpha(0.3)
-
-        let paoTitle9Rect = CGRect(x: 210.42, y: 403.58, width: 36.38, height: 20.81)
-        let paoTitle9TextContent = "13:00"
-        let paoTitle9Style = NSMutableParagraphStyle()
-        paoTitle9Style.alignment = .center
-        let paoTitle9FontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 10)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: paoTitle9Style]
-
-        let paoTitle9Inset: CGRect = paoTitle9Rect.insetBy(dx: 0, dy: 1)
-        let paoTitle9TextHeight: CGFloat = paoTitle9TextContent.boundingRect(with: CGSize(width: paoTitle9Inset.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: paoTitle9FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: paoTitle9Inset)
-        paoTitle9TextContent.draw(in: CGRect(x: paoTitle9Inset.minX, y: paoTitle9Inset.minY + (paoTitle9Inset.height - paoTitle9TextHeight) / 2, width: paoTitle9Inset.width, height: paoTitle9TextHeight), withAttributes: paoTitle9FontAttributes)
-        context.restoreGState()
-
-        context.restoreGState()
-
-
-        //// paoTitle 10 Drawing
-        context.saveGState()
-        context.setAlpha(0.3)
-
-        let paoTitle10Rect = CGRect(x: 252.01, y: 403.58, width: 36.38, height: 20.81)
-        let paoTitle10TextContent = "14:00"
-        let paoTitle10Style = NSMutableParagraphStyle()
-        paoTitle10Style.alignment = .center
-        let paoTitle10FontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 10)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: paoTitle10Style]
-
-        let paoTitle10Inset: CGRect = paoTitle10Rect.insetBy(dx: 0, dy: 1)
-        let paoTitle10TextHeight: CGFloat = paoTitle10TextContent.boundingRect(with: CGSize(width: paoTitle10Inset.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: paoTitle10FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: paoTitle10Inset)
-        paoTitle10TextContent.draw(in: CGRect(x: paoTitle10Inset.minX, y: paoTitle10Inset.minY + (paoTitle10Inset.height - paoTitle10TextHeight) / 2, width: paoTitle10Inset.width, height: paoTitle10TextHeight), withAttributes: paoTitle10FontAttributes)
-        context.restoreGState()
-
-        context.restoreGState()
-
-
-        //// paoTitle 11 Drawing
-        context.saveGState()
-        context.setAlpha(0.3)
-
-        let paoTitle11Rect = CGRect(x: 294.01, y: 403.58, width: 36.38, height: 20.81)
-        let paoTitle11TextContent = "15:00"
-        let paoTitle11Style = NSMutableParagraphStyle()
-        paoTitle11Style.alignment = .center
-        let paoTitle11FontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 10)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: paoTitle11Style]
-
-        let paoTitle11Inset: CGRect = paoTitle11Rect.insetBy(dx: 0, dy: 1)
-        let paoTitle11TextHeight: CGFloat = paoTitle11TextContent.boundingRect(with: CGSize(width: paoTitle11Inset.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: paoTitle11FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: paoTitle11Inset)
-        paoTitle11TextContent.draw(in: CGRect(x: paoTitle11Inset.minX, y: paoTitle11Inset.minY + (paoTitle11Inset.height - paoTitle11TextHeight) / 2, width: paoTitle11Inset.width, height: paoTitle11TextHeight), withAttributes: paoTitle11FontAttributes)
-        context.restoreGState()
-
-        context.restoreGState()
-
-
-        //// paoTitle 12 Drawing
-        context.saveGState()
-        context.setAlpha(0.3)
-
-        let paoTitle12Rect = CGRect(x: 335.83, y: 403.58, width: 36.38, height: 20.81)
-        let paoTitle12TextContent = "16:00"
-        let paoTitle12Style = NSMutableParagraphStyle()
-        paoTitle12Style.alignment = .center
-        let paoTitle12FontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Medium", size: 10)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: paoTitle12Style]
-
-        let paoTitle12Inset: CGRect = paoTitle12Rect.insetBy(dx: 0, dy: 1)
-        let paoTitle12TextHeight: CGFloat = paoTitle12TextContent.boundingRect(with: CGSize(width: paoTitle12Inset.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: paoTitle12FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: paoTitle12Inset)
-        paoTitle12TextContent.draw(in: CGRect(x: paoTitle12Inset.minX, y: paoTitle12Inset.minY + (paoTitle12Inset.height - paoTitle12TextHeight) / 2, width: paoTitle12Inset.width, height: paoTitle12TextHeight), withAttributes: paoTitle12FontAttributes)
-        context.restoreGState()
-
-        context.restoreGState()
-
-
-        //// paoTitle 13 Drawing
-        context.saveGState()
-        context.setAlpha(0.5)
-
-        let paoTitle13Rect = CGRect(x: 157.53, y: 550.86, width: 97.18, height: 20.81)
-        let paoTitle13TextContent = "TODAY"
-        let paoTitle13Style = NSMutableParagraphStyle()
-        paoTitle13Style.alignment = .center
-        let paoTitle13FontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Heavy", size: 15)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: paoTitle13Style]
-
-        let paoTitle13TextHeight: CGFloat = paoTitle13TextContent.boundingRect(with: CGSize(width: paoTitle13Rect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: paoTitle13FontAttributes, context: nil).height
-        context.saveGState()
-        context.clip(to: paoTitle13Rect)
-        paoTitle13TextContent.draw(in: CGRect(x: paoTitle13Rect.minX, y: paoTitle13Rect.minY + (paoTitle13Rect.height - paoTitle13TextHeight) / 2, width: paoTitle13Rect.width, height: paoTitle13TextHeight), withAttributes: paoTitle13FontAttributes)
-        context.restoreGState()
-
-        context.restoreGState()
-
-
-        //// Bezier 10 Drawing
-        let bezier10Path = UIBezierPath()
-        bezier10Path.move(to: CGPoint(x: 49.06, y: 483.1))
-        bezier10Path.addCurve(to: CGPoint(x: 113.28, y: 433.81), controlPoint1: CGPoint(x: 49.06, y: 483.1), controlPoint2: CGPoint(x: 90.6, y: 426.39))
-        bezier10Path.addCurve(to: CGPoint(x: 153.05, y: 520.06), controlPoint1: CGPoint(x: 135.96, y: 441.23), controlPoint2: CGPoint(x: 128.14, y: 516.57))
-        bezier10Path.addCurve(to: CGPoint(x: 197.44, y: 463.06), controlPoint1: CGPoint(x: 177.97, y: 523.56), controlPoint2: CGPoint(x: 175.36, y: 472.91))
-        bezier10Path.addCurve(to: CGPoint(x: 234.57, y: 475.07), controlPoint1: CGPoint(x: 219.52, y: 453.2), controlPoint2: CGPoint(x: 221.81, y: 478.7))
-        bezier10Path.addCurve(to: CGPoint(x: 251.89, y: 438.56), controlPoint1: CGPoint(x: 247.33, y: 471.43), controlPoint2: CGPoint(x: 241.45, y: 439.33))
-        bezier10Path.addCurve(to: CGPoint(x: 277.55, y: 516.07), controlPoint1: CGPoint(x: 262.34, y: 437.78), controlPoint2: CGPoint(x: 270.51, y: 517.03))
-        bezier10Path.addCurve(to: CGPoint(x: 293.29, y: 467.17), controlPoint1: CGPoint(x: 284.6, y: 515.11), controlPoint2: CGPoint(x: 284.78, y: 472.48))
-        bezier10Path.addCurve(to: CGPoint(x: 332.37, y: 494.07), controlPoint1: CGPoint(x: 301.81, y: 461.86), controlPoint2: CGPoint(x: 306.76, y: 488.07))
-        bezier10Path.addCurve(to: CGPoint(x: 367.4, y: 482.97), controlPoint1: CGPoint(x: 357.99, y: 500.08), controlPoint2: CGPoint(x: 367.4, y: 482.97))
-        context.saveGState()
-        bezier10Path.addClip()
-        context.drawLinearGradient(paoBarGradient, start: CGPoint(x: 208.23, y: 433.14), end: CGPoint(x: 208.23, y: 520.23), options: [])
-        context.restoreGState()
-
-
-
-
-        //// Symbol 10 Drawing
-        let symbol10Rect = CGRect(x: 39.2, y: 615.7, width: 66, height: 90)
-        context.saveGState()
-        context.clip(to: symbol10Rect)
-        context.translateBy(x: symbol10Rect.minX, y: symbol10Rect.minY)
-
-        PaoDrawingAssets.drawPaoButtonTrain(frame: CGRect(origin: .zero, size: symbol10Rect.size), resizing: .stretch, isPressed: false)
-        context.restoreGState()
-
-
-        //// Symbol 11 Drawing
-        let symbol11Rect = CGRect(x: 129, y: 616, width: 66, height: 90)
-        context.saveGState()
-        context.clip(to: symbol11Rect)
-        context.translateBy(x: symbol11Rect.minX, y: symbol11Rect.minY)
-
-        PaoDrawingAssets.drawPaoButtonDebug(frame: CGRect(origin: .zero, size: symbol11Rect.size), resizing: .stretch, isPressed: false)
-        context.restoreGState()
-
-
-        //// Symbol 12 Drawing
-        let symbol12Rect = CGRect(x: 219, y: 616, width: 66, height: 90)
-        context.saveGState()
-        context.clip(to: symbol12Rect)
-        context.translateBy(x: symbol12Rect.minX, y: symbol12Rect.minY)
-
-        PaoDrawingAssets.drawPaoButtonConfig(frame: CGRect(origin: .zero, size: symbol12Rect.size), resizing: .stretch, isPressed: false)
-        context.restoreGState()
-
-
-        //// Symbol 13 Drawing
-        let symbol13Rect = CGRect(x: 309.21, y: 616, width: 66, height: 90)
-        context.saveGState()
-        context.clip(to: symbol13Rect)
-        context.translateBy(x: symbol13Rect.minX, y: symbol13Rect.minY)
-
-        PaoDrawingAssets.drawPaoButtonHelp(frame: CGRect(origin: .zero, size: symbol13Rect.size), resizing: .stretch, isPressed: false)
-        context.restoreGState()
-        
-        context.restoreGState()
-
-    }
-
     public dynamic class func drawPaoProfilePic(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 126, height: 126), resizing: ResizingBehavior = .aspectFit) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
@@ -881,7 +236,7 @@ public class PaoDrawingAssets : NSObject {
 
     }
 
-    public dynamic class func drawPaoPostureBar(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 300, height: 20), resizing: ResizingBehavior = .aspectFit, currentPosture: CGFloat = 0.839) {
+    public dynamic class func drawPaoPostureBar(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 300, height: 20), resizing: ResizingBehavior = .aspectFit, currentPosture: CGFloat = 0.853) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -1211,7 +566,7 @@ public class PaoDrawingAssets : NSObject {
 
     }
 
-    public dynamic class func drawPaoSittingGoal(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 180, height: 180), resizing: ResizingBehavior = .aspectFit, postureGoalPercentage: CGFloat = 0.864) {
+    public dynamic class func drawPaoSittingGoal(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 180, height: 180), resizing: ResizingBehavior = .aspectFit, postureGoalPercentage: CGFloat = 0.65) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -1470,7 +825,7 @@ public class PaoDrawingAssets : NSObject {
 
     }
 
-    public dynamic class func drawPaoMovingGoal(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 180, height: 180), resizing: ResizingBehavior = .aspectFit, postureGoalPercentage: CGFloat = 0.864) {
+    public dynamic class func drawPaoMovingGoal(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 180, height: 180), resizing: ResizingBehavior = .aspectFit, postureGoalPercentage: CGFloat = 0.65) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -1668,7 +1023,7 @@ public class PaoDrawingAssets : NSObject {
 
     }
 
-    public dynamic class func drawPaoStandingGoal(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 180, height: 180), resizing: ResizingBehavior = .aspectFit, postureGoalPercentage: CGFloat = 0.864) {
+    public dynamic class func drawPaoStandingGoal(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 180, height: 180), resizing: ResizingBehavior = .aspectFit, postureGoalPercentage: CGFloat = 0.65) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
         
@@ -2006,193 +1361,31 @@ public class PaoDrawingAssets : NSObject {
         context.restoreGState()
 
 
-        //// Group
-        //// Rectangle Drawing
-        let rectanglePath = UIBezierPath(rect: CGRect(x: 25.08, y: 21.68, width: 12.16, height: 1.53))
-        paoTextWhite.setFill()
-        rectanglePath.fill()
+        //// Symbol Drawing
+        context.saveGState()
+        context.translateBy(x: 0, y: -100)
+
+        let symbolRect = CGRect(x: 13.02, y: -78.27, width: 40, height: 41)
+        context.saveGState()
+        context.clip(to: symbolRect)
+        context.translateBy(x: symbolRect.minX, y: symbolRect.minY)
+        context.translateBy(x: 0, y: 1)
+
+        PaoDrawingAssets.drawDebugIcon(frame: CGRect(origin: .zero, size: symbolRect.size), resizing: .stretch)
+        context.restoreGState()
+
+        context.restoreGState()
 
 
-        //// Bezier 2 Drawing
-        let bezier2Path = UIBezierPath()
-        bezier2Path.move(to: CGPoint(x: 19.53, y: 24.88))
-        bezier2Path.addLine(to: CGPoint(x: 20.97, y: 23.42))
-        bezier2Path.addLine(to: CGPoint(x: 22.42, y: 24.88))
-        bezier2Path.addLine(to: CGPoint(x: 23.55, y: 23.73))
-        bezier2Path.addLine(to: CGPoint(x: 22.11, y: 22.27))
-        bezier2Path.addLine(to: CGPoint(x: 23.55, y: 20.81))
-        bezier2Path.addLine(to: CGPoint(x: 22.42, y: 19.66))
-        bezier2Path.addLine(to: CGPoint(x: 20.97, y: 21.12))
-        bezier2Path.addLine(to: CGPoint(x: 19.53, y: 19.66))
-        bezier2Path.addLine(to: CGPoint(x: 18.4, y: 20.81))
-        bezier2Path.addLine(to: CGPoint(x: 19.84, y: 22.27))
-        bezier2Path.addLine(to: CGPoint(x: 18.39, y: 23.73))
-        bezier2Path.addLine(to: CGPoint(x: 19.53, y: 24.88))
-        bezier2Path.close()
-        paoTextWhite.setFill()
-        bezier2Path.fill()
+        //// Symbol 2 Drawing
+        let symbol2Rect = CGRect(x: 13, y: 14, width: 40, height: 41)
+        context.saveGState()
+        context.clip(to: symbol2Rect)
+        context.translateBy(x: symbol2Rect.minX, y: symbol2Rect.minY)
+        context.translateBy(x: 0, y: 1)
 
-
-        //// Bezier 3 Drawing
-        let bezier3Path = UIBezierPath()
-        bezier3Path.move(to: CGPoint(x: 22.82, y: 28.66))
-        bezier3Path.addLine(to: CGPoint(x: 20.32, y: 31.2))
-        bezier3Path.addLine(to: CGPoint(x: 19.13, y: 30))
-        bezier3Path.addLine(to: CGPoint(x: 17.99, y: 31.15))
-        bezier3Path.addLine(to: CGPoint(x: 20.32, y: 33.5))
-        bezier3Path.addLine(to: CGPoint(x: 23.96, y: 29.81))
-        bezier3Path.addLine(to: CGPoint(x: 22.82, y: 28.66))
-        bezier3Path.close()
-        paoTextWhite.setFill()
-        bezier3Path.fill()
-
-
-        //// Bezier 4 Drawing
-        let bezier4Path = UIBezierPath()
-        bezier4Path.move(to: CGPoint(x: 19.13, y: 38.96))
-        bezier4Path.addLine(to: CGPoint(x: 17.99, y: 40.11))
-        bezier4Path.addLine(to: CGPoint(x: 20.32, y: 42.47))
-        bezier4Path.addLine(to: CGPoint(x: 23.96, y: 38.78))
-        bezier4Path.addLine(to: CGPoint(x: 22.82, y: 37.63))
-        bezier4Path.addLine(to: CGPoint(x: 20.32, y: 40.16))
-        bezier4Path.addLine(to: CGPoint(x: 19.13, y: 38.96))
-        bezier4Path.close()
-        paoTextWhite.setFill()
-        bezier4Path.fill()
-
-
-        //// Bezier 5 Drawing
-        let bezier5Path = UIBezierPath()
-        bezier5Path.move(to: CGPoint(x: 16.03, y: 48.3))
-        bezier5Path.addLine(to: CGPoint(x: 16.03, y: 15.73))
-        bezier5Path.addLine(to: CGPoint(x: 42.17, y: 15.73))
-        bezier5Path.addLine(to: CGPoint(x: 42.17, y: 27.35))
-        bezier5Path.addCurve(to: CGPoint(x: 44.24, y: 26.64), controlPoint1: CGPoint(x: 42.77, y: 26.89), controlPoint2: CGPoint(x: 43.48, y: 26.64))
-        bezier5Path.addCurve(to: CGPoint(x: 45.19, y: 26.78), controlPoint1: CGPoint(x: 44.56, y: 26.64), controlPoint2: CGPoint(x: 44.88, y: 26.69))
-        bezier5Path.addLine(to: CGPoint(x: 45.19, y: 14.71))
-        bezier5Path.addCurve(to: CGPoint(x: 43.18, y: 12.67), controlPoint1: CGPoint(x: 45.19, y: 13.59), controlPoint2: CGPoint(x: 44.28, y: 12.67))
-        bezier5Path.addLine(to: CGPoint(x: 15.03, y: 12.67))
-        bezier5Path.addCurve(to: CGPoint(x: 13.02, y: 14.71), controlPoint1: CGPoint(x: 13.92, y: 12.67), controlPoint2: CGPoint(x: 13.02, y: 13.59))
-        bezier5Path.addLine(to: CGPoint(x: 13.02, y: 49.32))
-        bezier5Path.addCurve(to: CGPoint(x: 15.03, y: 51.35), controlPoint1: CGPoint(x: 13.02, y: 50.43), controlPoint2: CGPoint(x: 13.92, y: 51.35))
-        bezier5Path.addLine(to: CGPoint(x: 27.84, y: 51.35))
-        bezier5Path.addCurve(to: CGPoint(x: 28.6, y: 48.3), controlPoint1: CGPoint(x: 27.6, y: 50.29), controlPoint2: CGPoint(x: 27.86, y: 49.15))
-        bezier5Path.addLine(to: CGPoint(x: 16.03, y: 48.3))
-        bezier5Path.addLine(to: CGPoint(x: 16.03, y: 48.3))
-        bezier5Path.close()
-        paoTextWhite.setFill()
-        bezier5Path.fill()
-
-
-        //// Bezier 6 Drawing
-        let bezier6Path = UIBezierPath()
-        bezier6Path.move(to: CGPoint(x: 25.48, y: 41.17))
-        bezier6Path.addLine(to: CGPoint(x: 27.54, y: 41.17))
-        bezier6Path.addCurve(to: CGPoint(x: 30.15, y: 39.93), controlPoint1: CGPoint(x: 28.17, y: 40.41), controlPoint2: CGPoint(x: 29.1, y: 39.93))
-        bezier6Path.addLine(to: CGPoint(x: 30.66, y: 39.93))
-        bezier6Path.addCurve(to: CGPoint(x: 30.7, y: 39.82), controlPoint1: CGPoint(x: 30.68, y: 39.89), controlPoint2: CGPoint(x: 30.69, y: 39.86))
-        bezier6Path.addLine(to: CGPoint(x: 29.99, y: 39.14))
-        bezier6Path.addLine(to: CGPoint(x: 25.48, y: 39.14))
-        bezier6Path.addLine(to: CGPoint(x: 25.48, y: 41.17))
-        bezier6Path.close()
-        paoTextWhite.setFill()
-        bezier6Path.fill()
-
-
-        //// Bezier 7 Drawing
-        let bezier7Path = UIBezierPath()
-        bezier7Path.move(to: CGPoint(x: 34.98, y: 31.41))
-        bezier7Path.addCurve(to: CGPoint(x: 34.74, y: 30.18), controlPoint1: CGPoint(x: 34.82, y: 31.02), controlPoint2: CGPoint(x: 34.75, y: 30.6))
-        bezier7Path.addLine(to: CGPoint(x: 25.48, y: 30.18))
-        bezier7Path.addLine(to: CGPoint(x: 25.48, y: 32.22))
-        bezier7Path.addLine(to: CGPoint(x: 34.5, y: 32.22))
-        bezier7Path.addCurve(to: CGPoint(x: 34.98, y: 31.41), controlPoint1: CGPoint(x: 34.65, y: 31.94), controlPoint2: CGPoint(x: 34.8, y: 31.67))
-        bezier7Path.close()
-        paoTextWhite.setFill()
-        bezier7Path.fill()
-
-
-        //// Bezier 8 Drawing
-        let bezier8Path = UIBezierPath()
-        bezier8Path.move(to: CGPoint(x: 31.95, y: 35.2))
-        bezier8Path.addCurve(to: CGPoint(x: 30.89, y: 35.21), controlPoint1: CGPoint(x: 31.66, y: 34.9), controlPoint2: CGPoint(x: 31.18, y: 34.91))
-        bezier8Path.addCurve(to: CGPoint(x: 30.89, y: 36.29), controlPoint1: CGPoint(x: 30.59, y: 35.51), controlPoint2: CGPoint(x: 30.59, y: 35.99))
-        bezier8Path.addLine(to: CGPoint(x: 32.69, y: 38.01))
-        bezier8Path.addCurve(to: CGPoint(x: 33.22, y: 38.12), controlPoint1: CGPoint(x: 32.83, y: 38.15), controlPoint2: CGPoint(x: 33.02, y: 38.12))
-        bezier8Path.addLine(to: CGPoint(x: 34.69, y: 38.12))
-        bezier8Path.addCurve(to: CGPoint(x: 32.71, y: 42.63), controlPoint1: CGPoint(x: 33.65, y: 39.44), controlPoint2: CGPoint(x: 32.96, y: 41.04))
-        bezier8Path.addLine(to: CGPoint(x: 30.15, y: 42.63))
-        bezier8Path.addCurve(to: CGPoint(x: 29.4, y: 43.42), controlPoint1: CGPoint(x: 29.73, y: 42.63), controlPoint2: CGPoint(x: 29.4, y: 43))
-        bezier8Path.addCurve(to: CGPoint(x: 30.15, y: 44.22), controlPoint1: CGPoint(x: 29.4, y: 43.85), controlPoint2: CGPoint(x: 29.73, y: 44.22))
-        bezier8Path.addLine(to: CGPoint(x: 32.59, y: 44.22))
-        bezier8Path.addCurve(to: CGPoint(x: 33.52, y: 47.94), controlPoint1: CGPoint(x: 32.61, y: 45.55), controlPoint2: CGPoint(x: 32.94, y: 46.87))
-        bezier8Path.addLine(to: CGPoint(x: 32.97, y: 47.94))
-        bezier8Path.addCurve(to: CGPoint(x: 32.44, y: 48.19), controlPoint1: CGPoint(x: 32.77, y: 47.94), controlPoint2: CGPoint(x: 32.58, y: 48.05))
-        bezier8Path.addLine(to: CGPoint(x: 30.64, y: 50.04))
-        bezier8Path.addCurve(to: CGPoint(x: 30.64, y: 51.13), controlPoint1: CGPoint(x: 30.34, y: 50.34), controlPoint2: CGPoint(x: 30.34, y: 50.83))
-        bezier8Path.addCurve(to: CGPoint(x: 31.17, y: 51.36), controlPoint1: CGPoint(x: 30.78, y: 51.28), controlPoint2: CGPoint(x: 30.98, y: 51.36))
-        bezier8Path.addCurve(to: CGPoint(x: 31.7, y: 51.13), controlPoint1: CGPoint(x: 31.36, y: 51.36), controlPoint2: CGPoint(x: 31.55, y: 51.28))
-        bezier8Path.addLine(to: CGPoint(x: 33.28, y: 49.53))
-        bezier8Path.addLine(to: CGPoint(x: 34.5, y: 49.53))
-        bezier8Path.addCurve(to: CGPoint(x: 40.66, y: 52.73), controlPoint1: CGPoint(x: 35.98, y: 51.39), controlPoint2: CGPoint(x: 38.31, y: 52.59))
-        bezier8Path.addLine(to: CGPoint(x: 40.66, y: 36.79))
-        bezier8Path.addLine(to: CGPoint(x: 33.53, y: 36.79))
-        bezier8Path.addLine(to: CGPoint(x: 31.95, y: 35.2))
-        bezier8Path.close()
-        paoTextWhite.setFill()
-        bezier8Path.fill()
-
-
-        //// Bezier 9 Drawing
-        let bezier9Path = UIBezierPath()
-        bezier9Path.move(to: CGPoint(x: 52.23, y: 42.63))
-        bezier9Path.addLine(to: CGPoint(x: 49.62, y: 42.63))
-        bezier9Path.addCurve(to: CGPoint(x: 47.48, y: 38.12), controlPoint1: CGPoint(x: 49.3, y: 41.04), controlPoint2: CGPoint(x: 48.46, y: 39.44))
-        bezier9Path.addLine(to: CGPoint(x: 49.16, y: 38.12))
-        bezier9Path.addCurve(to: CGPoint(x: 49.69, y: 38.01), controlPoint1: CGPoint(x: 49.36, y: 38.12), controlPoint2: CGPoint(x: 49.55, y: 38.15))
-        bezier9Path.addLine(to: CGPoint(x: 51.49, y: 36.24))
-        bezier9Path.addCurve(to: CGPoint(x: 51.49, y: 35.19), controlPoint1: CGPoint(x: 51.79, y: 35.94), controlPoint2: CGPoint(x: 51.78, y: 35.49))
-        bezier9Path.addCurve(to: CGPoint(x: 50.43, y: 35.19), controlPoint1: CGPoint(x: 51.2, y: 34.89), controlPoint2: CGPoint(x: 50.72, y: 34.89))
-        bezier9Path.addLine(to: CGPoint(x: 48.84, y: 36.79))
-        bezier9Path.addLine(to: CGPoint(x: 41.71, y: 36.79))
-        bezier9Path.addLine(to: CGPoint(x: 41.71, y: 52.72))
-        bezier9Path.addCurve(to: CGPoint(x: 47.84, y: 49.53), controlPoint1: CGPoint(x: 44.07, y: 52.57), controlPoint2: CGPoint(x: 46.36, y: 51.12))
-        bezier9Path.addLine(to: CGPoint(x: 49.09, y: 49.53))
-        bezier9Path.addLine(to: CGPoint(x: 50.68, y: 51.13))
-        bezier9Path.addCurve(to: CGPoint(x: 51.21, y: 51.36), controlPoint1: CGPoint(x: 50.82, y: 51.28), controlPoint2: CGPoint(x: 51.02, y: 51.36))
-        bezier9Path.addCurve(to: CGPoint(x: 51.74, y: 51.14), controlPoint1: CGPoint(x: 51.4, y: 51.36), controlPoint2: CGPoint(x: 51.59, y: 51.29))
-        bezier9Path.addCurve(to: CGPoint(x: 51.74, y: 50.06), controlPoint1: CGPoint(x: 52.04, y: 50.84), controlPoint2: CGPoint(x: 52.04, y: 50.36))
-        bezier9Path.addLine(to: CGPoint(x: 49.94, y: 48.19))
-        bezier9Path.addCurve(to: CGPoint(x: 49.41, y: 47.94), controlPoint1: CGPoint(x: 49.8, y: 48.05), controlPoint2: CGPoint(x: 49.61, y: 47.94))
-        bezier9Path.addLine(to: CGPoint(x: 48.83, y: 47.94))
-        bezier9Path.addCurve(to: CGPoint(x: 49.76, y: 44.22), controlPoint1: CGPoint(x: 49.42, y: 46.87), controlPoint2: CGPoint(x: 49.75, y: 45.55))
-        bezier9Path.addLine(to: CGPoint(x: 52.23, y: 44.22))
-        bezier9Path.addCurve(to: CGPoint(x: 52.98, y: 43.42), controlPoint1: CGPoint(x: 52.65, y: 44.22), controlPoint2: CGPoint(x: 52.98, y: 43.85))
-        bezier9Path.addCurve(to: CGPoint(x: 52.23, y: 42.63), controlPoint1: CGPoint(x: 52.98, y: 43), controlPoint2: CGPoint(x: 52.65, y: 42.63))
-        bezier9Path.close()
-        paoTextWhite.setFill()
-        bezier9Path.fill()
-
-
-        //// Bezier 10 Drawing
-        let bezier10Path = UIBezierPath()
-        bezier10Path.move(to: CGPoint(x: 36.32, y: 35.73))
-        bezier10Path.addLine(to: CGPoint(x: 46.06, y: 35.73))
-        bezier10Path.addCurve(to: CGPoint(x: 43.78, y: 31.6), controlPoint1: CGPoint(x: 46.06, y: 33.87), controlPoint2: CGPoint(x: 45.15, y: 32.47))
-        bezier10Path.addLine(to: CGPoint(x: 44.77, y: 30.63))
-        bezier10Path.addCurve(to: CGPoint(x: 44.77, y: 29.56), controlPoint1: CGPoint(x: 45.06, y: 30.33), controlPoint2: CGPoint(x: 45.06, y: 29.86))
-        bezier10Path.addCurve(to: CGPoint(x: 43.7, y: 29.56), controlPoint1: CGPoint(x: 44.47, y: 29.26), controlPoint2: CGPoint(x: 44, y: 29.27))
-        bezier10Path.addLine(to: CGPoint(x: 42.28, y: 31.01))
-        bezier10Path.addCurve(to: CGPoint(x: 41.19, y: 30.88), controlPoint1: CGPoint(x: 41.93, y: 30.92), controlPoint2: CGPoint(x: 41.57, y: 30.88))
-        bezier10Path.addCurve(to: CGPoint(x: 40.1, y: 31.01), controlPoint1: CGPoint(x: 40.81, y: 30.88), controlPoint2: CGPoint(x: 40.45, y: 30.93))
-        bezier10Path.addLine(to: CGPoint(x: 38.68, y: 29.57))
-        bezier10Path.addCurve(to: CGPoint(x: 37.61, y: 29.57), controlPoint1: CGPoint(x: 38.38, y: 29.27), controlPoint2: CGPoint(x: 37.91, y: 29.27))
-        bezier10Path.addCurve(to: CGPoint(x: 37.61, y: 30.65), controlPoint1: CGPoint(x: 37.32, y: 29.87), controlPoint2: CGPoint(x: 37.32, y: 30.35))
-        bezier10Path.addLine(to: CGPoint(x: 38.6, y: 31.6))
-        bezier10Path.addCurve(to: CGPoint(x: 36.32, y: 35.73), controlPoint1: CGPoint(x: 37.23, y: 32.47), controlPoint2: CGPoint(x: 36.32, y: 33.87))
-        bezier10Path.close()
-        paoTextWhite.setFill()
-        bezier10Path.fill()
+        PaoDrawingAssets.drawDebugIcon(frame: CGRect(origin: .zero, size: symbol2Rect.size), resizing: .stretch)
+        context.restoreGState()
         
         context.restoreGState()
 
@@ -2454,6 +1647,1038 @@ public class PaoDrawingAssets : NSObject {
         bezier4Path.close()
         paoTextWhite.setFill()
         bezier4Path.fill()
+        
+        context.restoreGState()
+
+    }
+
+    public dynamic class func drawPaoButtonBack(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 90, height: 66), resizing: ResizingBehavior = .aspectFit, isPressed: Bool = false) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 90, height: 66), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 90, y: resizedFrame.height / 66)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+        let paoBtnColorGreen = UIColor(red: 0.204, green: 0.886, blue: 0.729, alpha: 1.000)
+
+        //// Variable Declarations
+        let buttonMaskCoordHorizontal: CGFloat = isPressed ? 0 : 60
+
+        //// buttonBase Drawing
+        context.saveGState()
+        context.setAlpha(0.2)
+
+        let buttonBasePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoTextWhite.setFill()
+        buttonBasePath.fill()
+
+        context.restoreGState()
+
+
+        //// buttonColorEnable
+        context.saveGState()
+        context.beginTransparencyLayer(auxiliaryInfo: nil)
+
+        //// Clip buttonMask
+        let buttonMaskPath = UIBezierPath(rect: CGRect(x: 0, y: buttonMaskCoordHorizontal, width: 90, height: 66))
+        var buttonMaskTransformation = CGAffineTransform.identity
+        buttonMaskPath.apply(buttonMaskTransformation)
+        buttonMaskPath.addClip()
+
+
+        //// buttonColor Drawing
+        let buttonColorPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoBtnColorGreen.setFill()
+        buttonColorPath.fill()
+
+
+        context.endTransparencyLayer()
+        context.restoreGState()
+
+
+        //// Text Drawing
+        let textRect = CGRect(x: 18.03, y: 41, width: 53.93, height: 21)
+        let textTextContent = "BACK"
+        let textStyle = NSMutableParagraphStyle()
+        textStyle.alignment = .center
+        let textFontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Book", size: 13)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: textStyle]
+
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
+
+
+        //// Group
+        //// Group 2
+        //// Bezier Drawing
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: 49.49, y: 39.88))
+        bezierPath.addCurve(to: CGPoint(x: 49.96, y: 38.76), controlPoint1: CGPoint(x: 50.36, y: 39.88), controlPoint2: CGPoint(x: 50.6, y: 39.4))
+        bezierPath.addLine(to: CGPoint(x: 39.88, y: 28.6))
+        bezierPath.addCurve(to: CGPoint(x: 40.36, y: 27.48), controlPoint1: CGPoint(x: 39.24, y: 27.96), controlPoint2: CGPoint(x: 39.48, y: 27.48))
+        bezierPath.addLine(to: CGPoint(x: 62.66, y: 27.48))
+        bezierPath.addCurve(to: CGPoint(x: 64.25, y: 25.88), controlPoint1: CGPoint(x: 63.54, y: 27.48), controlPoint2: CGPoint(x: 64.25, y: 26.76))
+        bezierPath.addLine(to: CGPoint(x: 64.25, y: 21.88))
+        bezierPath.addCurve(to: CGPoint(x: 62.66, y: 20.28), controlPoint1: CGPoint(x: 64.25, y: 21), controlPoint2: CGPoint(x: 63.54, y: 20.28))
+        bezierPath.addLine(to: CGPoint(x: 40.36, y: 20.28))
+        bezierPath.addCurve(to: CGPoint(x: 39.88, y: 19.16), controlPoint1: CGPoint(x: 39.48, y: 20.28), controlPoint2: CGPoint(x: 39.24, y: 19.8))
+        bezierPath.addLine(to: CGPoint(x: 49.96, y: 9))
+        bezierPath.addCurve(to: CGPoint(x: 49.49, y: 7.88), controlPoint1: CGPoint(x: 50.6, y: 8.36), controlPoint2: CGPoint(x: 50.36, y: 7.88))
+        bezierPath.addLine(to: CGPoint(x: 42.58, y: 7.88))
+        bezierPath.addCurve(to: CGPoint(x: 39.88, y: 9), controlPoint1: CGPoint(x: 41.71, y: 7.88), controlPoint2: CGPoint(x: 40.51, y: 8.36))
+        bezierPath.addLine(to: CGPoint(x: 26.23, y: 22.76))
+        bezierPath.addCurve(to: CGPoint(x: 26.23, y: 25), controlPoint1: CGPoint(x: 25.59, y: 23.4), controlPoint2: CGPoint(x: 25.59, y: 24.36))
+        bezierPath.addLine(to: CGPoint(x: 39.88, y: 38.76))
+        bezierPath.addCurve(to: CGPoint(x: 42.58, y: 39.88), controlPoint1: CGPoint(x: 40.51, y: 39.4), controlPoint2: CGPoint(x: 41.71, y: 39.88))
+        bezierPath.addLine(to: CGPoint(x: 49.49, y: 39.88))
+        bezierPath.close()
+        paoTextWhite.setFill()
+        bezierPath.fill()
+        
+        context.restoreGState()
+
+    }
+
+    public dynamic class func drawPaoButtonPing(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 66, height: 90), resizing: ResizingBehavior = .aspectFit, isPressed: Bool = false) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 66, height: 90), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 66, y: resizedFrame.height / 90)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+        let paoBtnColorYellow = UIColor(red: 0.988, green: 0.812, blue: 0.310, alpha: 1.000)
+
+        //// Variable Declarations
+        let buttonMaskCoord: CGFloat = isPressed ? 0 : 84
+
+        //// buttonBase Drawing
+        context.saveGState()
+        context.setAlpha(0.2)
+
+        let buttonBasePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 66, height: 90), cornerRadius: 6)
+        paoTextWhite.setFill()
+        buttonBasePath.fill()
+
+        context.restoreGState()
+
+
+        //// buttonColorEnable
+        context.saveGState()
+        context.beginTransparencyLayer(auxiliaryInfo: nil)
+
+        //// Clip buttonMask
+        let buttonMaskPath = UIBezierPath(rect: CGRect(x: 0, y: buttonMaskCoord, width: 66, height: 90))
+        var buttonMaskTransformation = CGAffineTransform.identity
+        buttonMaskPath.apply(buttonMaskTransformation)
+        buttonMaskPath.addClip()
+
+
+        //// buttonColor Drawing
+        let buttonColorPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 66, height: 90), cornerRadius: 6)
+        paoBtnColorYellow.setFill()
+        buttonColorPath.fill()
+
+
+        context.endTransparencyLayer()
+        context.restoreGState()
+
+
+        //// Text Drawing
+        let textRect = CGRect(x: 8.15, y: 59.86, width: 49.71, height: 21)
+        let textTextContent = "PING"
+        let textStyle = NSMutableParagraphStyle()
+        textStyle.alignment = .center
+        let textFontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Book", size: 13)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: textStyle]
+
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
+
+
+        //// Bezier Drawing
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: 33.49, y: 15.91))
+        bezierPath.addLine(to: CGPoint(x: 32.59, y: 15.91))
+        bezierPath.addLine(to: CGPoint(x: 32.59, y: 7))
+        bezierPath.addLine(to: CGPoint(x: 33.49, y: 7))
+        bezierPath.addLine(to: CGPoint(x: 33.49, y: 15.91))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 46.26, y: 11.16))
+        bezierPath.addLine(to: CGPoint(x: 45.63, y: 10.53))
+        bezierPath.addLine(to: CGPoint(x: 39.32, y: 16.83))
+        bezierPath.addLine(to: CGPoint(x: 39.95, y: 17.46))
+        bezierPath.addLine(to: CGPoint(x: 46.26, y: 11.16))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 52.55, y: 23.52))
+        bezierPath.addLine(to: CGPoint(x: 43.64, y: 23.51))
+        bezierPath.addLine(to: CGPoint(x: 43.64, y: 24.41))
+        bezierPath.addLine(to: CGPoint(x: 52.55, y: 24.41))
+        bezierPath.addLine(to: CGPoint(x: 52.55, y: 23.52))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 22.36, y: 24.41))
+        bezierPath.addLine(to: CGPoint(x: 22.36, y: 23.51))
+        bezierPath.addLine(to: CGPoint(x: 13.45, y: 23.52))
+        bezierPath.addLine(to: CGPoint(x: 13.45, y: 24.41))
+        bezierPath.addLine(to: CGPoint(x: 22.36, y: 24.41))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 26.8, y: 16.83))
+        bezierPath.addLine(to: CGPoint(x: 20.5, y: 10.53))
+        bezierPath.addLine(to: CGPoint(x: 19.86, y: 11.16))
+        bezierPath.addLine(to: CGPoint(x: 26.17, y: 17.46))
+        bezierPath.addLine(to: CGPoint(x: 26.8, y: 16.83))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 44.55, y: 49.45))
+        bezierPath.addLine(to: CGPoint(x: 37.37, y: 49.45))
+        bezierPath.addLine(to: CGPoint(x: 37.37, y: 55.49))
+        bezierPath.addLine(to: CGPoint(x: 35.53, y: 55.49))
+        bezierPath.addLine(to: CGPoint(x: 35.53, y: 49.45))
+        bezierPath.addLine(to: CGPoint(x: 30.27, y: 49.45))
+        bezierPath.addLine(to: CGPoint(x: 30.27, y: 55.49))
+        bezierPath.addLine(to: CGPoint(x: 28.44, y: 55.49))
+        bezierPath.addLine(to: CGPoint(x: 28.44, y: 49.45))
+        bezierPath.addLine(to: CGPoint(x: 21.26, y: 49.45))
+        bezierPath.addLine(to: CGPoint(x: 21.26, y: 41.43))
+        bezierPath.addLine(to: CGPoint(x: 25.08, y: 41.43))
+        bezierPath.addLine(to: CGPoint(x: 25.08, y: 27.93))
+        bezierPath.addCurve(to: CGPoint(x: 32.9, y: 20.11), controlPoint1: CGPoint(x: 25.08, y: 23.62), controlPoint2: CGPoint(x: 28.59, y: 20.11))
+        bezierPath.addCurve(to: CGPoint(x: 40.72, y: 27.93), controlPoint1: CGPoint(x: 37.22, y: 20.11), controlPoint2: CGPoint(x: 40.72, y: 23.62))
+        bezierPath.addLine(to: CGPoint(x: 40.72, y: 41.43))
+        bezierPath.addLine(to: CGPoint(x: 44.55, y: 41.43))
+        bezierPath.addLine(to: CGPoint(x: 44.55, y: 49.45))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 26.92, y: 41.43))
+        bezierPath.addLine(to: CGPoint(x: 38.89, y: 41.43))
+        bezierPath.addLine(to: CGPoint(x: 38.89, y: 27.93))
+        bezierPath.addCurve(to: CGPoint(x: 32.9, y: 21.94), controlPoint1: CGPoint(x: 38.89, y: 24.63), controlPoint2: CGPoint(x: 36.21, y: 21.94))
+        bezierPath.addCurve(to: CGPoint(x: 26.92, y: 27.93), controlPoint1: CGPoint(x: 29.6, y: 21.94), controlPoint2: CGPoint(x: 26.92, y: 24.63))
+        bezierPath.addLine(to: CGPoint(x: 26.92, y: 41.43))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 42.72, y: 43.26))
+        bezierPath.addLine(to: CGPoint(x: 40.72, y: 43.26))
+        bezierPath.addLine(to: CGPoint(x: 25.08, y: 43.26))
+        bezierPath.addLine(to: CGPoint(x: 23.09, y: 43.26))
+        bezierPath.addLine(to: CGPoint(x: 23.09, y: 47.62))
+        bezierPath.addLine(to: CGPoint(x: 42.72, y: 47.62))
+        bezierPath.addLine(to: CGPoint(x: 42.72, y: 43.26))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 32.9, y: 24.87))
+        bezierPath.addLine(to: CGPoint(x: 32.9, y: 23.95))
+        bezierPath.addCurve(to: CGPoint(x: 28.75, y: 28.11), controlPoint1: CGPoint(x: 30.61, y: 23.95), controlPoint2: CGPoint(x: 28.75, y: 25.82))
+        bezierPath.addLine(to: CGPoint(x: 29.66, y: 28.11))
+        bezierPath.addCurve(to: CGPoint(x: 32.9, y: 24.87), controlPoint1: CGPoint(x: 29.66, y: 26.32), controlPoint2: CGPoint(x: 31.12, y: 24.87))
+        bezierPath.close()
+        paoTextWhite.setFill()
+        bezierPath.fill()
+        
+        context.restoreGState()
+
+    }
+
+    public dynamic class func drawPaoButtonSend(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 66, height: 90), resizing: ResizingBehavior = .aspectFit, isPressed: Bool = false) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 66, height: 90), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 66, y: resizedFrame.height / 90)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+        let paoBtnColorBlue = UIColor(red: 0.067, green: 0.682, blue: 0.984, alpha: 1.000)
+
+        //// Variable Declarations
+        let buttonMaskCoord: CGFloat = isPressed ? 0 : 84
+
+        //// buttonBase Drawing
+        context.saveGState()
+        context.setAlpha(0.2)
+
+        let buttonBasePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 66, height: 90), cornerRadius: 6)
+        paoTextWhite.setFill()
+        buttonBasePath.fill()
+
+        context.restoreGState()
+
+
+        //// buttonColorEnable
+        context.saveGState()
+        context.beginTransparencyLayer(auxiliaryInfo: nil)
+
+        //// Clip buttonMask
+        let buttonMaskPath = UIBezierPath(rect: CGRect(x: 0, y: buttonMaskCoord, width: 66, height: 90))
+        var buttonMaskTransformation = CGAffineTransform.identity
+        buttonMaskPath.apply(buttonMaskTransformation)
+        buttonMaskPath.addClip()
+
+
+        //// buttonColor Drawing
+        let buttonColorPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 66, height: 90), cornerRadius: 6)
+        paoBtnColorBlue.setFill()
+        buttonColorPath.fill()
+
+
+        context.endTransparencyLayer()
+        context.restoreGState()
+
+
+        //// Text Drawing
+        let textRect = CGRect(x: 6.03, y: 59.86, width: 53.93, height: 21)
+        let textTextContent = "Send"
+        let textStyle = NSMutableParagraphStyle()
+        textStyle.alignment = .center
+        let textFontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Book", size: 13)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: textStyle]
+
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
+
+
+        //// Bezier Drawing
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: 52.22, y: 24.94))
+        bezierPath.addLine(to: CGPoint(x: 13.78, y: 32.98))
+        bezierPath.addLine(to: CGPoint(x: 20.97, y: 38.62))
+        bezierPath.addLine(to: CGPoint(x: 20.97, y: 49.79))
+        bezierPath.addLine(to: CGPoint(x: 29.38, y: 44.96))
+        bezierPath.addLine(to: CGPoint(x: 26.97, y: 42.33))
+        bezierPath.addLine(to: CGPoint(x: 36.67, y: 49.3))
+        bezierPath.addLine(to: CGPoint(x: 52.22, y: 24.94))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 48.78, y: 27.26))
+        bezierPath.addLine(to: CGPoint(x: 27.55, y: 40.76))
+        bezierPath.addLine(to: CGPoint(x: 25.45, y: 43.93))
+        bezierPath.addLine(to: CGPoint(x: 23.43, y: 45.23))
+        bezierPath.addLine(to: CGPoint(x: 23.43, y: 39.6))
+        bezierPath.addLine(to: CGPoint(x: 48.78, y: 27.26))
+        bezierPath.close()
+        paoTextWhite.setFill()
+        bezierPath.fill()
+        
+        context.restoreGState()
+
+    }
+
+    public dynamic class func drawDebugIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 40, height: 41), resizing: ResizingBehavior = .aspectFit) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 40, height: 41), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 40, y: resizedFrame.height / 41)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+
+        //// Group
+        //// Rectangle Drawing
+        let rectanglePath = UIBezierPath(rect: CGRect(x: 12.06, y: 8.96, width: 12.16, height: 1.53))
+        paoTextWhite.setFill()
+        rectanglePath.fill()
+
+
+        //// Bezier 2 Drawing
+        let bezier2Path = UIBezierPath()
+        bezier2Path.move(to: CGPoint(x: 6.52, y: 12.15))
+        bezier2Path.addLine(to: CGPoint(x: 7.96, y: 10.69))
+        bezier2Path.addLine(to: CGPoint(x: 9.4, y: 12.15))
+        bezier2Path.addLine(to: CGPoint(x: 10.54, y: 11))
+        bezier2Path.addLine(to: CGPoint(x: 9.09, y: 9.54))
+        bezier2Path.addLine(to: CGPoint(x: 10.54, y: 8.08))
+        bezier2Path.addLine(to: CGPoint(x: 9.4, y: 6.93))
+        bezier2Path.addLine(to: CGPoint(x: 7.96, y: 8.39))
+        bezier2Path.addLine(to: CGPoint(x: 6.52, y: 6.93))
+        bezier2Path.addLine(to: CGPoint(x: 5.38, y: 8.08))
+        bezier2Path.addLine(to: CGPoint(x: 6.82, y: 9.54))
+        bezier2Path.addLine(to: CGPoint(x: 5.38, y: 11))
+        bezier2Path.addLine(to: CGPoint(x: 6.52, y: 12.15))
+        bezier2Path.close()
+        paoTextWhite.setFill()
+        bezier2Path.fill()
+
+
+        //// Bezier 3 Drawing
+        let bezier3Path = UIBezierPath()
+        bezier3Path.move(to: CGPoint(x: 9.8, y: 15.94))
+        bezier3Path.addLine(to: CGPoint(x: 7.3, y: 18.47))
+        bezier3Path.addLine(to: CGPoint(x: 6.11, y: 17.27))
+        bezier3Path.addLine(to: CGPoint(x: 4.98, y: 18.42))
+        bezier3Path.addLine(to: CGPoint(x: 7.3, y: 20.77))
+        bezier3Path.addLine(to: CGPoint(x: 10.94, y: 17.09))
+        bezier3Path.addLine(to: CGPoint(x: 9.8, y: 15.94))
+        bezier3Path.close()
+        paoTextWhite.setFill()
+        bezier3Path.fill()
+
+
+        //// Bezier 4 Drawing
+        let bezier4Path = UIBezierPath()
+        bezier4Path.move(to: CGPoint(x: 6.11, y: 26.24))
+        bezier4Path.addLine(to: CGPoint(x: 4.98, y: 27.39))
+        bezier4Path.addLine(to: CGPoint(x: 7.3, y: 29.74))
+        bezier4Path.addLine(to: CGPoint(x: 10.94, y: 26.05))
+        bezier4Path.addLine(to: CGPoint(x: 9.8, y: 24.9))
+        bezier4Path.addLine(to: CGPoint(x: 7.3, y: 27.44))
+        bezier4Path.addLine(to: CGPoint(x: 6.11, y: 26.24))
+        bezier4Path.close()
+        paoTextWhite.setFill()
+        bezier4Path.fill()
+
+
+        //// Bezier 5 Drawing
+        let bezier5Path = UIBezierPath()
+        bezier5Path.move(to: CGPoint(x: 3.02, y: 35.57))
+        bezier5Path.addLine(to: CGPoint(x: 3.02, y: 3))
+        bezier5Path.addLine(to: CGPoint(x: 29.16, y: 3))
+        bezier5Path.addLine(to: CGPoint(x: 29.16, y: 14.62))
+        bezier5Path.addCurve(to: CGPoint(x: 31.22, y: 13.91), controlPoint1: CGPoint(x: 29.75, y: 14.16), controlPoint2: CGPoint(x: 30.47, y: 13.91))
+        bezier5Path.addCurve(to: CGPoint(x: 32.17, y: 14.05), controlPoint1: CGPoint(x: 31.55, y: 13.91), controlPoint2: CGPoint(x: 31.87, y: 13.96))
+        bezier5Path.addLine(to: CGPoint(x: 32.17, y: 1.98))
+        bezier5Path.addCurve(to: CGPoint(x: 30.16, y: -0.05), controlPoint1: CGPoint(x: 32.17, y: 0.86), controlPoint2: CGPoint(x: 31.27, y: -0.05))
+        bezier5Path.addLine(to: CGPoint(x: 2.01, y: -0.05))
+        bezier5Path.addCurve(to: CGPoint(x: 0, y: 1.98), controlPoint1: CGPoint(x: 0.9, y: -0.05), controlPoint2: CGPoint(x: 0, y: 0.86))
+        bezier5Path.addLine(to: CGPoint(x: 0, y: 36.59))
+        bezier5Path.addCurve(to: CGPoint(x: 2.01, y: 38.63), controlPoint1: CGPoint(x: 0, y: 37.71), controlPoint2: CGPoint(x: 0.9, y: 38.63))
+        bezier5Path.addLine(to: CGPoint(x: 14.82, y: 38.63))
+        bezier5Path.addCurve(to: CGPoint(x: 15.59, y: 35.57), controlPoint1: CGPoint(x: 14.59, y: 37.57), controlPoint2: CGPoint(x: 14.84, y: 36.43))
+        bezier5Path.addLine(to: CGPoint(x: 3.02, y: 35.57))
+        bezier5Path.addLine(to: CGPoint(x: 3.02, y: 35.57))
+        bezier5Path.close()
+        paoTextWhite.setFill()
+        bezier5Path.fill()
+
+
+        //// Bezier 6 Drawing
+        let bezier6Path = UIBezierPath()
+        bezier6Path.move(to: CGPoint(x: 12.47, y: 28.45))
+        bezier6Path.addLine(to: CGPoint(x: 14.52, y: 28.45))
+        bezier6Path.addCurve(to: CGPoint(x: 17.13, y: 27.2), controlPoint1: CGPoint(x: 15.15, y: 27.69), controlPoint2: CGPoint(x: 16.09, y: 27.2))
+        bezier6Path.addLine(to: CGPoint(x: 17.64, y: 27.2))
+        bezier6Path.addCurve(to: CGPoint(x: 17.69, y: 27.09), controlPoint1: CGPoint(x: 17.66, y: 27.17), controlPoint2: CGPoint(x: 17.67, y: 27.13))
+        bezier6Path.addLine(to: CGPoint(x: 16.97, y: 26.41))
+        bezier6Path.addLine(to: CGPoint(x: 12.47, y: 26.41))
+        bezier6Path.addLine(to: CGPoint(x: 12.47, y: 28.45))
+        bezier6Path.close()
+        paoTextWhite.setFill()
+        bezier6Path.fill()
+
+
+        //// Bezier 7 Drawing
+        let bezier7Path = UIBezierPath()
+        bezier7Path.move(to: CGPoint(x: 21.96, y: 18.69))
+        bezier7Path.addCurve(to: CGPoint(x: 21.72, y: 17.45), controlPoint1: CGPoint(x: 21.81, y: 18.29), controlPoint2: CGPoint(x: 21.73, y: 17.87))
+        bezier7Path.addLine(to: CGPoint(x: 12.47, y: 17.45))
+        bezier7Path.addLine(to: CGPoint(x: 12.47, y: 19.49))
+        bezier7Path.addLine(to: CGPoint(x: 21.49, y: 19.49))
+        bezier7Path.addCurve(to: CGPoint(x: 21.96, y: 18.69), controlPoint1: CGPoint(x: 21.63, y: 19.21), controlPoint2: CGPoint(x: 21.79, y: 18.94))
+        bezier7Path.close()
+        paoTextWhite.setFill()
+        bezier7Path.fill()
+
+
+        //// Bezier 8 Drawing
+        let bezier8Path = UIBezierPath()
+        bezier8Path.move(to: CGPoint(x: 18.94, y: 22.48))
+        bezier8Path.addCurve(to: CGPoint(x: 17.87, y: 22.48), controlPoint1: CGPoint(x: 18.64, y: 22.18), controlPoint2: CGPoint(x: 18.17, y: 22.18))
+        bezier8Path.addCurve(to: CGPoint(x: 17.87, y: 23.56), controlPoint1: CGPoint(x: 17.58, y: 22.78), controlPoint2: CGPoint(x: 17.58, y: 23.27))
+        bezier8Path.addLine(to: CGPoint(x: 19.67, y: 25.28))
+        bezier8Path.addCurve(to: CGPoint(x: 20.21, y: 25.39), controlPoint1: CGPoint(x: 19.81, y: 25.42), controlPoint2: CGPoint(x: 20.01, y: 25.39))
+        bezier8Path.addLine(to: CGPoint(x: 21.67, y: 25.39))
+        bezier8Path.addCurve(to: CGPoint(x: 19.69, y: 29.9), controlPoint1: CGPoint(x: 20.63, y: 26.72), controlPoint2: CGPoint(x: 19.94, y: 28.31))
+        bezier8Path.addLine(to: CGPoint(x: 17.13, y: 29.9))
+        bezier8Path.addCurve(to: CGPoint(x: 16.38, y: 30.7), controlPoint1: CGPoint(x: 16.72, y: 29.9), controlPoint2: CGPoint(x: 16.38, y: 30.28))
+        bezier8Path.addCurve(to: CGPoint(x: 17.13, y: 31.49), controlPoint1: CGPoint(x: 16.38, y: 31.12), controlPoint2: CGPoint(x: 16.72, y: 31.49))
+        bezier8Path.addLine(to: CGPoint(x: 19.58, y: 31.49))
+        bezier8Path.addCurve(to: CGPoint(x: 20.5, y: 35.21), controlPoint1: CGPoint(x: 19.59, y: 32.82), controlPoint2: CGPoint(x: 19.92, y: 34.15))
+        bezier8Path.addLine(to: CGPoint(x: 19.96, y: 35.21))
+        bezier8Path.addCurve(to: CGPoint(x: 19.42, y: 35.47), controlPoint1: CGPoint(x: 19.76, y: 35.21), controlPoint2: CGPoint(x: 19.56, y: 35.33))
+        bezier8Path.addLine(to: CGPoint(x: 17.62, y: 37.32))
+        bezier8Path.addCurve(to: CGPoint(x: 17.62, y: 38.4), controlPoint1: CGPoint(x: 17.33, y: 37.61), controlPoint2: CGPoint(x: 17.33, y: 38.11))
+        bezier8Path.addCurve(to: CGPoint(x: 18.15, y: 38.63), controlPoint1: CGPoint(x: 17.77, y: 38.55), controlPoint2: CGPoint(x: 17.96, y: 38.63))
+        bezier8Path.addCurve(to: CGPoint(x: 18.68, y: 38.41), controlPoint1: CGPoint(x: 18.34, y: 38.63), controlPoint2: CGPoint(x: 18.54, y: 38.56))
+        bezier8Path.addLine(to: CGPoint(x: 20.27, y: 36.8))
+        bezier8Path.addLine(to: CGPoint(x: 21.48, y: 36.8))
+        bezier8Path.addCurve(to: CGPoint(x: 27.65, y: 40), controlPoint1: CGPoint(x: 22.96, y: 38.66), controlPoint2: CGPoint(x: 25.29, y: 39.87))
+        bezier8Path.addLine(to: CGPoint(x: 27.65, y: 24.06))
+        bezier8Path.addLine(to: CGPoint(x: 20.52, y: 24.06))
+        bezier8Path.addLine(to: CGPoint(x: 18.94, y: 22.48))
+        bezier8Path.close()
+        paoTextWhite.setFill()
+        bezier8Path.fill()
+
+
+        //// Bezier 9 Drawing
+        let bezier9Path = UIBezierPath()
+        bezier9Path.move(to: CGPoint(x: 39.21, y: 29.9))
+        bezier9Path.addLine(to: CGPoint(x: 36.6, y: 29.9))
+        bezier9Path.addCurve(to: CGPoint(x: 34.46, y: 25.39), controlPoint1: CGPoint(x: 36.28, y: 28.31), controlPoint2: CGPoint(x: 35.44, y: 26.72))
+        bezier9Path.addLine(to: CGPoint(x: 36.14, y: 25.39))
+        bezier9Path.addCurve(to: CGPoint(x: 36.67, y: 25.28), controlPoint1: CGPoint(x: 36.34, y: 25.39), controlPoint2: CGPoint(x: 36.53, y: 25.43))
+        bezier9Path.addLine(to: CGPoint(x: 38.48, y: 23.51))
+        bezier9Path.addCurve(to: CGPoint(x: 38.47, y: 22.46), controlPoint1: CGPoint(x: 38.77, y: 23.21), controlPoint2: CGPoint(x: 38.77, y: 22.76))
+        bezier9Path.addCurve(to: CGPoint(x: 37.41, y: 22.46), controlPoint1: CGPoint(x: 38.18, y: 22.17), controlPoint2: CGPoint(x: 37.7, y: 22.16))
+        bezier9Path.addLine(to: CGPoint(x: 35.83, y: 24.06))
+        bezier9Path.addLine(to: CGPoint(x: 28.7, y: 24.06))
+        bezier9Path.addLine(to: CGPoint(x: 28.7, y: 40))
+        bezier9Path.addCurve(to: CGPoint(x: 34.82, y: 36.8), controlPoint1: CGPoint(x: 31.06, y: 39.84), controlPoint2: CGPoint(x: 33.34, y: 38.39))
+        bezier9Path.addLine(to: CGPoint(x: 36.08, y: 36.8))
+        bezier9Path.addLine(to: CGPoint(x: 37.66, y: 38.41))
+        bezier9Path.addCurve(to: CGPoint(x: 38.19, y: 38.63), controlPoint1: CGPoint(x: 37.81, y: 38.56), controlPoint2: CGPoint(x: 38, y: 38.63))
+        bezier9Path.addCurve(to: CGPoint(x: 38.72, y: 38.41), controlPoint1: CGPoint(x: 38.39, y: 38.63), controlPoint2: CGPoint(x: 38.58, y: 38.56))
+        bezier9Path.addCurve(to: CGPoint(x: 38.73, y: 37.33), controlPoint1: CGPoint(x: 39.02, y: 38.12), controlPoint2: CGPoint(x: 39.02, y: 37.63))
+        bezier9Path.addLine(to: CGPoint(x: 36.92, y: 35.47))
+        bezier9Path.addCurve(to: CGPoint(x: 36.39, y: 35.21), controlPoint1: CGPoint(x: 36.78, y: 35.33), controlPoint2: CGPoint(x: 36.59, y: 35.21))
+        bezier9Path.addLine(to: CGPoint(x: 35.81, y: 35.21))
+        bezier9Path.addCurve(to: CGPoint(x: 36.75, y: 31.49), controlPoint1: CGPoint(x: 36.4, y: 34.15), controlPoint2: CGPoint(x: 36.74, y: 32.82))
+        bezier9Path.addLine(to: CGPoint(x: 39.21, y: 31.49))
+        bezier9Path.addCurve(to: CGPoint(x: 39.97, y: 30.7), controlPoint1: CGPoint(x: 39.63, y: 31.49), controlPoint2: CGPoint(x: 39.97, y: 31.12))
+        bezier9Path.addCurve(to: CGPoint(x: 39.21, y: 29.9), controlPoint1: CGPoint(x: 39.97, y: 30.28), controlPoint2: CGPoint(x: 39.63, y: 29.9))
+        bezier9Path.close()
+        paoTextWhite.setFill()
+        bezier9Path.fill()
+
+
+        //// Bezier 10 Drawing
+        let bezier10Path = UIBezierPath()
+        bezier10Path.move(to: CGPoint(x: 23.3, y: 23))
+        bezier10Path.addLine(to: CGPoint(x: 33.04, y: 23))
+        bezier10Path.addCurve(to: CGPoint(x: 30.77, y: 18.88), controlPoint1: CGPoint(x: 33.04, y: 21.15), controlPoint2: CGPoint(x: 32.13, y: 19.75))
+        bezier10Path.addLine(to: CGPoint(x: 31.75, y: 17.9))
+        bezier10Path.addCurve(to: CGPoint(x: 31.75, y: 16.83), controlPoint1: CGPoint(x: 32.04, y: 17.6), controlPoint2: CGPoint(x: 32.04, y: 17.13))
+        bezier10Path.addCurve(to: CGPoint(x: 30.68, y: 16.84), controlPoint1: CGPoint(x: 31.45, y: 16.53), controlPoint2: CGPoint(x: 30.98, y: 16.54))
+        bezier10Path.addLine(to: CGPoint(x: 29.26, y: 18.28))
+        bezier10Path.addCurve(to: CGPoint(x: 28.17, y: 18.15), controlPoint1: CGPoint(x: 28.91, y: 18.2), controlPoint2: CGPoint(x: 28.55, y: 18.15))
+        bezier10Path.addCurve(to: CGPoint(x: 27.08, y: 18.28), controlPoint1: CGPoint(x: 27.8, y: 18.15), controlPoint2: CGPoint(x: 27.43, y: 18.2))
+        bezier10Path.addLine(to: CGPoint(x: 25.66, y: 16.84))
+        bezier10Path.addCurve(to: CGPoint(x: 24.6, y: 16.84), controlPoint1: CGPoint(x: 25.37, y: 16.54), controlPoint2: CGPoint(x: 24.89, y: 16.54))
+        bezier10Path.addCurve(to: CGPoint(x: 24.6, y: 17.92), controlPoint1: CGPoint(x: 24.3, y: 17.14), controlPoint2: CGPoint(x: 24.3, y: 17.62))
+        bezier10Path.addLine(to: CGPoint(x: 25.58, y: 18.88))
+        bezier10Path.addCurve(to: CGPoint(x: 23.3, y: 23), controlPoint1: CGPoint(x: 24.21, y: 19.75), controlPoint2: CGPoint(x: 23.3, y: 21.15))
+        bezier10Path.close()
+        paoTextWhite.setFill()
+        bezier10Path.fill()
+        
+        context.restoreGState()
+
+    }
+
+    public dynamic class func drawGyroIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 52, height: 51), resizing: ResizingBehavior = .aspectFit) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 52, height: 51), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 52, y: resizedFrame.height / 51)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+
+        //// Bezier Drawing
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: 4.38, y: 24.41))
+        bezierPath.addLine(to: CGPoint(x: 3.28, y: 24.41))
+        bezierPath.addCurve(to: CGPoint(x: 2.74, y: 24.96), controlPoint1: CGPoint(x: 2.98, y: 24.41), controlPoint2: CGPoint(x: 2.74, y: 24.66))
+        bezierPath.addCurve(to: CGPoint(x: 3.28, y: 25.5), controlPoint1: CGPoint(x: 2.74, y: 25.26), controlPoint2: CGPoint(x: 2.98, y: 25.5))
+        bezierPath.addLine(to: CGPoint(x: 4.38, y: 25.5))
+        bezierPath.addCurve(to: CGPoint(x: 4.93, y: 24.96), controlPoint1: CGPoint(x: 4.68, y: 25.5), controlPoint2: CGPoint(x: 4.93, y: 25.26))
+        bezierPath.addCurve(to: CGPoint(x: 4.38, y: 24.41), controlPoint1: CGPoint(x: 4.93, y: 24.66), controlPoint2: CGPoint(x: 4.68, y: 24.41))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 26.82, y: 47.74))
+        bezierPath.addLine(to: CGPoint(x: 26.82, y: 46.66))
+        bezierPath.addCurve(to: CGPoint(x: 26.27, y: 46.12), controlPoint1: CGPoint(x: 26.82, y: 46.36), controlPoint2: CGPoint(x: 26.58, y: 46.12))
+        bezierPath.addCurve(to: CGPoint(x: 25.73, y: 46.66), controlPoint1: CGPoint(x: 25.97, y: 46.12), controlPoint2: CGPoint(x: 25.73, y: 46.36))
+        bezierPath.addLine(to: CGPoint(x: 25.73, y: 47.74))
+        bezierPath.addCurve(to: CGPoint(x: 26.27, y: 48.29), controlPoint1: CGPoint(x: 25.73, y: 48.04), controlPoint2: CGPoint(x: 25.97, y: 48.29))
+        bezierPath.addCurve(to: CGPoint(x: 26.82, y: 47.74), controlPoint1: CGPoint(x: 26.58, y: 48.29), controlPoint2: CGPoint(x: 26.82, y: 48.04))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 26.27, y: 48.83))
+        bezierPath.addCurve(to: CGPoint(x: 25.18, y: 49.91), controlPoint1: CGPoint(x: 25.67, y: 48.83), controlPoint2: CGPoint(x: 25.18, y: 49.32))
+        bezierPath.addCurve(to: CGPoint(x: 26.27, y: 51), controlPoint1: CGPoint(x: 25.18, y: 50.51), controlPoint2: CGPoint(x: 25.67, y: 51))
+        bezierPath.addCurve(to: CGPoint(x: 27.37, y: 49.91), controlPoint1: CGPoint(x: 26.88, y: 51), controlPoint2: CGPoint(x: 27.37, y: 50.51))
+        bezierPath.addCurve(to: CGPoint(x: 26.27, y: 48.83), controlPoint1: CGPoint(x: 27.37, y: 49.32), controlPoint2: CGPoint(x: 26.88, y: 48.83))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 1.09, y: 23.87))
+        bezierPath.addCurve(to: CGPoint(x: 0, y: 24.96), controlPoint1: CGPoint(x: 0.49, y: 23.87), controlPoint2: CGPoint(x: 0, y: 24.36))
+        bezierPath.addCurve(to: CGPoint(x: 1.09, y: 26.04), controlPoint1: CGPoint(x: 0, y: 25.56), controlPoint2: CGPoint(x: 0.49, y: 26.04))
+        bezierPath.addCurve(to: CGPoint(x: 2.19, y: 24.96), controlPoint1: CGPoint(x: 1.7, y: 26.04), controlPoint2: CGPoint(x: 2.19, y: 25.56))
+        bezierPath.addCurve(to: CGPoint(x: 1.09, y: 23.87), controlPoint1: CGPoint(x: 2.19, y: 24.36), controlPoint2: CGPoint(x: 1.7, y: 23.87))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 26.27, y: 2.17))
+        bezierPath.addCurve(to: CGPoint(x: 27.37, y: 1.09), controlPoint1: CGPoint(x: 26.88, y: 2.17), controlPoint2: CGPoint(x: 27.37, y: 1.68))
+        bezierPath.addCurve(to: CGPoint(x: 26.27, y: 0), controlPoint1: CGPoint(x: 27.37, y: 0.49), controlPoint2: CGPoint(x: 26.88, y: 0))
+        bezierPath.addCurve(to: CGPoint(x: 25.18, y: 1.09), controlPoint1: CGPoint(x: 25.67, y: 0), controlPoint2: CGPoint(x: 25.18, y: 0.49))
+        bezierPath.addCurve(to: CGPoint(x: 26.27, y: 2.17), controlPoint1: CGPoint(x: 25.18, y: 1.68), controlPoint2: CGPoint(x: 25.67, y: 2.17))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 10.4, y: 24.95))
+        bezierPath.addCurve(to: CGPoint(x: 20.8, y: 22.44), controlPoint1: CGPoint(x: 10.4, y: 24.09), controlPoint2: CGPoint(x: 14.5, y: 22.9))
+        bezierPath.addLine(to: CGPoint(x: 20.8, y: 20.8))
+        bezierPath.addCurve(to: CGPoint(x: 8.76, y: 24.95), controlPoint1: CGPoint(x: 12.89, y: 21.37), controlPoint2: CGPoint(x: 8.76, y: 23.16))
+        bezierPath.addCurve(to: CGPoint(x: 20.8, y: 29.1), controlPoint1: CGPoint(x: 8.76, y: 26.74), controlPoint2: CGPoint(x: 12.89, y: 28.53))
+        bezierPath.addLine(to: CGPoint(x: 20.8, y: 27.46))
+        bezierPath.addCurve(to: CGPoint(x: 10.4, y: 24.95), controlPoint1: CGPoint(x: 14.5, y: 27), controlPoint2: CGPoint(x: 10.4, y: 25.8))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 25.73, y: 3.26))
+        bezierPath.addLine(to: CGPoint(x: 25.73, y: 4.34))
+        bezierPath.addCurve(to: CGPoint(x: 26.27, y: 4.88), controlPoint1: CGPoint(x: 25.73, y: 4.64), controlPoint2: CGPoint(x: 25.97, y: 4.88))
+        bezierPath.addCurve(to: CGPoint(x: 26.82, y: 4.34), controlPoint1: CGPoint(x: 26.58, y: 4.88), controlPoint2: CGPoint(x: 26.82, y: 4.64))
+        bezierPath.addLine(to: CGPoint(x: 26.82, y: 3.26))
+        bezierPath.addCurve(to: CGPoint(x: 26.27, y: 2.71), controlPoint1: CGPoint(x: 26.82, y: 2.96), controlPoint2: CGPoint(x: 26.58, y: 2.71))
+        bezierPath.addCurve(to: CGPoint(x: 25.73, y: 3.26), controlPoint1: CGPoint(x: 25.97, y: 2.71), controlPoint2: CGPoint(x: 25.73, y: 2.96))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 24.63, y: 20.63))
+        bezierPath.addLine(to: CGPoint(x: 24.63, y: 22.26))
+        bezierPath.addCurve(to: CGPoint(x: 26.28, y: 22.24), controlPoint1: CGPoint(x: 25.18, y: 22.25), controlPoint2: CGPoint(x: 25.71, y: 22.24))
+        bezierPath.addCurve(to: CGPoint(x: 41.6, y: 24.95), controlPoint1: CGPoint(x: 35.03, y: 22.24), controlPoint2: CGPoint(x: 41.6, y: 23.86))
+        bezierPath.addCurve(to: CGPoint(x: 26.28, y: 27.66), controlPoint1: CGPoint(x: 41.6, y: 26.03), controlPoint2: CGPoint(x: 35.03, y: 27.66))
+        bezierPath.addCurve(to: CGPoint(x: 24.63, y: 27.64), controlPoint1: CGPoint(x: 25.71, y: 27.66), controlPoint2: CGPoint(x: 25.18, y: 27.65))
+        bezierPath.addLine(to: CGPoint(x: 24.63, y: 29.27))
+        bezierPath.addCurve(to: CGPoint(x: 26.28, y: 29.29), controlPoint1: CGPoint(x: 25.17, y: 29.28), controlPoint2: CGPoint(x: 25.71, y: 29.29))
+        bezierPath.addCurve(to: CGPoint(x: 43.25, y: 24.95), controlPoint1: CGPoint(x: 36.68, y: 29.29), controlPoint2: CGPoint(x: 43.25, y: 27.12))
+        bezierPath.addCurve(to: CGPoint(x: 26.28, y: 20.61), controlPoint1: CGPoint(x: 43.25, y: 22.78), controlPoint2: CGPoint(x: 36.68, y: 20.61))
+        bezierPath.addCurve(to: CGPoint(x: 24.63, y: 20.63), controlPoint1: CGPoint(x: 25.71, y: 20.61), controlPoint2: CGPoint(x: 25.17, y: 20.62))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 50.91, y: 23.87))
+        bezierPath.addCurve(to: CGPoint(x: 49.81, y: 24.96), controlPoint1: CGPoint(x: 50.3, y: 23.87), controlPoint2: CGPoint(x: 49.81, y: 24.36))
+        bezierPath.addCurve(to: CGPoint(x: 50.91, y: 26.04), controlPoint1: CGPoint(x: 49.81, y: 25.56), controlPoint2: CGPoint(x: 50.3, y: 26.04))
+        bezierPath.addCurve(to: CGPoint(x: 52, y: 24.96), controlPoint1: CGPoint(x: 51.51, y: 26.04), controlPoint2: CGPoint(x: 52, y: 25.56))
+        bezierPath.addCurve(to: CGPoint(x: 50.91, y: 23.87), controlPoint1: CGPoint(x: 52, y: 24.36), controlPoint2: CGPoint(x: 51.51, y: 23.87))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 25.73, y: 5.42))
+        bezierPath.addCurve(to: CGPoint(x: 6.02, y: 25.22), controlPoint1: CGPoint(x: 15.15, y: 5.42), controlPoint2: CGPoint(x: 6.02, y: 14.59))
+        bezierPath.addCurve(to: CGPoint(x: 25.73, y: 45.02), controlPoint1: CGPoint(x: 6.02, y: 35.85), controlPoint2: CGPoint(x: 15.15, y: 45.02))
+        bezierPath.addCurve(to: CGPoint(x: 45.98, y: 25.22), controlPoint1: CGPoint(x: 36.31, y: 45.02), controlPoint2: CGPoint(x: 45.98, y: 35.85))
+        bezierPath.addCurve(to: CGPoint(x: 25.73, y: 5.42), controlPoint1: CGPoint(x: 45.98, y: 14.59), controlPoint2: CGPoint(x: 36.31, y: 5.42))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 25.73, y: 43.4))
+        bezierPath.addCurve(to: CGPoint(x: 7.67, y: 25.22), controlPoint1: CGPoint(x: 15.9, y: 43.4), controlPoint2: CGPoint(x: 7.67, y: 35.11))
+        bezierPath.addCurve(to: CGPoint(x: 25.73, y: 7.04), controlPoint1: CGPoint(x: 7.67, y: 15.33), controlPoint2: CGPoint(x: 15.9, y: 7.04))
+        bezierPath.addCurve(to: CGPoint(x: 44.34, y: 25.22), controlPoint1: CGPoint(x: 35.55, y: 7.04), controlPoint2: CGPoint(x: 44.34, y: 15.33))
+        bezierPath.addCurve(to: CGPoint(x: 25.73, y: 43.4), controlPoint1: CGPoint(x: 44.34, y: 35.11), controlPoint2: CGPoint(x: 35.55, y: 43.4))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 48.72, y: 24.41))
+        bezierPath.addLine(to: CGPoint(x: 47.62, y: 24.41))
+        bezierPath.addCurve(to: CGPoint(x: 47.07, y: 24.96), controlPoint1: CGPoint(x: 47.32, y: 24.41), controlPoint2: CGPoint(x: 47.07, y: 24.66))
+        bezierPath.addCurve(to: CGPoint(x: 47.62, y: 25.5), controlPoint1: CGPoint(x: 47.07, y: 25.26), controlPoint2: CGPoint(x: 47.32, y: 25.5))
+        bezierPath.addLine(to: CGPoint(x: 48.72, y: 25.5))
+        bezierPath.addCurve(to: CGPoint(x: 49.26, y: 24.96), controlPoint1: CGPoint(x: 49.02, y: 25.5), controlPoint2: CGPoint(x: 49.26, y: 25.26))
+        bezierPath.addCurve(to: CGPoint(x: 48.72, y: 24.41), controlPoint1: CGPoint(x: 49.26, y: 24.66), controlPoint2: CGPoint(x: 49.02, y: 24.41))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 26.28, y: 40.14))
+        bezierPath.addCurve(to: CGPoint(x: 23.54, y: 24.95), controlPoint1: CGPoint(x: 25.18, y: 40.14), controlPoint2: CGPoint(x: 23.54, y: 33.63))
+        bezierPath.addCurve(to: CGPoint(x: 26.28, y: 9.76), controlPoint1: CGPoint(x: 23.54, y: 16.27), controlPoint2: CGPoint(x: 25.18, y: 9.76))
+        bezierPath.addCurve(to: CGPoint(x: 28.79, y: 19.52), controlPoint1: CGPoint(x: 27.13, y: 9.76), controlPoint2: CGPoint(x: 28.31, y: 13.7))
+        bezierPath.addLine(to: CGPoint(x: 30.41, y: 19.52))
+        bezierPath.addCurve(to: CGPoint(x: 26.28, y: 8.13), controlPoint1: CGPoint(x: 29.79, y: 12.68), controlPoint2: CGPoint(x: 28.03, y: 8.13))
+        bezierPath.addCurve(to: CGPoint(x: 21.9, y: 24.95), controlPoint1: CGPoint(x: 24.09, y: 8.13), controlPoint2: CGPoint(x: 21.9, y: 15.18))
+        bezierPath.addCurve(to: CGPoint(x: 26.28, y: 41.77), controlPoint1: CGPoint(x: 21.9, y: 34.71), controlPoint2: CGPoint(x: 24.09, y: 41.77))
+        bezierPath.addCurve(to: CGPoint(x: 30.41, y: 30.37), controlPoint1: CGPoint(x: 28.03, y: 41.77), controlPoint2: CGPoint(x: 29.78, y: 37.21))
+        bezierPath.addLine(to: CGPoint(x: 28.79, y: 30.37))
+        bezierPath.addCurve(to: CGPoint(x: 26.28, y: 40.14), controlPoint1: CGPoint(x: 28.31, y: 36.2), controlPoint2: CGPoint(x: 27.13, y: 40.14))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 33.39, y: 24.95))
+        bezierPath.addCurve(to: CGPoint(x: 26.28, y: 23.32), controlPoint1: CGPoint(x: 33.39, y: 24.05), controlPoint2: CGPoint(x: 30.21, y: 23.32))
+        bezierPath.addCurve(to: CGPoint(x: 24.63, y: 23.37), controlPoint1: CGPoint(x: 25.71, y: 23.32), controlPoint2: CGPoint(x: 25.16, y: 23.34))
+        bezierPath.addLine(to: CGPoint(x: 24.63, y: 26.53))
+        bezierPath.addCurve(to: CGPoint(x: 26.28, y: 26.58), controlPoint1: CGPoint(x: 25.16, y: 26.56), controlPoint2: CGPoint(x: 25.71, y: 26.58))
+        bezierPath.addCurve(to: CGPoint(x: 33.39, y: 24.95), controlPoint1: CGPoint(x: 30.21, y: 26.58), controlPoint2: CGPoint(x: 33.39, y: 25.85))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 25.18, y: 24.95))
+        bezierPath.addCurve(to: CGPoint(x: 26.28, y: 23.86), controlPoint1: CGPoint(x: 25.18, y: 24.35), controlPoint2: CGPoint(x: 25.67, y: 23.86))
+        bezierPath.addCurve(to: CGPoint(x: 27.37, y: 24.95), controlPoint1: CGPoint(x: 26.88, y: 23.86), controlPoint2: CGPoint(x: 27.37, y: 24.35))
+        bezierPath.addCurve(to: CGPoint(x: 26.28, y: 26.03), controlPoint1: CGPoint(x: 27.37, y: 25.55), controlPoint2: CGPoint(x: 26.88, y: 26.03))
+        bezierPath.addCurve(to: CGPoint(x: 25.18, y: 24.95), controlPoint1: CGPoint(x: 25.67, y: 26.03), controlPoint2: CGPoint(x: 25.18, y: 25.55))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 19.16, y: 24.95))
+        bezierPath.addCurve(to: CGPoint(x: 21.35, y: 26.12), controlPoint1: CGPoint(x: 19.16, y: 25.41), controlPoint2: CGPoint(x: 20, y: 25.82))
+        bezierPath.addLine(to: CGPoint(x: 21.35, y: 23.78))
+        bezierPath.addCurve(to: CGPoint(x: 19.16, y: 24.95), controlPoint1: CGPoint(x: 20, y: 24.07), controlPoint2: CGPoint(x: 19.16, y: 24.49))
+        bezierPath.close()
+        bezierPath.usesEvenOddFillRule = true
+        paoTextWhite.setFill()
+        bezierPath.fill()
+        
+        context.restoreGState()
+
+    }
+
+    public dynamic class func drawAccIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 52, height: 51), resizing: ResizingBehavior = .aspectFit) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 52, height: 51), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 52, y: resizedFrame.height / 51)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+
+        //// Group
+        //// Bezier 2 Drawing
+        let bezier2Path = UIBezierPath()
+        bezier2Path.move(to: CGPoint(x: 6.83, y: 25.19))
+        bezier2Path.addLine(to: CGPoint(x: 45.12, y: 25.19))
+        bezier2Path.addLine(to: CGPoint(x: 45.12, y: 26.69))
+        bezier2Path.addLine(to: CGPoint(x: 6.83, y: 26.69))
+        bezier2Path.addLine(to: CGPoint(x: 6.83, y: 25.19))
+        bezier2Path.close()
+        bezier2Path.move(to: CGPoint(x: 6.83, y: 26.69))
+        bezier2Path.addLine(to: CGPoint(x: 6.83, y: 25.19))
+        bezier2Path.addLine(to: CGPoint(x: 45.12, y: 25.19))
+        bezier2Path.addLine(to: CGPoint(x: 45.12, y: 26.69))
+        bezier2Path.addLine(to: CGPoint(x: 6.83, y: 26.69))
+        bezier2Path.close()
+        paoTextWhite.setFill()
+        bezier2Path.fill()
+
+
+        //// Bezier Drawing
+        context.saveGState()
+        context.translateBy(x: 25.22, y: 45.09)
+        context.rotate(by: -90 * CGFloat.pi/180)
+
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: 0, y: 0))
+        bezierPath.addLine(to: CGPoint(x: 38.29, y: 0))
+        bezierPath.addLine(to: CGPoint(x: 38.29, y: 1.5))
+        bezierPath.addLine(to: CGPoint(x: 0, y: 1.5))
+        bezierPath.addLine(to: CGPoint(x: 0, y: 0))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 0, y: 1.5))
+        bezierPath.addLine(to: CGPoint(x: 0, y: 0))
+        bezierPath.addLine(to: CGPoint(x: 38.29, y: 0))
+        bezierPath.addLine(to: CGPoint(x: 38.29, y: 1.5))
+        bezierPath.addLine(to: CGPoint(x: 0, y: 1.5))
+        bezierPath.close()
+        paoTextWhite.setFill()
+        bezierPath.fill()
+
+        context.restoreGState()
+
+
+        //// Bezier 3 Drawing
+        context.saveGState()
+        context.translateBy(x: 11.91, y: 38.95)
+        context.rotate(by: -45 * CGFloat.pi/180)
+
+        let bezier3Path = UIBezierPath()
+        bezier3Path.move(to: CGPoint(x: 0, y: 0))
+        bezier3Path.addLine(to: CGPoint(x: 38.29, y: 0))
+        bezier3Path.addLine(to: CGPoint(x: 38.29, y: 1.5))
+        bezier3Path.addLine(to: CGPoint(x: 0, y: 1.5))
+        bezier3Path.addLine(to: CGPoint(x: 0, y: 0))
+        bezier3Path.close()
+        bezier3Path.move(to: CGPoint(x: 0, y: 1.5))
+        bezier3Path.addLine(to: CGPoint(x: 0, y: 0))
+        bezier3Path.addLine(to: CGPoint(x: 38.29, y: 0))
+        bezier3Path.addLine(to: CGPoint(x: 38.29, y: 1.5))
+        bezier3Path.addLine(to: CGPoint(x: 0, y: 1.5))
+        bezier3Path.close()
+        paoTextWhite.setFill()
+        bezier3Path.fill()
+
+        context.restoreGState()
+
+
+        //// Bezier 4 Drawing
+        let bezier4Path = UIBezierPath()
+        bezier4Path.move(to: CGPoint(x: 23.58, y: 7))
+        bezier4Path.addLine(to: CGPoint(x: 28.33, y: 7))
+        bezier4Path.addLine(to: CGPoint(x: 26.03, y: 3.71))
+        bezier4Path.addLine(to: CGPoint(x: 23.58, y: 7))
+        paoTextWhite.setStroke()
+        bezier4Path.lineWidth = 1
+        bezier4Path.stroke()
+
+
+        //// Bezier 5 Drawing
+        context.saveGState()
+        context.translateBy(x: 39.98, y: 8.3)
+        context.rotate(by: 45 * CGFloat.pi/180)
+
+        let bezier5Path = UIBezierPath()
+        bezier5Path.move(to: CGPoint(x: 0, y: 3.29))
+        bezier5Path.addLine(to: CGPoint(x: 4.76, y: 3.29))
+        bezier5Path.addLine(to: CGPoint(x: 2.45, y: 0))
+        bezier5Path.addLine(to: CGPoint(x: 0, y: 3.29))
+        paoTextWhite.setStroke()
+        bezier5Path.lineWidth = 1
+        bezier5Path.stroke()
+
+        context.restoreGState()
+
+
+        //// Bezier 6 Drawing
+        context.saveGState()
+        context.translateBy(x: 11.43, y: 43.59)
+        context.rotate(by: -135 * CGFloat.pi/180)
+
+        let bezier6Path = UIBezierPath()
+        bezier6Path.move(to: CGPoint(x: 0, y: 3.29))
+        bezier6Path.addLine(to: CGPoint(x: 4.76, y: 3.29))
+        bezier6Path.addLine(to: CGPoint(x: 2.45, y: 0))
+        bezier6Path.addLine(to: CGPoint(x: 0, y: 3.29))
+        paoTextWhite.setStroke()
+        bezier6Path.lineWidth = 1
+        bezier6Path.stroke()
+
+        context.restoreGState()
+
+
+        //// Bezier 7 Drawing
+        context.saveGState()
+        context.translateBy(x: 3.54, y: 28.47)
+        context.rotate(by: -90 * CGFloat.pi/180)
+
+        let bezier7Path = UIBezierPath()
+        bezier7Path.move(to: CGPoint(x: 0, y: 3.29))
+        bezier7Path.addLine(to: CGPoint(x: 4.76, y: 3.29))
+        bezier7Path.addLine(to: CGPoint(x: 2.45, y: 0))
+        bezier7Path.addLine(to: CGPoint(x: 0, y: 3.29))
+        paoTextWhite.setStroke()
+        bezier7Path.lineWidth = 1
+        bezier7Path.stroke()
+
+        context.restoreGState()
+
+
+        //// Bezier 8 Drawing
+        context.saveGState()
+        context.translateBy(x: 28.33, y: 48.38)
+        context.rotate(by: -180 * CGFloat.pi/180)
+
+        let bezier8Path = UIBezierPath()
+        bezier8Path.move(to: CGPoint(x: 0, y: 3.29))
+        bezier8Path.addLine(to: CGPoint(x: 4.76, y: 3.29))
+        bezier8Path.addLine(to: CGPoint(x: 2.45, y: 0))
+        bezier8Path.addLine(to: CGPoint(x: 0, y: 3.29))
+        paoTextWhite.setStroke()
+        bezier8Path.lineWidth = 1
+        bezier8Path.stroke()
+
+        context.restoreGState()
+
+
+        //// Bezier 9 Drawing
+        context.saveGState()
+        context.translateBy(x: 48.41, y: 23.56)
+        context.rotate(by: 90 * CGFloat.pi/180)
+
+        let bezier9Path = UIBezierPath()
+        bezier9Path.move(to: CGPoint(x: 0, y: 3.29))
+        bezier9Path.addLine(to: CGPoint(x: 4.76, y: 3.29))
+        bezier9Path.addLine(to: CGPoint(x: 2.45, y: 0))
+        bezier9Path.addLine(to: CGPoint(x: 0, y: 3.29))
+        paoTextWhite.setStroke()
+        bezier9Path.lineWidth = 1
+        bezier9Path.stroke()
+
+        context.restoreGState()
+        
+        context.restoreGState()
+
+    }
+
+    public dynamic class func drawDMPIcon(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 52, height: 51), resizing: ResizingBehavior = .aspectFit) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 52, height: 51), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 52, y: resizedFrame.height / 51)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+
+        //// Text Drawing
+        let textRect = CGRect(x: 6.21, y: 15.61, width: 41.52, height: 21)
+        let textTextContent = "DMP"
+        let textStyle = NSMutableParagraphStyle()
+        textStyle.alignment = .left
+        let textFontAttributes = [NSFontAttributeName: UIFont(name: "Avenir-Black", size: UIFont.labelFontSize)!, NSForegroundColorAttributeName: paoTextWhite, NSParagraphStyleAttributeName: textStyle]
+
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
+
+
+        //// Rectangle Drawing
+        let rectanglePath = UIBezierPath(rect: CGRect(x: 5, y: 5, width: 42, height: 42))
+        paoTextWhite.setStroke()
+        rectanglePath.lineWidth = 1
+        rectanglePath.stroke()
+        
+        context.restoreGState()
+
+    }
+
+    public dynamic class func drawExportButton(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 48, height: 48), resizing: ResizingBehavior = .aspectFit, isPressed: Bool = false) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 48, height: 48), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 48, y: resizedFrame.height / 48)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+        let paoBtnColorRed = UIColor(red: 0.800, green: 0.320, blue: 0.429, alpha: 1.000)
+
+        //// Variable Declarations
+        let buttonMaskCoordSmall: CGFloat = isPressed ? 0 : 42
+
+        //// Rectangle Drawing
+        context.saveGState()
+        context.setAlpha(0.2)
+
+        let rectanglePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 48, height: 48), cornerRadius: 6)
+        paoTextWhite.setFill()
+        rectanglePath.fill()
+
+        context.restoreGState()
+
+
+        //// Group
+        context.saveGState()
+        context.beginTransparencyLayer(auxiliaryInfo: nil)
+
+        //// Clip Rectangle 3
+        let rectangle3Path = UIBezierPath(rect: CGRect(x: 0, y: buttonMaskCoordSmall, width: 48, height: 48))
+        var rectangle3Transformation = CGAffineTransform.identity
+        rectangle3Path.apply(rectangle3Transformation)
+        rectangle3Path.addClip()
+
+
+        //// Rectangle 2 Drawing
+        let rectangle2Path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 48, height: 48), cornerRadius: 6)
+        paoBtnColorRed.setFill()
+        rectangle2Path.fill()
+
+
+        context.endTransparencyLayer()
+        context.restoreGState()
+
+
+        //// Bezier Drawing
+        let bezierPath = UIBezierPath()
+        bezierPath.move(to: CGPoint(x: 24.27, y: 8.87))
+        bezierPath.addLine(to: CGPoint(x: 30.55, y: 15.18))
+        bezierPath.addCurve(to: CGPoint(x: 30, y: 15.73), controlPoint1: CGPoint(x: 30.92, y: 15.55), controlPoint2: CGPoint(x: 30.37, y: 16.1))
+        bezierPath.addLine(to: CGPoint(x: 24.67, y: 10.4))
+        bezierPath.addCurve(to: CGPoint(x: 24.39, y: 10.52), controlPoint1: CGPoint(x: 24.51, y: 10.25), controlPoint2: CGPoint(x: 24.39, y: 10.3))
+        bezierPath.addLine(to: CGPoint(x: 24.39, y: 25.67))
+        bezierPath.addCurve(to: CGPoint(x: 24, y: 26.06), controlPoint1: CGPoint(x: 24.39, y: 25.88), controlPoint2: CGPoint(x: 24.22, y: 26.06))
+        bezierPath.addCurve(to: CGPoint(x: 23.61, y: 25.67), controlPoint1: CGPoint(x: 23.78, y: 26.06), controlPoint2: CGPoint(x: 23.61, y: 25.88))
+        bezierPath.addLine(to: CGPoint(x: 23.61, y: 10.52))
+        bezierPath.addCurve(to: CGPoint(x: 23.33, y: 10.4), controlPoint1: CGPoint(x: 23.61, y: 10.3), controlPoint2: CGPoint(x: 23.48, y: 10.25))
+        bezierPath.addLine(to: CGPoint(x: 18, y: 15.73))
+        bezierPath.addCurve(to: CGPoint(x: 17.45, y: 15.18), controlPoint1: CGPoint(x: 17.63, y: 16.1), controlPoint2: CGPoint(x: 17.08, y: 15.55))
+        bezierPath.addLine(to: CGPoint(x: 23.72, y: 8.87))
+        bezierPath.addCurve(to: CGPoint(x: 24.27, y: 8.87), controlPoint1: CGPoint(x: 23.87, y: 8.71), controlPoint2: CGPoint(x: 24.12, y: 8.71))
+        bezierPath.close()
+        bezierPath.move(to: CGPoint(x: 20.07, y: 18.76))
+        bezierPath.addCurve(to: CGPoint(x: 20.47, y: 19.15), controlPoint1: CGPoint(x: 20.29, y: 18.76), controlPoint2: CGPoint(x: 20.47, y: 18.93))
+        bezierPath.addCurve(to: CGPoint(x: 20.07, y: 19.54), controlPoint1: CGPoint(x: 20.47, y: 19.37), controlPoint2: CGPoint(x: 20.29, y: 19.54))
+        bezierPath.addLine(to: CGPoint(x: 16.93, y: 19.54))
+        bezierPath.addCurve(to: CGPoint(x: 16.54, y: 19.93), controlPoint1: CGPoint(x: 16.72, y: 19.54), controlPoint2: CGPoint(x: 16.54, y: 19.72))
+        bezierPath.addLine(to: CGPoint(x: 16.54, y: 34.07))
+        bezierPath.addCurve(to: CGPoint(x: 16.93, y: 34.46), controlPoint1: CGPoint(x: 16.54, y: 34.29), controlPoint2: CGPoint(x: 16.71, y: 34.46))
+        bezierPath.addLine(to: CGPoint(x: 31.07, y: 34.46))
+        bezierPath.addCurve(to: CGPoint(x: 31.46, y: 34.07), controlPoint1: CGPoint(x: 31.28, y: 34.46), controlPoint2: CGPoint(x: 31.46, y: 34.29))
+        bezierPath.addLine(to: CGPoint(x: 31.46, y: 19.93))
+        bezierPath.addCurve(to: CGPoint(x: 31.07, y: 19.54), controlPoint1: CGPoint(x: 31.46, y: 19.72), controlPoint2: CGPoint(x: 31.29, y: 19.54))
+        bezierPath.addLine(to: CGPoint(x: 27.93, y: 19.54))
+        bezierPath.addCurve(to: CGPoint(x: 27.53, y: 19.15), controlPoint1: CGPoint(x: 27.71, y: 19.54), controlPoint2: CGPoint(x: 27.53, y: 19.37))
+        bezierPath.addCurve(to: CGPoint(x: 27.93, y: 18.76), controlPoint1: CGPoint(x: 27.53, y: 18.93), controlPoint2: CGPoint(x: 27.71, y: 18.76))
+        bezierPath.addLine(to: CGPoint(x: 31.07, y: 18.76))
+        bezierPath.addCurve(to: CGPoint(x: 32.25, y: 19.93), controlPoint1: CGPoint(x: 31.72, y: 18.76), controlPoint2: CGPoint(x: 32.25, y: 19.28))
+        bezierPath.addLine(to: CGPoint(x: 32.25, y: 34.07))
+        bezierPath.addCurve(to: CGPoint(x: 31.07, y: 35.25), controlPoint1: CGPoint(x: 32.25, y: 34.72), controlPoint2: CGPoint(x: 31.72, y: 35.25))
+        bezierPath.addLine(to: CGPoint(x: 16.93, y: 35.25))
+        bezierPath.addCurve(to: CGPoint(x: 15.75, y: 34.07), controlPoint1: CGPoint(x: 16.28, y: 35.25), controlPoint2: CGPoint(x: 15.75, y: 34.72))
+        bezierPath.addLine(to: CGPoint(x: 15.75, y: 19.93))
+        bezierPath.addCurve(to: CGPoint(x: 16.93, y: 18.76), controlPoint1: CGPoint(x: 15.75, y: 19.28), controlPoint2: CGPoint(x: 16.28, y: 18.76))
+        bezierPath.addLine(to: CGPoint(x: 20.07, y: 18.76))
+        bezierPath.close()
+        bezierPath.usesEvenOddFillRule = true
+        paoTextWhite.setFill()
+        bezierPath.fill()
+        
+        context.restoreGState()
+
+    }
+
+    public dynamic class func drawConsoleWindow(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 340, height: 194), resizing: ResizingBehavior = .aspectFit) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 340, height: 194), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 340, y: resizedFrame.height / 194)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+
+        //// Group 13
+        //// Rectangle 11 Drawing
+        context.saveGState()
+        context.setAlpha(0.2)
+
+        let rectangle11Path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 340, height: 194), cornerRadius: 6)
+        paoTextWhite.setFill()
+        rectangle11Path.fill()
+
+        context.restoreGState()
+
+
+        //// Rectangle 12 Drawing
+        context.saveGState()
+        context.setAlpha(0.4)
+
+        let rectangle12Path = UIBezierPath(rect: CGRect(x: 15, y: 12, width: 310, height: 170))
+        UIColor.black.setFill()
+        rectangle12Path.fill()
+
+        context.restoreGState()
         
         context.restoreGState()
 
