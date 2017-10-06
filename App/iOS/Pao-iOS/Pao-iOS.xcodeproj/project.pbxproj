@@ -16,9 +16,17 @@
 		4942F1131F811B5500F378A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4942F1111F811B5500F378A9 /* Main.storyboard */; };
 		4942F1181F811B5500F378A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4942F1161F811B5500F378A9 /* LaunchScreen.storyboard */; };
 		4951427B1F82CAA300A2921E /* PaoFindingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4951427A1F82CAA300A2921E /* PaoFindingView.swift */; };
+		49578C7B1F86DD070050C192 /* PaoDrawingAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C7A1F86DD060050C192 /* PaoDrawingAssets.swift */; };
+		49578C7D1F86E4500050C192 /* AssetBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C7C1F86E4500050C192 /* AssetBackgroundView.swift */; };
+		49578C7F1F86F1C40050C192 /* AssetTitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C7E1F86F1C40050C192 /* AssetTitleBarView.swift */; };
+		49578C811F8781580050C192 /* AssetManSlouchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C801F8781580050C192 /* AssetManSlouchingView.swift */; };
+		49578C831F8782690050C192 /* AssetManStraightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C821F8782690050C192 /* AssetManStraightView.swift */; };
+		49578C851F878C1A0050C192 /* AssetBtnTrainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C841F878C1A0050C192 /* AssetBtnTrainView.swift */; };
+		49578C871F8790460050C192 /* AssetBtnDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C861F8790460050C192 /* AssetBtnDebugView.swift */; };
+		49578C891F87907B0050C192 /* AssetBtnConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C881F87907B0050C192 /* AssetBtnConfigView.swift */; };
+		49578C8B1F8790CC0050C192 /* AssetBtnHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C8A1F8790CC0050C192 /* AssetBtnHelpView.swift */; };
 		495A76391F83BD1300E1B5C4 /* BleConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A76381F83BD1300E1B5C4 /* BleConnection.swift */; };
 		495A763D1F83FD2200E1B5C4 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A763C1F83FD2200E1B5C4 /* DashboardVC.swift */; };
-		495A76411F84437100E1B5C4 /* PaoDrawings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A76401F84437100E1B5C4 /* PaoDrawings.swift */; };
 		495CDACA1F84450B00B0D7B9 /* PaoPostureBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */; };
 		497245E11F84551800697B60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 497245E01F84551800697B60 /* Assets.xcassets */; };
 		49BDDD201F84EAC80052FA32 /* PostureEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BDDD1F1F84EAC80052FA32 /* PostureEntry.swift */; };
@@ -36,9 +44,17 @@
 		4942F1171F811B5500F378A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4942F1191F811B5500F378A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4951427A1F82CAA300A2921E /* PaoFindingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoFindingView.swift; sourceTree = "<group>"; };
+		49578C7A1F86DD060050C192 /* PaoDrawingAssets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaoDrawingAssets.swift; sourceTree = "<group>"; };
+		49578C7C1F86E4500050C192 /* AssetBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBackgroundView.swift; sourceTree = "<group>"; };
+		49578C7E1F86F1C40050C192 /* AssetTitleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTitleBarView.swift; sourceTree = "<group>"; };
+		49578C801F8781580050C192 /* AssetManSlouchingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManSlouchingView.swift; sourceTree = "<group>"; };
+		49578C821F8782690050C192 /* AssetManStraightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetManStraightView.swift; sourceTree = "<group>"; };
+		49578C841F878C1A0050C192 /* AssetBtnTrainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBtnTrainView.swift; sourceTree = "<group>"; };
+		49578C861F8790460050C192 /* AssetBtnDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBtnDebugView.swift; sourceTree = "<group>"; };
+		49578C881F87907B0050C192 /* AssetBtnConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBtnConfigView.swift; sourceTree = "<group>"; };
+		49578C8A1F8790CC0050C192 /* AssetBtnHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBtnHelpView.swift; sourceTree = "<group>"; };
 		495A76381F83BD1300E1B5C4 /* BleConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleConnection.swift; sourceTree = "<group>"; };
 		495A763C1F83FD2200E1B5C4 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
-		495A76401F84437100E1B5C4 /* PaoDrawings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaoDrawings.swift; path = "Pao-iOS/PaoDrawings.swift"; sourceTree = SOURCE_ROOT; };
 		495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoPostureBarView.swift; sourceTree = "<group>"; };
 		497245E01F84551800697B60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49BDDD1F1F84EAC80052FA32 /* PostureEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostureEntry.swift; sourceTree = "<group>"; };
@@ -115,12 +131,20 @@
 		495142741F82C86700A2921E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				495A76401F84437100E1B5C4 /* PaoDrawings.swift */,
+				49578C7A1F86DD060050C192 /* PaoDrawingAssets.swift */,
 				4951427A1F82CAA300A2921E /* PaoFindingView.swift */,
 				495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */,
 				492A89881F85A2650067A6F8 /* PaoSittingGoalView.swift */,
 				492A898A1F85A6720067A6F8 /* PaoStandingGoalView.swift */,
 				492A898C1F85A6B20067A6F8 /* PaoMovingGoalView.swift */,
+				49578C7C1F86E4500050C192 /* AssetBackgroundView.swift */,
+				49578C7E1F86F1C40050C192 /* AssetTitleBarView.swift */,
+				49578C801F8781580050C192 /* AssetManSlouchingView.swift */,
+				49578C821F8782690050C192 /* AssetManStraightView.swift */,
+				49578C841F878C1A0050C192 /* AssetBtnTrainView.swift */,
+				49578C861F8790460050C192 /* AssetBtnDebugView.swift */,
+				49578C881F87907B0050C192 /* AssetBtnConfigView.swift */,
+				49578C8A1F8790CC0050C192 /* AssetBtnHelpView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -271,17 +295,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				495A76411F84437100E1B5C4 /* PaoDrawings.swift in Sources */,
 				492A89891F85A2650067A6F8 /* PaoSittingGoalView.swift in Sources */,
 				49BDDD201F84EAC80052FA32 /* PostureEntry.swift in Sources */,
 				492A898D1F85A6B20067A6F8 /* PaoMovingGoalView.swift in Sources */,
+				49578C7D1F86E4500050C192 /* AssetBackgroundView.swift in Sources */,
+				49578C871F8790460050C192 /* AssetBtnDebugView.swift in Sources */,
+				49578C831F8782690050C192 /* AssetManStraightView.swift in Sources */,
+				49578C7F1F86F1C40050C192 /* AssetTitleBarView.swift in Sources */,
+				49578C891F87907B0050C192 /* AssetBtnConfigView.swift in Sources */,
 				495CDACA1F84450B00B0D7B9 /* PaoPostureBarView.swift in Sources */,
 				492A898B1F85A6720067A6F8 /* PaoStandingGoalView.swift in Sources */,
 				4942F1101F811B5500F378A9 /* BleConnectVC.swift in Sources */,
 				495A763D1F83FD2200E1B5C4 /* DashboardVC.swift in Sources */,
 				4951427B1F82CAA300A2921E /* PaoFindingView.swift in Sources */,
 				4942F10E1F811B5500F378A9 /* AppDelegate.swift in Sources */,
+				49578C811F8781580050C192 /* AssetManSlouchingView.swift in Sources */,
+				49578C8B1F8790CC0050C192 /* AssetBtnHelpView.swift in Sources */,
+				49578C7B1F86DD070050C192 /* PaoDrawingAssets.swift in Sources */,
 				495A76391F83BD1300E1B5C4 /* BleConnection.swift in Sources */,
+				49578C851F878C1A0050C192 /* AssetBtnTrainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

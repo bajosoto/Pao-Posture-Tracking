@@ -31,7 +31,7 @@ class PaoSittingGoalView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        PaoDrawings.drawSittingGoal(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height) , resizing: PaoDrawings.ResizingBehavior.aspectFit, postureGoalPercentage: 0.5)
+        PaoDrawingAssets.drawPaoSittingGoal(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height) , resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, postureGoalPercentage: 0.5)
     }
 
 }
