@@ -45,7 +45,7 @@ class BleConnectVC: UIViewController, UITextViewDelegate, bleConnectionResponder
         paoEggView.animationProgress += 0.015 // (1/0.015) * 30ms ~= 2s egg oscillation
         if isFadingOut {
             if fadeOut.alpha < 1 {
-                fadeOut.alpha += 0.025  // (1/0.025) * 30ms = 1.2s transition
+                fadeOut.alpha += 0.06  // (1/0.025) * 30ms = 1.2s transition
             } else {
                 // Stop timer
                 clockTimer.invalidate()

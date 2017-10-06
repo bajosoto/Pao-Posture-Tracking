@@ -25,6 +25,7 @@
 		49578C871F8790460050C192 /* AssetBtnDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C861F8790460050C192 /* AssetBtnDebugView.swift */; };
 		49578C891F87907B0050C192 /* AssetBtnConfigView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C881F87907B0050C192 /* AssetBtnConfigView.swift */; };
 		49578C8B1F8790CC0050C192 /* AssetBtnHelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C8A1F8790CC0050C192 /* AssetBtnHelpView.swift */; };
+		49578C911F87B8C30050C192 /* DebugVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C901F87B8C30050C192 /* DebugVC.swift */; };
 		495A76391F83BD1300E1B5C4 /* BleConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A76381F83BD1300E1B5C4 /* BleConnection.swift */; };
 		495A763D1F83FD2200E1B5C4 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A763C1F83FD2200E1B5C4 /* DashboardVC.swift */; };
 		495CDACA1F84450B00B0D7B9 /* PaoPostureBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */; };
@@ -53,6 +54,7 @@
 		49578C861F8790460050C192 /* AssetBtnDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBtnDebugView.swift; sourceTree = "<group>"; };
 		49578C881F87907B0050C192 /* AssetBtnConfigView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBtnConfigView.swift; sourceTree = "<group>"; };
 		49578C8A1F8790CC0050C192 /* AssetBtnHelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBtnHelpView.swift; sourceTree = "<group>"; };
+		49578C901F87B8C30050C192 /* DebugVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugVC.swift; sourceTree = "<group>"; };
 		495A76381F83BD1300E1B5C4 /* BleConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleConnection.swift; sourceTree = "<group>"; };
 		495A763C1F83FD2200E1B5C4 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoPostureBarView.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				4942F10F1F811B5500F378A9 /* BleConnectVC.swift */,
 				495A763C1F83FD2200E1B5C4 /* DashboardVC.swift */,
+				49578C901F87B8C30050C192 /* DebugVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				49BDDD201F84EAC80052FA32 /* PostureEntry.swift in Sources */,
 				492A898D1F85A6B20067A6F8 /* PaoMovingGoalView.swift in Sources */,
 				49578C7D1F86E4500050C192 /* AssetBackgroundView.swift in Sources */,
+				49578C911F87B8C30050C192 /* DebugVC.swift in Sources */,
 				49578C871F8790460050C192 /* AssetBtnDebugView.swift in Sources */,
 				49578C831F8782690050C192 /* AssetManStraightView.swift in Sources */,
 				49578C7F1F86F1C40050C192 /* AssetTitleBarView.swift in Sources */,

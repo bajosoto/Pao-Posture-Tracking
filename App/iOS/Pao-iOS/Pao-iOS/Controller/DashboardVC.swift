@@ -176,6 +176,7 @@ class DashboardVC: UIViewController {
     }
     @IBAction func onBtnDebugReleased(_ sender: Any) {
         btnDebugView.isPressed = false
+        performSegue(withIdentifier: "toDebug", sender: nil)
     }
     @IBAction func onBtnDebugDrag(_ sender: Any) {
         btnDebugView.isPressed = false
