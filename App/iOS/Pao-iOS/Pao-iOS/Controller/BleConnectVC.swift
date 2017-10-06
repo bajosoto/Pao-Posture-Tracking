@@ -30,7 +30,7 @@ class BleConnectVC: UIViewController, UITextViewDelegate, bleConnectionResponder
         
         // Create a ble connection
         if let bleConnResp = self as bleConnectionResponder? {
-            bleConn = BleConnection(responder: bleConnResp)
+            bleConn = BleConnection(newResponder: bleConnResp)
         }
         // Initialize the BT connection
         bleConn?.connectBlePao()
@@ -51,7 +51,15 @@ class BleConnectVC: UIViewController, UITextViewDelegate, bleConnectionResponder
                 clockTimer.invalidate()
                 clockTimer = nil
                 // Perform segue
-                performSegue(withIdentifier: "toDashboard", sender: nil)
+                performSegue(withIdentifier: "toDashboard", sender: bleConn)
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? DashboardVC {
+            if let newConnection = sender as? BleConnection {
+                dest.bleConn = newConnection
             }
         }
     }
@@ -61,6 +69,10 @@ class BleConnectVC: UIViewController, UITextViewDelegate, bleConnectionResponder
         scanStatusLbl.text = "Pao found! :)"
         spinnningIndicator.isHidden = true
         isFadingOut = true
+    }
+    
+    func onMsgReceived(message: String!) {
+        // No functionality on this view
     }
     
 }

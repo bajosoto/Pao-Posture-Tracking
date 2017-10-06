@@ -16,7 +16,15 @@ class BleConnection {
     private var dataCharacteristicRx : Characteristic?
     
     // Responder to interface with ViewController
-    weak var _responder: bleConnectionResponder?
+    weak var _responder: bleConnectionResponder!
+    var responder: bleConnectionResponder {
+        get {
+            return _responder
+        }
+        set (newResponder) {
+            _responder = newResponder
+        }
+    }
     
     public enum AppError : Error {
         case dataCharactertisticNotFound
@@ -29,9 +37,9 @@ class BleConnection {
         case unknown
     }
     
-    init(responder: bleConnectionResponder) {
+    init(newResponder: bleConnectionResponder) {
         // Set a responder
-        self._responder = responder
+        self._responder = newResponder
     }
     
     func connectBlePao() {
@@ -171,6 +179,7 @@ class BleConnection {
         dataFuture.onSuccess { data in
             let s = String(data:data!, encoding: .utf8 )
             DispatchQueue.main.async {
+                self.receive(dataAsString: s!)
                 print("notified value is \(String(describing: s!)) ")
             }
         }
@@ -190,6 +199,11 @@ class BleConnection {
         }
     }
     
+    
+    func receive(dataAsString: String!) {
+        // Do some processing here
+        self._responder?.onMsgReceived(message: dataAsString)
+    }
     
     func write(){
         //self.valueToWriteTextField.resignFirstResponder()
@@ -212,4 +226,5 @@ class BleConnection {
 protocol bleConnectionResponder: class {
     
     func onPaoFound()
+    func onMsgReceived(message: String!)
 }

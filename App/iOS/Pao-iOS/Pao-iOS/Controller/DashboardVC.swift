@@ -11,20 +11,29 @@ import Charts
 import ChartsRealm
 import RealmSwift
 
-class DashboardVC: UIViewController {
+class DashboardVC: UIViewController, bleConnectionResponder {
 
     @IBOutlet weak var profilePicImg: UIImageView!
     @IBOutlet weak var postureBar: UIView!
     @IBOutlet weak var postureChart: LineChartView!
     
-
     @IBOutlet weak var btnTrainView: AssetBtnTrainView!
     @IBOutlet weak var btnDebugView: AssetBtnDebugView!
     @IBOutlet weak var btnConfigView: AssetBtnConfigView!
     @IBOutlet weak var btnHelpView: AssetBtnHelpView!
     
+    var _bleConn: BleConnection!
+    var bleConn: BleConnection {
+        get {
+            return _bleConn
+        }
+        set (newConn) {
+            _bleConn = newConn
+        }
+    }
+    
     // Axis format delegate
-     weak var axisFormatDelegate: IAxisValueFormatter?
+    weak var axisFormatDelegate: IAxisValueFormatter?
     
     // Colors
     let blueColor = UIColor(red: 124/255, green: 188/255, blue: 232/255, alpha: 1.0)
@@ -38,6 +47,11 @@ class DashboardVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set this VC as the current responder
+        if let bleConnResp = self as bleConnectionResponder? {
+            bleConn.responder = bleConnResp
+        }
         
         // Round off profile picture
         profilePicImg.layer.cornerRadius = profilePicImg.frame.size.width / 2
@@ -176,7 +190,7 @@ class DashboardVC: UIViewController {
     }
     @IBAction func onBtnDebugReleased(_ sender: Any) {
         btnDebugView.isPressed = false
-        performSegue(withIdentifier: "toDebug", sender: nil)
+        performSegue(withIdentifier: "toDebug", sender: bleConn)
     }
     @IBAction func onBtnDebugDrag(_ sender: Any) {
         btnDebugView.isPressed = false
@@ -205,6 +219,21 @@ class DashboardVC: UIViewController {
     }
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? DebugVC {
+            if let newConnection = sender as? BleConnection {
+                dest.bleConn = newConnection
+            }
+        }
+    }
+    
+    func onPaoFound() {
+        // Nothing to do here for now
+    }
+    
+    func onMsgReceived(message: String!) {
+        // Nothing to do here for now
+    }
 }
 
 extension UIViewController: IAxisValueFormatter {

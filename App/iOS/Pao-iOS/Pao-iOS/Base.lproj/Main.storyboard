@@ -434,6 +434,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4Dw-gU-Yjw">
+                                <rect key="frame" x="87" y="122" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="WIX-wu-Vq6"/>
+                                    <constraint firstAttribute="width" constant="240" id="nN7-zM-x8Q"/>
+                                </constraints>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajD-ql-vMf" userLabel="Title Bar" customClass="AssetTitleBarView" customModule="Pao_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="28"/>
                                 <color key="backgroundColor" red="0.55897984560000002" green="0.95611631080000004" blue="0.99698013070000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -460,10 +471,15 @@
                             <constraint firstItem="9tp-99-onh" firstAttribute="leading" secondItem="7dP-fR-GGR" secondAttribute="leading" id="FKY-Wq-6ED"/>
                             <constraint firstItem="ajD-ql-vMf" firstAttribute="top" secondItem="7dP-fR-GGR" secondAttribute="top" id="LBT-1c-xSt"/>
                             <constraint firstItem="9tp-99-onh" firstAttribute="top" secondItem="7dP-fR-GGR" secondAttribute="top" id="Xiv-Cg-rlb"/>
+                            <constraint firstItem="4Dw-gU-Yjw" firstAttribute="top" secondItem="ajD-ql-vMf" secondAttribute="bottom" constant="94" id="YNZ-EQ-47u"/>
+                            <constraint firstItem="4Dw-gU-Yjw" firstAttribute="centerX" secondItem="7dP-fR-GGR" secondAttribute="centerX" id="m1P-jj-aCY"/>
                             <constraint firstItem="Ac2-Bf-w3g" firstAttribute="top" secondItem="9tp-99-onh" secondAttribute="bottom" id="mbP-xC-kIc"/>
                             <constraint firstAttribute="trailing" secondItem="9tp-99-onh" secondAttribute="trailing" id="tRp-LK-JbW"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="consoleTextView" destination="4Dw-gU-Yjw" id="fpg-UH-eSM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g71-9i-xZB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
