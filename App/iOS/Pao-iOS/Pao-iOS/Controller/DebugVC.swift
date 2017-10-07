@@ -11,6 +11,10 @@ import UIKit
 class DebugVC: UIViewController, bleConnectionResponder {
 
     @IBOutlet weak var consoleTextView: UITextView!
+    @IBOutlet weak var btnPing: AssetBtnPing!
+    @IBOutlet weak var btnSend: AssetBtnSend!
+    @IBOutlet weak var btnBack: AssetBtnBackView!
+    @IBOutlet weak var btnExport: AssetBtnExport!
     
     var _bleConn: BleConnection!
     // Reference to the previous responder (e.g. parent VC)
@@ -37,13 +41,56 @@ class DebugVC: UIViewController, bleConnectionResponder {
         
         // Do any additional setup after loading the view.
     }
-
-    @IBAction func backBtnPressed(_ sender: Any) {
+    
+    /* Back Button*/
+    @IBAction func onBtnBackPressed(_ sender: Any) {
+        btnBack.isPressed = true
+    }
+    @IBAction func onBtnBackRelease(_ sender: Any) {
+        btnBack.isPressed = false
         dismiss(animated: true, completion: {
             // Revert responder to previous
             self.bleConn.responder = self._prevResponder
         })
     }
+    @IBAction func onBtnBackDrag(_ sender: Any) {
+        btnBack.isPressed = false
+    }
+    
+    /* Export Button */
+    @IBAction func onBtnExportPressed(_ sender: Any) {
+        btnExport.isPressed = true
+    }
+    @IBAction func onBtnExportRelease(_ sender: Any) {
+        btnExport.isPressed = false
+    }
+    @IBAction func onBtnExportDrag(_ sender: Any) {
+        btnExport.isPressed = false
+    }
+    
+    /* Ping Button */
+    @IBAction func onBtnPingPressed(_ sender: Any) {
+        btnPing.isPressed = true
+    }
+    @IBAction func onBtnPingRelease(_ sender: Any) {
+        btnPing.isPressed = false
+        bleConn.write()
+    }
+    @IBAction func onBtnPingDrag(_ sender: Any) {
+        btnPing.isPressed = false
+    }
+    
+    /* Send Button */
+    @IBAction func onBtnSendPressed(_ sender: Any) {
+        btnSend.isPressed = true
+    }
+    @IBAction func onBtnSendRelease(_ sender: Any) {
+        btnSend.isPressed = false
+    }
+    @IBAction func onBtnSendDrag(_ sender: Any) {
+        btnSend.isPressed = false
+    }
+    
     
     func onPaoFound() {
         // Nothing needed here I think
