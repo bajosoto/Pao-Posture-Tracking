@@ -32,11 +32,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </view>
                             <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h6z-hl-OYN" userLabel="PaoEggView" customClass="PaoFindingView" customModule="Pao_iOS" customModuleProvider="target">
-                                <rect key="frame" x="82" y="236" width="250" height="250"/>
+                                <rect key="frame" x="107" y="286" width="200" height="200"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="5SC-7z-VNh"/>
-                                    <constraint firstAttribute="height" constant="250" id="99x-Em-b1D"/>
+                                    <constraint firstAttribute="width" constant="200" id="5SC-7z-VNh"/>
+                                    <constraint firstAttribute="height" constant="200" id="99x-Em-b1D"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJD-Vg-srP" userLabel="ScanView">

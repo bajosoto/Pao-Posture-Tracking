@@ -49,9 +49,17 @@ public class PaoDrawingAssets : NSObject {
 
     }
 
-    @objc public dynamic class func drawPaoEgg(frame: CGRect = CGRect(x: 0, y: 0, width: 250, height: 250), time: CGFloat = 1) {
+    @objc public dynamic class func drawPaoEgg(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 250, height: 250), resizing: ResizingBehavior = .aspectFit, time: CGFloat = 1) {
         //// General Declarations
         let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 250, height: 250), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 250, y: resizedFrame.height / 250)
+        let resizedShadowScale: CGFloat = min(resizedFrame.width / 250, resizedFrame.height / 250)
+
 
         //// Color Declarations
         let paoEggWater = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
@@ -82,7 +90,7 @@ public class PaoDrawingAssets : NSObject {
 
         //// Water Drawing
         context.saveGState()
-        context.translateBy(x: frame.minX + 0.50000 * frame.width, y: frame.minY + 0.77992 * frame.height)
+        context.translateBy(x: 125, y: 194.98)
         context.scaleBy(x: time, y: time)
 
         context.saveGState()
@@ -113,7 +121,7 @@ public class PaoDrawingAssets : NSObject {
 
         //// PaoEgg
         context.saveGState()
-        context.translateBy(x: frame.maxX - 125, y: frame.maxY - 55.02)
+        context.translateBy(x: 125, y: 194.98)
         context.rotate(by: -sinoftime * CGFloat.pi/180)
 
 
@@ -148,7 +156,7 @@ public class PaoDrawingAssets : NSObject {
         //// paoEggButton Drawing
         let paoEggButtonPath = UIBezierPath(ovalIn: CGRect(x: -48, y: -116.98, width: 96, height: 99))
         context.saveGState()
-        context.setShadow(offset: shadow.shadowOffset, blur: shadow.shadowBlurRadius, color: (shadow.shadowColor as! UIColor).cgColor)
+        context.setShadow(offset: CGSize(width: shadow.shadowOffset.width * resizedShadowScale, height: shadow.shadowOffset.height * resizedShadowScale), blur: shadow.shadowBlurRadius * resizedShadowScale, color: (shadow.shadowColor as! UIColor).cgColor)
         paoEggBtnCenter.setFill()
         paoEggButtonPath.fill()
         context.restoreGState()
@@ -179,6 +187,9 @@ public class PaoDrawingAssets : NSObject {
 
         context.endTransparencyLayer()
         context.restoreGState()
+        
+        context.restoreGState()
+
     }
 
     @objc public dynamic class func drawPaoProfilePic(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 126, height: 126), resizing: ResizingBehavior = .aspectFit) {

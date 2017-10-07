@@ -82,6 +82,7 @@ class DebugVC: UIViewController, bleConnectionResponder {
     @IBAction func onBtnPingRelease(_ sender: Any) {
         btnPing.isPressed = false
         bleConn.write()
+        bleConn.logMsg(message: "Ping...")
     }
     @IBAction func onBtnPingDrag(_ sender: Any) {
         btnPing.isPressed = false
