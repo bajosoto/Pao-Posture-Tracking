@@ -29,6 +29,9 @@
 		49578C931F87F2C30050C192 /* AssetDebugIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C921F87F2C30050C192 /* AssetDebugIcon.swift */; };
 		49578C951F87F4540050C192 /* AssetBtnPing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C941F87F4540050C192 /* AssetBtnPing.swift */; };
 		49578C971F87FEAB0050C192 /* AssetBtnSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C961F87FEAB0050C192 /* AssetBtnSend.swift */; };
+		49578C991F8860240050C192 /* AssetAccIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C981F8860240050C192 /* AssetAccIconView.swift */; };
+		49578C9B1F8860830050C192 /* AssetGyroIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C9A1F8860830050C192 /* AssetGyroIconView.swift */; };
+		49578C9D1F8861290050C192 /* AssetDMPIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49578C9C1F8861290050C192 /* AssetDMPIconView.swift */; };
 		495A76391F83BD1300E1B5C4 /* BleConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A76381F83BD1300E1B5C4 /* BleConnection.swift */; };
 		495A763D1F83FD2200E1B5C4 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A763C1F83FD2200E1B5C4 /* DashboardVC.swift */; };
 		495CDACA1F84450B00B0D7B9 /* PaoPostureBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */; };
@@ -61,6 +64,9 @@
 		49578C921F87F2C30050C192 /* AssetDebugIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDebugIcon.swift; sourceTree = "<group>"; };
 		49578C941F87F4540050C192 /* AssetBtnPing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBtnPing.swift; sourceTree = "<group>"; };
 		49578C961F87FEAB0050C192 /* AssetBtnSend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBtnSend.swift; sourceTree = "<group>"; };
+		49578C981F8860240050C192 /* AssetAccIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetAccIconView.swift; sourceTree = "<group>"; };
+		49578C9A1F8860830050C192 /* AssetGyroIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetGyroIconView.swift; sourceTree = "<group>"; };
+		49578C9C1F8861290050C192 /* AssetDMPIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetDMPIconView.swift; sourceTree = "<group>"; };
 		495A76381F83BD1300E1B5C4 /* BleConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleConnection.swift; sourceTree = "<group>"; };
 		495A763C1F83FD2200E1B5C4 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoPostureBarView.swift; sourceTree = "<group>"; };
@@ -156,6 +162,9 @@
 				49578C921F87F2C30050C192 /* AssetDebugIcon.swift */,
 				49578C941F87F4540050C192 /* AssetBtnPing.swift */,
 				49578C961F87FEAB0050C192 /* AssetBtnSend.swift */,
+				49578C981F8860240050C192 /* AssetAccIconView.swift */,
+				49578C9A1F8860830050C192 /* AssetGyroIconView.swift */,
+				49578C9C1F8861290050C192 /* AssetDMPIconView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -319,6 +328,7 @@
 				495CDACA1F84450B00B0D7B9 /* PaoPostureBarView.swift in Sources */,
 				492A898B1F85A6720067A6F8 /* PaoStandingGoalView.swift in Sources */,
 				4942F1101F811B5500F378A9 /* BleConnectVC.swift in Sources */,
+				49578C991F8860240050C192 /* AssetAccIconView.swift in Sources */,
 				495A763D1F83FD2200E1B5C4 /* DashboardVC.swift in Sources */,
 				4951427B1F82CAA300A2921E /* PaoFindingView.swift in Sources */,
 				4942F10E1F811B5500F378A9 /* AppDelegate.swift in Sources */,
@@ -328,7 +338,9 @@
 				49578C931F87F2C30050C192 /* AssetDebugIcon.swift in Sources */,
 				49578C7B1F86DD070050C192 /* PaoDrawingAssets.swift in Sources */,
 				495A76391F83BD1300E1B5C4 /* BleConnection.swift in Sources */,
+				49578C9B1F8860830050C192 /* AssetGyroIconView.swift in Sources */,
 				49578C851F878C1A0050C192 /* AssetBtnTrainView.swift in Sources */,
+				49578C9D1F8861290050C192 /* AssetDMPIconView.swift in Sources */,
 				49578C951F87F4540050C192 /* AssetBtnPing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
