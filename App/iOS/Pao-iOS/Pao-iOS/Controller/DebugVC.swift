@@ -42,6 +42,10 @@ class DebugVC: UIViewController, bleConnectionResponder {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        consoleTextView.attributedText = bleConn.consoleMessages;
+    }
+    
     /* Back Button*/
     @IBAction func onBtnBackPressed(_ sender: Any) {
         btnBack.isPressed = true
@@ -98,7 +102,7 @@ class DebugVC: UIViewController, bleConnectionResponder {
     
     func onMsgReceived(message: String!) {
         // Nothing to do here for now
-        consoleTextView.text = message;
+        consoleTextView.attributedText = bleConn.consoleMessages;
     }
     
 }

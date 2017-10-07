@@ -15,6 +15,8 @@ class BleConnection {
     private var dataCharacteristicTx : Characteristic?
     private var dataCharacteristicRx : Characteristic?
     
+    var consoleMessages: NSMutableAttributedString = NSMutableAttributedString()
+    
     // Responder to interface with ViewController
     weak var _responder: bleConnectionResponder!
     var responder: bleConnectionResponder {
@@ -60,7 +62,7 @@ class BleConnection {
             case .poweredOn:
                 DispatchQueue.main.async {
                     //self.connectionStatusLabel.text = "Looking for a pao..."
-                    print("Looking for a pao...")
+                    self.logMsg(message: "Looking for pao...")
                 }
                 //scan for peripherlas that advertise the ec00 service
                 return manager.startScanning(forServiceUUIDs: [serviceUUID])
@@ -104,7 +106,7 @@ class BleConnection {
             }
             DispatchQueue.main.async {
                 //self.connectionStatusLabel.text = "Found a Pao! [\(peripheral.identifier.uuidString)]. Trying to connect"
-                print("Found a Pao! [\(peripheral.identifier.uuidString)]. Trying to connect")
+                self.logMsg(message: "pao found! [\(peripheral.identifier.uuidString)]. Trying to connect...")
             }
             //connect to the peripheral in order to trigger the connected mode
             return peripheral.connect(connectionTimeout: 10, capacity: 5)
@@ -126,7 +128,7 @@ class BleConnection {
                 peripheral = discoveredPeripheral
                 DispatchQueue.main.async {
                     //self.connectionStatusLabel.text = "Discovered service \(service.uuid.uuidString). Trying to discover characteristics"
-                    print("Discovered service \(service.uuid.uuidString). Trying to discover characteristics")
+                    self.logMsg(message: "Discovered service \(service.uuid.uuidString). Trying to discover characteristics")
                 }
                 //we have discovered the service, the next step is to discover the "ec0e" characteristic
                 return service.discoverCharacteristics([dateCharacteristicTxUUID, dateCharacteristicRxUUID])
@@ -150,8 +152,8 @@ class BleConnection {
             self.dataCharacteristicRx = dataCharactRx
             DispatchQueue.main.async {
                 //self.connectionStatusLabel.text = "Discovered characteristic \(dataCharactTx.uuid.uuidString). COOL :)"
-                print("Discovered characteristic \(dataCharactTx.uuid.uuidString). COOL :)")
-                print("Discovered characteristic \(dataCharactRx.uuid.uuidString). COOL :)")
+                self.logMsg(message: "Discovered characteristic \(dataCharactTx.uuid.uuidString).")
+                self.logMsg(message: "Discovered characteristic \(dataCharactRx.uuid.uuidString).")
             }
             // Inform responder that pao was found
             self._responder?.onPaoFound()
@@ -199,6 +201,24 @@ class BleConnection {
         }
     }
     
+    func logMsg(message: String) {
+        let paoBarBlue = UIColor(red: 0.024, green: 0.671, blue: 0.925, alpha: 1.000)
+        let dateFormatter : DateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        let date = Date()
+        let dateString = dateFormatter.string(from: date)
+        
+        let newLine = "[\(dateString)]:\(message)\n"
+        
+        let mutableString = NSMutableAttributedString(string: newLine, attributes: [NSAttributedStringKey.font:UIFont(name: "Avenir", size: 10.0)!])
+        mutableString.addAttribute(NSAttributedStringKey.foregroundColor, value: paoBarBlue, range: NSRange(location:0,length:10))
+        mutableString.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.white, range: NSRange(location:11,length:message.characters.count))
+        // set label Attribute
+        consoleMessages.append(mutableString)
+        //labName.attributedText = myMutableString
+        
+        //self.consoleMessages.append("[\(dateString)]:\(message)\n")
+    }
     
     func receive(dataAsString: String!) {
         // Do some processing here

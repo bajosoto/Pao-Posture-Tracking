@@ -1027,23 +1027,12 @@
                                             <constraint firstAttribute="width" constant="309" id="VdY-JP-e8B"/>
                                             <constraint firstAttribute="height" constant="170" id="eXo-po-LEA"/>
                                         </constraints>
-                                        <mutableString key="text">[10/08/17 - 15:23:26] Pao connected...
+                                        <string key="text">[10/08/17 - 15:23:26] Pao connected...
 [10/08/17 - 15:24:47] Pong!
 [10/08/17 - 15:25:43] Packet received
-[10/08/17 - 15:29:74] Posture received
-[10/08/17 - 15:32:23] Calibration confirmed
-[10/08/17 - 15:23:26] Pao connected...
-[10/08/17 - 15:24:47] Pong!
-[10/08/17 - 15:25:43] Packet received
-[10/08/17 - 15:29:74] Posture received
-[10/08/17 - 15:32:23] Calibration confirmed
-[10/08/17 - 15:23:26] Pao connected...
-[10/08/17 - 15:24:47] Pong!
-[10/08/17 - 15:25:43] Packet received
-[10/08/17 - 15:29:74] Posture received
-[10/08/17 - 15:32:23] Calibration confirmed</mutableString>
+[10/08/17 - 15:29:74] Posture received</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="11"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="10"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                 </subviews>
@@ -1078,7 +1067,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gyn-FE-8i4" customClass="AssetBtnExport" customModule="Pao_iOS" customModuleProvider="target">
-                                <rect key="frame" x="20" y="663" width="48" height="48"/>
+                                <rect key="frame" x="37" y="663" width="48" height="48"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhA-Fm-Vub">
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
@@ -1107,6 +1096,7 @@
                             <constraint firstItem="nHd-Ld-sO9" firstAttribute="top" secondItem="egJ-gr-HwU" secondAttribute="bottom" constant="25" id="3lZ-2f-Hr1"/>
                             <constraint firstItem="Ac2-Bf-w3g" firstAttribute="top" secondItem="gyn-FE-8i4" secondAttribute="bottom" constant="25" id="6pD-1B-pNv"/>
                             <constraint firstItem="FAk-Fb-gts" firstAttribute="trailing" secondItem="gzA-3Y-vnz" secondAttribute="centerX" constant="-10" id="75q-5X-uSj"/>
+                            <constraint firstItem="gyn-FE-8i4" firstAttribute="leading" secondItem="nHd-Ld-sO9" secondAttribute="leading" id="8EZ-QD-VDc"/>
                             <constraint firstItem="9JF-mm-wfp" firstAttribute="centerX" secondItem="7dP-fR-GGR" secondAttribute="centerX" id="8PY-ch-qi7"/>
                             <constraint firstItem="A3Q-PD-hU5" firstAttribute="top" secondItem="nh8-IZ-GMR" secondAttribute="bottom" id="CxN-Bi-e1j"/>
                             <constraint firstItem="ajD-ql-vMf" firstAttribute="leading" secondItem="7dP-fR-GGR" secondAttribute="leading" id="Dzv-gr-JzR"/>
@@ -1125,7 +1115,6 @@
                             <constraint firstItem="nHd-Ld-sO9" firstAttribute="centerX" secondItem="7dP-fR-GGR" secondAttribute="centerX" id="lUr-w3-gkT"/>
                             <constraint firstItem="egJ-gr-HwU" firstAttribute="leading" secondItem="7dP-fR-GGR" secondAttribute="leading" constant="40" id="mKP-a5-rXo"/>
                             <constraint firstItem="Ac2-Bf-w3g" firstAttribute="top" secondItem="9tp-99-onh" secondAttribute="bottom" id="mbP-xC-kIc"/>
-                            <constraint firstItem="gyn-FE-8i4" firstAttribute="leading" secondItem="7dP-fR-GGR" secondAttribute="leading" constant="20" id="n2e-WK-yiy"/>
                             <constraint firstItem="Ac2-Bf-w3g" firstAttribute="top" secondItem="9JF-mm-wfp" secondAttribute="bottom" constant="25" id="osa-oS-GSO"/>
                             <constraint firstAttribute="trailing" secondItem="9tp-99-onh" secondAttribute="trailing" id="tRp-LK-JbW"/>
                             <constraint firstItem="nsi-2D-SF8" firstAttribute="centerY" secondItem="FAk-Fb-gts" secondAttribute="centerY" id="u5b-Dc-raK"/>
