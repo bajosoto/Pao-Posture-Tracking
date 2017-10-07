@@ -67,6 +67,9 @@ class DebugVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnExportRelease(_ sender: Any) {
         btnExport.isPressed = false
+        bleConn.logMsg(message: "Log file stored")
+        let activity: UIActivityViewController = UIActivityViewController(activityItems: [consoleTextView.text], applicationActivities: nil)
+        self.present(activity, animated: true, completion: nil)
     }
     @IBAction func onBtnExportDrag(_ sender: Any) {
         btnExport.isPressed = false
@@ -90,6 +93,7 @@ class DebugVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnSendRelease(_ sender: Any) {
         btnSend.isPressed = false
+        
     }
     @IBAction func onBtnSendDrag(_ sender: Any) {
         btnSend.isPressed = false
@@ -102,6 +106,7 @@ class DebugVC: UIViewController, bleConnectionResponder {
     
     func onMsgReceived(message: String!) {
         // Nothing to do here for now
+        bleConn.logMsg(message: message)
         consoleTextView.attributedText = bleConn.consoleMessages;
     }
     
