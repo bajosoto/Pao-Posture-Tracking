@@ -95,8 +95,10 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         postureChart.scaleYEnabled = false
         postureChart.highlightPerTapEnabled = false
         postureChart.highlightPerDragEnabled = false
-        postureChart.setVisibleXRangeMaximum(10.0)  // In seconds. Will make the app crash if insufficient data is available
-        postureChart.setVisibleXRangeMinimum(3.0)   // In seconds. Will make the app crash if insufficient data is available
+        if(chartDataSet.entryCount > 0) {   // TODO: This should be in terms of the time interval measurements ar etaken
+            postureChart.setVisibleXRangeMaximum(60.0)  // In seconds. Will make the app crash if insufficient data is available
+            postureChart.setVisibleXRangeMinimum(3.0)   // In seconds. Will make the app crash if insufficient data is available
+        }
         postureChart.legend.enabled = false
         
         chartDataSet.mode = .horizontalBezier
