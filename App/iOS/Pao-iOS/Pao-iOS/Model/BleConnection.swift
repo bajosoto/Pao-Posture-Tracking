@@ -225,20 +225,27 @@ class BleConnection {
         self._responder?.onMsgReceived(message: dataAsString)
     }
     
-    func write(){
+    func write(msg: String){
         //self.valueToWriteTextField.resignFirstResponder()
         //guard let text = self.valueToWriteTextField.text else{
         //    return;
         //}
         //write a value to the characteristic
-        let text = "1"
-        let writeFuture = self.dataCharacteristicTx?.write(data:text.data(using: .ascii)!)
-        writeFuture?.onSuccess(completion: { (_) in
-            print("write succes")
-        })
-        writeFuture?.onFailure(completion: { (e) in
-            print("write failed")
-        })
+        //let text = "3131"
+        let parsedData = Scanner(string: msg)
+        var value: UInt64 = 0
+        if parsedData.scanHexInt64(&value) {
+            // let writeFuture = self.dataCharacteristicTx?.write(data: Data(bytes: &value, count: sizeof(UInt64)))
+            // let writeFuture = self.dataCharacteristicTx?.write(data:text.data(using: .ascii)!)
+            let myData = Data(bytes: &value, count: MemoryLayout<UInt64>.size)
+            let writeFuture = self.dataCharacteristicTx?.write(data: myData)
+            writeFuture?.onSuccess(completion: { (_) in
+                print("write succes")
+            })
+            writeFuture?.onFailure(completion: { (e) in
+                print("write failed")
+            })
+        }
     }
 }
 

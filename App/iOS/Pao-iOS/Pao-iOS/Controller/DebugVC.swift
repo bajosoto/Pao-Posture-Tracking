@@ -8,9 +8,10 @@
 
 import UIKit
 
-class DebugVC: UIViewController, bleConnectionResponder {
+class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
 
     @IBOutlet weak var consoleTextView: UITextView!
+    @IBOutlet weak var msgHexValueTxtFld: UITextField!
     @IBOutlet weak var btnPing: AssetBtnPing!
     @IBOutlet weak var btnSend: AssetBtnSend!
     @IBOutlet weak var btnBack: AssetBtnBackView!
@@ -39,11 +40,29 @@ class DebugVC: UIViewController, bleConnectionResponder {
             bleConn.responder = bleConnResp
         }
         
+        // Set self as delegate for the text field
+        self.msgHexValueTxtFld.delegate = self
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         consoleTextView.attributedText = bleConn.consoleMessages;
+    }
+    
+    // Hide keyboard when pressing outside the keyboard
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    // Hide keyboard and send message when pressing return
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        msgHexValueTxtFld.resignFirstResponder()
+        if let message = msgHexValueTxtFld.text as String! {
+            bleConn.write(msg: message)
+            bleConn.logMsg(message: "Sent Message: \(message)")
+        }
+        return (true)
     }
     
     /* Back Button*/
@@ -81,7 +100,7 @@ class DebugVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnPingRelease(_ sender: Any) {
         btnPing.isPressed = false
-        bleConn.write()
+        bleConn.write(msg: "31")
         bleConn.logMsg(message: "Ping...")
     }
     @IBAction func onBtnPingDrag(_ sender: Any) {
@@ -94,6 +113,10 @@ class DebugVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnSendRelease(_ sender: Any) {
         btnSend.isPressed = false
+        if let message = msgHexValueTxtFld.text as String! {
+            bleConn.write(msg: message)
+            bleConn.logMsg(message: "Sent Message: \(message)")
+        }
         
     }
     @IBAction func onBtnSendDrag(_ sender: Any) {

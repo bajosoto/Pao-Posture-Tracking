@@ -1127,6 +1127,7 @@
                         <outlet property="btnPing" destination="XmA-aW-lOt" id="I0w-Dc-Gck"/>
                         <outlet property="btnSend" destination="ikt-dA-2IA" id="7uO-uC-KXO"/>
                         <outlet property="consoleTextView" destination="4Dw-gU-Yjw" id="fpg-UH-eSM"/>
+                        <outlet property="msgHexValueTxtFld" destination="nh8-IZ-GMR" id="sqN-iv-C1T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g71-9i-xZB" userLabel="First Responder" sceneMemberID="firstResponder"/>
