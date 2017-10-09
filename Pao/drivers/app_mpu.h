@@ -253,7 +253,7 @@ typedef struct
  *
  * @retval      uint32_t        Error code
  */
-uint32_t mpu_init(void);
+//uint32_t mpu_init(void);
 
     
 

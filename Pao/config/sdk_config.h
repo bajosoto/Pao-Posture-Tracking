@@ -2932,19 +2932,19 @@
 // // <h> nRF_Libraries 
 
 // //==========================================================
-// // <q> APP_GPIOTE_ENABLED  - app_gpiote - GPIOTE events dispatcher
+// <q> APP_GPIOTE_ENABLED  - app_gpiote - GPIOTE events dispatcher
  
 
-// #ifndef APP_GPIOTE_ENABLED
-// #define APP_GPIOTE_ENABLED 0
-// #endif
+#ifndef APP_GPIOTE_ENABLED
+#define APP_GPIOTE_ENABLED 1
+#endif
 
-// // <q> APP_PWM_ENABLED  - app_pwm - PWM functionality
+// <q> APP_PWM_ENABLED  - app_pwm - PWM functionality
  
 
-// #ifndef APP_PWM_ENABLED
-// #define APP_PWM_ENABLED 0
-// #endif
+#ifndef APP_PWM_ENABLED
+#define APP_PWM_ENABLED 0
+#endif
 
 // // <e> APP_SCHEDULER_ENABLED - app_scheduler - Events scheduler
 // //==========================================================
