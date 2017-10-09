@@ -249,6 +249,21 @@ class BleConnection {
                 self.logMsg(message: String(s[index...]))
             }
             break
+        case 2:
+            let s0: Int16 = unfoldSI16(index: 1);
+            let s1: Int16 = unfoldSI16(index: 3);
+            let s2: Int16 = unfoldSI16(index: 5);
+            let s3: Int16 = unfoldSI16(index: 7);
+            let s4: Int16 = unfoldSI16(index: 9);
+            let s5: Int16 = unfoldSI16(index: 11);
+            self.logMsg(message: "\(s0),\(s1),\(s2),\(s3),\(s4),\(s5)")
+//            dispVal(DISP_AX, s0);
+//            dispVal(DISP_AY, s1);
+//            dispVal(DISP_AZ, s2);
+//            dispVal(DISP_P, s3);
+//            dispVal(DISP_Q, s4);
+//            dispVal(DISP_R, s5);
+            break
         default:
             self.logMsg(message: "Unknown Message received (\(bleRxBuff[0]))")
             break
@@ -292,28 +307,18 @@ class BleConnection {
             self.logMsg(message: "Invalid message length")
         }
     }
+    
+    func unfoldSI16(index: Int) -> Int16 {
+        
+        var result: Int16 = 0
+        
+        result = result | ((Int16(bleRxBuff[0 + index]) & 0xff)     )
+        result = result | ((Int16(bleRxBuff[1 + index]) & 0xff) << 8)
+        
+        return result;
+    }
 }
 
-//extension String {
-//
-////    subscript (i: Int) -> Character {
-////        return self[index(startIndex, offsetBy: i)]
-////    }
-//
-//    subscript (i: Int) -> String {
-//        return String(self[i] as Character)
-//    }
-//
-//    subscript (r: Range<Int>) -> String {
-//        let start = index(startIndex, offsetBy: r.lowerBound)
-//        let end = index(startIndex, offsetBy: r.upperBound)
-//        return String(self[Range(start ..< end)])
-//    }
-//
-//    var asciiArray: [UInt32] {
-//        return unicodeScalars.filter{$0.isASCII}.map{$0.value}
-//    }
-//}
 
 
 // A protocol for the ViewController to adhere in order to edit instances in the view
