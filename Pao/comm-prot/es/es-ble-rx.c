@@ -1,6 +1,7 @@
 
 #include "es-ble-rx.h"
 #include "debug-interface.h"
+#include "es-ble-tx.h"
 
 // =========================================================================== //
 //								BLE Messages
@@ -25,7 +26,7 @@ BleMsgType bleMsgTable[TOTAL_BLE_MESSAGES_APP] = {
 
 void ble_msg00_ping(){
 	bsp_board_led_invert(1);
-	sendMsgBle(1, "%c", 0);
+	sendBleMessageEs(MSG_BLE_00_PONG);
 	//debugMsgBle("Hello! %d", -4673);        // Example of how to use debugMsgBle
 }
 
