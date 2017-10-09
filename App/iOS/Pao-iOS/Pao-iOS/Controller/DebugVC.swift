@@ -44,6 +44,9 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
         self.msgHexValueTxtFld.delegate = self
         
         // Do any additional setup after loading the view.
+        
+        // Text view stuff
+        consoleTextView.layoutManager.allowsNonContiguousLayout = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,6 +141,9 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
     func redrawConsole() {
         // No functionality here
         consoleTextView.attributedText = bleConn.consoleMessages;
+        // Scroll down to bottom
+        let bottom = NSMakeRange(consoleTextView.text.characters.count - 2, 0)
+        consoleTextView.scrollRangeToVisible(bottom)
     }
     
 }
