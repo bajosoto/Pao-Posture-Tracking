@@ -66,7 +66,13 @@ class LdaClassifier: Classifier{
 	}
 
 	static func estimateCov(dataset: Dataset,regularizer: Double)->Matrix<Double>{
-		return cov(matrix:dataset.samples)+eye(dataset.dim,dataset.dim)*regularizer;
+		var covariance = zeros(dataset.dim,dataset.dim)
+		let priors = estimatePriors(dataset:dataset)
+		for i in dataset.classes{
+			covariance = covariance + cov(matrix:dataset.classSamples(class_id:i))*priors[dataset.classes.index(of:i)!]
+		}
+		
+		return covariance+eye(dataset.dim,dataset.dim)*regularizer;
 	}
 
 	static func estimatePriors(dataset: Dataset) -> [Double]{
