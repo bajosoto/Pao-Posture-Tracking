@@ -2,13 +2,14 @@
 #include "es-ble-tx.h"
 #include "ble_interface.h"
 #include "debug-interface.h"
+#include "mpu_interface.h"
 
 #define MAX_MSG_LENGTH 30
 
 uint8_t bleTxBuff[MAX_MSG_LENGTH];
 
 void stringCpy(char * inString);
-void splitSI16(int16_t c, int index);
+void splitSI16Ble(int16_t c, int index);
 
 /* sendMessage(TxMsg msgType)
  * Author: 		Sergio Soto
@@ -24,18 +25,29 @@ void sendBleMessageEs(TxMsgBleEs msgType){
 			case MSG_BLE_00_PONG:
 				sendMsgBle(1, "%c", 0);
 				break;
-			// case MSG01_QUIT_ANS:
-			// 	sendPacket(msgType, 0);
-			// 	break;
-			// case MSG02_SENSOR_VALS:
-			// 	splitSI16(getMpuVal(ACC_X), 0);
-			// 	splitSI16(getMpuVal(ACC_Y), 1);
-			// 	splitSI16(getMpuVal(ACC_Z), 2);
-			// 	splitSI16(getMpuVal(GYR_X), 3);
-			// 	splitSI16(getMpuVal(GYR_Y), 4);
-			// 	splitSI16(getMpuVal(GYR_Z), 5);
-			// 	sendPacket(msgType, 18);
-			// 	break;
+			case MSG_BLE_01_DEBUG:	// This message is not implemented here. See debug-interface.c
+				break;
+			case MSG_BLE_02_SENSOR:
+				splitSI16Ble(getMpuVal(ACC_X), 1);
+				splitSI16Ble(getMpuVal(ACC_Y), 3);
+				splitSI16Ble(getMpuVal(ACC_Z), 5);
+				splitSI16Ble(getMpuVal(GYR_X), 7);
+				splitSI16Ble(getMpuVal(GYR_Y), 9);
+				splitSI16Ble(getMpuVal(GYR_Z), 11);
+				sendMsgBle(13, "%c%c%c%c%c%c%c%c%c%c%c%c", 2, 
+					bleTxBuff[1], 
+					bleTxBuff[2], 
+					bleTxBuff[3], 
+					bleTxBuff[4], 
+					bleTxBuff[5], 
+					bleTxBuff[6], 
+					bleTxBuff[7], 
+					bleTxBuff[8], 
+					bleTxBuff[9], 
+					bleTxBuff[10], 
+					bleTxBuff[11],
+					bleTxBuff[12] );
+				break;
 			// case MSG03_BLE_STATUS:
 			// 	txBuff[0] = getBleStatus();
 			// 	sendPacket(msgType, 1);
@@ -68,17 +80,6 @@ void sendBleMessageEs(TxMsgBleEs msgType){
 */
 void splitSI16Ble(int16_t c, int index) {
 
-	int16_t posNum;
-	int16_t offset = 3 * index;;
-	
-	if(c < 0) {
-		posNum = -c;
-		txBuff[0 + offset] = 1;
-	} else {
-		posNum = c;
-		txBuff[0 + offset] = 0;
-	}
-
-	txBuff[1 + offset] = (uint8_t) (posNum     ) & 0xff;
-	txBuff[2 + offset] = (uint8_t) (posNum >> 8) & 0xff;   
+	bleTxBuff[0 + index] = (uint8_t) ((c      ) & 0xff);
+	bleTxBuff[1 + index] = (uint8_t) ((c >> 8 ) & 0xff);   
 }
