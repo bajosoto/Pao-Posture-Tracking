@@ -181,8 +181,10 @@ class BleConnection {
         dataFuture.onSuccess { data in
             let s = String(data:data!, encoding: .utf8 )
             DispatchQueue.main.async {
-                self.receive(dataAsString: s!)
-                print("notified value is \(String(describing: s!)) ")
+                if s != nil {
+                    self.receive(dataAsString: s)
+                    print("notified value is \(String(describing: s!)) ")
+                }
             }
         }
         
@@ -232,7 +234,25 @@ class BleConnection {
         //}
         //write a value to the characteristic
         //let text = "3131"
-        let parsedData = Scanner(string: msg)
+        var reversedMsg = String();
+        
+        // Data reversal
+        let iter = msg.characters.count/2 - 1
+        for i in 0...iter {
+            let range = msg.index(msg.startIndex, offsetBy: 2 * (iter - i))...msg.index(msg.startIndex, offsetBy: (2 * (iter - i) + 1))
+            let substring = msg[range]
+            reversedMsg.append(String(substring))
+        }
+        print("Reversed message: \(reversedMsg)")
+        
+        // a b c d e f   char count = 6
+        // 0 1 2 3 4 5
+        
+        // 2 * 2 , 2 * 2 + 1    =   4, 5
+        // 2 * 1 , 2 * 1 + 1    =   2, 3
+        // 2 * 0 , 2 * 0 + 1    =   0, 1
+        
+        let parsedData = Scanner(string: reversedMsg)
         var value: UInt64 = 0
         if parsedData.scanHexInt64(&value) {
             // let writeFuture = self.dataCharacteristicTx?.write(data: Data(bytes: &value, count: sizeof(UInt64)))

@@ -100,7 +100,7 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
     }
     @IBAction func onBtnPingRelease(_ sender: Any) {
         btnPing.isPressed = false
-        bleConn.write(msg: "31")
+        bleConn.write(msg: "7E00")
         bleConn.logMsg(message: "Ping...")
     }
     @IBAction func onBtnPingDrag(_ sender: Any) {

@@ -512,7 +512,7 @@
                                 <color key="textColor" white="1" alpha="0.49510380990000002" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="FFFFFF" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="nh8-IZ-GMR" userLabel="HexValTxt">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="7EXXXX" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="nh8-IZ-GMR" userLabel="HexValTxt">
                                 <rect key="frame" x="241.33333333333331" y="204" width="119.99999999999994" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="58u-FU-RL0"/>
