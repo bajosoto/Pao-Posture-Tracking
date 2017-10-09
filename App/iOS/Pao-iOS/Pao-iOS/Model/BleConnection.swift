@@ -243,6 +243,12 @@ class BleConnection {
         case 0:
             self.logMsg(message: "Pong!")
             break
+        case 1:
+            if let s = String(data:rawData, encoding: .utf8 ) {
+                let index = s.index(s.startIndex, offsetBy: 1)
+                self.logMsg(message: String(s[index...]))
+            }
+            break
         default:
             self.logMsg(message: "Unknown Message received (\(bleRxBuff[0]))")
             break
