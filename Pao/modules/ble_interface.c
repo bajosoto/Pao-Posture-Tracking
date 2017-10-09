@@ -568,7 +568,8 @@ void sendMsgBle(const char* format, ... ) {
 
     va_list args;
     va_start( args, format );
-    vsprintf (msg,format, args);
+    // vsprintf (msg,format, args);   // This is the one tha tworks
+    vsprintf (msg,format, args);       // Testing see if I can add the msg type 
     va_end( args );
 
     //strcpy(dbgMsg, msg);

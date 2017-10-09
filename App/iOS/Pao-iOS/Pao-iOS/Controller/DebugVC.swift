@@ -100,8 +100,8 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
     }
     @IBAction func onBtnPingRelease(_ sender: Any) {
         btnPing.isPressed = false
-        bleConn.write(msg: "7E00")
         bleConn.logMsg(message: "Ping...")
+        bleConn.write(msg: "7E00")
     }
     @IBAction func onBtnPingDrag(_ sender: Any) {
         btnPing.isPressed = false
@@ -115,7 +115,6 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
         btnSend.isPressed = false
         if let message = msgHexValueTxtFld.text as String! {
             bleConn.write(msg: message)
-            bleConn.logMsg(message: "Sent Message: \(message)")
         }
         
     }
@@ -129,8 +128,15 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
     }
     
     func onMsgReceived(message: String!) {
+        
+        //let type: Int = BleCommProt.getType(msg: message)
+        //bleConn.logMsg(message: "The received message type substring is: \(type)")
         // Nothing to do here for now
-        bleConn.logMsg(message: message)
+        //bleConn.logMsg(message: message)
+    }
+    
+    func redrawConsole() {
+        // No functionality here
         consoleTextView.attributedText = bleConn.consoleMessages;
     }
     

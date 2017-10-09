@@ -75,5 +75,9 @@ class BleConnectVC: UIViewController, UITextViewDelegate, bleConnectionResponder
         // No functionality on this view
     }
     
+    func redrawConsole() {
+        // No functionality here
+    }
+    
 }
 

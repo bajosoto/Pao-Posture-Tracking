@@ -69,37 +69,14 @@ uint8_t blePlLength = 0;
 uint8_t blePlPosition = 0;
 
 
-/* keyInput(int c)
- * Author: 		Sergio Soto
- * Function: 	Executes commands from keyboard input
- * IN:			int c - The int read from the keyboard
-*/
 void bleInput(uint8_t c) {
 
 	bleRxChar = c;
-	debugMsg("received %d", bleRxChar);
-	sendMsgBle("received %c", bleRxChar);
+	// debugMsg("received %d", bleRxChar);
+	// sendMsgBle("received %c", bleRxChar);
 	bleTable[stateBle].action();						// Perform BLE state machine action
-
-	// switch(c) {
-	// 	case '1':										// '.'	:	Ping			
-
-	// 		break;
-	// 	case '2':										// '.'	:	Request status from board			
-	// 		sendMessageEs(MSG04_PICKLE_RICK);
-	// 		break;
-	// 	default:	
-	// 		break;	
-	// }
 }
 
-/* ble_start_rx()
- * Author: 		Sergio Soto
- * State: 	STATE_UART_WAIT
- * Action: 	Validate whether a new packet is being received, a sent packet was acknowledged or it wasn't.
- * 			On new packet, moves to STATE_UART_RX_TYPE state and waits for the message type.
- *			On acknowledge failure, attempt to resend the last message if max tries haven't been reached.
-*/
 void ble_start_rx() {
 
 	if(bleRxChar == '~'){										// Start nibble of packet received
@@ -107,14 +84,6 @@ void ble_start_rx() {
 	}
 }
 
-/* ble_receive_type()
- * Author: 		Sergio Soto
- * State: 	STATE_UART_RX_TYPE
- * Action: 	Validates the message type and stores the message lenght expected to be received.
- * 			Adds the type nibble to the checksum.
- *			If the type is valid, moves to STATE_UART_RX_DATA state and waits for the payload.
- *			If the message has no payload, acknowledges the message and returns to standby
-*/
 void ble_receive_type() {
 
 	if(bleRxChar < TOTAL_BLE_MESSAGES_APP) {					// Validate message type
@@ -135,11 +104,6 @@ void ble_receive_type() {
 	}	
 }
 
-/* recieve_data()
- * Author: 		Sergio Soto
- * State: 	STATE_UART_RX_DATA
- * Action: 	Stores received payload data into buffer
-*/
 void ble_receive_data() {
 
 	bleRxBuff[blePlLength - blePlPosition] = bleRxChar;			// Store data into buffer

@@ -236,6 +236,10 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     func onMsgReceived(message: String!) {
         // Nothing to do here for now
     }
+    
+    func redrawConsole() {
+        // No functionality here
+    }
 }
 
 extension UIViewController: IAxisValueFormatter {

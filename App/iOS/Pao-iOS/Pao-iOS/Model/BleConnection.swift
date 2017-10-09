@@ -15,6 +15,8 @@ class BleConnection {
     private var dataCharacteristicTx : Characteristic?
     private var dataCharacteristicRx : Characteristic?
     
+    var bleRxBuff: [UInt8] = [UInt8](repeating: 0, count: 30)
+    
     var consoleMessages: NSMutableAttributedString = NSMutableAttributedString()
     
     // Responder to interface with ViewController
@@ -179,11 +181,15 @@ class BleConnection {
         
         //The onSuccess method is called every time the characteristic value changes
         dataFuture.onSuccess { data in
+            
             let s = String(data:data!, encoding: .utf8 )
             DispatchQueue.main.async {
                 if s != nil {
-                    self.receive(dataAsString: s)
-                    print("notified value is \(String(describing: s!)) ")
+                    //self.logMsg(message: "Data (as string) received:")// \(String(describing: s!)) ")
+                    print("Data (as string) received: \(String(describing: s!)) ")
+                }
+                if let safeData = data {
+                    self.receive(rawData: safeData)
                 }
             }
         }
@@ -219,59 +225,87 @@ class BleConnection {
         consoleMessages.append(mutableString)
         //labName.attributedText = myMutableString
         
-        //self.consoleMessages.append("[\(dateString)]:\(message)\n")
+        self._responder?.redrawConsole()
     }
     
-    func receive(dataAsString: String!) {
+    
+    
+    
+    //func receive(dataAsString: String!) {
+    func receive(rawData: Data) {
         // Do some processing here
-        self._responder?.onMsgReceived(message: dataAsString)
+        bleRxBuff = rawData.withUnsafeBytes {
+            Array(UnsafeBufferPointer<UInt8>(start: $0, count: (rawData.count)/MemoryLayout<UInt8>.size))
+        }
+        print(bleRxBuff)
+        
+        //self._responder?.onMsgReceived(message: dataAsString)
     }
+    
     
     func write(msg: String){
-        //self.valueToWriteTextField.resignFirstResponder()
-        //guard let text = self.valueToWriteTextField.text else{
-        //    return;
-        //}
-        //write a value to the characteristic
-        //let text = "3131"
+
         var reversedMsg = String();
         
-        // Data reversal
-        let iter = msg.characters.count/2 - 1
-        for i in 0...iter {
-            let range = msg.index(msg.startIndex, offsetBy: 2 * (iter - i))...msg.index(msg.startIndex, offsetBy: (2 * (iter - i) + 1))
-            let substring = msg[range]
-            reversedMsg.append(String(substring))
-        }
-        print("Reversed message: \(reversedMsg)")
+        if(msg.characters.count > 0 && msg.characters.count % 2 == 0) {
+            
+            self.logMsg(message: "Writing message: \(msg)")
         
-        // a b c d e f   char count = 6
-        // 0 1 2 3 4 5
+            // Data reversal
+            let iter = msg.characters.count/2 - 1
+            for i in 0...iter {
+                let range = msg.index(msg.startIndex, offsetBy: 2 * (iter - i))...msg.index(msg.startIndex, offsetBy: (2 * (iter - i) + 1))
+                let substring = msg[range]
+                reversedMsg.append(String(substring))
+            }
+            print("Reversed message: \(reversedMsg)")
         
-        // 2 * 2 , 2 * 2 + 1    =   4, 5
-        // 2 * 1 , 2 * 1 + 1    =   2, 3
-        // 2 * 0 , 2 * 0 + 1    =   0, 1
-        
-        let parsedData = Scanner(string: reversedMsg)
-        var value: UInt64 = 0
-        if parsedData.scanHexInt64(&value) {
-            // let writeFuture = self.dataCharacteristicTx?.write(data: Data(bytes: &value, count: sizeof(UInt64)))
-            // let writeFuture = self.dataCharacteristicTx?.write(data:text.data(using: .ascii)!)
-            let myData = Data(bytes: &value, count: MemoryLayout<UInt64>.size)
-            let writeFuture = self.dataCharacteristicTx?.write(data: myData)
-            writeFuture?.onSuccess(completion: { (_) in
-                print("write succes")
-            })
-            writeFuture?.onFailure(completion: { (e) in
-                print("write failed")
-            })
+            let parsedData = Scanner(string: reversedMsg)
+            var value: UInt64 = 0
+            if parsedData.scanHexInt64(&value) {
+                // let writeFuture = self.dataCharacteristicTx?.write(data: Data(bytes: &value, count: sizeof(UInt64)))
+                // let writeFuture = self.dataCharacteristicTx?.write(data:text.data(using: .ascii)!)
+                let myData = Data(bytes: &value, count: MemoryLayout<UInt64>.size)
+                let writeFuture = self.dataCharacteristicTx?.write(data: myData)
+                writeFuture?.onSuccess(completion: { (_) in
+                    print("write succes")
+                })
+                writeFuture?.onFailure(completion: { (e) in
+                    print("write failed")
+                })
+            }
+        } else {
+            self.logMsg(message: "Invalid message length")
         }
     }
 }
+
+//extension String {
+//
+////    subscript (i: Int) -> Character {
+////        return self[index(startIndex, offsetBy: i)]
+////    }
+//
+//    subscript (i: Int) -> String {
+//        return String(self[i] as Character)
+//    }
+//
+//    subscript (r: Range<Int>) -> String {
+//        let start = index(startIndex, offsetBy: r.lowerBound)
+//        let end = index(startIndex, offsetBy: r.upperBound)
+//        return String(self[Range(start ..< end)])
+//    }
+//
+//    var asciiArray: [UInt32] {
+//        return unicodeScalars.filter{$0.isASCII}.map{$0.value}
+//    }
+//}
+
 
 // A protocol for the ViewController to adhere in order to edit instances in the view
 protocol bleConnectionResponder: class {
     
     func onPaoFound()
     func onMsgReceived(message: String!)
+    func redrawConsole()
 }
