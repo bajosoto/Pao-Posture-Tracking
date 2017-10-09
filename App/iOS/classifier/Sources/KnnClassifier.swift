@@ -28,7 +28,7 @@ class KnnClassifier: Classifier{
 		var counts: [Int: Int] = [:]
 		var ranking = [(key: Int, value: Int)]()
 		for i in 0 ..< trainset.nSamples{
-			distances.append((KnnClassifier.dist(this:trainset.samples[i],that:sample),trainset.labels[i]))
+			distances.append((KnnClassifier.dist(this:trainset.samples[i,0..<trainset.samples.columns],that:sample),trainset.labels[i]))
 		}
 		distances = distances.sorted(by: {$0.distance < $1.distance})
 
@@ -39,12 +39,13 @@ class KnnClassifier: Classifier{
 				counts.updateValue((neighbours.filter({$0.label == i})).count, forKey:i)
 			}
 
-			ranking = counts.sorted(by: {$0.0 < $1.0})
-			if (ranking.prefix(1).count > ranking.prefix(2).count){
+			ranking = counts.sorted(by: {$0.1 > $1.1})
+
+			if (ranking[0].value > ranking[1].value){
 				break
 			} 	
 		}
-		return ranking[0].value
+		return ranking[0].key
 
 		
 	}
@@ -53,7 +54,7 @@ class KnnClassifier: Classifier{
 		//Euclidian
 		var sum:Double = 0
 		for i in 0 ..< this.columns {
-			sum += (this[i]-that[i])**2
+			sum += pow((this[i]-that[i]),2)
 		}
 		return sqrt(sum)
 	}
