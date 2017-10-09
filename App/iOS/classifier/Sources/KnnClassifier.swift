@@ -1,10 +1,17 @@
 import Nifty
 class KnnClassifier: Classifier{
 	
-	let trainset: Matrix<Double>
+	let trainset: Dataset
+	let kNeighbours: Int
 
-	required init(trainset: Dataset,regularizer: Double = 0.0001, kNeighbours: Int){
-		self.trainset = trainset	
+	required init(trainset: Dataset,regularizer: Double = 0.0001){
+		self.trainset = trainset
+		self.kNeighbours = 2
+	}
+
+	required init(trainset: Dataset,regularizer: Double = 0.0001, kNeighbours: Int = 2){
+		self.trainset = trainset
+		self.kNeighbours = kNeighbours
 	}
 
 	func classify(samples: Matrix<Double>)->[Int]{
@@ -17,34 +24,35 @@ class KnnClassifier: Classifier{
 	}
 
 	private func classifySample(sample: Matrix<Double>)->Int{
-		var neighbours = [(distance:Double,label:Int)] = [:]
-		var counts: [label:Int: count:Int] = [:]
-
+		var distances = [(distance:Double,label:Int)]()
+		var counts: [Int: Int] = [:]
+		var ranking = [(key: Int, value: Int)]()
 		for i in 0 ..< trainset.nSamples{
-			neighbours.append((dist(trainset.samples[i],sample),trainset.labels[i]))
+			distances.append((KnnClassifier.dist(this:trainset.samples[i],that:sample),trainset.labels[i]))
 		}
-		neighbours = neighbours.sorted(by: {$0.distance < $1.distance})
+		distances = distances.sorted(by: {$0.distance < $1.distance})
 
 		for k in kNeighbours ..< trainset.nSamples{
-			kNeighbours = neighbours.prefix(k)
+			let neighbours = distances[0 ..< k]
 		
-			for i in 0 ..< trainset.classes {
-				counts[i] = kNeighbours.filter{$0.label == element}.count
+			for i in trainset.classes {
+				counts.updateValue((neighbours.filter({$0.label == i})).count, forKey:i)
 			}
 
-			counts = counts.sorted(by: {$0.count < $1.count})
-			if (counts.prefix(1).count > counts.prefix(2).count){
+			ranking = counts.sorted(by: {$0.0 < $1.0})
+			if (ranking.prefix(1).count > ranking.prefix(2).count){
 				break
 			} 	
 		}
-		return counts.prefix(1).label
+		return ranking[0].value
 
 		
 	}
 
-	private static func dist(this: Matrix<Double>,that: Matrix<Double>){
-		var sum = 0
-		for m in 0 ..< this.columns {
+	public static func dist(this: Matrix<Double>,that: Matrix<Double>)->Double{
+		//Euclidian
+		var sum:Double = 0
+		for i in 0 ..< this.columns {
 			sum += (this[i]-that[i])**2
 		}
 		return sqrt(sum)
