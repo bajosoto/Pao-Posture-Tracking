@@ -562,7 +562,7 @@ uint8_t getBleStatus() {
     return ble_conn_status;
 }
 
-void sendMsgBle(const char* format, ... ) {
+void sendMsgBle(int length, const char* format, ... ) {
 
     char msg[50];
 
@@ -574,6 +574,6 @@ void sendMsgBle(const char* format, ... ) {
 
     //strcpy(dbgMsg, msg);
 
-    ble_nus_string_send(&m_nus, (uint8_t *)msg, strlen(msg));
+    ble_nus_string_send(&m_nus, (uint8_t *)msg, length);
 }
 

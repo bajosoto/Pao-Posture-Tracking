@@ -40,7 +40,7 @@ int main(void)
 
         if(timer % 50 == 0) {
             if(bsp_board_button_state_get(3)) {
-                sendMsgBle("Button 3 Pressed");
+                sendMsgBle(16, "Button 3 Pressed");
             }
             // for(int i = 0; i < BUTTONS_NUMBER; i++) {
             //     if(bsp_board_button_state_get(i)) {

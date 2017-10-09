@@ -240,7 +240,7 @@ class BleConnection {
         self.logMsg(message: "RX: \(bleRxBuff)")
         
         switch bleRxBuff[0] {
-        case 1:
+        case 0:
             self.logMsg(message: "Pong!")
             break
         default:

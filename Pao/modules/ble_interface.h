@@ -50,7 +50,7 @@ void app_timer_init_sergio();
 
 uint8_t getBleStatus();
 
-void sendMsgBle(const char* format, ... );
+void sendMsgBle(int length, const char* format, ... );
 
 
 #endif /* BLE_INTERFACE_H__ */
