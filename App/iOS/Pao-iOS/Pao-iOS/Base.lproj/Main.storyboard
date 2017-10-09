@@ -1122,11 +1122,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="axLbl" destination="qKu-mP-YhX" id="xes-VV-9Ou"/>
+                        <outlet property="ayLbl" destination="vN6-rO-zQF" id="Hig-n6-l08"/>
+                        <outlet property="azLbl" destination="5Hu-Tr-duo" id="isQ-SE-Jsx"/>
                         <outlet property="btnBack" destination="9JF-mm-wfp" id="eUu-xq-lEA"/>
                         <outlet property="btnExport" destination="gyn-FE-8i4" id="vBT-Ta-W7y"/>
                         <outlet property="btnPing" destination="XmA-aW-lOt" id="I0w-Dc-Gck"/>
                         <outlet property="btnSend" destination="ikt-dA-2IA" id="7uO-uC-KXO"/>
                         <outlet property="consoleTextView" destination="4Dw-gU-Yjw" id="fpg-UH-eSM"/>
+                        <outlet property="gxLbl" destination="Xrn-SL-E8O" id="ltl-Ip-M8E"/>
+                        <outlet property="gyLbl" destination="XML-jF-fFj" id="gc8-VB-4Dk"/>
+                        <outlet property="gzLbl" destination="nn9-Qv-Oja" id="VEM-tr-REX"/>
                         <outlet property="msgHexValueTxtFld" destination="nh8-IZ-GMR" id="sqN-iv-C1T"/>
                     </connections>
                 </viewController>

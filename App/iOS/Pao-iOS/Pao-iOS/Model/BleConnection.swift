@@ -237,7 +237,7 @@ class BleConnection {
         bleRxBuff = rawData.withUnsafeBytes {
             Array(UnsafeBufferPointer<UInt8>(start: $0, count: (rawData.count)/MemoryLayout<UInt8>.size))
         }
-        self.logMsg(message: "RX: \(bleRxBuff)")
+        //self.logMsg(message: "RX: \(bleRxBuff)")
         
         switch bleRxBuff[0] {
         case 0:
@@ -256,13 +256,8 @@ class BleConnection {
             let s3: Int16 = unfoldSI16(index: 7);
             let s4: Int16 = unfoldSI16(index: 9);
             let s5: Int16 = unfoldSI16(index: 11);
-            self.logMsg(message: "\(s0),\(s1),\(s2),\(s3),\(s4),\(s5)")
-//            dispVal(DISP_AX, s0);
-//            dispVal(DISP_AY, s1);
-//            dispVal(DISP_AZ, s2);
-//            dispVal(DISP_P, s3);
-//            dispVal(DISP_Q, s4);
-//            dispVal(DISP_R, s5);
+            //self.logMsg(message: "\(s0),\(s1),\(s2),\(s3),\(s4),\(s5)")
+            self._responder?.getSensorData(s0, s1, s2, s3, s4, s5)
             break
         default:
             self.logMsg(message: "Unknown Message received (\(bleRxBuff[0]))")
@@ -278,7 +273,7 @@ class BleConnection {
         
         if(msg.characters.count > 0 && msg.characters.count % 2 == 0) {
             
-            self.logMsg(message: "TX: \(msg)")
+            //self.logMsg(message: "TX: \(msg)")
         
             // Data reversal
             let iter = msg.characters.count/2 - 1
@@ -327,4 +322,5 @@ protocol bleConnectionResponder: class {
     func onPaoFound()
     func onMsgReceived(message: String!)
     func redrawConsole()
+    func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16)
 }

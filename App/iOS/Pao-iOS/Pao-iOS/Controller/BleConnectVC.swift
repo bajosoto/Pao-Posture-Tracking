@@ -79,5 +79,10 @@ class BleConnectVC: UIViewController, UITextViewDelegate, bleConnectionResponder
         // No functionality here
     }
     
+    func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16) {
+        // Nothing to do
+    }
+
+    
 }
 

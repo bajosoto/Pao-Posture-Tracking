@@ -14,7 +14,7 @@ import RealmSwift
 class DashboardVC: UIViewController, bleConnectionResponder {
 
     @IBOutlet weak var profilePicImg: UIImageView!
-    @IBOutlet weak var postureBar: UIView!
+    @IBOutlet weak var postureBar: PaoPostureBarView!
     @IBOutlet weak var postureChart: LineChartView!
     
     @IBOutlet weak var btnTrainView: AssetBtnTrainView!
@@ -239,6 +239,13 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     
     func redrawConsole() {
         // No functionality here
+    }
+    
+    func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16) {
+        // Nothing to do
+        DispatchQueue.main.async {
+            self.postureBar.posture = CGFloat(ay) / 32000 + 0.5
+        }
     }
 }
 

@@ -32,7 +32,7 @@ class PaoPostureBarView: UIView {
     
     override func draw(_ rect: CGRect) {
         // TODO: 250 is hardcoded and won't display properly on other resolutions
-        PaoDrawingAssets.drawPaoPostureBar(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), currentPosture: 0.75)
+        PaoDrawingAssets.drawPaoPostureBar(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), currentPosture: _posture)
     }
     
 }

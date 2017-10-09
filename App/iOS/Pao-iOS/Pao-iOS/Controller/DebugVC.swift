@@ -17,6 +17,14 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
     @IBOutlet weak var btnBack: AssetBtnBackView!
     @IBOutlet weak var btnExport: AssetBtnExport!
     
+    @IBOutlet weak var axLbl: UILabel!
+    @IBOutlet weak var ayLbl: UILabel!
+    @IBOutlet weak var azLbl: UILabel!
+    @IBOutlet weak var gxLbl: UILabel!
+    @IBOutlet weak var gyLbl: UILabel!
+    @IBOutlet weak var gzLbl: UILabel!
+    
+    
     var _bleConn: BleConnection!
     // Reference to the previous responder (e.g. parent VC)
     var _prevResponder: bleConnectionResponder!
@@ -144,6 +152,17 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
         // Scroll down to bottom
         let bottom = NSMakeRange(consoleTextView.text.characters.count - 2, 0)
         consoleTextView.scrollRangeToVisible(bottom)
+    }
+    
+    func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16) {
+        DispatchQueue.main.async {  //UIKit is not thread safe
+            self.axLbl.text = "\(ax)"
+            self.ayLbl.text = "\(ay)"
+            self.azLbl.text = "\(az)"
+            self.gxLbl.text = "\(gx)"
+            self.gyLbl.text = "\(gy)"
+            self.gzLbl.text = "\(gz)"
+        }
     }
     
 }
