@@ -25,7 +25,7 @@ BleMsgType bleMsgTable[TOTAL_BLE_MESSAGES_APP] = {
 
 void ble_msg00_ping(){
 	bsp_board_led_invert(1);
-	sendMsgBle("Pong!");
+	sendMsgBle("%c", 1);
 }
 
 void ble_msg01_dummy_data(){

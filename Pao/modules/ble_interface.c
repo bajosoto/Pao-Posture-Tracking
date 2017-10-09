@@ -564,7 +564,7 @@ uint8_t getBleStatus() {
 
 void sendMsgBle(const char* format, ... ) {
 
-    char msg[30];
+    char msg[50];
 
     va_list args;
     va_start( args, format );

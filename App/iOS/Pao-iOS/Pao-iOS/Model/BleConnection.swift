@@ -237,8 +237,16 @@ class BleConnection {
         bleRxBuff = rawData.withUnsafeBytes {
             Array(UnsafeBufferPointer<UInt8>(start: $0, count: (rawData.count)/MemoryLayout<UInt8>.size))
         }
-        print(bleRxBuff)
+        self.logMsg(message: "RX: \(bleRxBuff)")
         
+        switch bleRxBuff[0] {
+        case 1:
+            self.logMsg(message: "Pong!")
+            break
+        default:
+            self.logMsg(message: "Unknown Message received (\(bleRxBuff[0]))")
+            break
+        }
         //self._responder?.onMsgReceived(message: dataAsString)
     }
     
@@ -249,7 +257,7 @@ class BleConnection {
         
         if(msg.characters.count > 0 && msg.characters.count % 2 == 0) {
             
-            self.logMsg(message: "Writing message: \(msg)")
+            self.logMsg(message: "TX: \(msg)")
         
             // Data reversal
             let iter = msg.characters.count/2 - 1
