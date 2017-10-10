@@ -37,11 +37,9 @@ class KnnClassifier: Classifier{
 			distances.append((KnnClassifier.dist(this:trainset.samples[i,0..<trainset.samples.columns],that:sample),trainset.labels[i]))
 		}
 		distances = distances.sorted(by: {$0.distance < $1.distance})
-		print("Distances: \(distances)")
 
 		for k in kNeighbours ..< trainset.nSamples{
 			let neighbours = distances[0 ..< k]
-			print("Neighbours: \(neighbours)")
 			for c in trainset.classes {
 				proba.updateValue(Double((neighbours.filter({$0.label == c})).count)/Double(k), forKey:c)
 			}

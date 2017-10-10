@@ -79,9 +79,8 @@ class KnnClassifierTest: XCTestCase {
                                             [0,1]])
         let results = knnc.classify_soft(samples:testsamples)
         XCTAssertEqual(results[0],[2: 0.0,1: 1.0])
-        XCTAssertEqual(results[0],[2: 0.25,1: 0.75])
+        XCTAssertEqual(results[1],[2: 0.75,1: 0.25])
 
-        print("Results: \(results)")
   }
 
 	static var allTests : [(String, (KnnClassifierTest) -> () throws -> Void)] {
