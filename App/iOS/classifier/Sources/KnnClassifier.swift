@@ -24,30 +24,46 @@ class KnnClassifier: Classifier{
 	}
 
 	private func classifySample(sample: Matrix<Double>)->Int{
+		return classifySample_soft(sample:sample).sorted(by: {$0.1 > $1.1})[0].key
+
+
+	}
+
+	private func classifySample_soft(sample: Matrix<Double>)->[Int: Double]{
 		var distances = [(distance:Double,label:Int)]()
-		var counts: [Int: Int] = [:]
-		var ranking = [(key: Int, value: Int)]()
+		var proba: [Int: Double] = [:]
+		var ranking = [(key: Int, value: Double)]()
 		for i in 0 ..< trainset.nSamples{
 			distances.append((KnnClassifier.dist(this:trainset.samples[i,0..<trainset.samples.columns],that:sample),trainset.labels[i]))
 		}
 		distances = distances.sorted(by: {$0.distance < $1.distance})
+		print("Distances: \(distances)")
 
 		for k in kNeighbours ..< trainset.nSamples{
 			let neighbours = distances[0 ..< k]
-		
-			for i in trainset.classes {
-				counts.updateValue((neighbours.filter({$0.label == i})).count, forKey:i)
+			print("Neighbours: \(neighbours)")
+			for c in trainset.classes {
+				proba.updateValue(Double((neighbours.filter({$0.label == c})).count)/Double(k), forKey:c)
 			}
 
-			ranking = counts.sorted(by: {$0.1 > $1.1})
+			ranking = proba.sorted(by: {$0.1 > $1.1})
 
 			if (ranking[0].value > ranking[1].value){
 				break
 			} 	
 		}
-		return ranking[0].key
+		return proba
 
 		
+	}
+
+	func classify_soft(samples: Matrix<Double>)->[[Int:Double]]{
+		var softLabels:[[Int:Double]] = []
+		for i in 0..<samples.rows{
+			softLabels.append(self.classifySample_soft(sample:samples[i,0..<samples.columns]))
+			
+		}
+		return softLabels
 	}
 
 	public static func dist(this: Matrix<Double>,that: Matrix<Double>)->Double{

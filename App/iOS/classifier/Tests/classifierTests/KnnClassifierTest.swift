@@ -63,12 +63,35 @@ class KnnClassifierTest: XCTestCase {
         XCTAssertTrue(results[3]==2,"Was:\(results[3])")
 	}
 
+    func testClassifSoft(){
+     let samples = Matrix<Double>([[-5,-5],
+                                      [-5,-4],
+                                      [-5,-6],
+                                      [-4,-5],
+                                      [5,5],
+                                      [5,4],
+                                      [5,6],
+                                      [4,4]])
+        let labels = [1,1,1,1,2,2,2,2]
+        let dataset =  Dataset(samples:samples,labels:labels)
+        let knnc = KnnClassifier(trainset:dataset,kNeighbours:4)
+        let testsamples = Matrix<Double>([  [-5,-4.5],
+                                            [0,1]])
+        let results = knnc.classify_soft(samples:testsamples)
+        XCTAssertEqual(results[0],[2: 0.0,1: 1.0])
+        XCTAssertEqual(results[0],[2: 0.25,1: 0.75])
+
+        print("Results: \(results)")
+  }
+
 	static var allTests : [(String, (KnnClassifierTest) -> () throws -> Void)] {
         return [
         	("testDist",testDist),
         	("testDist2",testDist2),
         	("testClassif1",testClassif1),
-        	("testClassif2",testClassif2)
+        	("testClassif2",testClassif2),
+          ("testClassifSoft",testClassifSoft)
+
 
         ]
     }
