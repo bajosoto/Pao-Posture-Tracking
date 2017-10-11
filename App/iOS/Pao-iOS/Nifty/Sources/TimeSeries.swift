@@ -165,7 +165,7 @@ public struct TimeSeries<T>: DataSeriesProtocol
 
             let v = e.1
 
-            print("v = \(v)")
+            print("v = \(v!)")
 
             let t = (index: i, value: v)
 

@@ -189,7 +189,7 @@ internal func _formatElement<T>(_ element: T, _ format: NumberFormatter) -> Stri
     {
         case is Double:  doubleValue = (element as! Double)
         case is Float:   doubleValue = Double(element as! Float)
-        case is Float80: doubleValue = Double(element as! Float80)
+//        case is Float80: doubleValue = Double(element as! Float80)
         case is Int:     doubleValue = Double(element as! Int)
         case is Int8:    doubleValue = Double(element as! Int8)
         case is Int16:   doubleValue = Double(element as! Int16)
