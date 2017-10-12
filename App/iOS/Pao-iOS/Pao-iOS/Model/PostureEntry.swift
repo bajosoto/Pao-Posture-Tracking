@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import Nifty
 
 class PostureEntry: Object {
     // TODO: I think these should be '@objc dynamic'
