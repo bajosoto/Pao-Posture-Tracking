@@ -52,10 +52,11 @@ int main(void)
         if(timer % 20 == 0) {
             getMpuSensors();
             sendMessageEs(MSG02_SENSOR_VALS);
-        }
-        if(timer % 50 == 0) {
             sendBleMessageEs(MSG_BLE_02_SENSOR);
         }
+        // if(timer % 50 == 0) {
+        //     sendBleMessageEs(MSG_BLE_02_SENSOR);
+        // }
         if(timer % 100 == 0) {
             bsp_board_led_invert(0);
             timer = 0;

@@ -24,6 +24,17 @@ class AssetBtnTrainStandingOkView: UIView {
         }
     }
     
+    private var _takingMeasurement: Bool = false
+    
+    var takingMeasurement: Bool {
+        set(newTakingMeasurement) {
+            _takingMeasurement = newTakingMeasurement
+        }
+        get {
+            return _takingMeasurement
+        }
+    }
+    
     override func draw(_ rect: CGRect) {
         
         PaoDrawingAssets.drawPaoButtonTrainStandingOk(frame: CGRect(x: 0, y: 0, width: 90, height: 66), resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, isPressed: _isPressed)
@@ -42,6 +53,17 @@ class AssetBtnTrainStandingNokView: UIView {
         }
         get {
             return _isPressed
+        }
+    }
+    
+    private var _takingMeasurement: Bool = false
+    
+    var takingMeasurement: Bool {
+        set(newTakingMeasurement) {
+            _takingMeasurement = newTakingMeasurement
+        }
+        get {
+            return _takingMeasurement
         }
     }
     
@@ -66,6 +88,17 @@ class AssetBtnTrainSittingOkView: UIView {
         }
     }
     
+    private var _takingMeasurement: Bool = false
+    
+    var takingMeasurement: Bool {
+        set(newTakingMeasurement) {
+            _takingMeasurement = newTakingMeasurement
+        }
+        get {
+            return _takingMeasurement
+        }
+    }
+    
     override func draw(_ rect: CGRect) {
         
         PaoDrawingAssets.drawPaoButtonTrainSittingOk(frame: CGRect(x: 0, y: 0, width: 90, height: 66), resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, isPressed: _isPressed)
@@ -84,6 +117,17 @@ class AssetBtnTrainSittingNokView: UIView {
         }
         get {
             return _isPressed
+        }
+    }
+    
+    private var _takingMeasurement: Bool = false
+    
+    var takingMeasurement: Bool {
+        set(newTakingMeasurement) {
+            _takingMeasurement = newTakingMeasurement
+        }
+        get {
+            return _takingMeasurement
         }
     }
     
@@ -108,6 +152,17 @@ class AssetBtnTrainMovingOkView: UIView {
         }
     }
     
+    private var _takingMeasurement: Bool = false
+    
+    var takingMeasurement: Bool {
+        set(newTakingMeasurement) {
+            _takingMeasurement = newTakingMeasurement
+        }
+        get {
+            return _takingMeasurement
+        }
+    }
+    
     override func draw(_ rect: CGRect) {
         
         PaoDrawingAssets.drawPaoButtonTrainMovingOk(frame: CGRect(x: 0, y: 0, width: 90, height: 66), resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, isPressed: _isPressed)
@@ -126,6 +181,17 @@ class AssetBtnTrainMovingNokView: UIView {
         }
         get {
             return _isPressed
+        }
+    }
+    
+    private var _takingMeasurement: Bool = false
+    
+    var takingMeasurement: Bool {
+        set(newTakingMeasurement) {
+            _takingMeasurement = newTakingMeasurement
+        }
+        get {
+            return _takingMeasurement
         }
     }
     

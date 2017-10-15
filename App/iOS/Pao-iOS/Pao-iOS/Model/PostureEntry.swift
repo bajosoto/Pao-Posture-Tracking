@@ -13,14 +13,14 @@ import Nifty
 class PostureEntry: Object {
     // TODO: I think these should be '@objc dynamic'
     @objc dynamic var date: Date = Date()
-    @objc dynamic var accX: Int = Int(0)
-    @objc dynamic var accY: Int = Int(0)
-    @objc dynamic var accZ: Int = Int(0)
-    @objc dynamic var gyrX: Int = Int(0)
-    @objc dynamic var gyrY: Int = Int(0)
-    @objc dynamic var gyrZ: Int = Int(0)
+    @objc dynamic var accX: Int16 = Int16(0)
+    @objc dynamic var accY: Int16 = Int16(0)
+    @objc dynamic var accZ: Int16 = Int16(0)
+    @objc dynamic var gyrX: Int16 = Int16(0)
+    @objc dynamic var gyrY: Int16 = Int16(0)
+    @objc dynamic var gyrZ: Int16 = Int16(0)
     @objc dynamic var posture: Double = 0
-    @objc dynamic var postureLbl: String = ""
+    @objc dynamic var postureLbl: Int = 0
     
     // Save this entry into realm database
     func save() {

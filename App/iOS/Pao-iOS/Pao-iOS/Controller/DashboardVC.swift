@@ -60,6 +60,11 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     let paoBarBlue = UIColor(red: 0.024, green: 0.671, blue: 0.925, alpha: 1.000)
     let paoBarGreen = UIColor(red: 0.184, green: 0.886, blue: 0.686, alpha: 1.000)
     
+    // Training states and label
+    var currLabel: Int = 0
+    var sampleCnt: Int = 0
+    var isSampling: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -271,7 +276,16 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         btnTrainSitOk.isPressed = true
     }
     @IBAction func onBtnTrainSitOkReleased(_ sender: Any) {
-        btnTrainSitOk.isPressed = false
+        if(btnTrainSitOk.takingMeasurement == false){
+            btnTrainSitOk.takingMeasurement = true
+            btnTrainSitOk.isPressed = true
+            isSampling = true
+            currLabel = 1
+        } else {
+            btnTrainSitOk.takingMeasurement = false
+            btnTrainSitOk.isPressed = false
+            isSampling = false
+        }
     }
     @IBAction func onBtnTrainSitOkDrag(_ sender: Any) {
         btnTrainSitOk.isPressed = false
@@ -281,7 +295,16 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         btnTrainSitNok.isPressed = true
     }
     @IBAction func onBtnTrainSitNokReleased(_ sender: Any) {
-        btnTrainSitNok.isPressed = false
+        if(btnTrainSitNok.takingMeasurement == false){
+            btnTrainSitNok.takingMeasurement = true
+            btnTrainSitNok.isPressed = true
+            isSampling = true
+            currLabel = 2
+        } else {
+            btnTrainSitNok.takingMeasurement = false
+            btnTrainSitNok.isPressed = false
+            isSampling = false
+        }
     }
     @IBAction func onBtnTrainSitNokDrag(_ sender: Any) {
         btnTrainSitNok.isPressed = false
@@ -291,7 +314,16 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         btnTrainStndOk.isPressed = true
     }
     @IBAction func onBtnTrainStndOkReleased(_ sender: Any) {
-        btnTrainStndOk.isPressed = false
+        if(btnTrainStndOk.takingMeasurement == false){
+            btnTrainStndOk.takingMeasurement = true
+            btnTrainStndOk.isPressed = true
+            isSampling = true
+            currLabel = 3
+        } else {
+            btnTrainStndOk.takingMeasurement = false
+            btnTrainStndOk.isPressed = false
+            isSampling = false
+        }
     }
     @IBAction func onBtnTrainStndOkDrag(_ sender: Any) {
         btnTrainStndOk.isPressed = false
@@ -301,7 +333,16 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         btnTrainStndNok.isPressed = true
     }
     @IBAction func onBtnTrainStndNokReleased(_ sender: Any) {
-        btnTrainStndNok.isPressed = false
+        if(btnTrainStndNok.takingMeasurement == false){
+            btnTrainStndNok.takingMeasurement = true
+            btnTrainStndNok.isPressed = true
+            isSampling = true
+            currLabel = 4
+        } else {
+            btnTrainStndNok.takingMeasurement = false
+            btnTrainStndNok.isPressed = false
+            isSampling = false
+        }
     }
     @IBAction func onBtnTrainStndNokDrag(_ sender: Any) {
         btnTrainStndNok.isPressed = false
@@ -311,7 +352,16 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         btnTrainMvOk.isPressed = true
     }
     @IBAction func onBtnTrainMvOkReleased(_ sender: Any) {
-        btnTrainMvOk.isPressed = false
+        if(btnTrainMvOk.takingMeasurement == false){
+            btnTrainMvOk.takingMeasurement = true
+            btnTrainMvOk.isPressed = true
+            isSampling = true
+            currLabel = 5
+        } else {
+            btnTrainMvOk.takingMeasurement = false
+            btnTrainMvOk.isPressed = false
+            isSampling = false
+        }
     }
     @IBAction func onBtnTrainMvOkDrag(_ sender: Any) {
         btnTrainMvOk.isPressed = false
@@ -321,7 +371,16 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         btnTrainMvNok.isPressed = true
     }
     @IBAction func onBtnTrainMvNokReleased(_ sender: Any) {
-        btnTrainMvNok.isPressed = false
+        if(btnTrainMvNok.takingMeasurement == false){
+            btnTrainMvNok.takingMeasurement = true
+            btnTrainMvNok.isPressed = true
+            isSampling = true
+            currLabel = 6
+        } else {
+            btnTrainMvNok.takingMeasurement = false
+            btnTrainMvNok.isPressed = false
+            isSampling = false
+        }
     }
     @IBAction func onBtnTrainMvNokDrag(_ sender: Any) {
         btnTrainMvNok.isPressed = false
@@ -360,9 +419,37 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     
     func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16) {
-        // Nothing to do
+        
+        var shouldSaveSample = false
         DispatchQueue.main.async {
-            self.postureBar.posture = CGFloat(ay) / 32000 + 0.5
+            // Training data generation:
+            if(self.isSampling == true || self.sampleCnt > 0) {
+                shouldSaveSample = true
+            }
+            
+            
+            if(shouldSaveSample == true) {
+                let postureEntry = PostureEntry()
+                postureEntry.accX = ax
+                postureEntry.accY = ay
+                postureEntry.accZ = az
+                postureEntry.gyrX = gx
+                postureEntry.gyrY = gy
+                postureEntry.gyrZ = gz
+                postureEntry.postureLbl = self.currLabel
+                postureEntry.save()
+                self.bleConn.logMsg(message: "Stored sample \(self.currLabel)")
+                self.sampleCnt += 1
+            }
+            
+            if(self.sampleCnt == 10) {
+                self.sampleCnt = 0
+                if(self.isSampling == false) {
+                    self.currLabel = 0
+                }
+            }
+            
+            // self.postureBar.posture = CGFloat(ay) / 32000 + 0.5
         }
     }
 }
