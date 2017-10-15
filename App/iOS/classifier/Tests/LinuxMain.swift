@@ -7,5 +7,7 @@ XCTMain([
      testCase(DatasetTest.allTests),
      testCase(LdaClassifierTest.allTests),
      testCase(KnnClassifierTest.allTests),
+     testCase(ParzenClassifierTest.allTests),
+     testCase(SimplePreprocessorTest.allTests),
 
 ])

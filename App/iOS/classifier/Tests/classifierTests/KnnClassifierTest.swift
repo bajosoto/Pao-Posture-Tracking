@@ -77,7 +77,7 @@ class KnnClassifierTest: XCTestCase {
         let knnc = KnnClassifier(trainset:dataset,kNeighbours:4)
         let testsamples = Matrix<Double>([  [-5,-4.5],
                                             [0,1]])
-        let results = knnc.classify_soft(samples:testsamples)
+        let results = knnc.classifySoft(samples:testsamples)
         XCTAssertEqual(results[0],[2: 0.0,1: 1.0])
         XCTAssertEqual(results[1],[2: 0.75,1: 0.25])
 

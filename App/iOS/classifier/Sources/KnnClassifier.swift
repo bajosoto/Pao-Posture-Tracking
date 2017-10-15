@@ -1,17 +1,26 @@
 import Nifty
 class KnnClassifier: Classifier{
 	
-	let trainset: Dataset
-	let kNeighbours: Int
+	internal let trainset: Dataset
+	internal let kNeighbours: Int
+	internal var priors: [Int: Double] = [:]
 
 	required init(trainset: Dataset,regularizer: Double = 0.0001){
 		self.trainset = trainset
 		self.kNeighbours = 2
+		train()
 	}
 
 	required init(trainset: Dataset,regularizer: Double = 0.0001, kNeighbours: Int = 2){
 		self.trainset = trainset
 		self.kNeighbours = kNeighbours
+		train()
+	}
+
+	internal func train(){
+		for c in trainset.classes{
+			priors.updateValue(Double(trainset.classSamples(class_id:c).rows)/Double(trainset.nSamples),forKey:c)
+		}
 	}
 
 	func classify(samples: Matrix<Double>)->[Int]{
@@ -23,13 +32,13 @@ class KnnClassifier: Classifier{
 		return labelsFound
 	}
 
-	private func classifySample(sample: Matrix<Double>)->Int{
+	internal func classifySample(sample: Matrix<Double>)->Int{
 		return classifySample_soft(sample:sample).sorted(by: {$0.1 > $1.1})[0].key
 
 
 	}
 
-	private func classifySample_soft(sample: Matrix<Double>)->[Int: Double]{
+	internal func classifySample_soft(sample: Matrix<Double>)->[Int: Double]{
 		var distances = [(distance:Double,label:Int)]()
 		var proba: [Int: Double] = [:]
 		var ranking = [(key: Int, value: Double)]()
@@ -41,7 +50,7 @@ class KnnClassifier: Classifier{
 		for k in kNeighbours ..< trainset.nSamples{
 			let neighbours = distances[0 ..< k]
 			for c in trainset.classes {
-				proba.updateValue(Double((neighbours.filter({$0.label == c})).count)/Double(k), forKey:c)
+				proba.updateValue(priors[c]!*Double((neighbours.filter({$0.label == c})).count)/Double(k), forKey:c)
 			}
 
 			ranking = proba.sorted(by: {$0.1 > $1.1})
@@ -50,12 +59,21 @@ class KnnClassifier: Classifier{
 				break
 			} 	
 		}
+		// normalize
+		var sum = 0.0
+		for c in trainset.classes{
+			sum += proba[c]!
+		}
+		for c in trainset.classes{
+			proba.updateValue(proba[c]!/sum,forKey:c)
+		}
+
 		return proba
 
 		
 	}
 
-	func classify_soft(samples: Matrix<Double>)->[[Int:Double]]{
+	func classifySoft(samples: Matrix<Double>)->[[Int:Double]]{
 		var softLabels:[[Int:Double]] = []
 		for i in 0..<samples.rows{
 			softLabels.append(self.classifySample_soft(sample:samples[i,0..<samples.columns]))
@@ -64,13 +82,9 @@ class KnnClassifier: Classifier{
 		return softLabels
 	}
 
-	public static func dist(this: Matrix<Double>,that: Matrix<Double>)->Double{
-		//Euclidian
-		var sum:Double = 0
-		for i in 0 ..< this.columns {
-			sum += pow((this[i]-that[i]),2)
-		}
-		return sqrt(sum)
+	internal static func dist(this: Matrix<Double>,that: Matrix<Double>)->Double{
+		//Euclidian distance
+		return norm(this-that)
 	}
 	
 	
