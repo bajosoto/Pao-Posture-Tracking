@@ -59,7 +59,7 @@ class KnnClassifier: Classifier{
 				break
 			} 	
 		}
-		
+		// normalize
 		var sum = 0.0
 		for c in trainset.classes{
 			sum += proba[c]!
@@ -73,7 +73,7 @@ class KnnClassifier: Classifier{
 		
 	}
 
-	func classify_soft(samples: Matrix<Double>)->[[Int:Double]]{
+	func classifySoft(samples: Matrix<Double>)->[[Int:Double]]{
 		var softLabels:[[Int:Double]] = []
 		for i in 0..<samples.rows{
 			softLabels.append(self.classifySample_soft(sample:samples[i,0..<samples.columns]))

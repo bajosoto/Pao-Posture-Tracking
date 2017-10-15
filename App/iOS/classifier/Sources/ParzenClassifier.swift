@@ -74,7 +74,7 @@ class ParzenClassifier {
 		return normConst * (euler()**scalar)
 	}
 
-	func classify_soft(samples: Matrix<Double>)->[[Int:Double]]{
+	func classifySoft(samples: Matrix<Double>)->[[Int:Double]]{
 		var softLabels:[[Int:Double]] = []
 		for i in 0..<samples.rows{
 			softLabels.append(self.classifySampleSoft(sample:samples[i,0..<samples.columns]))

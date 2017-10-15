@@ -23,5 +23,5 @@ protocol Classifier {
 	 * @samples 		Matrix 		[Samples to classify each row will be classified as one sample]
 	 * @return			[Vector]	[Vectors containing the probability for each class]
 	 */
-	func classify_soft(samples: Matrix<Double>)->[[Int: Double]]
+	func classifySoft(samples: Matrix<Double>)->[[Int: Double]]
 }
