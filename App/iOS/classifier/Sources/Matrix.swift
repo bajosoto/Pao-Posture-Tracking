@@ -4,6 +4,19 @@ class MyMatrix{
 		self.data = data
 	}
 
+	init(_ data:[[Int]]){
+		var dataDouble = [[Double]]()
+		for row in data{
+			var rowDouble = [Double]()
+			for element in row {
+				rowDouble.append(Double(element))
+			}
+			dataDouble.append(rowDouble)
+		}
+		
+		self.data = dataDouble
+	}
+
 	subscript(_ i: Int, _ j: Int) -> Double {
 	  get {
 	    return data[i][j]
@@ -15,10 +28,8 @@ class MyMatrix{
 
 	subscript(_ i: Int) -> MyMatrix {
 	  get {
-	    return data[i]
-	  }
-	  set {
-	    data[i][j] = newValue
+	    return MyMatrix([data[i]])
 	  }
 	}
+
 }
