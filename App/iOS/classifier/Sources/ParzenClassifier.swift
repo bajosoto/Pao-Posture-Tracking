@@ -4,6 +4,7 @@ class ParzenClassifier {
 
 	internal let trainset: Dataset
 	internal var width: Double
+	internal var priors: [Int: Double] = [:]
 
 	init(trainset:Dataset,regularizer:Double){
 		self.trainset = trainset
@@ -16,22 +17,25 @@ class ParzenClassifier {
 		self.width = sqrt(Double(trainset.nSamples))/2
 		self.width = train(trainset)
 	}
-	init(trainset:Dataset,regularizer:Double,maxApparentErr: Double, maxI: Int){
+	init(trainset:Dataset,regularizer:Double,maxApparentErr: Double, maxI: Int, learningRate: Double){
 		self.trainset = trainset
 		self.width = sqrt(Double(trainset.nSamples))/2
-		self.width = train(trainset,maxApparentErr,maxI)
+		self.width = train(trainset,maxApparentErr,maxI,learningRate)
 	}
 
-	internal func train(_ trainset: Dataset,_ maxApparentErr: Double = 0.000001, _ maxI: Int = 1000)->Double{
+	internal func train(_ trainset: Dataset,_ maxApparentErr: Double = 0.000001, _ maxI: Int = 1000, _ learningRate: Double = 10.0)->Double{
 
 		var errorLast = 1.0
 		var width = self.width
+		for c in trainset.classes{
+			priors.updateValue(Double(trainset.classSamples(class_id:c).rows)/Double(trainset.nSamples),forKey:c)
+		}
 		for i in 0 ..< maxI{
 			let error = getApparentError()
 			if(abs(error - errorLast) <= maxApparentErr){
 				break;
 			}else{
-				width = sqrt(Double(trainset.nSamples))/Double((i+1)*10)
+				width = sqrt(Double(trainset.nSamples))/(Double((i+1))*learningRate)
 				errorLast = error
 			}
 		}
@@ -82,8 +86,17 @@ class ParzenClassifier {
 	internal func classifySampleSoft(sample: Matrix<Double>)->[Int: Double]{
 		var classLikelihoods: [Int: Double]=[:]
 		for c in trainset.classes{
-			classLikelihoods.updateValue(getClassLikelihood(sample,c),forKey:c)
+			classLikelihoods.updateValue(priors[c]!*getClassLikelihood(sample,c),forKey:c)
 		}
+		//normalize
+		var sum = 0.0
+		for c in trainset.classes{
+			sum += classLikelihoods[c]!
+		}
+		for c in trainset.classes{
+			classLikelihoods.updateValue(classLikelihoods[c]!/sum,forKey:c)
+		}
+
 		return classLikelihoods
 	}
 

@@ -27,6 +27,10 @@ class DatasetTest: XCTestCase {
         XCTAssertTrue(result2 == Matrix<Double>([[1,2,3],
         										[4,5,6]]),"\(result2)")
 
+        XCTAssertTrue(result1.rows == 1)
+        XCTAssertTrue(result2.rows == 2)
+
+
     }
 
     static var allTests : [(String, (DatasetTest) -> () throws -> Void)] {

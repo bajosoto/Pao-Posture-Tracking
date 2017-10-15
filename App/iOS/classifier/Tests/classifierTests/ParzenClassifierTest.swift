@@ -5,15 +5,6 @@ import Nifty
 class ParzenClassifierTest: XCTestCase {
     
  
-    func testKernel(){
-      let testsample = Matrix<Double>([[1,2]])
-      let trainsample = Matrix<Double>([[0,0]])
-      let result = ParzenClassifier.kernel(x:testsample,width: 1,mean:trainsample)
-
-      print("Result \(result)")
-    
-    }
-
     func testSimpleClassif(){
          let samples = Matrix<Double>([[-1,-1],
                                         [1,1]])
@@ -24,27 +15,49 @@ class ParzenClassifierTest: XCTestCase {
                                           [0,0],
                                           [1,1]])
         let results = parzenc.classify_soft(samples:testsamples)
-        print("Results: \(results)")
+       
+        XCTAssertTrue(0.9999999 <= results[0][1]!)
+        XCTAssertTrue(results[0][1]! <= 1.0)
+
+        XCTAssertTrue(0.00001 >= results[0][2]!)
+        XCTAssertTrue(results[0][2]! >= 0.0)
+
+        XCTAssertTrue(0.49 <= results[1][1]!)
+        XCTAssertTrue(results[1][1]! <= 0.51)
+
+        XCTAssertTrue(0.49 <= results[1][2]!)
+        XCTAssertTrue(results[1][2]! <= 0.51)
+
+        XCTAssertTrue(0.9999999 <= results[2][2]!)
+        XCTAssertTrue(results[2][2]! <= 1.0)
+
+        XCTAssertTrue(0.00001 >= results[2][1]!)
+        XCTAssertTrue(results[2][1]! >= 0.0)
+
 
     }
 
     func testClassif1(){
-        let samples = Matrix<Double>([[-1,-2],
-                                      [-15,-3],
-                                      [-1,-27],
-                                      [-17,-27],
-                                      [-100,-27],
-                                      [7,8],
-                                      [9,27],
-                                      [12,8],
-                                      [13,9],
-                                      [7,8]])
-        let labels = [1,1,1,1,1,2,2,2,2,2]
+        let samples = Matrix<Double>([[-5,-5],
+                                      [-5,-4],
+                                      [-5,-6],
+                                      [-4,-5],
+                                      [5,5],
+                                      [5,4],
+                                      [5,6],
+                                      [4,5]])
+        let labels = [1,1,1,1,2,2,2,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let parzenc = ParzenClassifier(trainset:dataset)
-        let testsamples = Matrix<Double>([[-15,-3]])
+        let testsamples = Matrix<Double>([  [-5,-4.5],
+                                            [-4.5,-6],
+                                            [5,4.5],
+                                            [4.5,5]])
         let results = parzenc.classify(samples:testsamples)
-        print("Results: \(results)")
+        XCTAssertTrue(results[0]==1,"Was:\(results[0])")
+        XCTAssertTrue(results[1]==1,"Was:\(results[1])")
+        XCTAssertTrue(results[2]==2,"Was:\(results[2])")
+        XCTAssertTrue(results[3]==2,"Was:\(results[3])")
 
     }
 
@@ -52,7 +65,6 @@ class ParzenClassifierTest: XCTestCase {
 
     static var allTests : [(String, (ParzenClassifierTest) -> () throws -> Void)] {
         return [
-        	("testKernel",testKernel),
           ("testSimpleClassif",testSimpleClassif),
           ("testClassif1",testClassif1)
         ]
