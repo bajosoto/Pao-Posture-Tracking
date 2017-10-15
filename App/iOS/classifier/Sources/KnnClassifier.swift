@@ -32,13 +32,13 @@ class KnnClassifier: Classifier{
 		return labelsFound
 	}
 
-	private func classifySample(sample: Matrix<Double>)->Int{
+	internal func classifySample(sample: Matrix<Double>)->Int{
 		return classifySample_soft(sample:sample).sorted(by: {$0.1 > $1.1})[0].key
 
 
 	}
 
-	private func classifySample_soft(sample: Matrix<Double>)->[Int: Double]{
+	internal func classifySample_soft(sample: Matrix<Double>)->[Int: Double]{
 		var distances = [(distance:Double,label:Int)]()
 		var proba: [Int: Double] = [:]
 		var ranking = [(key: Int, value: Double)]()
@@ -82,13 +82,9 @@ class KnnClassifier: Classifier{
 		return softLabels
 	}
 
-	public static func dist(this: Matrix<Double>,that: Matrix<Double>)->Double{
-		//Euclidian
-		var sum:Double = 0
-		for i in 0 ..< this.columns {
-			sum += pow((this[i]-that[i]),2)
-		}
-		return sqrt(sum)
+	internal static func dist(this: Matrix<Double>,that: Matrix<Double>)->Double{
+		//Euclidian distance
+		return norm(this-that)
 	}
 	
 	

@@ -38,3 +38,13 @@ func ln(x: Double)->Double{
     return log(x)/log(euler())
 
 }
+
+func norm(_ m: Matrix<Double>) -> Double{
+    var sum:Double = 0
+    for i in 0 ..< m.columns {
+        for j in 0 ..< m.rows {
+        sum += pow(m[j,i],2)
+        }
+    }
+    return sqrt(sum)
+}
