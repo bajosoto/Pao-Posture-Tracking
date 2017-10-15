@@ -1,3 +1,5 @@
+import Nifty
+
 struct Measurement{
 	let gyroX: Double
 	let gyroY: Double 
@@ -16,7 +18,7 @@ struct Measurement{
 	}
 
 	func toVector()->Matrix<Double>{
-		return Matrix<Double>[[gyroX,gyroY,gyroZ,accelX,accelY,accelZ]]
+		return Matrix<Double>([[gyroX,gyroY,gyroZ,accelX,accelY,accelZ]])
 	}
 }
 

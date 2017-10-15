@@ -18,12 +18,21 @@ class SimplePreprocessorTest: XCTestCase {
         XCTAssertTrue(result.accelZ == 1.5)
 
     }
+
+    func testPeak2Peak(){
+        let measurement1 = Measurement(Matrix<Double>([[1.0,1.0,1.0, 0.0,0.0,0.0]]))
+        let measurement2 = Measurement(Matrix<Double>([[2.0,2.0,2.0, 1.0,0.0,0.0]]))
+        let measurement3 = Measurement(Matrix<Double>([[2.0,2.0,2.0, 0.2,0.2,0.2]]))
+
+        let result = SimplePreprocessor.getPeak2Peak([measurement1,measurement2])
+
+        XCTAssertTrue(result == 1.0, "Was \(result)")
+    }
     
      static var allTests : [(String, (SimplePreprocessorTest) -> () throws -> Void)] {
         return [
-          ("testSimpleClassif",testSimpleClassif),
-          ("testClassif1",testClassif1),
-          ("testClassif2",testClassif2)
+          ("testAverageFilter",testAverageFilter),
+          ("testPeak2Peak",testPeak2Peak),
 
         ]
     }

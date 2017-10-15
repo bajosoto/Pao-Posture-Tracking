@@ -1,6 +1,6 @@
 import Nifty
 
-func mean_row(matrix: Matrix<Double>)->Matrix<Double>{
+func mean_row( matrix: Matrix<Double>)->Matrix<Double>{
 	var sum:Matrix<Double> = zeros(1,matrix.columns)
 	for i in 0..<matrix.rows{
         sum = sum + matrix[i,0..<matrix.columns]
