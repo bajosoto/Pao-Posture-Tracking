@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -355,6 +354,27 @@
                                             <constraint firstAttribute="height" constant="90" id="xxg-8l-0Lz"/>
                                         </constraints>
                                     </stackView>
+                                    <visualEffectView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inM-DA-lQt">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="nen-F1-Vbk">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <visualEffectView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mky-pQ-EaO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="V7g-A8-k1W">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    </view>
+                                                    <vibrancyEffect>
+                                                        <blurEffect style="light"/>
+                                                    </vibrancyEffect>
+                                                </visualEffectView>
+                                            </subviews>
+                                        </view>
+                                        <blurEffect style="dark"/>
+                                    </visualEffectView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="5Ka-A9-Rha" firstAttribute="centerX" secondItem="dBk-FU-NrV" secondAttribute="centerX" id="2C8-kq-EhB"/>
@@ -363,7 +383,9 @@
                                     <constraint firstItem="5lt-Gj-KYN" firstAttribute="centerY" secondItem="Yhv-75-Xsr" secondAttribute="centerY" id="9mL-4b-2UX"/>
                                     <constraint firstAttribute="bottom" secondItem="7ZF-LW-t57" secondAttribute="bottom" constant="40" id="AWS-Zm-OIt"/>
                                     <constraint firstItem="W4n-Tk-Sat" firstAttribute="top" secondItem="Yhv-75-Xsr" secondAttribute="bottom" constant="65" id="BGL-GG-how"/>
+                                    <constraint firstItem="inM-DA-lQt" firstAttribute="top" secondItem="zy7-xb-3Ui" secondAttribute="top" id="BaA-da-nm6"/>
                                     <constraint firstItem="Yhv-75-Xsr" firstAttribute="centerX" secondItem="zy7-xb-3Ui" secondAttribute="centerX" id="CsP-jd-hr1"/>
+                                    <constraint firstAttribute="bottom" secondItem="inM-DA-lQt" secondAttribute="bottom" id="Dqj-1b-cHK"/>
                                     <constraint firstItem="5Ka-A9-Rha" firstAttribute="top" secondItem="dBk-FU-NrV" secondAttribute="bottom" constant="-8" id="G6b-82-mAa"/>
                                     <constraint firstItem="v4x-IL-rxg" firstAttribute="width" secondItem="CrR-mW-rTG" secondAttribute="width" id="G8M-Mb-buB"/>
                                     <constraint firstItem="v4x-IL-rxg" firstAttribute="centerY" secondItem="CrR-mW-rTG" secondAttribute="centerY" id="Gh7-Oj-u0C"/>
@@ -381,6 +403,7 @@
                                     <constraint firstAttribute="trailing" secondItem="wEw-hi-gN9" secondAttribute="trailing" id="aje-4m-nHp"/>
                                     <constraint firstItem="jXq-YL-bOp" firstAttribute="width" secondItem="Yhv-75-Xsr" secondAttribute="width" id="ava-s5-jjw"/>
                                     <constraint firstItem="dBk-FU-NrV" firstAttribute="top" secondItem="W4n-Tk-Sat" secondAttribute="bottom" constant="55" id="cmn-UL-oX8"/>
+                                    <constraint firstAttribute="trailing" secondItem="inM-DA-lQt" secondAttribute="trailing" id="exp-eT-H33"/>
                                     <constraint firstItem="0r9-Yt-M39" firstAttribute="centerY" secondItem="Yhv-75-Xsr" secondAttribute="centerY" id="f2b-P3-SfP"/>
                                     <constraint firstItem="CrR-mW-rTG" firstAttribute="top" secondItem="zy7-xb-3Ui" secondAttribute="top" constant="60" id="fe3-qx-Rtz"/>
                                     <constraint firstItem="5lt-Gj-KYN" firstAttribute="leading" secondItem="zy7-xb-3Ui" secondAttribute="leading" constant="20" id="g66-pP-RIc"/>
@@ -388,6 +411,7 @@
                                     <constraint firstItem="5Ka-A9-Rha" firstAttribute="width" secondItem="dBk-FU-NrV" secondAttribute="width" id="n9g-uf-5oH"/>
                                     <constraint firstAttribute="trailing" secondItem="0r9-Yt-M39" secondAttribute="trailing" constant="20" id="omm-bZ-1j4"/>
                                     <constraint firstAttribute="trailing" secondItem="7ZF-LW-t57" secondAttribute="trailing" constant="40" id="pys-8l-osE"/>
+                                    <constraint firstItem="inM-DA-lQt" firstAttribute="leading" secondItem="zy7-xb-3Ui" secondAttribute="leading" id="sbf-1l-pf3"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -405,19 +429,226 @@
                     </view>
                     <navigationItem key="navigationItem" title="paó" id="ggJ-GM-Jgg"/>
                     <connections>
+                        <outlet property="BlurEffectVC" destination="inM-DA-lQt" id="MrA-VH-B6C"/>
                         <outlet property="btnConfigView" destination="Ckw-Lo-F9j" id="60i-si-Czo"/>
                         <outlet property="btnDebugView" destination="5un-Hd-PZO" id="tVu-N8-PDA"/>
                         <outlet property="btnHelpView" destination="kIK-1k-Nuz" id="55k-65-bZs"/>
+                        <outlet property="btnTrainBack" destination="ls9-OP-rH8" id="6Vc-6P-Sfw"/>
+                        <outlet property="btnTrainMvNok" destination="Zvg-uz-vrI" id="Q6k-x1-bpH"/>
+                        <outlet property="btnTrainMvOk" destination="z39-aW-zeh" id="Dxg-Af-Rn4"/>
+                        <outlet property="btnTrainSitNok" destination="FP0-1F-6uN" id="XBV-gR-kO5"/>
+                        <outlet property="btnTrainSitOk" destination="xZj-fZ-xWD" id="dKo-Uj-NgU"/>
+                        <outlet property="btnTrainStndNok" destination="V4n-I6-RW5" id="iAC-AF-Vs2"/>
+                        <outlet property="btnTrainStndOk" destination="MAN-mz-veJ" id="Bhu-6K-RgK"/>
                         <outlet property="btnTrainView" destination="txC-oY-PwM" id="JX5-jT-YX3"/>
                         <outlet property="postureBar" destination="Yhv-75-Xsr" id="A9z-T7-BFB"/>
                         <outlet property="postureChart" destination="dBk-FU-NrV" id="8ph-HD-ggW"/>
                         <outlet property="profilePicImg" destination="CrR-mW-rTG" id="ecO-4g-VIi"/>
+                        <outlet property="trainButtonsView" destination="F3h-Je-5JN" id="3yj-ds-Pt9"/>
                         <segue destination="lOM-qF-ybT" kind="presentation" identifier="toDebug" modalTransitionStyle="crossDissolve" id="QGU-9G-X84"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KgD-2p-T8R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="F3h-Je-5JN">
+                    <rect key="frame" x="0.0" y="0.0" width="237" height="362"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gcW-it-eGK">
+                            <rect key="frame" x="20" y="20" width="197" height="322"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="Ym1-s5-iZS">
+                                    <rect key="frame" x="5" y="0.0" width="187" height="66"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZj-fZ-xWD" customClass="AssetBtnTrainSittingOkView" customModule="Pao_iOS" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="66"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHY-Z9-v3d">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66"/>
+                                                    <connections>
+                                                        <action selector="onBtnTrainSitOkDrag:" destination="3wQ-he-Asj" eventType="touchDragExit" id="rQq-KK-GM7"/>
+                                                        <action selector="onBtnTrainSitOkPressed:" destination="3wQ-he-Asj" eventType="touchDown" id="5gI-uC-qPu"/>
+                                                        <action selector="onBtnTrainSitOkReleased:" destination="3wQ-he-Asj" eventType="touchUpInside" id="9Uj-Gi-dSI"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="fHY-Z9-v3d" firstAttribute="top" secondItem="xZj-fZ-xWD" secondAttribute="top" id="3Ef-4y-zNx"/>
+                                                <constraint firstAttribute="trailing" secondItem="fHY-Z9-v3d" secondAttribute="trailing" id="SrN-fr-lE3"/>
+                                                <constraint firstItem="fHY-Z9-v3d" firstAttribute="leading" secondItem="xZj-fZ-xWD" secondAttribute="leading" id="Ufa-Y8-5AE"/>
+                                                <constraint firstAttribute="height" constant="66" id="ik7-kZ-aNh"/>
+                                                <constraint firstAttribute="width" constant="90" id="nsH-5x-JXX"/>
+                                                <constraint firstAttribute="bottom" secondItem="fHY-Z9-v3d" secondAttribute="bottom" id="vJZ-Zc-0uj"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FP0-1F-6uN" customClass="AssetBtnTrainSittingNokView" customModule="Pao_iOS" customModuleProvider="target">
+                                            <rect key="frame" x="97" y="0.0" width="90" height="66"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iu0-Of-n8a">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66"/>
+                                                    <connections>
+                                                        <action selector="onBtnTrainSitNokDrag:" destination="3wQ-he-Asj" eventType="touchDragExit" id="X9m-wA-tza"/>
+                                                        <action selector="onBtnTrainSitNokPressed:" destination="3wQ-he-Asj" eventType="touchDown" id="tHu-5T-SEE"/>
+                                                        <action selector="onBtnTrainSitNokReleased:" destination="3wQ-he-Asj" eventType="touchUpInside" id="Ohc-sA-kEa"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="iu0-Of-n8a" secondAttribute="bottom" id="BS2-pl-Kku"/>
+                                                <constraint firstItem="iu0-Of-n8a" firstAttribute="top" secondItem="FP0-1F-6uN" secondAttribute="top" id="GcC-64-2WA"/>
+                                                <constraint firstItem="iu0-Of-n8a" firstAttribute="leading" secondItem="FP0-1F-6uN" secondAttribute="leading" id="Ggm-SC-B23"/>
+                                                <constraint firstAttribute="width" constant="90" id="Jdt-Pt-BWo"/>
+                                                <constraint firstAttribute="height" constant="66" id="OKN-Rv-gl1"/>
+                                                <constraint firstAttribute="trailing" secondItem="iu0-Of-n8a" secondAttribute="trailing" id="bwR-5C-agd"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="o5I-r9-Zj8">
+                                    <rect key="frame" x="5" y="85.333333333333343" width="187" height="66.000000000000028"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MAN-mz-veJ" customClass="AssetBtnTrainStandingOkView" customModule="Pao_iOS" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="66.000000000000014"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Enm-Ex-MWK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66.000000000000014"/>
+                                                    <connections>
+                                                        <action selector="onBtnTrainStndOkDrag:" destination="3wQ-he-Asj" eventType="touchDragExit" id="52h-5P-qaw"/>
+                                                        <action selector="onBtnTrainStndOkPressed:" destination="3wQ-he-Asj" eventType="touchDown" id="tGx-Fk-Yk1"/>
+                                                        <action selector="onBtnTrainStndOkReleased:" destination="3wQ-he-Asj" eventType="touchUpInside" id="FK5-xv-Cr0"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="Enm-Ex-MWK" firstAttribute="leading" secondItem="MAN-mz-veJ" secondAttribute="leading" id="Vzr-gl-GTz"/>
+                                                <constraint firstItem="Enm-Ex-MWK" firstAttribute="top" secondItem="MAN-mz-veJ" secondAttribute="top" id="Zh5-s5-0Xm"/>
+                                                <constraint firstAttribute="bottom" secondItem="Enm-Ex-MWK" secondAttribute="bottom" id="fK6-NF-g94"/>
+                                                <constraint firstAttribute="trailing" secondItem="Enm-Ex-MWK" secondAttribute="trailing" id="qwo-tl-kCS"/>
+                                                <constraint firstAttribute="height" constant="66" id="u7C-Ft-pk8"/>
+                                                <constraint firstAttribute="width" constant="90" id="ydd-7U-2Oa"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V4n-I6-RW5" customClass="AssetBtnTrainStandingNokView" customModule="Pao_iOS" customModuleProvider="target">
+                                            <rect key="frame" x="97" y="0.0" width="90" height="66.000000000000014"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edH-Yf-gnF">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66.000000000000014"/>
+                                                    <connections>
+                                                        <action selector="onBtnTrainStndNokDrag:" destination="3wQ-he-Asj" eventType="touchDragExit" id="zUG-fM-wqL"/>
+                                                        <action selector="onBtnTrainStndNokPressed:" destination="3wQ-he-Asj" eventType="touchDown" id="yHL-BK-41r"/>
+                                                        <action selector="onBtnTrainStndNokReleased:" destination="3wQ-he-Asj" eventType="touchUpInside" id="eIh-Od-Wia"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="edH-Yf-gnF" secondAttribute="trailing" id="5rj-OT-zqG"/>
+                                                <constraint firstItem="edH-Yf-gnF" firstAttribute="top" secondItem="V4n-I6-RW5" secondAttribute="top" id="75U-O9-Pzj"/>
+                                                <constraint firstAttribute="bottom" secondItem="edH-Yf-gnF" secondAttribute="bottom" id="DQp-BE-AEl"/>
+                                                <constraint firstAttribute="height" constant="66" id="Ffi-iQ-GTi"/>
+                                                <constraint firstAttribute="width" constant="90" id="fAk-Z9-pV9"/>
+                                                <constraint firstItem="edH-Yf-gnF" firstAttribute="leading" secondItem="V4n-I6-RW5" secondAttribute="leading" id="gcE-0d-hFU"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="MjR-eI-w0I">
+                                    <rect key="frame" x="5" y="170.66666666666669" width="187" height="66.000000000000028"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z39-aW-zeh" customClass="AssetBtnTrainMovingOkView" customModule="Pao_iOS" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="66.000000000000028"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUX-PX-A1z">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66.000000000000028"/>
+                                                    <connections>
+                                                        <action selector="onBtnTrainMvOkDrag:" destination="3wQ-he-Asj" eventType="touchDragExit" id="NxS-IZ-TPc"/>
+                                                        <action selector="onBtnTrainMvOkPressed:" destination="3wQ-he-Asj" eventType="touchUpInside" id="t7J-Z1-tN2"/>
+                                                        <action selector="onBtnTrainMvOkPressed:" destination="3wQ-he-Asj" eventType="touchDown" id="vSd-m4-pF5"/>
+                                                        <action selector="onBtnTrainMvOkReleased:" destination="3wQ-he-Asj" eventType="touchUpInside" id="F0k-Dh-3dm"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="PUX-PX-A1z" firstAttribute="leading" secondItem="z39-aW-zeh" secondAttribute="leading" id="44l-4L-OMO"/>
+                                                <constraint firstAttribute="bottom" secondItem="PUX-PX-A1z" secondAttribute="bottom" id="5y1-9e-Jwn"/>
+                                                <constraint firstAttribute="height" constant="66" id="CeV-rw-0KO"/>
+                                                <constraint firstItem="PUX-PX-A1z" firstAttribute="top" secondItem="z39-aW-zeh" secondAttribute="top" id="hO1-Ug-AGa"/>
+                                                <constraint firstAttribute="trailing" secondItem="PUX-PX-A1z" secondAttribute="trailing" id="qDT-b3-9wL"/>
+                                                <constraint firstAttribute="width" constant="90" id="rFk-gN-eLi"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zvg-uz-vrI" customClass="AssetBtnTrainMovingNokView" customModule="Pao_iOS" customModuleProvider="target">
+                                            <rect key="frame" x="97" y="0.0" width="90" height="66.000000000000028"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uqp-0I-Rop">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66.000000000000028"/>
+                                                    <connections>
+                                                        <action selector="onBtnTrainMvNokDrag:" destination="3wQ-he-Asj" eventType="touchDragExit" id="SyK-GW-C7y"/>
+                                                        <action selector="onBtnTrainMvNokPressed:" destination="3wQ-he-Asj" eventType="touchDown" id="g0C-Al-PzP"/>
+                                                        <action selector="onBtnTrainMvNokReleased:" destination="3wQ-he-Asj" eventType="touchUpInside" id="Vjx-gZ-Vk6"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="uqp-0I-Rop" firstAttribute="leading" secondItem="Zvg-uz-vrI" secondAttribute="leading" id="Cjt-IX-dIi"/>
+                                                <constraint firstAttribute="trailing" secondItem="uqp-0I-Rop" secondAttribute="trailing" id="cZS-2O-grA"/>
+                                                <constraint firstAttribute="width" constant="90" id="mbf-x6-hsk"/>
+                                                <constraint firstAttribute="height" constant="66" id="ofz-en-jhm"/>
+                                                <constraint firstAttribute="bottom" secondItem="uqp-0I-Rop" secondAttribute="bottom" id="pUM-By-85M"/>
+                                                <constraint firstItem="uqp-0I-Rop" firstAttribute="top" secondItem="Zvg-uz-vrI" secondAttribute="top" id="yxb-Wq-Bnf"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                </stackView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ls9-OP-rH8" customClass="AssetBtnBackView" customModule="Pao_iOS" customModuleProvider="target">
+                                    <rect key="frame" x="53.666666666666664" y="256" width="90" height="66"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4LY-6A-xoY">
+                                            <rect key="frame" x="0.0" y="0.0" width="89.999999999999986" height="66"/>
+                                            <connections>
+                                                <action selector="onBtnTrainBackDrag:" destination="3wQ-he-Asj" eventType="touchDragExit" id="pw1-Xs-ZFY"/>
+                                                <action selector="onBtnTrainBackPressed:" destination="3wQ-he-Asj" eventType="touchDown" id="e2n-Lv-bvT"/>
+                                                <action selector="onBtnTrainBackReleased:" destination="3wQ-he-Asj" eventType="touchUpInside" id="pvI-s3-Tza"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="4LY-6A-xoY" firstAttribute="top" secondItem="ls9-OP-rH8" secondAttribute="top" id="44b-9u-mMC"/>
+                                        <constraint firstItem="4LY-6A-xoY" firstAttribute="leading" secondItem="ls9-OP-rH8" secondAttribute="leading" id="Peb-Km-cqS"/>
+                                        <constraint firstAttribute="width" constant="90" id="WKX-ga-9zG"/>
+                                        <constraint firstAttribute="trailing" secondItem="4LY-6A-xoY" secondAttribute="trailing" id="mb8-z0-32c"/>
+                                        <constraint firstAttribute="bottom" secondItem="4LY-6A-xoY" secondAttribute="bottom" id="uFn-yn-FLG"/>
+                                        <constraint firstAttribute="height" constant="66" id="xf1-iu-uqX"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="MjR-eI-w0I" secondAttribute="trailing" constant="5" id="3z9-8D-mE1"/>
+                                <constraint firstAttribute="trailing" secondItem="o5I-r9-Zj8" secondAttribute="trailing" constant="5" id="UgH-t9-ExQ"/>
+                                <constraint firstItem="Ym1-s5-iZS" firstAttribute="leading" secondItem="gcW-it-eGK" secondAttribute="leading" constant="5" id="exW-9K-6wO"/>
+                                <constraint firstItem="o5I-r9-Zj8" firstAttribute="leading" secondItem="gcW-it-eGK" secondAttribute="leading" constant="5" id="nf6-u5-ygu"/>
+                                <constraint firstItem="MjR-eI-w0I" firstAttribute="leading" secondItem="gcW-it-eGK" secondAttribute="leading" constant="5" id="uw2-At-cYL"/>
+                                <constraint firstAttribute="trailing" secondItem="Ym1-s5-iZS" secondAttribute="trailing" constant="5" id="xuF-1r-VB7"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="gcW-it-eGK" firstAttribute="leading" secondItem="F3h-Je-5JN" secondAttribute="leading" constant="20" id="9Tz-Dr-fSt"/>
+                        <constraint firstItem="gcW-it-eGK" firstAttribute="top" secondItem="F3h-Je-5JN" secondAttribute="top" constant="20" id="9fI-pO-4OY"/>
+                        <constraint firstItem="gcW-it-eGK" firstAttribute="centerY" secondItem="F3h-Je-5JN" secondAttribute="centerY" id="I2q-xe-Mz7"/>
+                        <constraint firstAttribute="bottom" secondItem="gcW-it-eGK" secondAttribute="bottom" constant="20" id="arB-C0-ASJ"/>
+                        <constraint firstAttribute="trailing" secondItem="gcW-it-eGK" secondAttribute="trailing" constant="20" id="uYf-3d-GQa"/>
+                        <constraint firstItem="gcW-it-eGK" firstAttribute="centerX" secondItem="F3h-Je-5JN" secondAttribute="centerX" id="yDE-Nw-kgc"/>
+                    </constraints>
+                </view>
             </objects>
-            <point key="canvasLocation" x="1523" y="774"/>
+            <point key="canvasLocation" x="1521.7391304347827" y="773.64130434782612"/>
         </scene>
         <!--Debug-->
         <scene sceneID="Bjq-LP-x82">

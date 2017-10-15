@@ -22,6 +22,21 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     @IBOutlet weak var btnConfigView: AssetBtnConfigView!
     @IBOutlet weak var btnHelpView: AssetBtnHelpView!
     
+    // Train Buttons
+    @IBOutlet weak var btnTrainSitOk: AssetBtnTrainSittingOkView!
+    @IBOutlet weak var btnTrainSitNok: AssetBtnTrainSittingNokView!
+    @IBOutlet weak var btnTrainStndOk: AssetBtnTrainStandingOkView!
+    @IBOutlet weak var btnTrainStndNok: AssetBtnTrainStandingNokView!
+    @IBOutlet weak var btnTrainMvOk: AssetBtnTrainMovingOkView!
+    @IBOutlet weak var btnTrainMvNok: AssetBtnTrainMovingNokView!
+    @IBOutlet weak var btnTrainBack: AssetBtnBackView!
+    
+    
+    @IBOutlet weak var BlurEffectVC: UIVisualEffectView!
+    @IBOutlet var trainButtonsView: UIView!
+    
+    var effect: UIVisualEffect!
+    
     var _bleConn: BleConnection!
     var bleConn: BleConnection {
         get {
@@ -48,6 +63,13 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Store blur effect
+        effect = BlurEffectVC.effect
+        BlurEffectVC.effect = nil
+        
+        // Corners for train buttons view
+        trainButtonsView.layer.cornerRadius = 5
+        
         // Set this VC as the current responder
         if let bleConnResp = self as bleConnectionResponder? {
             bleConn.responder = bleConnResp
@@ -64,6 +86,29 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         updateChartWithData()
 
     }
+    
+    func animateTrainButtonsIn() {
+        self.view.addSubview(trainButtonsView)
+        trainButtonsView.center = self.view.center
+        trainButtonsView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        trainButtonsView.alpha = 0
+        UIView.animate(withDuration: 0.2) {
+            self.BlurEffectVC.effect = self.effect
+            self.trainButtonsView.alpha = 1
+            self.trainButtonsView.transform = CGAffineTransform.identity
+        }
+    }
+    
+    func animateTrainButtonsOut() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.trainButtonsView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.trainButtonsView.alpha = 0
+            self.BlurEffectVC.effect = nil
+        }) { (success:Bool) in
+            self.trainButtonsView.removeFromSuperview()
+        }
+    }
+    
     @IBAction func onTestBtnPress(_ sender: Any) {
         let postureEntry = PostureEntry()
         let randInt = (Double(arc4random()) / Double(UINT32_MAX) ) * 2.0 - 1.0
@@ -181,6 +226,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnTrainReleased(_ sender: Any) {
         btnTrainView.isPressed = false
+        animateTrainButtonsIn()
     }
     @IBAction func onBtnTrainDrag(_ sender: Any) {
         btnTrainView.isPressed = false
@@ -218,6 +264,78 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnHelpDrag(_ sender: Any) {
         btnHelpView.isPressed = false
+    }
+    
+    // Training Buttons
+    @IBAction func onBtnTrainSitOkPressed(_ sender: Any) {
+        btnTrainSitOk.isPressed = true
+    }
+    @IBAction func onBtnTrainSitOkReleased(_ sender: Any) {
+        btnTrainSitOk.isPressed = false
+    }
+    @IBAction func onBtnTrainSitOkDrag(_ sender: Any) {
+        btnTrainSitOk.isPressed = false
+    }
+    
+    @IBAction func onBtnTrainSitNokPressed(_ sender: Any) {
+        btnTrainSitNok.isPressed = true
+    }
+    @IBAction func onBtnTrainSitNokReleased(_ sender: Any) {
+        btnTrainSitNok.isPressed = false
+    }
+    @IBAction func onBtnTrainSitNokDrag(_ sender: Any) {
+        btnTrainSitNok.isPressed = false
+    }
+    
+    @IBAction func onBtnTrainStndOkPressed(_ sender: Any) {
+        btnTrainStndOk.isPressed = true
+    }
+    @IBAction func onBtnTrainStndOkReleased(_ sender: Any) {
+        btnTrainStndOk.isPressed = false
+    }
+    @IBAction func onBtnTrainStndOkDrag(_ sender: Any) {
+        btnTrainStndOk.isPressed = false
+    }
+    
+    @IBAction func onBtnTrainStndNokPressed(_ sender: Any) {
+        btnTrainStndNok.isPressed = true
+    }
+    @IBAction func onBtnTrainStndNokReleased(_ sender: Any) {
+        btnTrainStndNok.isPressed = false
+    }
+    @IBAction func onBtnTrainStndNokDrag(_ sender: Any) {
+        btnTrainStndNok.isPressed = false
+    }
+    
+    @IBAction func onBtnTrainMvOkPressed(_ sender: Any) {
+        btnTrainMvOk.isPressed = true
+    }
+    @IBAction func onBtnTrainMvOkReleased(_ sender: Any) {
+        btnTrainMvOk.isPressed = false
+    }
+    @IBAction func onBtnTrainMvOkDrag(_ sender: Any) {
+        btnTrainMvOk.isPressed = false
+    }
+    
+    @IBAction func onBtnTrainMvNokPressed(_ sender: Any) {
+        btnTrainMvNok.isPressed = true
+    }
+    @IBAction func onBtnTrainMvNokReleased(_ sender: Any) {
+        btnTrainMvNok.isPressed = false
+    }
+    @IBAction func onBtnTrainMvNokDrag(_ sender: Any) {
+        btnTrainMvNok.isPressed = false
+    }
+    
+    @IBAction func onBtnTrainBackPressed(_ sender: Any) {
+        btnTrainBack.isPressed = true
+    }
+    @IBAction func onBtnTrainBackReleased(_ sender: Any) {
+        btnTrainBack.isPressed = false
+        animateTrainButtonsOut()
+    }
+    @IBAction func onBtnTrainBackDrag(_ sender: Any) {
+        btnTrainBack.isPressed = false
     }
     
     

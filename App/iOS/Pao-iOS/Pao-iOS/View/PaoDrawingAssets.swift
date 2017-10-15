@@ -2695,6 +2695,426 @@ public class PaoDrawingAssets : NSObject {
 
     }
 
+    @objc public dynamic class func drawPaoButtonTrainSittingOk(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 90, height: 66), resizing: ResizingBehavior = .aspectFit, isPressed: Bool = false) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 90, height: 66), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 90, y: resizedFrame.height / 66)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+        let paoBtnColorGreen = UIColor(red: 0.204, green: 0.886, blue: 0.729, alpha: 1.000)
+
+        //// Variable Declarations
+        let buttonMaskCoordHorizontal: CGFloat = isPressed ? 0 : 60
+
+        //// buttonBase Drawing
+        context.saveGState()
+        context.setAlpha(0.2)
+
+        let buttonBasePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoTextWhite.setFill()
+        buttonBasePath.fill()
+
+        context.restoreGState()
+
+
+        //// buttonColorEnable
+        context.saveGState()
+        context.beginTransparencyLayer(auxiliaryInfo: nil)
+
+        //// Clip buttonMask
+        let buttonMaskPath = UIBezierPath(rect: CGRect(x: 0, y: buttonMaskCoordHorizontal, width: 90, height: 66))
+        var buttonMaskTransformation = CGAffineTransform.identity
+        buttonMaskPath.apply(buttonMaskTransformation)
+        buttonMaskPath.addClip()
+
+
+        //// buttonColor Drawing
+        let buttonColorPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoBtnColorGreen.setFill()
+        buttonColorPath.fill()
+
+
+        context.endTransparencyLayer()
+        context.restoreGState()
+
+
+        //// Text Drawing
+        let textRect = CGRect(x: 18.03, y: 41, width: 53.93, height: 21)
+        let textTextContent = "SITTING"
+        let textStyle = NSMutableParagraphStyle()
+        textStyle.alignment = .center
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 13)!, NSAttributedStringKey.foregroundColor: paoTextWhite, NSAttributedStringKey.paragraphStyle: textStyle]
+
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
+
+
+        //// Group
+        
+        context.restoreGState()
+
+    }
+
+    @objc public dynamic class func drawPaoButtonTrainSittingNok(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 90, height: 66), resizing: ResizingBehavior = .aspectFit, isPressed: Bool = false) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 90, height: 66), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 90, y: resizedFrame.height / 66)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+        let paoBtnColorRed = UIColor(red: 0.800, green: 0.320, blue: 0.429, alpha: 1.000)
+
+        //// Variable Declarations
+        let buttonMaskCoordHorizontal: CGFloat = isPressed ? 0 : 60
+
+        //// buttonBase Drawing
+        context.saveGState()
+        context.setAlpha(0.2)
+
+        let buttonBasePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoTextWhite.setFill()
+        buttonBasePath.fill()
+
+        context.restoreGState()
+
+
+        //// buttonColorEnable
+        context.saveGState()
+        context.beginTransparencyLayer(auxiliaryInfo: nil)
+
+        //// Clip buttonMask
+        let buttonMaskPath = UIBezierPath(rect: CGRect(x: 0, y: buttonMaskCoordHorizontal, width: 90, height: 66))
+        var buttonMaskTransformation = CGAffineTransform.identity
+        buttonMaskPath.apply(buttonMaskTransformation)
+        buttonMaskPath.addClip()
+
+
+        //// buttonColor Drawing
+        let buttonColorPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoBtnColorRed.setFill()
+        buttonColorPath.fill()
+
+
+        context.endTransparencyLayer()
+        context.restoreGState()
+
+
+        //// Text Drawing
+        let textRect = CGRect(x: 18.03, y: 41, width: 53.93, height: 21)
+        let textTextContent = "SITTING"
+        let textStyle = NSMutableParagraphStyle()
+        textStyle.alignment = .center
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 13)!, NSAttributedStringKey.foregroundColor: paoTextWhite, NSAttributedStringKey.paragraphStyle: textStyle]
+
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
+
+
+        //// Group
+        
+        context.restoreGState()
+
+    }
+
+    @objc public dynamic class func drawPaoButtonTrainStandingOk(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 90, height: 66), resizing: ResizingBehavior = .aspectFit, isPressed: Bool = false) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 90, height: 66), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 90, y: resizedFrame.height / 66)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+        let paoBtnColorGreen = UIColor(red: 0.204, green: 0.886, blue: 0.729, alpha: 1.000)
+
+        //// Variable Declarations
+        let buttonMaskCoordHorizontal: CGFloat = isPressed ? 0 : 60
+
+        //// buttonBase Drawing
+        context.saveGState()
+        context.setAlpha(0.2)
+
+        let buttonBasePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoTextWhite.setFill()
+        buttonBasePath.fill()
+
+        context.restoreGState()
+
+
+        //// buttonColorEnable
+        context.saveGState()
+        context.beginTransparencyLayer(auxiliaryInfo: nil)
+
+        //// Clip buttonMask
+        let buttonMaskPath = UIBezierPath(rect: CGRect(x: 0, y: buttonMaskCoordHorizontal, width: 90, height: 66))
+        var buttonMaskTransformation = CGAffineTransform.identity
+        buttonMaskPath.apply(buttonMaskTransformation)
+        buttonMaskPath.addClip()
+
+
+        //// buttonColor Drawing
+        let buttonColorPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoBtnColorGreen.setFill()
+        buttonColorPath.fill()
+
+
+        context.endTransparencyLayer()
+        context.restoreGState()
+
+
+        //// Text Drawing
+        let textRect = CGRect(x: 0, y: 41, width: 90, height: 21)
+        let textTextContent = "STANDING"
+        let textStyle = NSMutableParagraphStyle()
+        textStyle.alignment = .center
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 13)!, NSAttributedStringKey.foregroundColor: paoTextWhite, NSAttributedStringKey.paragraphStyle: textStyle]
+
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
+
+
+        //// Group
+        
+        context.restoreGState()
+
+    }
+
+    @objc public dynamic class func drawPaoButtonTrainStandingNok(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 90, height: 66), resizing: ResizingBehavior = .aspectFit, isPressed: Bool = false) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 90, height: 66), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 90, y: resizedFrame.height / 66)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+        let paoBtnColorRed = UIColor(red: 0.800, green: 0.320, blue: 0.429, alpha: 1.000)
+
+        //// Variable Declarations
+        let buttonMaskCoordHorizontal: CGFloat = isPressed ? 0 : 60
+
+        //// buttonBase Drawing
+        context.saveGState()
+        context.setAlpha(0.2)
+
+        let buttonBasePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoTextWhite.setFill()
+        buttonBasePath.fill()
+
+        context.restoreGState()
+
+
+        //// buttonColorEnable
+        context.saveGState()
+        context.beginTransparencyLayer(auxiliaryInfo: nil)
+
+        //// Clip buttonMask
+        let buttonMaskPath = UIBezierPath(rect: CGRect(x: 0, y: buttonMaskCoordHorizontal, width: 90, height: 66))
+        var buttonMaskTransformation = CGAffineTransform.identity
+        buttonMaskPath.apply(buttonMaskTransformation)
+        buttonMaskPath.addClip()
+
+
+        //// buttonColor Drawing
+        let buttonColorPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoBtnColorRed.setFill()
+        buttonColorPath.fill()
+
+
+        context.endTransparencyLayer()
+        context.restoreGState()
+
+
+        //// Text Drawing
+        let textRect = CGRect(x: 0, y: 41, width: 90, height: 21)
+        let textTextContent = "STANDING"
+        let textStyle = NSMutableParagraphStyle()
+        textStyle.alignment = .center
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 13)!, NSAttributedStringKey.foregroundColor: paoTextWhite, NSAttributedStringKey.paragraphStyle: textStyle]
+
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
+
+
+        //// Group
+        
+        context.restoreGState()
+
+    }
+
+    @objc public dynamic class func drawPaoButtonTrainMovingOk(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 90, height: 66), resizing: ResizingBehavior = .aspectFit, isPressed: Bool = false) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 90, height: 66), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 90, y: resizedFrame.height / 66)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+        let paoBtnColorGreen = UIColor(red: 0.204, green: 0.886, blue: 0.729, alpha: 1.000)
+
+        //// Variable Declarations
+        let buttonMaskCoordHorizontal: CGFloat = isPressed ? 0 : 60
+
+        //// buttonBase Drawing
+        context.saveGState()
+        context.setAlpha(0.2)
+
+        let buttonBasePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoTextWhite.setFill()
+        buttonBasePath.fill()
+
+        context.restoreGState()
+
+
+        //// buttonColorEnable
+        context.saveGState()
+        context.beginTransparencyLayer(auxiliaryInfo: nil)
+
+        //// Clip buttonMask
+        let buttonMaskPath = UIBezierPath(rect: CGRect(x: 0, y: buttonMaskCoordHorizontal, width: 90, height: 66))
+        var buttonMaskTransformation = CGAffineTransform.identity
+        buttonMaskPath.apply(buttonMaskTransformation)
+        buttonMaskPath.addClip()
+
+
+        //// buttonColor Drawing
+        let buttonColorPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoBtnColorGreen.setFill()
+        buttonColorPath.fill()
+
+
+        context.endTransparencyLayer()
+        context.restoreGState()
+
+
+        //// Text Drawing
+        let textRect = CGRect(x: 0, y: 41, width: 90, height: 21)
+        let textTextContent = "MOVING"
+        let textStyle = NSMutableParagraphStyle()
+        textStyle.alignment = .center
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 13)!, NSAttributedStringKey.foregroundColor: paoTextWhite, NSAttributedStringKey.paragraphStyle: textStyle]
+
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
+
+
+        //// Group
+        
+        context.restoreGState()
+
+    }
+
+    @objc public dynamic class func drawPaoButtonTrainMovingNok(frame targetFrame: CGRect = CGRect(x: 0, y: 0, width: 90, height: 66), resizing: ResizingBehavior = .aspectFit, isPressed: Bool = false) {
+        //// General Declarations
+        let context = UIGraphicsGetCurrentContext()!
+        
+        //// Resize to Target Frame
+        context.saveGState()
+        let resizedFrame: CGRect = resizing.apply(rect: CGRect(x: 0, y: 0, width: 90, height: 66), target: targetFrame)
+        context.translateBy(x: resizedFrame.minX, y: resizedFrame.minY)
+        context.scaleBy(x: resizedFrame.width / 90, y: resizedFrame.height / 66)
+
+
+        //// Color Declarations
+        let paoTextWhite = UIColor(red: 1.000, green: 1.000, blue: 1.000, alpha: 1.000)
+        let paoBtnColorRed = UIColor(red: 0.800, green: 0.320, blue: 0.429, alpha: 1.000)
+
+        //// Variable Declarations
+        let buttonMaskCoordHorizontal: CGFloat = isPressed ? 0 : 60
+
+        //// buttonBase Drawing
+        context.saveGState()
+        context.setAlpha(0.2)
+
+        let buttonBasePath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoTextWhite.setFill()
+        buttonBasePath.fill()
+
+        context.restoreGState()
+
+
+        //// buttonColorEnable
+        context.saveGState()
+        context.beginTransparencyLayer(auxiliaryInfo: nil)
+
+        //// Clip buttonMask
+        let buttonMaskPath = UIBezierPath(rect: CGRect(x: 0, y: buttonMaskCoordHorizontal, width: 90, height: 66))
+        let buttonMaskTransformation = CGAffineTransform.identity
+        buttonMaskPath.apply(buttonMaskTransformation)
+        buttonMaskPath.addClip()
+
+
+        //// buttonColor Drawing
+        let buttonColorPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 90, height: 66), cornerRadius: 6)
+        paoBtnColorRed.setFill()
+        buttonColorPath.fill()
+
+
+        context.endTransparencyLayer()
+        context.restoreGState()
+
+
+        //// Text Drawing
+        let textRect = CGRect(x: 0, y: 41, width: 90, height: 21)
+        let textTextContent = "MOVING"
+        let textStyle = NSMutableParagraphStyle()
+        textStyle.alignment = .center
+        let textFontAttributes = [NSAttributedStringKey.font: UIFont(name: "Avenir-Book", size: 13)!, NSAttributedStringKey.foregroundColor: paoTextWhite, NSAttributedStringKey.paragraphStyle: textStyle]
+
+        let textTextHeight: CGFloat = textTextContent.boundingRect(with: CGSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes, context: nil).height
+        context.saveGState()
+        context.clip(to: textRect)
+        textTextContent.draw(in: CGRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight), withAttributes: textFontAttributes)
+        context.restoreGState()
+
+
+        //// Group
+        
+        context.restoreGState()
+
+    }
+
 
 
 
