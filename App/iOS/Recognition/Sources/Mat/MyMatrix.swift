@@ -1,5 +1,7 @@
 class MyMatrix{
-	private var data: [[Double]]
+	var data: [[Double]]
+
+	
 	init(_ data:[[Double]]){
 		self.data = data
 	}
@@ -30,6 +32,14 @@ class MyMatrix{
 	  get {
 	    return MyMatrix([data[i]])
 	  }
+	}
+
+	var rows:Int{
+		return data.count
+	}
+
+	var columns:Int{
+		return data[0].count
 	}
 
 }

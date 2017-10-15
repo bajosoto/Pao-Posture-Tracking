@@ -5,7 +5,7 @@ import Nifty
 class MyMatrixTest: XCTestCase {
     
     func testInit(){
-        let matrix = MyMatrix([[1,2],[3,4]])
+        _ = MyMatrix([[1,2],[3,4]])
         XCTAssertTrue(true)
     }
 
@@ -34,7 +34,7 @@ class MyMatrixTest: XCTestCase {
     func testRowsCols(){
         let matrix = MyMatrix([[1,2],[3,4],[5,6]])
         XCTAssertEqual(matrix.rows,3)
-        XCTAssertEqual(matrix.columns,3)
+        XCTAssertEqual(matrix.columns,2)
 
         
     }
