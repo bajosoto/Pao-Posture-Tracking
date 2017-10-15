@@ -40,6 +40,16 @@
 		495CDACA1F84450B00B0D7B9 /* PaoPostureBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */; };
 		497245E11F84551800697B60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 497245E01F84551800697B60 /* Assets.xcassets */; };
 		497FD28B1F93811900CE9AE5 /* AssetBtnTrainBtnsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FD28A1F93811900CE9AE5 /* AssetBtnTrainBtnsView.swift */; };
+		497FD29F1F93B36000CE9AE5 /* Classifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FD2951F93B35E00CE9AE5 /* Classifier.swift */; };
+		497FD2A01F93B36000CE9AE5 /* SimpleFeatureVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FD2961F93B35E00CE9AE5 /* SimpleFeatureVector.swift */; };
+		497FD2A11F93B36000CE9AE5 /* SimplePreprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FD2971F93B35F00CE9AE5 /* SimplePreprocessor.swift */; };
+		497FD2A21F93B36000CE9AE5 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FD2981F93B35F00CE9AE5 /* Utils.swift */; };
+		497FD2A31F93B36000CE9AE5 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FD2991F93B35F00CE9AE5 /* Measurement.swift */; };
+		497FD2A41F93B36000CE9AE5 /* FeatureVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FD29A1F93B35F00CE9AE5 /* FeatureVector.swift */; };
+		497FD2A51F93B36000CE9AE5 /* KnnClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FD29B1F93B35F00CE9AE5 /* KnnClassifier.swift */; };
+		497FD2A61F93B36000CE9AE5 /* Preprocessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FD29C1F93B35F00CE9AE5 /* Preprocessor.swift */; };
+		497FD2A71F93B36000CE9AE5 /* LdaClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FD29D1F93B35F00CE9AE5 /* LdaClassifier.swift */; };
+		497FD2A81F93B36000CE9AE5 /* ParzenClassifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FD29E1F93B36000CE9AE5 /* ParzenClassifier.swift */; };
 		49BDDD201F84EAC80052FA32 /* PostureEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BDDD1F1F84EAC80052FA32 /* PostureEntry.swift */; };
 		49F1AB471F811C8700148162 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F1AB461F811C8700148162 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
@@ -104,6 +114,16 @@
 		495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoPostureBarView.swift; sourceTree = "<group>"; };
 		497245E01F84551800697B60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		497FD28A1F93811900CE9AE5 /* AssetBtnTrainBtnsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBtnTrainBtnsView.swift; sourceTree = "<group>"; };
+		497FD2951F93B35E00CE9AE5 /* Classifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
+		497FD2961F93B35E00CE9AE5 /* SimpleFeatureVector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleFeatureVector.swift; sourceTree = "<group>"; };
+		497FD2971F93B35F00CE9AE5 /* SimplePreprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimplePreprocessor.swift; sourceTree = "<group>"; };
+		497FD2981F93B35F00CE9AE5 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		497FD2991F93B35F00CE9AE5 /* Measurement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
+		497FD29A1F93B35F00CE9AE5 /* FeatureVector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureVector.swift; sourceTree = "<group>"; };
+		497FD29B1F93B35F00CE9AE5 /* KnnClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KnnClassifier.swift; sourceTree = "<group>"; };
+		497FD29C1F93B35F00CE9AE5 /* Preprocessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preprocessor.swift; sourceTree = "<group>"; };
+		497FD29D1F93B35F00CE9AE5 /* LdaClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LdaClassifier.swift; sourceTree = "<group>"; };
+		497FD29E1F93B36000CE9AE5 /* ParzenClassifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParzenClassifier.swift; sourceTree = "<group>"; };
 		49BDDD1F1F84EAC80052FA32 /* PostureEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostureEntry.swift; sourceTree = "<group>"; };
 		49F1AB461F811C8700148162 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		7B2DA017E3B105073B5AB5BA /* Pods-Pao-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pao-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pao-iOS/Pods-Pao-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -165,6 +185,7 @@
 		4942F10C1F811B5500F378A9 /* Pao-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				497FD2941F93B33A00CE9AE5 /* Classifier */,
 				495142751F82C86C00A2921E /* Controller */,
 				495142741F82C86700A2921E /* View */,
 				495142731F82C85800A2921E /* Model */,
@@ -224,6 +245,23 @@
 				49578C901F87B8C30050C192 /* DebugVC.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		497FD2941F93B33A00CE9AE5 /* Classifier */ = {
+			isa = PBXGroup;
+			children = (
+				497FD2951F93B35E00CE9AE5 /* Classifier.swift */,
+				497FD29A1F93B35F00CE9AE5 /* FeatureVector.swift */,
+				497FD29B1F93B35F00CE9AE5 /* KnnClassifier.swift */,
+				497FD29D1F93B35F00CE9AE5 /* LdaClassifier.swift */,
+				497FD2991F93B35F00CE9AE5 /* Measurement.swift */,
+				497FD29E1F93B36000CE9AE5 /* ParzenClassifier.swift */,
+				497FD29C1F93B35F00CE9AE5 /* Preprocessor.swift */,
+				497FD2961F93B35E00CE9AE5 /* SimpleFeatureVector.swift */,
+				497FD2971F93B35F00CE9AE5 /* SimplePreprocessor.swift */,
+				497FD2981F93B35F00CE9AE5 /* Utils.swift */,
+			);
+			path = Classifier;
 			sourceTree = "<group>";
 		};
 		F1B975708B1E566B99B50A0A /* Pods */ = {
@@ -387,34 +425,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				497FD2A11F93B36000CE9AE5 /* SimplePreprocessor.swift in Sources */,
 				492A89891F85A2650067A6F8 /* PaoSittingGoalView.swift in Sources */,
+				497FD2A51F93B36000CE9AE5 /* KnnClassifier.swift in Sources */,
 				49BDDD201F84EAC80052FA32 /* PostureEntry.swift in Sources */,
 				49578C9F1F8874710050C192 /* AssetConsoleWindowView.swift in Sources */,
 				492A898D1F85A6B20067A6F8 /* PaoMovingGoalView.swift in Sources */,
+				497FD2A61F93B36000CE9AE5 /* Preprocessor.swift in Sources */,
 				49578C7D1F86E4500050C192 /* AssetBackgroundView.swift in Sources */,
 				49578C911F87B8C30050C192 /* DebugVC.swift in Sources */,
 				497FD28B1F93811900CE9AE5 /* AssetBtnTrainBtnsView.swift in Sources */,
 				49578C871F8790460050C192 /* AssetBtnDebugView.swift in Sources */,
+				497FD2A21F93B36000CE9AE5 /* Utils.swift in Sources */,
 				49578C831F8782690050C192 /* AssetManStraightView.swift in Sources */,
 				49578C7F1F86F1C40050C192 /* AssetTitleBarView.swift in Sources */,
+				497FD2A81F93B36000CE9AE5 /* ParzenClassifier.swift in Sources */,
 				49578C891F87907B0050C192 /* AssetBtnConfigView.swift in Sources */,
+				497FD29F1F93B36000CE9AE5 /* Classifier.swift in Sources */,
 				495CDACA1F84450B00B0D7B9 /* PaoPostureBarView.swift in Sources */,
+				497FD2A71F93B36000CE9AE5 /* LdaClassifier.swift in Sources */,
 				492A898B1F85A6720067A6F8 /* PaoStandingGoalView.swift in Sources */,
 				4942F1101F811B5500F378A9 /* BleConnectVC.swift in Sources */,
 				49578CA31F887C160050C192 /* AssetBtnExport.swift in Sources */,
 				49578C991F8860240050C192 /* AssetAccIconView.swift in Sources */,
 				495A763D1F83FD2200E1B5C4 /* DashboardVC.swift in Sources */,
 				4951427B1F82CAA300A2921E /* PaoFindingView.swift in Sources */,
+				497FD2A41F93B36000CE9AE5 /* FeatureVector.swift in Sources */,
 				4942F10E1F811B5500F378A9 /* AppDelegate.swift in Sources */,
 				49578CA11F8879790050C192 /* AssetBtnBackView.swift in Sources */,
 				49578C971F87FEAB0050C192 /* AssetBtnSend.swift in Sources */,
 				49578C811F8781580050C192 /* AssetManSlouchingView.swift in Sources */,
 				49578C8B1F8790CC0050C192 /* AssetBtnHelpView.swift in Sources */,
 				49578C931F87F2C30050C192 /* AssetDebugIcon.swift in Sources */,
+				497FD2A31F93B36000CE9AE5 /* Measurement.swift in Sources */,
 				49578C7B1F86DD070050C192 /* PaoDrawingAssets.swift in Sources */,
 				495A76391F83BD1300E1B5C4 /* BleConnection.swift in Sources */,
 				49578C9B1F8860830050C192 /* AssetGyroIconView.swift in Sources */,
 				49578C851F878C1A0050C192 /* AssetBtnTrainView.swift in Sources */,
+				497FD2A01F93B36000CE9AE5 /* SimpleFeatureVector.swift in Sources */,
 				49578C9D1F8861290050C192 /* AssetDMPIconView.swift in Sources */,
 				49578C951F87F4540050C192 /* AssetBtnPing.swift in Sources */,
 			);
