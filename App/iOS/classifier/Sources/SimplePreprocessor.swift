@@ -12,7 +12,7 @@ class SimplePreprocessor: Preprocessor{
 		var measurementWindow = [Measurement]()
 		for i in 0 ..< measurements.count{	
 			measurementWindow.append(measurements[i])
-			if(i>1 && i%10==0){
+			if(i>0 && i%windowSize==0){
 				vectors.append(preprocessWindow(measurementWindow))	
 				measurementWindow = [Measurement]()
 			}

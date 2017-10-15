@@ -28,11 +28,24 @@ class SimplePreprocessorTest: XCTestCase {
 
         XCTAssertTrue(result == 1.0, "Was \(result)")
     }
+
+    func testPreprocessor(){
+        let measurement1 = Measurement(Matrix<Double>([[1.0,1.0,1.0, 0.0,0.0,0.0]]))
+        let measurement2 = Measurement(Matrix<Double>([[2.0,2.0,2.0, 1.0,0.0,0.0]]))
+        let measurement3 = Measurement(Matrix<Double>([[2.0,2.0,2.0, 0.2,0.2,0.2]]))
+
+
+        let preprocessor = SimplePreprocessor(windowSize:2)
+        let featureVectors = preprocessor.preprocess(measurements:[measurement1,measurement2,measurement3])
+
+        print(featureVectors)
+    }
     
      static var allTests : [(String, (SimplePreprocessorTest) -> () throws -> Void)] {
         return [
           ("testAverageFilter",testAverageFilter),
           ("testPeak2Peak",testPeak2Peak),
+          ("testPreprocessor",testPreprocessor),
 
         ]
     }
