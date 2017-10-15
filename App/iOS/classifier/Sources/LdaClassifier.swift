@@ -82,5 +82,7 @@ class LdaClassifier: Classifier{
 		}
 		return priors	
 	}
-        
+	func classify_soft(samples: Matrix<Double>)->[[Int:Double]]{
+		return [[:]]
+	}
 }

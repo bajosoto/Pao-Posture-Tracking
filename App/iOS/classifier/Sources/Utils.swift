@@ -26,8 +26,15 @@ func unique<T where T:Comparable, T:Hashable>(list: [T])->[T]{
 	return (Array<T>(Set<T>(list))).sorted(by:<)
 }
 
+func euler()-> Double{
+    return 2.7182818284
+}
+
+func pi() -> Double{
+    return 3.14159265359
+}
+
 func ln(x: Double)->Double{
-    let euler = 2.7182818284
-    return log(x)/log(euler)
+    return log(x)/log(euler())
 
 }
