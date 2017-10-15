@@ -65,6 +65,7 @@ SRC_FILES += \
   $(PROJ_DIR)/drivers/uart.c \
   $(PROJ_DIR)/drivers/app_mpu.c \
   $(SDK_ROOT)/components/drivers_nrf/twi_master/nrf_drv_twi.c \
+  $(SDK_ROOT)/components/drivers_nrf/gpiote/nrf_drv_gpiote.c \
   $(PROJ_DIR)/drivers/nrf_drv_mpu_twi.c \
   $(PROJ_DIR)/modules/mpu_interface.c \
   $(PROJ_DIR)/modules/ble_interface.c \
@@ -76,6 +77,18 @@ SRC_FILES += \
   $(SDK_ROOT)/components/ble/common/ble_srv_common.c \
   $(SDK_ROOT)/components/libraries/fstorage/fstorage.c \
   $(PROJ_DIR)/modules/debug-interface.c \
+  $(PROJ_DIR)/../motion_driver_6.12/core/driver/nRF5/log_nRF5.c \
+  $(PROJ_DIR)/../motion_driver_6.12/core/driver/eMPL/inv_mpu.c \
+  $(PROJ_DIR)/../motion_driver_6.12/core/driver/eMPL/inv_mpu_dmp_motion_driver.c \
+  $(PROJ_DIR)/../motion_driver_6.12/core/mllite/mpl.c \
+  $(PROJ_DIR)/../motion_driver_6.12/core/mllite/data_builder.c \
+  $(PROJ_DIR)/../motion_driver_6.12/core/mllite/storage_manager.c \
+  $(PROJ_DIR)/../motion_driver_6.12/core/mllite/start_manager.c \
+  $(PROJ_DIR)/../motion_driver_6.12/core/mllite/results_holder.c \
+  $(PROJ_DIR)/../motion_driver_6.12/core/mllite/message_layer.c \
+  $(PROJ_DIR)/../motion_driver_6.12/core/mllite/ml_math_func.c \
+  $(PROJ_DIR)/../motion_driver_6.12/core/mllite/hal_outputs.c \
+  $(PROJ_DIR)/../motion_driver_6.12/core/eMPL-hal/eMPL_outputs.c \
 
   # $(PROJ_DIR)/comm-prot/sm/uart-sm.c \
   # $(PROJ_DIR)/comm-prot/es/es-uart-rx.c \
@@ -115,6 +128,7 @@ INC_FOLDERS += \
   $(SDK_ROOT)/components/libraries/usbd/class/hid/kbd \
   $(SDK_ROOT)/components/ble/ble_services/ble_lls \
   $(SDK_ROOT)/components/drivers_nrf/wdt \
+  $(SDK_ROOT)/components/drivers_nrf/gpiote \
   $(SDK_ROOT)/components/libraries/bsp \
   $(SDK_ROOT)/components/ble/ble_services/ble_bas \
   $(SDK_ROOT)/components/libraries/experimental_section_vars \
@@ -214,7 +228,13 @@ INC_FOLDERS += \
   $(SDK_ROOT)/components/ble/ble_services/ble_nus/ \
   $(SDK_ROOT)/components/ble/ble_advertising/  \
   $(SDK_ROOT)/components/libraries/timer \
-  $(SDK_ROOT)/components/libraries/fstorage
+  $(SDK_ROOT)/components/libraries/fstorage\
+  $(PROJ_DIR)/../motion_driver_6.12/core/driver/include \
+  $(PROJ_DIR)/../motion_driver_6.12/core/driver/nRF5 \
+  $(PROJ_DIR)/../motion_driver_6.12/core/driver/eMPL \
+  $(PROJ_DIR)/../motion_driver_6.12/core/eMPL-hal \
+  $(PROJ_DIR)/../motion_driver_6.12/core/mpl \
+  $(PROJ_DIR)/../motion_driver_6.12/core/mllite \
 
   # $(PROJ_DIR)/comm-prot/sm \
   # $(PROJ_DIR)/comm-prot/es \
@@ -240,7 +260,8 @@ CFLAGS +=  -Wall -Werror -O3 -g3
 CFLAGS += -mfloat-abi=soft
 # keep every function in separate section, this allows linker to discard unused ones
 CFLAGS += -ffunction-sections -fdata-sections -fno-strict-aliasing
-CFLAGS += -fno-builtin --short-enums 
+CFLAGS += -DMPU9250
+CFLAGS += -DEMPL
 
 # ===========================
 # Custom flags
@@ -263,6 +284,8 @@ ASMFLAGS += -DSWI_DISABLE0
 ASMFLAGS += -DBSP_DEFINES_ONLY
 ASMFLAGS += -DNRF51422
 ASMFLAGS += -DNRF_SD_BLE_API_VERSION=2
+ASMFLAGS += -DMPU9250
+ASMFLAGS += -DEMPL
 
 # Linker flags
 LDFLAGS += -mthumb -mabi=aapcs -L $(TEMPLATE_PATH) -T$(LINKER_SCRIPT)

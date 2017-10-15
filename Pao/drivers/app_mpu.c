@@ -13,6 +13,7 @@
 #include "nrf_drv_mpu.h"
 #include "nrf_error.h"
 #include "nrf_drv_config.h"
+#include "inv_mpu.h"
 
 
 
@@ -44,24 +45,24 @@ uint32_t mpu_int_enable(mpu_int_enable_t *cfg)
 
 
 
-uint32_t mpu_init(void)
-{
-    uint32_t err_code;
+// uint32_t mpu_init(void)
+// {
+//     uint32_t err_code;
 	
-	// Initate TWI or SPI driver dependent on what is defined from the project
-	err_code = nrf_drv_mpu_init();
-    if(err_code != NRF_SUCCESS) return err_code;
+// 	// Initate TWI or SPI driver dependent on what is defined from the project
+// 	err_code = nrf_drv_mpu_init();
+//     if(err_code != NRF_SUCCESS) return err_code;
 
-    uint8_t reset_value = 7; // Resets gyro, accelerometer and temperature sensor signal paths.
-    err_code = nrf_drv_mpu_write_single_register(MPU_REG_SIGNAL_PATH_RESET, reset_value);
-    if(err_code != NRF_SUCCESS) return err_code;
+//     uint8_t reset_value = 7; // Resets gyro, accelerometer and temperature sensor signal paths.
+//     err_code = nrf_drv_mpu_write_single_register(MPU_REG_SIGNAL_PATH_RESET, reset_value);
+//     if(err_code != NRF_SUCCESS) return err_code;
 
-    // Chose  PLL with X axis gyroscope reference as clock source
-    err_code = nrf_drv_mpu_write_single_register(MPU_REG_PWR_MGMT_1, 1);
-    if(err_code != NRF_SUCCESS) return err_code;
+//     // Chose  PLL with X axis gyroscope reference as clock source
+//     err_code = nrf_drv_mpu_write_single_register(MPU_REG_PWR_MGMT_1, 1);
+//     if(err_code != NRF_SUCCESS) return err_code;
 
-    return NRF_SUCCESS;
-}
+//     return NRF_SUCCESS;
+// }
 
 
 
@@ -207,15 +208,15 @@ uint32_t mpu_read_magnetometer_test(uint8_t reg, uint8_t * registers, uint8_t le
 */
 void mpu_setup(void)
 {
-    ret_code_t ret_code;
+    //ret_code_t ret_code;
     // Initiate MPU driver
-    ret_code = mpu_init();
-    APP_ERROR_CHECK(ret_code); // Check for errors in return value
+    //ret_code = mpu_init();
+    //APP_ERROR_CHECK(ret_code); // Check for errors in return value
     
     // Setup and configure the MPU with intial values
-    mpu_config_t p_mpu_config = MPU_DEFAULT_CONFIG(); // Load default values
-    p_mpu_config.smplrt_div = 19;   // Change sampelrate. Sample Rate = Gyroscope Output Rate / (1 + SMPLRT_DIV). 19 gives a sample rate of 50Hz
-    p_mpu_config.accel_config.afs_sel = AFS_2G; // Set accelerometer full scale range to 2G
-    ret_code = mpu_config(&p_mpu_config); // Configure the MPU with above values
-    APP_ERROR_CHECK(ret_code); // Check for errors in return value 
+    //mpu_config_t p_mpu_config = MPU_DEFAULT_CONFIG(); // Load default values
+    //p_mpu_config.smplrt_div = 19;   // Change sampelrate. Sample Rate = Gyroscope Output Rate / (1 + SMPLRT_DIV). 19 gives a sample rate of 50Hz
+    //p_mpu_config.accel_config.afs_sel = AFS_2G; // Set accelerometer full scale range to 2G
+    //ret_code = mpu_config(&p_mpu_config); // Configure the MPU with above values
+    //APP_ERROR_CHECK(ret_code); // Check for errors in return value 
 }
