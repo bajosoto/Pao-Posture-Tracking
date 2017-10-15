@@ -1,7 +1,6 @@
 import XCTest
 import Nifty
-@testable import classifier
-
+@testable import Recognition
 class UtilsTest: XCTestCase {
 
 	func testMeanRow(){

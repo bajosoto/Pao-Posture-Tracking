@@ -1,5 +1,5 @@
 import XCTest
-@testable import classifierTests
+@testable import RecognitionTests
 
 XCTMain([
      testCase(OperatorTest.allTests),
@@ -9,6 +9,6 @@ XCTMain([
      testCase(KnnClassifierTest.allTests),
      testCase(ParzenClassifierTest.allTests),
      testCase(SimplePreprocessorTest.allTests),
-     testCase(MyMatrixTest.allTests),
+     //testCase(MyMatrixTest.allTests),
 
 ])
