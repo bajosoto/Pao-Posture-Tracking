@@ -36,8 +36,7 @@ class SimplePreprocessorTest: XCTestCase {
 
         let preprocessor = SimplePreprocessor(windowSize:2)
         let featureVectors = preprocessor.preprocess(measurements:[measurement1,measurement2,measurement3])
-
-        print(featureVectors)
+        //TODO inser assertion
     }
     
      static var allTests : [(String, (SimplePreprocessorTest) -> () throws -> Void)] {

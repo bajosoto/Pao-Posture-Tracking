@@ -1,4 +1,6 @@
 import Nifty
+import Mat
+
 class LdaClassifier: Classifier{
 	
 	let means 		 : [Matrix<Double>]

@@ -1,4 +1,6 @@
 import Nifty
+import Mat
+
 class KnnClassifier: Classifier{
 	
 	internal let trainset: Dataset
@@ -84,7 +86,7 @@ class KnnClassifier: Classifier{
 
 	internal static func dist(this: Matrix<Double>,that: Matrix<Double>)->Double{
 		//Euclidian distance
-		return norm(this-that)
+		return Mat.norm(this-that)
 	}
 	
 	

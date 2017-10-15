@@ -1,5 +1,5 @@
 import Nifty
-
+import Mat
 class SimplePreprocessor: Preprocessor{
 	
 	let windowSize: Int
@@ -49,7 +49,7 @@ class SimplePreprocessor: Preprocessor{
 				let vector1 = Matrix<Double>([[measurements[i].accelX,measurements[i].accelY,measurements[i].accelZ]])
 				let vector2 = Matrix<Double>([[measurements[j].accelX,measurements[j].accelY,measurements[j].accelZ]])
 
-				let dist = norm(vector1-vector2)
+				let dist = Mat.norm(vector1-vector2)
 				if (dist > maxDist){
 					maxDist = dist
 				}

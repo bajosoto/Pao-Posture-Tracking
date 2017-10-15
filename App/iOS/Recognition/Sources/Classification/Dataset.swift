@@ -1,4 +1,6 @@
 import Nifty
+import Mat
+
 struct Dataset{
 	public let samples:Matrix<Double>
 	public let labels:[Int]
