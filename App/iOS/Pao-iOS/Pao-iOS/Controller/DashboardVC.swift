@@ -449,7 +449,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
                 }
             }
             
-            // self.postureBar.posture = CGFloat(ay) / 32000 + 0.5
+            self.postureBar.posture = CGFloat(ax) / 32000.0 + 0.5
         }
     }
 }
