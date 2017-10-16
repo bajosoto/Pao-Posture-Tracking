@@ -182,7 +182,7 @@ class Classifier {
             try! entriesRealm.write {
                 entriesRealm.add(newEntry)
             }
-            _bleConn.logMsg(message: "Stored classified sample: \(newEntry.postureLbl)")
+            _bleConn.logMsg(message: "Stored classified sample: \(newEntry.postureLbl), \(newEntry.posture.format(f: ".2"))")
             print("Stored classified sample: \(newEntry.postureLbl)")
             
             // Reset sample counter
@@ -215,19 +215,44 @@ class Classifier {
         var ranking: [String: Double] = [:]
         for k in 0..<nNeighbours {
             let label = distances[k].lbl
+            // Accumulate occurrances
             ranking[label] = (ranking[label] ?? 0) + 1
         }
         
         let result = ranking.sorted(by: {$0.1 > $1.1})[0]
-        proba = (lbl: result.key, prob: result.value / Double(nNeighbours))
+        
+        // Calculate probability relative to opposing class
+        // result.value has the number of occurrances of a given label
+        // we are getting the ratio between only opposing classes
+        // TODO: Don't use strings for this. Too innefficient
+        var perPostureProb = result.value
+        switch result.key {
+        case "SitOk":
+            perPostureProb = perPostureProb / (perPostureProb + (ranking["SitNok"] ?? 0))
+            break
+        case "SitNok":
+            // Negative signs for bad postures
+            perPostureProb = -perPostureProb / (perPostureProb + (ranking["SitOk"] ?? 0))
+            break
+        case "StandOk":
+            perPostureProb = perPostureProb / (perPostureProb + (ranking["StandNok"] ?? 0))
+            break
+        case "StandNok":
+            perPostureProb = -perPostureProb / (perPostureProb + (ranking["StandOk"] ?? 0))
+            break
+        case "MovOk":
+            perPostureProb = perPostureProb / (perPostureProb + (ranking["MovNok"] ?? 0))
+            break
+        case "MovNok":
+            perPostureProb = -perPostureProb / (perPostureProb + (ranking["MovOk"] ?? 0))
+            break
+        default:
+            break
+        }
+        proba = (lbl: result.key, prob: perPostureProb)//result.value / Double(nNeighbours))
         
         newEntry.postureLbl = proba.lbl
         newEntry.posture = proba.prob
-        
-        print("new posture lbl: \(proba.lbl)")
-        print("new posture prob: \(proba.prob)")
-        
-        //return proba
         
     }
     

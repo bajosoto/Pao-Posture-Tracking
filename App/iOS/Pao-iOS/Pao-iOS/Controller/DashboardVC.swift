@@ -234,12 +234,14 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     
     func getPostureEntriesFromDatabase() -> Results<PostureEntry> {
-        do {
-            let realm = try Realm()
-            return realm.objects(PostureEntry.self)
-        } catch let error as NSError {
-            fatalError(error.localizedDescription)
-        }
+//        do {
+//            let realm = try Realm()
+//            return realm.objects(PostureEntry.self)
+//        } catch let error as NSError {
+//            fatalError(error.localizedDescription)
+//        }
+        return self.classifier.entriesRealm.objects(PostureEntry.self)
+        
     }
     
     
@@ -421,6 +423,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         if let dest = segue.destination as? DebugVC {
             if let newConnection = sender as? BleConnection {
                 dest.bleConn = newConnection
+                dest.classifier = self.classifier
             }
         }
     }
@@ -454,7 +457,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
                 self.sampleCnt += 1
             } else if(shouldClassifySample == true) {
                 print("classifying...")
-                self.classifier.classifyKnn(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, nNeighbours: 5)
+                self.classifier.classifyKnn(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, nNeighbours: 15)
                 self.sampleCnt += 1
             }
             
@@ -463,9 +466,17 @@ class DashboardVC: UIViewController, bleConnectionResponder {
                 if(self.isSampling == false) {
                     self.currLabel = ""
                 }
+                
+                // Calculate value for posture bar
+                var postureBarVal = 0.5
+                let lastPostureProb = self.classifier.entriesRealm.objects(PostureEntry.self).last?.posture
+                // 0.5 +/- 0...0.5
+                postureBarVal += lastPostureProb! / 2.0     // Unsafe unwrap! TODO: Change this
+                self.postureBar.posture = CGFloat(postureBarVal)
+                self.updateChartWithData()
             }
             
-            self.postureBar.posture = CGFloat(ax) / 32000.0 + 0.5
+            
         }
     }
 }

@@ -37,6 +37,24 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
         }
     }
     
+    private var _classifier: Classifier!
+    var classifier: Classifier {
+        get {
+            return _classifier
+        }
+        set (newClassifier) {
+            _classifier = newClassifier
+        }
+    }
+    
+    // Training states and label
+    var currLabel: String = ""
+    var sampleCnt: Int = 0
+    var isSampling: Bool = false
+    
+    // Classifying state
+    var isClassifying: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -162,6 +180,33 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
             self.gxLbl.text = "\(gx)"
             self.gyLbl.text = "\(gy)"
             self.gzLbl.text = "\(gz)"
+        }
+        
+        var shouldSaveSample = false
+        var shouldClassifySample = false
+        DispatchQueue.main.async {
+            // Training data generation:
+            if(self.isSampling == true) {//} || self.sampleCnt > 0) {
+                shouldSaveSample = true
+            } else if (self.isClassifying == true) {
+                shouldClassifySample = true
+            }
+            
+            if(shouldSaveSample == true) {
+                self.classifier.addToDataset(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, label: self.currLabel)
+                self.sampleCnt += 1
+            } else if(shouldClassifySample == true) {
+                print("classifying...")
+                self.classifier.classifyKnn(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, nNeighbours: 15)
+                self.sampleCnt += 1
+            }
+            
+            if(self.sampleCnt == 10) {
+                self.sampleCnt = 0
+                if(self.isSampling == false) {
+                    self.currLabel = ""
+                }
+            }
         }
     }
     
