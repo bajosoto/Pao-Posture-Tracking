@@ -37,7 +37,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     
     var effect: UIVisualEffect!
     
-    var _bleConn: BleConnection!
+    private var _bleConn: BleConnection!
     var bleConn: BleConnection {
         get {
             return _bleConn
@@ -46,6 +46,17 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             _bleConn = newConn
         }
     }
+    
+    private var _classifier: Classifier!
+    var classifier: Classifier {
+        get {
+            return _classifier
+        }
+        set (newClassifier) {
+            _classifier = newClassifier
+        }
+    }
+    
     
     // Axis format delegate
     weak var axisFormatDelegate: IAxisValueFormatter?
@@ -61,9 +72,12 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     let paoBarGreen = UIColor(red: 0.184, green: 0.886, blue: 0.686, alpha: 1.000)
     
     // Training states and label
-    var currLabel: Int = 0
+    var currLabel: String = ""
     var sampleCnt: Int = 0
     var isSampling: Bool = false
+    
+    // Classifying state
+    var isClassifying: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +93,9 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         if let bleConnResp = self as bleConnectionResponder? {
             bleConn.responder = bleConnResp
         }
+        
+        // Create a classifier
+        classifier = Classifier(numSamples: 10, bleConn: _bleConn)
         
         // Round off profile picture
         profilePicImg.layer.cornerRadius = profilePicImg.frame.size.width / 2
@@ -231,6 +248,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnTrainReleased(_ sender: Any) {
         btnTrainView.isPressed = false
+        isClassifying = false
         animateTrainButtonsIn()
     }
     @IBAction func onBtnTrainDrag(_ sender: Any) {
@@ -280,7 +298,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             btnTrainSitOk.takingMeasurement = true
             btnTrainSitOk.isPressed = true
             isSampling = true
-            currLabel = 1
+            currLabel = "SitOk"
         } else {
             btnTrainSitOk.takingMeasurement = false
             btnTrainSitOk.isPressed = false
@@ -299,7 +317,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             btnTrainSitNok.takingMeasurement = true
             btnTrainSitNok.isPressed = true
             isSampling = true
-            currLabel = 2
+            currLabel = "SitNok"
         } else {
             btnTrainSitNok.takingMeasurement = false
             btnTrainSitNok.isPressed = false
@@ -318,7 +336,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             btnTrainStndOk.takingMeasurement = true
             btnTrainStndOk.isPressed = true
             isSampling = true
-            currLabel = 3
+            currLabel = "StandOk"
         } else {
             btnTrainStndOk.takingMeasurement = false
             btnTrainStndOk.isPressed = false
@@ -337,7 +355,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             btnTrainStndNok.takingMeasurement = true
             btnTrainStndNok.isPressed = true
             isSampling = true
-            currLabel = 4
+            currLabel = "StandNok"
         } else {
             btnTrainStndNok.takingMeasurement = false
             btnTrainStndNok.isPressed = false
@@ -356,7 +374,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             btnTrainMvOk.takingMeasurement = true
             btnTrainMvOk.isPressed = true
             isSampling = true
-            currLabel = 5
+            currLabel = "MovOk"
         } else {
             btnTrainMvOk.takingMeasurement = false
             btnTrainMvOk.isPressed = false
@@ -375,7 +393,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             btnTrainMvNok.takingMeasurement = true
             btnTrainMvNok.isPressed = true
             isSampling = true
-            currLabel = 6
+            currLabel = "MovNok"
         } else {
             btnTrainMvNok.takingMeasurement = false
             btnTrainMvNok.isPressed = false
@@ -391,6 +409,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnTrainBackReleased(_ sender: Any) {
         btnTrainBack.isPressed = false
+        isClassifying = true
         animateTrainButtonsOut()
     }
     @IBAction func onBtnTrainBackDrag(_ sender: Any) {
@@ -421,31 +440,28 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16) {
         
         var shouldSaveSample = false
+        var shouldClassifySample = false
         DispatchQueue.main.async {
             // Training data generation:
-            if(self.isSampling == true || self.sampleCnt > 0) {
+            if(self.isSampling == true) {//} || self.sampleCnt > 0) {
                 shouldSaveSample = true
+            } else if (self.isClassifying == true) {
+                shouldClassifySample = true
             }
             
-            
             if(shouldSaveSample == true) {
-                let postureEntry = PostureEntry()
-                postureEntry.accX = ax
-                postureEntry.accY = ay
-                postureEntry.accZ = az
-                postureEntry.gyrX = gx
-                postureEntry.gyrY = gy
-                postureEntry.gyrZ = gz
-                postureEntry.postureLbl = self.currLabel
-                postureEntry.save()
-                self.bleConn.logMsg(message: "Stored sample \(self.currLabel)")
+                self.classifier.addToDataset(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, label: self.currLabel)
+                self.sampleCnt += 1
+            } else if(shouldClassifySample == true) {
+                print("classifying...")
+                self.classifier.classifyKnn(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, nNeighbours: 5)
                 self.sampleCnt += 1
             }
             
             if(self.sampleCnt == 10) {
                 self.sampleCnt = 0
                 if(self.isSampling == false) {
-                    self.currLabel = 0
+                    self.currLabel = ""
                 }
             }
             

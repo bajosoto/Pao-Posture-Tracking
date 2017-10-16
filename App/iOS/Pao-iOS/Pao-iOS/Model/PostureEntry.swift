@@ -8,7 +8,6 @@
 
 import Foundation
 import RealmSwift
-import Nifty
 
 class PostureEntry: Object {
     // TODO: I think these should be '@objc dynamic'
@@ -19,8 +18,9 @@ class PostureEntry: Object {
     @objc dynamic var gyrX: Int16 = Int16(0)
     @objc dynamic var gyrY: Int16 = Int16(0)
     @objc dynamic var gyrZ: Int16 = Int16(0)
+    @objc dynamic var p2p: Double = Double(0)
     @objc dynamic var posture: Double = 0
-    @objc dynamic var postureLbl: Int = 0
+    @objc dynamic var postureLbl: String = ""
     
     // Save this entry into realm database
     func save() {

@@ -39,37 +39,13 @@
 		495A763D1F83FD2200E1B5C4 /* DashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A763C1F83FD2200E1B5C4 /* DashboardVC.swift */; };
 		495CDACA1F84450B00B0D7B9 /* PaoPostureBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */; };
 		497245E11F84551800697B60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 497245E01F84551800697B60 /* Assets.xcassets */; };
+		497BDC301F94014A006A612A /* Classifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497BDC2F1F94014A006A612A /* Classifier.swift */; };
 		497FD28B1F93811900CE9AE5 /* AssetBtnTrainBtnsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497FD28A1F93811900CE9AE5 /* AssetBtnTrainBtnsView.swift */; };
 		49BDDD201F84EAC80052FA32 /* PostureEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BDDD1F1F84EAC80052FA32 /* PostureEntry.swift */; };
 		49F1AB471F811C8700148162 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49F1AB461F811C8700148162 /* CoreBluetooth.framework */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		49208BE81F8EA96D005F9F14 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 49208BE31F8EA96D005F9F14 /* Nifty.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4A7C77FE1E411C6500B09975;
-			remoteInfo = Nifty;
-		};
-		49208BEA1F8EA96D005F9F14 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 49208BE31F8EA96D005F9F14 /* Nifty.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4A7C78071E411C6500B09975;
-			remoteInfo = NiftyTests;
-		};
-		49208BEC1F8EA9A1005F9F14 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 49208BE31F8EA96D005F9F14 /* Nifty.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 4A7C77FD1E411C6500B09975;
-			remoteInfo = Nifty;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		49208BE31F8EA96D005F9F14 /* Nifty.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Nifty.xcodeproj; path = Nifty/Nifty.xcodeproj; sourceTree = "<group>"; };
 		492A89881F85A2650067A6F8 /* PaoSittingGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoSittingGoalView.swift; sourceTree = "<group>"; };
 		492A898A1F85A6720067A6F8 /* PaoStandingGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoStandingGoalView.swift; sourceTree = "<group>"; };
 		492A898C1F85A6B20067A6F8 /* PaoMovingGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoMovingGoalView.swift; sourceTree = "<group>"; };
@@ -103,6 +79,7 @@
 		495A763C1F83FD2200E1B5C4 /* DashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardVC.swift; sourceTree = "<group>"; };
 		495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoPostureBarView.swift; sourceTree = "<group>"; };
 		497245E01F84551800697B60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		497BDC2F1F94014A006A612A /* Classifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
 		497FD28A1F93811900CE9AE5 /* AssetBtnTrainBtnsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBtnTrainBtnsView.swift; sourceTree = "<group>"; };
 		49BDDD1F1F84EAC80052FA32 /* PostureEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostureEntry.swift; sourceTree = "<group>"; };
 		49F1AB461F811C8700148162 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -133,19 +110,9 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		49208BE41F8EA96D005F9F14 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				49208BE91F8EA96D005F9F14 /* Nifty.framework */,
-				49208BEB1F8EA96D005F9F14 /* NiftyTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		4942F1011F811B5500F378A9 = {
 			isa = PBXGroup;
 			children = (
-				49208BE31F8EA96D005F9F14 /* Nifty.xcodeproj */,
 				497245E01F84551800697B60 /* Assets.xcassets */,
 				4942F10C1F811B5500F378A9 /* Pao-iOS */,
 				4942F10B1F811B5500F378A9 /* Products */,
@@ -165,6 +132,7 @@
 		4942F10C1F811B5500F378A9 /* Pao-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				497BDC2E1F94012E006A612A /* Classifier */,
 				495142751F82C86C00A2921E /* Controller */,
 				495142741F82C86700A2921E /* View */,
 				495142731F82C85800A2921E /* Model */,
@@ -226,6 +194,14 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		497BDC2E1F94012E006A612A /* Classifier */ = {
+			isa = PBXGroup;
+			children = (
+				497BDC2F1F94014A006A612A /* Classifier.swift */,
+			);
+			path = Classifier;
+			sourceTree = "<group>";
+		};
 		F1B975708B1E566B99B50A0A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,7 +228,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				49208BED1F8EA9A1005F9F14 /* PBXTargetDependency */,
 			);
 			name = "Pao-iOS";
 			productName = "Pao-iOS";
@@ -291,35 +266,12 @@
 			mainGroup = 4942F1011F811B5500F378A9;
 			productRefGroup = 4942F10B1F811B5500F378A9 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 49208BE41F8EA96D005F9F14 /* Products */;
-					ProjectRef = 49208BE31F8EA96D005F9F14 /* Nifty.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				4942F1091F811B5500F378A9 /* Pao-iOS */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		49208BE91F8EA96D005F9F14 /* Nifty.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Nifty.framework;
-			remoteRef = 49208BE81F8EA96D005F9F14 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		49208BEB1F8EA96D005F9F14 /* NiftyTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = NiftyTests.xctest;
-			remoteRef = 49208BEA1F8EA96D005F9F14 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		4942F1081F811B5500F378A9 /* Resources */ = {
@@ -415,20 +367,13 @@
 				495A76391F83BD1300E1B5C4 /* BleConnection.swift in Sources */,
 				49578C9B1F8860830050C192 /* AssetGyroIconView.swift in Sources */,
 				49578C851F878C1A0050C192 /* AssetBtnTrainView.swift in Sources */,
+				497BDC301F94014A006A612A /* Classifier.swift in Sources */,
 				49578C9D1F8861290050C192 /* AssetDMPIconView.swift in Sources */,
 				49578C951F87F4540050C192 /* AssetBtnPing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		49208BED1F8EA9A1005F9F14 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Nifty;
-			targetProxy = 49208BEC1F8EA9A1005F9F14 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		4942F1111F811B5500F378A9 /* Main.storyboard */ = {
