@@ -132,11 +132,11 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     
     @IBAction func onTestBtnPress(_ sender: Any) {
-        let postureEntry = PostureEntry()
-        let randInt = (Double(arc4random()) / Double(UINT32_MAX) ) * 2.0 - 1.0
-        postureEntry.posture = randInt // random number between -1 and 1
-        postureEntry.save()
-        updateChartWithData()
+//        let postureEntry = PostureEntry()
+//        let randInt = (Double(arc4random()) / Double(UINT32_MAX) ) * 2.0 - 1.0
+//        postureEntry.posture = randInt // random number between -1 and 1
+//        postureEntry.save()
+//        updateChartWithData()
     }
     
     func updateChartWithData() {
