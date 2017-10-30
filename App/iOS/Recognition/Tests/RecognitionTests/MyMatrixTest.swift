@@ -39,12 +39,66 @@ class MyMatrixTest: XCTestCase {
         
     }
 
+    func testPlus(){
+        let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
+        let matrix2 = MyMatrix([[1,2],[3,4],[5,6]])
+
+        let result = matrix1.plus(matrix2);
+        XCTAssertTrue(result[0,0] == 2)
+        XCTAssertTrue(result[0,1] == 4)
+        XCTAssertTrue(result[1,0] == 6)
+        XCTAssertTrue(result[1,1] == 8)
+    }
+
+
+    func testMinus(){
+        let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
+        let matrix2 = MyMatrix([[2,2],[3,4],[5,6]])
+
+        let result = matrix1.minus(matrix2);
+        XCTAssertTrue(result[0,0] == -1)
+        XCTAssertTrue(result[0,1] == 0)
+        XCTAssertTrue(result[1,0] == 0)
+        XCTAssertTrue(result[1,1] == 0)
+    }
+
+    func testMinusNotPossible(){
+
+    }
+
+    func testTimes(){
+        
+    }
+
+    func testDiv(){
+        
+    }
+
+    func testMinusScalar(){
+
+    }
+
+    func testPlusScalar(){
+        
+    }
+
+    func testTimesScalar(){
+        
+    }
+
+    func testDivScalar(){
+        
+    }    
+
     static var allTests : [(String, (MyMatrixTest) -> () throws -> Void)] {
         return [
         	("testInit",testInit),
         	("testSubscript",testSubscript),
             ("testSubscriptRow",testSubscriptRow),
             ("testRowsCols",testRowsCols),
+            ("testPlus",testPlus),
+            ("testMinus",testMinus),
+
 
         ]
     }
