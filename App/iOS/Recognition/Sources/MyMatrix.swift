@@ -52,24 +52,24 @@ class MyMatrix{
 		return data[0].count
 	}
 
-	func plus(_ that: MyMatrix) -> MyMatrix {
-		return MyMatrix.plus(self,that)
+	func plus(_ that: MyMatrix) throws -> MyMatrix {
+		return try MyMatrix.plus(self,that)
 	}
 
-	func minus(_ that: MyMatrix) -> MyMatrix {
-		return MyMatrix.minus(self,that)
+	func minus(_ that: MyMatrix) throws -> MyMatrix {
+		return try MyMatrix.minus(self,that)
 	}
 
-	static func plus(_ this: MyMatrix, _ that: MyMatrix) -> MyMatrix {
+	static func plus(_ this: MyMatrix, _ that: MyMatrix) throws -> MyMatrix {
 
-		try? checkDimAdd(this,that)
+		try checkDimAdd(this,that)
 		return doPlus(this,that)
 		
 	}
 
-	static func minus(_ this: MyMatrix, _ that: MyMatrix) -> MyMatrix {
+	static func minus(_ this: MyMatrix, _ that: MyMatrix) throws -> MyMatrix {
 
-		try? checkDimAdd(this,that)
+		try checkDimAdd(this,that)
 		return doMinus(this,that)
 		
 	}

@@ -41,13 +41,18 @@ class MyMatrixTest: XCTestCase {
 
     func testPlus(){
         let matrix1 = MyMatrix([[1,2],[3,4]])
-        let matrix2 = MyMatrix([[1,2],[3,4])
+        let matrix2 = MyMatrix([[1,2],[3,4]])
 
-        let result = matrix1.plus(matrix2);
-        XCTAssertTrue(result[0,0] == 2)
-        XCTAssertTrue(result[0,1] == 4)
-        XCTAssertTrue(result[1,0] == 6)
-        XCTAssertTrue(result[1,1] == 8)
+        do{
+            let result = try matrix1.plus(matrix2);
+            XCTAssertTrue(result[0,0] == 2)
+            XCTAssertTrue(result[0,1] == 4)
+            XCTAssertTrue(result[1,0] == 6)
+            XCTAssertTrue(result[1,1] == 8)    
+        }catch {
+            XCTFail("Improper exception")
+        }
+        
     }
 
 
@@ -55,32 +60,43 @@ class MyMatrixTest: XCTestCase {
         let matrix1 = MyMatrix([[1,2],[3,4]])
         let matrix2 = MyMatrix([[2,2],[3,4]])
 
-        let result = matrix1.minus(matrix2);
-        XCTAssertTrue(result[0,0] == -1)
-        XCTAssertTrue(result[0,1] == 0)
-        XCTAssertTrue(result[1,0] == 0)
-        XCTAssertTrue(result[1,1] == 0)
+        do{
+            let result = try matrix1.minus(matrix2);
+            XCTAssertTrue(result[0,0] == -1)
+            XCTAssertTrue(result[0,1] == 0)
+            XCTAssertTrue(result[1,0] == 0)
+            XCTAssertTrue(result[1,1] == 0)    
+        }catch {
+            XCTFail("Improper exception")
+        }
+        
     }
 
     func testMinusNotPossible(){
         let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
-        let matrix2 = MyMatrix([[2,2],[3,4])
+        let matrix2 = MyMatrix([[2,2],[3,4]])
 
-        let result = matrix1.minus(matrix2);
-        XCTAssertThrowsError(try functionThatThrows()) { 
-            error in XCTAssertEqual(error as? MatrixMathError, MatrixMathError.dimensionsDoNotMatch)
+        do{
+            _ = try matrix1.minus(matrix2);
+            XCTFail("No Error thrown")
+        }catch {
+
+        }
+        
     }
 
     func testPlusNotPossible(){
         let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
-        let matrix2 = MyMatrix([[2,2],[3,4])
+        let matrix2 = MyMatrix([[2,2],[3,4]])
 
-        let result = matrix1.plus(matrix2);
-        XCTAssertThrowsError(try functionThatThrows()) { 
-            error in XCTAssertEqual(error as? MatrixMathError, MatrixMathError.dimensionsDoNotMatch)
+        do{
+            _ = try matrix1.plus(matrix2);
+            XCTFail("No Error thrown")
+        }catch {
+            
+        }
     }
 
-    }
 
     func testTimes(){
         
