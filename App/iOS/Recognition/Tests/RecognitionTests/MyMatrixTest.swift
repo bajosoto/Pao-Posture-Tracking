@@ -39,7 +39,17 @@ class MyMatrixTest: XCTestCase {
         
     }
 
- 
+    func testEquals(){
+        let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
+        let matrix2 = MyMatrix([[1,2],[3,4],[5,6]])
+        XCTAssertEqual(matrix1,matrix2)
+    }
+
+    func testNotEquals(){
+        let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
+        let matrix2 = MyMatrix([[1,2],[3,5],[5,6]])
+        XCTAssertTrue(matrix1 != matrix2)
+    }
 
     static var allTests : [(String, (MyMatrixTest) -> () throws -> Void)] {
         return [
@@ -47,7 +57,9 @@ class MyMatrixTest: XCTestCase {
         	("testSubscript",testSubscript),
             ("testSubscriptRow",testSubscriptRow),
             ("testRowsCols",testRowsCols),
-            
+            ("testEquals",testEquals),
+            ("testNotEquals",testNotEquals)
+
         ]
     }
 }

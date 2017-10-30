@@ -1,4 +1,4 @@
-class MyMatrix : CustomStringConvertible{
+class MyMatrix : CustomStringConvertible, Equatable{
 	var data: [[Double]]
 
 	init(_ nrows:Int, _ ncols:Int){
@@ -63,5 +63,16 @@ class MyMatrix : CustomStringConvertible{
 		}
 		return s
 	}
+
+	static func ==(this: MyMatrix, that: MyMatrix) -> Bool {
+        for i in 0..<this.rows{
+			for n in 0..<that.columns{
+				if(this[i,n] != that[i,n]){
+					return false
+				}
+			}
+		}
+		return true
+    }
 	
 }
