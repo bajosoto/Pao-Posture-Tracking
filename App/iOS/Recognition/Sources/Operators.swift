@@ -1,3 +1,5 @@
+import Glibc
+
 public func equals(this: Matrix, that: Matrix, within: Double)-> Bool{
 	for i in 0..<this.rows{
 		for n in 0..<that.columns{
@@ -7,6 +9,14 @@ public func equals(this: Matrix, that: Matrix, within: Double)-> Bool{
 		}
 	}
 	return true
+}
+
+public func ^(this: Double, that: Double)-> Double{
+	return pow(this,that)
+}
+
+public func ^(this: Double, that: Int) -> Double{
+	return pow(this,Double(that))
 }
 
 public func *(this: Matrix, that: Matrix)-> Matrix{

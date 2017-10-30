@@ -1,5 +1,6 @@
 import XCTest
 
+
 @testable import Recognition
 class OperatorTest: XCTestCase {
     
