@@ -51,6 +51,18 @@ class MatrixTest: XCTestCase {
         XCTAssertTrue(matrix1 != matrix2)
     }
 
+    func testTransposed(){
+        let matrix = Matrix([[1,2],
+                              [3,4],
+                              [5,6]])
+
+        let transposed = Matrix([[1,3,5],
+                                 [2,4,6]])
+
+        XCTAssertEqual(matrix.T, transposed)
+
+    }
+
     static var allTests : [(String, (MatrixTest) -> () throws -> Void)] {
         return [
         	("testInit",testInit),
@@ -58,7 +70,8 @@ class MatrixTest: XCTestCase {
             ("testSubscriptRow",testSubscriptRow),
             ("testRowsCols",testRowsCols),
             ("testEquals",testEquals),
-            ("testNotEquals",testNotEquals)
+            ("testNotEquals",testNotEquals),
+            ("testTransposed",testTransposed),
 
         ]
     }

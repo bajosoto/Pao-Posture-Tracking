@@ -4,7 +4,7 @@ import XCTest
 class OperatorTest: XCTestCase {
     
     func testEqInt(){
-        let A = Matrix<Int>([[1, 2],[3, 4]])
+        let A = Matrix([[1, 2],[3, 4]])
         XCTAssertTrue(A==A)
     }
 

@@ -9,8 +9,12 @@ public func equals(this: Matrix, that: Matrix, within: Double)-> Bool{
 	return true
 }
 
+public func *(this: Matrix, that: Matrix)-> Matrix{
+	return try! MatrixMath.times(this,that)
+}
+
 public func *(matrix: Matrix, mul:Double) -> Matrix{
-	return try? MatrixMath.times(matrix,mul)
+	return try! MatrixMath.times(matrix,mul)
 }
 public func *(_ mul: Double, _ matrix:Matrix) -> Matrix{
 	return matrix*mul
@@ -41,25 +45,25 @@ public func /(div: Int, matrix: Matrix) -> Matrix{
 }
 
 public func +(_ this: Matrix, _ that: Matrix) -> Matrix{
-	return try? MatrixMath.plus(this,that)
+	return try! MatrixMath.plus(this,that)
 }
 
 public func +(_ this: Matrix, _ that: Double) -> Double{
-	return try? MatrixMath.plus(this,that)
+	return try! MatrixMath.plus(this,that)
 }
 
 public func -(_ this: Matrix, _ that: Matrix) -> Matrix{
-	return try? MatrixMath.minus(this,that)
+	return try! MatrixMath.minus(this,that)
 }
 
 public func -(_ this: Matrix, _ that: Double) -> Double{
-	return try? MatrixMath.minus(this,that)
+	return try! MatrixMath.minus(this,that)
 }
 
 public func -(_ this: Double, _ that: Matrix) -> Double{
-	return try? MatrixMath.minus(that,this)
+	return try! MatrixMath.minus(that,this)
 }
 
 public func +(_ this: Double, _ that: Matrix) -> Double{
-	return try? MatrixMath.plus(that,this)
+	return try! MatrixMath.plus(that,this)
 }

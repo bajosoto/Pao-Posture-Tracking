@@ -44,6 +44,16 @@ public class Matrix : CustomStringConvertible, Equatable{
 	  }
 	}
 
+	public subscript(_ i: Int, _ r: CountableClosedRange<Int>) -> Matrix {
+	  get {
+	  	let out:Matrix = Matrix(1,r.count)
+	    for j in r{
+	    	out[0,j] = self[i,j]
+	    }
+	    return out
+	  }
+	}
+
 	public var rows:Int{
 		return data.count
 	}
@@ -73,6 +83,16 @@ public class Matrix : CustomStringConvertible, Equatable{
 			}
 		}
 		return true
+    }
+
+    public var T:Matrix{
+    	let transposed = Matrix(self.columns,self.rows)
+    	for i in 0 ..< self.rows {
+			for j in 0 ..< self.columns {
+				transposed[j,i] = self[i,j]
+			}
+		}
+		return transposed
     }
 	
 }
