@@ -148,11 +148,25 @@ class MyMatrixTest: XCTestCase {
     }
 
     func testMinusScalar(){
-
+        let matrix = MyMatrix([[2]]])
+        let scalar = 2
+        do{
+            let result = try matrix.minus(scalar);
+            XCTAssertEqual(result,0)
+        }catch {
+            XCTFail("Improper exception")
+        }   
     }
 
     func testPlusScalar(){
-        
+        let matrix = MyMatrix([[2]]])
+        let scalar = 2
+        do{
+            let result = try matrix.plus(scalar);
+            XCTAssertEqual(result,4)
+        }catch {
+            XCTFail("Improper exception")
+        } 
     }
 
     func testTimesScalar(){

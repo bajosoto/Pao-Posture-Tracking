@@ -6,6 +6,12 @@ class MatrixMath {
 		
 	}
 
+	static func plus(_ this: MyMatrix, _ that: Double) throws -> Double {
+		let mat = MyMatrix([[that]])
+		let scalarMat = try plus(this,mat)
+		return scalarMat[0,0]
+	}
+
 	static func minus(_ this: MyMatrix, _ that: MyMatrix) throws -> MyMatrix {
 
 		try checkDimAdd(this,that)
@@ -13,11 +19,22 @@ class MatrixMath {
 		
 	}
 
+	static func minus(_ this: MyMatrix, _ that: Double) throws -> Double {
+		let mat = MyMatrix([[that]])
+		let scalarMat = try minus(this,mat)
+		return scalarMat[0,0]
+	}
+
 	static func times(_ this: MyMatrix, _ that: MyMatrix) throws -> MyMatrix {
 		try checkDimTimes(this,that)
 		return doTimes(this,that)
 	
 	}
+
+	static func times(_ this: MyMatrix, _ that: Double) throws -> Double {
+		return 0
+	}
+
 	internal static func checkDimAdd(_ this: MyMatrix, _ that: MyMatrix) throws{
 		if(this.rows != that.rows){
 			throw MatrixMathError.dimensionsDoNotMatch(this.rows,that.rows)

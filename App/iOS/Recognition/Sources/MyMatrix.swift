@@ -64,7 +64,11 @@ class MyMatrix : CustomStringConvertible{
 		return s
 	}
 
-	func plus(_ that: MyMatrix) throws -> MyMatrix {
+	func plus(that: MyMatrix) throws -> MyMatrix {
+		return try MatrixMath.plus(self,that)
+	}
+
+	func plus(that: Double) throws -> Double {
 		return try MatrixMath.plus(self,that)
 	}
 
@@ -72,9 +76,15 @@ class MyMatrix : CustomStringConvertible{
 		return try MatrixMath.minus(self,that)
 	}
 
+	func plus(_ that: Double) throws -> Double {
+		return try MatrixMath.minus(self,that)
+	}
+
 	func times(_ that: MyMatrix) throws -> MyMatrix {
 		return try MatrixMath.times(self,that)
 
 	}
+
+
 	
 }
