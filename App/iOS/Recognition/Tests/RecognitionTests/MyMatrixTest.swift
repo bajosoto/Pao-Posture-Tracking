@@ -40,8 +40,8 @@ class MyMatrixTest: XCTestCase {
     }
 
     func testPlus(){
-        let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
-        let matrix2 = MyMatrix([[1,2],[3,4],[5,6]])
+        let matrix1 = MyMatrix([[1,2],[3,4]])
+        let matrix2 = MyMatrix([[1,2],[3,4])
 
         let result = matrix1.plus(matrix2);
         XCTAssertTrue(result[0,0] == 2)
@@ -52,8 +52,8 @@ class MyMatrixTest: XCTestCase {
 
 
     func testMinus(){
-        let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
-        let matrix2 = MyMatrix([[2,2],[3,4],[5,6]])
+        let matrix1 = MyMatrix([[1,2],[3,4]])
+        let matrix2 = MyMatrix([[2,2],[3,4]])
 
         let result = matrix1.minus(matrix2);
         XCTAssertTrue(result[0,0] == -1)
@@ -63,6 +63,22 @@ class MyMatrixTest: XCTestCase {
     }
 
     func testMinusNotPossible(){
+        let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
+        let matrix2 = MyMatrix([[2,2],[3,4])
+
+        let result = matrix1.minus(matrix2);
+        XCTAssertThrowsError(try functionThatThrows()) { 
+            error in XCTAssertEqual(error as? MatrixMathError, MatrixMathError.dimensionsDoNotMatch)
+    }
+
+    func testPlusNotPossible(){
+        let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
+        let matrix2 = MyMatrix([[2,2],[3,4])
+
+        let result = matrix1.plus(matrix2);
+        XCTAssertThrowsError(try functionThatThrows()) { 
+            error in XCTAssertEqual(error as? MatrixMathError, MatrixMathError.dimensionsDoNotMatch)
+    }
 
     }
 
@@ -98,6 +114,8 @@ class MyMatrixTest: XCTestCase {
             ("testRowsCols",testRowsCols),
             ("testPlus",testPlus),
             ("testMinus",testMinus),
+            ("testPlusNotPossible",testPlusNotPossible),
+            ("testMinusNotPossible",testMinusNotPossible),
 
 
         ]
