@@ -10,5 +10,6 @@ XCTMain([
      testCase(ParzenClassifierTest.allTests),
      testCase(SimplePreprocessorTest.allTests),
      testCase(MyMatrixTest.allTests),
+     testCase(MatrixMathTest.allTests),
 
 ])
