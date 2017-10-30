@@ -31,8 +31,14 @@ class MatrixMath {
 	
 	}
 
-	static func times(_ this: MyMatrix, _ that: Double) throws -> Double {
-		return 0
+	static func times(_ this: MyMatrix, _ that: Double) throws -> MyMatrix {
+		let out = MyMatrix(this.rows,this.columns)
+		for i in 0 ..< this.rows {
+			for j in 0 ..< this.columns {
+				out[i,j] = this[i,j] * that
+			}
+		}
+		return out		
 	}
 
 	internal static func checkDimAdd(_ this: MyMatrix, _ that: MyMatrix) throws{
@@ -40,7 +46,7 @@ class MatrixMath {
 			throw MatrixMathError.dimensionsDoNotMatch(this.rows,that.rows)
 		}
 
-		if(this.rows != that.rows){
+		if(this.columns != that.columns){
 			throw MatrixMathError.dimensionsDoNotMatch(this.columns,that.columns)
 		}
 	}

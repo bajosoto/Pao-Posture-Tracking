@@ -72,7 +72,7 @@ class MyMatrixTest: XCTestCase {
         
     }
 
-    func testMinusNotPossible(){
+    func testMinusException(){
         let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
         let matrix2 = MyMatrix([[2,2],[3,4]])
 
@@ -85,7 +85,7 @@ class MyMatrixTest: XCTestCase {
         
     }
 
-    func testPlusNotPossible(){
+    func testPlusException(){
         let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
         let matrix2 = MyMatrix([[2,2],[3,4]])
 
@@ -130,7 +130,7 @@ class MyMatrixTest: XCTestCase {
     }
 
 
-    func testTimesNotPossible(){
+    func testTimesException(){
         let matrix1 = MyMatrix([[1,2],
                                 [3,4]])
         let matrix2 = MyMatrix([[2,2]])
@@ -143,13 +143,10 @@ class MyMatrixTest: XCTestCase {
         }
     }
 
-    func testDiv(){
-        
-    }
 
     func testMinusScalar(){
-        let matrix = MyMatrix([[2]]])
-        let scalar = 2
+        let matrix = MyMatrix([[2]])
+        let scalar = 2.0
         do{
             let result = try matrix.minus(scalar);
             XCTAssertEqual(result,0)
@@ -159,8 +156,8 @@ class MyMatrixTest: XCTestCase {
     }
 
     func testPlusScalar(){
-        let matrix = MyMatrix([[2]]])
-        let scalar = 2
+        let matrix = MyMatrix([[2]])
+        let scalar = 2.0
         do{
             let result = try matrix.plus(scalar);
             XCTAssertEqual(result,4)
@@ -170,10 +167,47 @@ class MyMatrixTest: XCTestCase {
     }
 
     func testTimesScalar(){
-        
+        let matrix = MyMatrix([[1,2],
+                                [3,4]])
+        let scalar = 2.0
+        do{
+            let result = try matrix.times(scalar);
+            XCTAssertTrue(result[0,0] == 2)
+            XCTAssertTrue(result[0,1] == 4)
+            XCTAssertTrue(result[1,0] == 6)
+            XCTAssertTrue(result[1,1] == 8)    
+        }catch {
+            XCTFail("Improper exception")
+        }         
+    }
+
+    func testMinusScalarException(){
+        let matrix = MyMatrix([[2,2]])
+        let scalar = 2.0
+        do{
+            let result = try matrix.minus(scalar);
+            XCTFail("Should throw exception")
+        }catch {
+        }   
+    }
+
+    func testPlusScalarException(){
+        let matrix = MyMatrix([[2],[2]])
+        let scalar = 2.0
+        do{
+            let result = try matrix.plus(scalar);
+            XCTFail("Should throw exception")
+        }catch {
+        } 
+    }
+
+
+    func testDiv(){
+        XCTFail("Not implemented")
     }
 
     func testDivScalar(){
+        XCTFail("Not implemented")
         
     }    
 
@@ -185,11 +219,17 @@ class MyMatrixTest: XCTestCase {
             ("testRowsCols",testRowsCols),
             ("testPlus",testPlus),
             ("testMinus",testMinus),
-            ("testPlusNotPossible",testPlusNotPossible),
-            ("testMinusNotPossible",testMinusNotPossible),
+            ("testPlusException",testPlusException),
+            ("testMinusException",testMinusException),
             ("testTimes",testTimes),
             ("testTimes2",testTimes2),
-            ("testTimesNotPossible",testTimesNotPossible),
+            ("testTimesException",testTimesException),
+            ("testMinusScalar",testMinusScalar),
+            ("testPlusScalar",testPlusScalar),
+            ("testTimesScalar",testTimesScalar),
+            ("testMinusScalarException",testMinusScalarException),
+            ("testPlusScalarException",testPlusScalarException),
+            
 
 
         ]
