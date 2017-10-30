@@ -1,5 +1,4 @@
 import Nifty
-import Mat
 
 class KnnClassifier: Classifier{
 	
@@ -86,7 +85,7 @@ class KnnClassifier: Classifier{
 
 	internal static func dist(this: Matrix<Double>,that: Matrix<Double>)->Double{
 		//Euclidian distance
-		return Mat.norm(this-that)
+		return norm(this-that)
 	}
 	
 	

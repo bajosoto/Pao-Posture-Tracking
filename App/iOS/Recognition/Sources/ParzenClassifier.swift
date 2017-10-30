@@ -1,5 +1,4 @@
 import Nifty
-import Mat
 
 
 class ParzenClassifier {

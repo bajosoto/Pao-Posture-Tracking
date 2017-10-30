@@ -1,5 +1,4 @@
 import Nifty
-import Mat
 
 struct Dataset{
 	public let samples:Matrix<Double>
