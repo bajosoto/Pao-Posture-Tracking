@@ -207,7 +207,18 @@ class MyMatrixTest: XCTestCase {
     }
 
     func testDivScalar(){
-        XCTFail("Not implemented")
+        let matrix = MyMatrix([[1,2],
+                                [3,4]])
+        let scalar = 2.0
+        do{
+            let result = try matrix.div(scalar);
+            XCTAssertTrue(result[0,0] == 0.5)
+            XCTAssertTrue(result[0,1] == 1)
+            XCTAssertTrue(result[1,0] == 1.5)
+            XCTAssertTrue(result[1,1] == 2.0)    
+        }catch {
+            XCTFail("Improper exception")
+        } 
         
     }    
 
@@ -229,6 +240,8 @@ class MyMatrixTest: XCTestCase {
             ("testTimesScalar",testTimesScalar),
             ("testMinusScalarException",testMinusScalarException),
             ("testPlusScalarException",testPlusScalarException),
+            ("testDiv",testDiv),
+            ("testDivScalar",testDivScalar),
             
 
 

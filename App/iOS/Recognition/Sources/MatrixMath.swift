@@ -41,6 +41,10 @@ class MatrixMath {
 		return out		
 	}
 
+	static func div(_ this: MyMatrix, _ that: Double) throws -> MyMatrix {
+		return try times(this,1.0/that)
+	}
+
 	internal static func checkDimAdd(_ this: MyMatrix, _ that: MyMatrix) throws{
 		if(this.rows != that.rows){
 			throw MatrixMathError.dimensionsDoNotMatch(this.rows,that.rows)

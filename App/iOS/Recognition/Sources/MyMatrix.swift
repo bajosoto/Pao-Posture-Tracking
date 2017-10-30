@@ -89,5 +89,9 @@ class MyMatrix : CustomStringConvertible{
 		return try MatrixMath.times(self,that)
 
 	}
+	func div(_ that: Double) throws -> MyMatrix {
+		return try MatrixMath.div(self,that)
+
+	}
 	
 }
