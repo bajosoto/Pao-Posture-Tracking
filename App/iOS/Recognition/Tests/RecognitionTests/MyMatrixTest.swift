@@ -99,7 +99,48 @@ class MyMatrixTest: XCTestCase {
 
 
     func testTimes(){
-        
+        let matrix1 = MyMatrix([[1,2],[3,4]])
+        let matrix2 = MyMatrix([[1,2],[3,4]])
+
+        do{
+            let result = try matrix1.times(matrix2)
+            XCTAssertTrue(result[0,0] == 7)
+            XCTAssertTrue(result[0,1] == 10)
+            XCTAssertTrue(result[1,0] == 15)
+            XCTAssertTrue(result[1,1] == 22)    
+        }catch {
+            XCTFail("Improper exception")
+        }
+    }
+
+    func testTimes2(){
+        let matrix1 = MyMatrix([[1,2]])
+        let matrix2 = MyMatrix([[1,2],
+                                [3,4]])
+
+        do{
+            let result = try matrix1.times(matrix2)
+            XCTAssertTrue(result.rows == 1)
+            XCTAssertTrue(result.columns == 2)
+            XCTAssertTrue(result[0,0] == 7)
+            XCTAssertTrue(result[0,1] == 10)
+        }catch {
+            XCTFail("Improper exception")
+        }
+    }
+
+
+    func testTimesNotPossible(){
+        let matrix1 = MyMatrix([[1,2],
+                                [3,4]])
+        let matrix2 = MyMatrix([[2,2]])
+
+        do{
+            _ = try matrix1.times(matrix2);
+            XCTFail("No Error thrown")
+        }catch {
+            
+        }
     }
 
     func testDiv(){
@@ -132,6 +173,9 @@ class MyMatrixTest: XCTestCase {
             ("testMinus",testMinus),
             ("testPlusNotPossible",testPlusNotPossible),
             ("testMinusNotPossible",testMinusNotPossible),
+            ("testTimes",testTimes),
+            ("testTimes2",testTimes2),
+            ("testTimesNotPossible",testTimesNotPossible),
 
 
         ]

@@ -1,4 +1,4 @@
-class MyMatrix{
+class MyMatrix : CustomStringConvertible{
 	var data: [[Double]]
 
 	init(_ nrows:Int, _ ncols:Int){
@@ -52,6 +52,18 @@ class MyMatrix{
 		return data[0].count
 	}
 
+	var description : String{
+		var s = String()
+		for i in 0 ..< self.rows {
+			s += "\n"
+			for j in 0 ..< self.columns {
+				s += "|\(self[i,j])"
+			}
+			s += "|"
+		}
+		return s
+	}
+
 	func plus(_ that: MyMatrix) throws -> MyMatrix {
 		return try MyMatrix.plus(self,that)
 	}
@@ -60,6 +72,10 @@ class MyMatrix{
 		return try MyMatrix.minus(self,that)
 	}
 
+	func times(_ that: MyMatrix) throws -> MyMatrix {
+		return try MyMatrix.times(self,that)
+
+	}
 	static func plus(_ this: MyMatrix, _ that: MyMatrix) throws -> MyMatrix {
 
 		try checkDimAdd(this,that)
@@ -74,6 +90,11 @@ class MyMatrix{
 		
 	}
 
+	static func times(_ this: MyMatrix, _ that: MyMatrix) throws -> MyMatrix {
+		try checkDimTimes(this,that)
+		return doTimes(this,that)
+	
+	}
 	internal static func checkDimAdd(_ this: MyMatrix, _ that: MyMatrix) throws{
 		if(this.rows != that.rows){
 			throw MatrixMathError.dimensionsDoNotMatch(this.rows,that.rows)
@@ -82,6 +103,12 @@ class MyMatrix{
 		if(this.rows != that.rows){
 			throw MatrixMathError.dimensionsDoNotMatch(this.columns,that.columns)
 		}
+	}
+
+	internal static func checkDimTimes(_ this: MyMatrix, _ that: MyMatrix) throws{
+		if(this.columns != that.rows){
+			throw MatrixMathError.dimensionsDoNotMatch(this.columns,that.rows)
+		}		
 	}
 
 	internal static func doPlus(_ this: MyMatrix,_ that: MyMatrix) -> MyMatrix {
@@ -101,6 +128,19 @@ class MyMatrix{
 		for i in 0 ..< this.rows {
 			for j in 0 ..< this.columns {
 				out[i,j] = this[i,j] - that[i,j]
+			}
+		}
+		return out
+	}
+
+	internal static func doTimes(_ this: MyMatrix, _ that: MyMatrix) -> MyMatrix {
+		let out = MyMatrix(this.rows,that.columns)
+
+		for i in 0 ..< this.rows {
+			for j in 0 ..< that.columns {
+				for k in 0 ..< that.rows {
+					out[i,j] += this[i,k] * that[k,j]
+				}
 			}
 		}
 		return out
