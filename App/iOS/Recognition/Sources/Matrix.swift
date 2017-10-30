@@ -52,6 +52,26 @@ public class Matrix : CustomStringConvertible, Equatable{
 	    }
 	    return out
 	  }
+	  set {
+	  	for j in r{
+	    	self[0,j] = newValue[0,j]
+	    }
+	  }
+	}
+
+	public subscript(_ i: Int, _ r: CountableRange<Int>) -> Matrix {
+	  get {
+	  	let out:Matrix = Matrix(1,r.count)
+	    for j in r{
+	    	out[0,j] = self[i,j]
+	    }
+	    return out
+	  }
+	  set {
+	    for j in r{
+	    	self[0,j] = newValue[0,j]
+	    }
+	  }
 	}
 
 	public var rows:Int{

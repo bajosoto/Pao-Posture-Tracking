@@ -67,7 +67,7 @@ class ParzenClassifier {
 		//Gaussian with unity covariance
 		let normConst = 1.0/(2.0*pi())**(Double(x.rows)/2.0)
 		let xMu = x-mean;
-		let outerProd = (xMu*transpose(xMu))*(-0.5)
+		let outerProd = (xMu*(xMu.T))*(-0.5)
 		let scalar = outerProd[0,0]
 		return normConst * (euler()**scalar)
 	}

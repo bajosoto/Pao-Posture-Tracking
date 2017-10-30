@@ -25,7 +25,7 @@ struct Dataset{
 			}
 		}
 		var n = 0
-		var classSamples:Matrix = zeros(count,self.dim)
+		var classSamples:Matrix = Matrix(count,self.dim)
 		for i in 0..<labels.count{
 			if(labels[i] == class_id){
 				classSamples[n,0..<self.dim] = samples[i,0..<self.dim]

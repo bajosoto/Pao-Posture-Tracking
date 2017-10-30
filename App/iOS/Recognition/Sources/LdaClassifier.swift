@@ -16,7 +16,7 @@ class LdaClassifier: Classifier{
 		for i in 0 ..< self.classes.count {
 			meanCovMeans.append(0.5*outerProd(vector:self.means[i],matrix:inv(self.covariance)))
 			lnPriors.append(ln(x:priors[i]))
-			covMeans.append(inv(self.covariance)*self.means[i]^)
+			covMeans.append(inv(self.covariance)*self.means[i].T)
 		}
 	}
 
@@ -31,7 +31,7 @@ class LdaClassifier: Classifier{
 
 	private func outerProd(vector: Matrix,matrix: Matrix)->Double{
 
-		let v: Matrix = vector*matrix*vector^
+		let v: Matrix = vector*matrix*vector.T
 		return v[0,0] //the result is scalar but still stored in datatype matrix -.-
 	}
 

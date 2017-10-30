@@ -46,3 +46,19 @@ public func norm(_ m: Matrix) -> Double{
     }
     return sum.squareRoot()
 }
+
+public func sqrt(_ x: Double) -> Double{
+   return x.squareRoot()
+}
+
+public func eye(_ rows: Int, _ cols: Int) -> Matrix{
+    let mat = Matrix(rows,cols)
+    for i in 0 ..< mat.columns {
+        for j in 0 ..< mat.rows {
+            if( i==j){
+                mat[i,j] = 1.0
+            }
+        }
+    }
+    return mat
+}

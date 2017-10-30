@@ -31,7 +31,7 @@ class SimplePreprocessor: Preprocessor{
 	}
 
 	internal static func averageFilter(_ measurements: [Measurement])->Measurement{
-		var matrix: Matrix = zeros(measurements.count,measurements[0].toVector().columns)
+		var matrix: Matrix = Matrix(measurements.count,measurements[0].toVector().columns)
 
 		for i in 0 ..< measurements.count{
 			matrix[i,0 ..< matrix.columns] = measurements[i].toVector()
