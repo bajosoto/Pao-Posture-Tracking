@@ -1,4 +1,4 @@
-class MyMatrix : CustomStringConvertible, Equatable{
+public class Matrix : CustomStringConvertible, Equatable{
 	var data: [[Double]]
 
 	init(_ nrows:Int, _ ncols:Int){
@@ -29,7 +29,7 @@ class MyMatrix : CustomStringConvertible, Equatable{
 		self.data = dataDouble
 	}
 
-	subscript(_ i: Int, _ j: Int) -> Double {
+	public subscript(_ i: Int, _ j: Int) -> Double {
 	  get {
 	    return data[i][j]
 	  }
@@ -38,21 +38,21 @@ class MyMatrix : CustomStringConvertible, Equatable{
 	  }
 	}
 
-	subscript(_ i: Int) -> MyMatrix {
+	public subscript(_ i: Int) -> Matrix {
 	  get {
-	    return MyMatrix([data[i]])
+	    return Matrix([data[i]])
 	  }
 	}
 
-	var rows:Int{
+	public var rows:Int{
 		return data.count
 	}
 
-	var columns:Int{
+	public var columns:Int{
 		return data[0].count
 	}
 
-	var description : String{
+	public var description : String{
 		var s = String()
 		for i in 0 ..< self.rows {
 			s += "\n"
@@ -64,7 +64,7 @@ class MyMatrix : CustomStringConvertible, Equatable{
 		return s
 	}
 
-	static func ==(this: MyMatrix, that: MyMatrix) -> Bool {
+	public static func ==(this: Matrix, that: Matrix) -> Bool {
         for i in 0..<this.rows{
 			for n in 0..<that.columns{
 				if(this[i,n] != that[i,n]){

@@ -1,5 +1,3 @@
-import Nifty
-
 class KnnClassifier: Classifier{
 	
 	internal let trainset: Dataset
@@ -24,7 +22,7 @@ class KnnClassifier: Classifier{
 		}
 	}
 
-	func classify(samples: Matrix<Double>)->[Int]{
+	func classify(samples: Matrix)->[Int]{
 		var labelsFound = [Int]()
 		for i in 0..<samples.rows{
 			labelsFound.append(self.classifySample(sample:samples[i,0..<samples.columns]))
@@ -33,13 +31,13 @@ class KnnClassifier: Classifier{
 		return labelsFound
 	}
 
-	internal func classifySample(sample: Matrix<Double>)->Int{
+	internal func classifySample(sample: Matrix)->Int{
 		return classifySample_soft(sample:sample).sorted(by: {$0.1 > $1.1})[0].key
 
 
 	}
 
-	internal func classifySample_soft(sample: Matrix<Double>)->[Int: Double]{
+	internal func classifySample_soft(sample: Matrix)->[Int: Double]{
 		var distances = [(distance:Double,label:Int)]()
 		var proba: [Int: Double] = [:]
 		var ranking = [(key: Int, value: Double)]()
@@ -74,7 +72,7 @@ class KnnClassifier: Classifier{
 		
 	}
 
-	func classifySoft(samples: Matrix<Double>)->[[Int:Double]]{
+	func classifySoft(samples: Matrix)->[[Int:Double]]{
 		var softLabels:[[Int:Double]] = []
 		for i in 0..<samples.rows{
 			softLabels.append(self.classifySample_soft(sample:samples[i,0..<samples.columns]))
@@ -83,7 +81,7 @@ class KnnClassifier: Classifier{
 		return softLabels
 	}
 
-	internal static func dist(this: Matrix<Double>,that: Matrix<Double>)->Double{
+	internal static func dist(this: Matrix,that: Matrix)->Double{
 		//Euclidian distance
 		return norm(this-that)
 	}

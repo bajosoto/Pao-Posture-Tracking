@@ -1,16 +1,16 @@
 import XCTest
-import Nifty
+
 @testable import Recognition
 class ParzenClassifierTest: XCTestCase {
     
  
     func testSimpleClassif(){
-        let samples = Matrix<Double>([[-1,-1],
+        let samples = Matrix([[-1,-1],
                                         [1,1]])
         let labels = [1,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let parzenc = ParzenClassifier(trainset:dataset)
-        let testsamples = Matrix<Double>([[-1,-1],
+        let testsamples = Matrix([[-1,-1],
                                           [0,0],
                                           [1,1]])
         let results = parzenc.classifySoft(samples:testsamples)
@@ -37,13 +37,13 @@ class ParzenClassifierTest: XCTestCase {
     }
 
     func testClassif1(){
-        let samples = Matrix<Double>([[-1,-1],
+        let samples = Matrix([[-1,-1],
                                         [1,1]])
 
         let labels = [1,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let parzenc = ParzenClassifier(trainset:dataset)
-        let testsamples = Matrix<Double>([  [-1,-1],
+        let testsamples = Matrix([  [-1,-1],
                                             [-0.5,-0.5],
                                             [-0.25,-0.25],
                                             [0.25,0.25],
@@ -63,7 +63,7 @@ class ParzenClassifierTest: XCTestCase {
 
 
     func testClassif2(){
-        let samples = Matrix<Double>([[-5,-5],
+        let samples = Matrix([[-5,-5],
                                       [-5,-4],
                                       [-5,-6],
                                       [-4,-5],
@@ -74,7 +74,7 @@ class ParzenClassifierTest: XCTestCase {
         let labels = [1,1,1,1,2,2,2,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let parzenc = ParzenClassifier(trainset:dataset)
-        let testsamples = Matrix<Double>([  [-5,-4.5],
+        let testsamples = Matrix([  [-5,-4.5],
                                             [-4.5,-6],
                                             [5,4.5],
                                             [4.5,5]])

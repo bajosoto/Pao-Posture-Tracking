@@ -1,20 +1,20 @@
 import XCTest
-import Nifty
+
 @testable import Recognition
 
 class KnnClassifierTest: XCTestCase {
 
 	func testDist(){
-		let sample1 = Matrix<Double>([[1,2,3]])
-		let sample2 = Matrix<Double>([[4,5,6]])
+		let sample1 = Matrix([[1,2,3]])
+		let sample2 = Matrix([[4,5,6]])
 		let res = KnnClassifier.dist(this:sample1,that:sample2)
 		XCTAssertTrue(res < 5.1962,"Was \(res)")
 		XCTAssertTrue(res > 5.1960,"Was \(res)")
 	}
 
 	func testDist2(){
-		let sample1 = Matrix<Double>([[-1,-2,-3]])
-		let sample2 = Matrix<Double>([[-4,-5,-6]])
+		let sample1 = Matrix([[-1,-2,-3]])
+		let sample2 = Matrix([[-4,-5,-6]])
 		let res = KnnClassifier.dist(this:sample1,that:sample2)
 		XCTAssertTrue(res < 5.1962,"Was \(res)")
 		XCTAssertTrue(res > 5.1960,"Was \(res)")
@@ -22,7 +22,7 @@ class KnnClassifierTest: XCTestCase {
 
 
 	func testClassif1(){
-		 let samples = Matrix<Double>([[-1,-2],
+		 let samples = Matrix([[-1,-2],
                                       [-15,-3],
                                       [-1,-27],
                                       [-17,-27],
@@ -35,13 +35,13 @@ class KnnClassifierTest: XCTestCase {
         let labels = [1,1,1,1,1,2,2,2,2,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let knnc = KnnClassifier(trainset:dataset)
-        let testsamples = Matrix<Double>([[-15,-3]])
+        let testsamples = Matrix([[-15,-3]])
         let results = knnc.classify(samples:testsamples)
         XCTAssertTrue(results[0]==1,"Was:\(results[0])")
 	}
 
 	func testClassif2(){
-		 let samples = Matrix<Double>([[-5,-5],
+		 let samples = Matrix([[-5,-5],
                                       [-5,-4],
                                       [-5,-6],
                                       [-4,-5],
@@ -52,7 +52,7 @@ class KnnClassifierTest: XCTestCase {
         let labels = [1,1,1,1,2,2,2,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let knnc = KnnClassifier(trainset:dataset)
-        let testsamples = Matrix<Double>([  [-5,-4.5],
+        let testsamples = Matrix([  [-5,-4.5],
                                             [-4.5,-6],
                                             [5,4.5],
                                             [4.5,5]])
@@ -64,7 +64,7 @@ class KnnClassifierTest: XCTestCase {
 	}
 
     func testClassifSoft(){
-     let samples = Matrix<Double>([[-5,-5],
+     let samples = Matrix([[-5,-5],
                                       [-5,-4],
                                       [-5,-6],
                                       [-4,-5],
@@ -75,7 +75,7 @@ class KnnClassifierTest: XCTestCase {
         let labels = [1,1,1,1,2,2,2,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let knnc = KnnClassifier(trainset:dataset,kNeighbours:4)
-        let testsamples = Matrix<Double>([  [-5,-4.5],
+        let testsamples = Matrix([  [-5,-4.5],
                                             [0,1]])
         let results = knnc.classifySoft(samples:testsamples)
         XCTAssertEqual(results[0],[2: 0.0,1: 1.0])

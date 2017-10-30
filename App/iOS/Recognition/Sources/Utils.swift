@@ -1,19 +1,17 @@
-import Nifty
-
-public func mean_row( matrix: Matrix<Double>)->Matrix<Double>{
-	var sum:Matrix<Double> = zeros(1,matrix.columns)
+public func mean_row( matrix: Matrix)->Matrix{
+	var sum:Matrix = Matrix(1,matrix.columns)
 	for i in 0..<matrix.rows{
         sum = sum + matrix[i,0..<matrix.columns]
     }
     return sum/matrix.rows
 }
 
-public func mean_col(matrix: Matrix<Double>)->Matrix<Double>{
+public func mean_col(matrix: Matrix)->Matrix{
 	return transpose(mean_row(matrix:matrix^))
 }
 
-public func cov(matrix: Matrix<Double>) -> Matrix<Double>{
-	var sum:Matrix<Double> = zeros(matrix.columns, matrix.columns)
+public func cov(matrix: Matrix) -> Matrix{
+	var sum:Matrix = Matrix(matrix.columns, matrix.columns)
 
     for i in 0..<matrix.rows{
         sum = sum + (matrix[i,0..<matrix.columns]-mean_row(matrix:matrix))^ * ((matrix[i,0..<matrix.columns]-mean_row(matrix:matrix)))
@@ -39,7 +37,7 @@ public func ln(x: Double)->Double{
 
 }
 
-public func norm(_ m: Matrix<Double>) -> Double{
+public func norm(_ m: Matrix) -> Double{
     var sum:Double = 0
     for i in 0 ..< m.columns {
         for j in 0 ..< m.rows {

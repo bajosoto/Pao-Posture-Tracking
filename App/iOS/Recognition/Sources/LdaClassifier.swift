@@ -1,13 +1,11 @@
-import Nifty
-
 class LdaClassifier: Classifier{
 	
-	let means 		 : [Matrix<Double>]
-	let covariance 	 : Matrix<Double>
+	let means 		 : [Matrix]
+	let covariance 	 : Matrix
 	let priors 	 	 : [Double]
 	let classes 	 : [Int]
 	var lnPriors 	 = [Double]()
-	var covMeans 	 = [Matrix<(Double)>]()
+	var covMeans 	 = [Matrix]()
 	var meanCovMeans = [Double]()
 
 	required init(trainset: Dataset,regularizer: Double = 0.0001){
@@ -22,7 +20,7 @@ class LdaClassifier: Classifier{
 		}
 	}
 
-	func classify(samples: Matrix<Double>)->[Int]{
+	func classify(samples: Matrix)->[Int]{
 		var labelsFound = [Int]()
 		for i in 0..<samples.rows{
 			labelsFound.append(self.classifySample(sample:samples[i,0..<samples.columns]))
@@ -31,20 +29,20 @@ class LdaClassifier: Classifier{
 		return labelsFound
 	}
 
-	private func outerProd(vector: Matrix<Double>,matrix: Matrix<Double>)->Double{
+	private func outerProd(vector: Matrix,matrix: Matrix)->Double{
 
-		let v: Matrix<Double> = vector*matrix*vector^
+		let v: Matrix = vector*matrix*vector^
 		return v[0,0] //the result is scalar but still stored in datatype matrix -.-
 	}
 
-	private func classifySample(sample: Matrix<Double>)->Int{
+	private func classifySample(sample: Matrix)->Int{
 		var maxArg = 0
 		var maxPosterior:Double = -Double.greatestFiniteMagnitude
 		for i in 0..<self.classes.count{
 			
 			//just multiplying a vector with a matrix here and the result is a sampleDepPartScalar
 			//this beatiful api doesnt seem to allow it nicer
-			let sampleDepPartMat:Matrix<Double> = sample*covMeans[i] 
+			let sampleDepPartMat:Matrix = sample*covMeans[i] 
 			let sampleDepPartScalar: Double = sampleDepPartMat[0,0] 
 
 			let classPosterior = priors[i]*(sampleDepPartScalar-meanCovMeans[i]+lnPriors[i])
@@ -58,16 +56,16 @@ class LdaClassifier: Classifier{
 
 	}
 	
-	static func estimateMeans(dataset: Dataset)->[Matrix<Double>]{
-		var means = [Matrix<Double>]()
+	static func estimateMeans(dataset: Dataset)->[Matrix]{
+		var means = [Matrix]()
 		for i in dataset.classes{
 			means.append(mean_row(matrix:(dataset.classSamples(class_id:i)))) 
 		}
 		return means
 	}
 
-	static func estimateCov(dataset: Dataset,regularizer: Double)->Matrix<Double>{
-		var covariance = zeros(dataset.dim,dataset.dim)
+	static func estimateCov(dataset: Dataset,regularizer: Double)->Matrix{
+		var covariance = Matrix(dataset.dim,dataset.dim)
 		let priors = estimatePriors(dataset:dataset)
 		for i in dataset.classes{
 			covariance = covariance + cov(matrix:dataset.classSamples(class_id:i))*priors[dataset.classes.index(of:i)!]
@@ -83,7 +81,7 @@ class LdaClassifier: Classifier{
 		}
 		return priors	
 	}
-	func classifySoft(samples: Matrix<Double>)->[[Int:Double]]{
+	func classifySoft(samples: Matrix)->[[Int:Double]]{
 		return [[:]]
 	}
 }

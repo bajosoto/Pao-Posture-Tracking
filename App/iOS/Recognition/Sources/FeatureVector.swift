@@ -1,6 +1,6 @@
-import Nifty
+
 
 protocol FeatureVector{
 
-	func toVector()->Matrix<Double>
+	func toVector()->Matrix
 }

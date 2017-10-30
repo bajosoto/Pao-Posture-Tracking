@@ -1,25 +1,25 @@
 import XCTest
-import Nifty
+
 @testable import Recognition
 class UtilsTest: XCTestCase {
 
 	func testMeanRow(){
-		let A = Matrix<Double>([[1, 1],[2, 2]])
-        let Solution = Matrix<Double>([[1.5, 1.5]])
+		let A = Matrix([[1, 1],[2, 2]])
+        let Solution = Matrix([[1.5, 1.5]])
 	    let B = mean_row(matrix:A)
 	    XCTAssertTrue(B==Solution,"\(B)")    
 	}
 
 	func testMeanRow2(){
-		let A = Matrix<Double>([[1, 2],[3, 4]])
-        let Solution = Matrix<Double>([[2, 3]])
+		let A = Matrix([[1, 2],[3, 4]])
+        let Solution = Matrix([[2, 3]])
 	    let B = mean_row(matrix:A)
 	    XCTAssertTrue(B==Solution,"\(B)")    
 	}
 
 	func testMeanCol(){
-		let A = Matrix<Double>([[1, 1],[2, 2]])
-        let Solution = Matrix<Double>([[1, 2]])
+		let A = Matrix([[1, 1],[2, 2]])
+        let Solution = Matrix([[1, 2]])
 	    let B = mean_col(matrix:A)
 	    XCTAssertTrue(B==Solution,"\(B)")    
 	}
@@ -27,30 +27,30 @@ class UtilsTest: XCTestCase {
 
 	func testTranspose(){
 
-		let A = Matrix<Double>([[1, 2],[3, 4]])
-        let Solution = Matrix<Double>([[1, 3],[2, 4]])
+		let A = Matrix([[1, 2],[3, 4]])
+        let Solution = Matrix([[1, 3],[2, 4]])
 	    let B = A^
 	    XCTAssertTrue(B==Solution,"\(B)")    	
 	}
 	func testTranspose1(){
-		let A = Matrix<Double>([[1, 2],[3, 4]])
+		let A = Matrix([[1, 2],[3, 4]])
 
-        let Solution = Matrix<Double>([[1], [2]])
+        let Solution = Matrix([[1], [2]])
 	    let B:Matrix = A[0,0...1]^
 	    XCTAssertTrue(B==Solution,"\(B)")    	
 
 	}
 	func testTranspose2(){
-		let A = Matrix<Double>([[1, 2],[3, 4]])
+		let A = Matrix([[1, 2],[3, 4]])
 
-        let Solution = Matrix<Double>([[3], [4]])
+        let Solution = Matrix([[3], [4]])
 	    let B:Matrix = transpose(A[1,0...1])
 	    XCTAssertTrue(B==Solution,"\(B)")    	
 	}
 
 	func testCov(){
-        let A = Matrix<Double>([[1, 2],[3, 4]])
-        let Solution = Matrix<Double>([[2, 2],[2, 2]])
+        let A = Matrix([[1, 2],[3, 4]])
+        let Solution = Matrix([[2, 2],[2, 2]])
         let B = cov(matrix:A);
         XCTAssertTrue(B==Solution,"\(B)")
     }

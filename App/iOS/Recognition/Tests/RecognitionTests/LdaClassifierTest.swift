@@ -1,11 +1,11 @@
 import XCTest
-import Nifty
+
 @testable import Recognition
 class LdaClassifierTest: XCTestCase {
     
     func testMeans(){
 
-    	let samples = Matrix<Double>([[1,2,3],
+    	let samples = Matrix([[1,2,3],
     								  [4,5,6],
                                       [7,8,9],
     								  [7,8,9]])
@@ -13,14 +13,14 @@ class LdaClassifierTest: XCTestCase {
         let dataset =  Dataset(samples:samples,labels:labels)
         let means = LdaClassifier.estimateMeans(dataset:dataset)
 
-        XCTAssertTrue(means[0] == Matrix<Double>([[2.5,3.5,4.5]]),"\(means[0])")
-        XCTAssertTrue(means[1] == Matrix<Double>([[7,8,9]]),"\(means[1])")
+        XCTAssertTrue(means[0] == Matrix([[2.5,3.5,4.5]]),"\(means[0])")
+        XCTAssertTrue(means[1] == Matrix([[7,8,9]]),"\(means[1])")
         
     }
 
     func testCov(){
 
-        let samples = Matrix<Double>([[1,2,3],
+        let samples = Matrix([[1,2,3],
                                       [4,5,6],
                                       [7,8,9],
                                       [7,8,9]])
@@ -28,14 +28,14 @@ class LdaClassifierTest: XCTestCase {
         let dataset =  Dataset(samples:samples,labels:labels)
         let cov = LdaClassifier.estimateCov(dataset:dataset,regularizer:0.0)
 
-        XCTAssertTrue(cov == Matrix<Double>([[2.25,2.25,2.25],
+        XCTAssertTrue(cov == Matrix([[2.25,2.25,2.25],
                                              [2.25,2.25,2.25],
                                              [2.25,2.25,2.25]]),"Was: \(cov)")
         
     }
 
     func testPrior(){
-        let samples = Matrix<Double>([[1,2,3],
+        let samples = Matrix([[1,2,3],
                                       [4,5,6],
                                       [7,8,9],
                                       [7,8,9]])
@@ -49,7 +49,7 @@ class LdaClassifierTest: XCTestCase {
     }
 
     func testLDA(){
-        let samples = Matrix<Double>([[1,2],
+        let samples = Matrix([[1,2],
                                       [1,2],
                                       [7,8],
                                       [7,8]])
@@ -65,7 +65,7 @@ class LdaClassifierTest: XCTestCase {
     }
 
     func testLDA2(){
-        let samples = Matrix<Double>([[-1,-2],
+        let samples = Matrix([[-1,-2],
                                       [-15,-3],
                                       [-1,-27],
                                       [-17,-27],
@@ -78,7 +78,7 @@ class LdaClassifierTest: XCTestCase {
         let labels = [1,1,1,1,1,2,2,2,2,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let ldc = LdaClassifier(trainset:dataset)
-        let testsamples = Matrix<Double>([  [-15,-3],
+        let testsamples = Matrix([  [-15,-3],
                                             [-19,-21],
                                             [7,8],
                                             [15,9]])

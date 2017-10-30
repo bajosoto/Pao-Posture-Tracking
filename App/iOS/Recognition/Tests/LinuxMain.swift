@@ -3,13 +3,13 @@ import XCTest
 
 XCTMain([
      testCase(OperatorTest.allTests),
-     testCase(UtilsTest.allTests),
-     testCase(DatasetTest.allTests),
-     testCase(LdaClassifierTest.allTests),
-     testCase(KnnClassifierTest.allTests),
-     testCase(ParzenClassifierTest.allTests),
-     testCase(SimplePreprocessorTest.allTests),
-     testCase(MyMatrixTest.allTests),
+     //testCase(UtilsTest.allTests),
+     //testCase(DatasetTest.allTests),
+     //testCase(LdaClassifierTest.allTests),
+     //testCase(KnnClassifierTest.allTests),
+     //testCase(ParzenClassifierTest.allTests),
+     //testCase(SimplePreprocessorTest.allTests),
+     testCase(MatrixTest.allTests),
      testCase(MatrixMathTest.allTests),
 
 ])

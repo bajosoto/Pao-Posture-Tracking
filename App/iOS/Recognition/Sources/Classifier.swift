@@ -1,5 +1,3 @@
-import Nifty
-
 protocol Classifier {
 	/**
 	 * [Constructor create a classifier object by training it from a dataset
@@ -16,12 +14,12 @@ protocol Classifier {
 	 * @samples 		Matrix 		[Samples to classify each row will be classified as one sample]
 	 * @return			[Int]		[List of assigned class labels]
 	 */
-	func classify(samples: Matrix<Double>)->[Int]
+	func classify(samples: Matrix)->[Int]
 
 	/**
 	 * [classify one or several samples. Soft labelled classification]
 	 * @samples 		Matrix 		[Samples to classify each row will be classified as one sample]
 	 * @return			[Vector]	[Vectors containing the probability for each class]
 	 */
-	func classifySoft(samples: Matrix<Double>)->[[Int: Double]]
+	func classifySoft(samples: Matrix)->[[Int: Double]]
 }

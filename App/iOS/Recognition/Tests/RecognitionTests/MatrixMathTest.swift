@@ -1,12 +1,12 @@
 import XCTest
-import Nifty
+
 @testable import Recognition
 
 class MatrixMathTest: XCTestCase {
     
     func testPlus(){
-        let matrix1 = MyMatrix([[1,2],[3,4]])
-        let matrix2 = MyMatrix([[1,2],[3,4]])
+        let matrix1 = Matrix([[1,2],[3,4]])
+        let matrix2 = Matrix([[1,2],[3,4]])
 
         do{
             let result = try MatrixMath.plus(matrix1,matrix2)
@@ -22,8 +22,8 @@ class MatrixMathTest: XCTestCase {
 
 
     func testMinus(){
-        let matrix1 = MyMatrix([[1,2],[3,4]])
-        let matrix2 = MyMatrix([[2,2],[3,4]])
+        let matrix1 = Matrix([[1,2],[3,4]])
+        let matrix2 = Matrix([[2,2],[3,4]])
 
         do{
             let result = try MatrixMath.minus(matrix1,matrix2)
@@ -38,8 +38,8 @@ class MatrixMathTest: XCTestCase {
     }
 
     func testMinusException(){
-        let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
-        let matrix2 = MyMatrix([[2,2],[3,4]])
+        let matrix1 = Matrix([[1,2],[3,4],[5,6]])
+        let matrix2 = Matrix([[2,2],[3,4]])
 
         do{
             _ = try MatrixMath.minus(matrix1,matrix2)
@@ -51,8 +51,8 @@ class MatrixMathTest: XCTestCase {
     }
 
     func testPlusException(){
-        let matrix1 = MyMatrix([[1,2],[3,4],[5,6]])
-        let matrix2 = MyMatrix([[2,2],[3,4]])
+        let matrix1 = Matrix([[1,2],[3,4],[5,6]])
+        let matrix2 = Matrix([[2,2],[3,4]])
 
         do{
             _ = try MatrixMath.plus(matrix1,matrix2)
@@ -64,8 +64,8 @@ class MatrixMathTest: XCTestCase {
 
 
     func testTimes(){
-        let matrix1 = MyMatrix([[1,2],[3,4]])
-        let matrix2 = MyMatrix([[1,2],[3,4]])
+        let matrix1 = Matrix([[1,2],[3,4]])
+        let matrix2 = Matrix([[1,2],[3,4]])
 
         do{
             let result = try MatrixMath.times(matrix1,matrix2)
@@ -79,8 +79,8 @@ class MatrixMathTest: XCTestCase {
     }
 
     func testTimes2(){
-        let matrix1 = MyMatrix([[1,2]])
-        let matrix2 = MyMatrix([[1,2],
+        let matrix1 = Matrix([[1,2]])
+        let matrix2 = Matrix([[1,2],
                                 [3,4]])
 
         do{
@@ -96,9 +96,9 @@ class MatrixMathTest: XCTestCase {
 
 
     func testTimesException(){
-        let matrix1 = MyMatrix([[1,2],
+        let matrix1 = Matrix([[1,2],
                                 [3,4]])
-        let matrix2 = MyMatrix([[2,2]])
+        let matrix2 = Matrix([[2,2]])
 
         do{
             _ = try MatrixMath.times(matrix1,matrix2)
@@ -110,7 +110,7 @@ class MatrixMathTest: XCTestCase {
 
 
     func testMinusScalar(){
-        let matrix = MyMatrix([[2]])
+        let matrix = Matrix([[2]])
         let scalar = 2.0
         do{
             let result = try MatrixMath.minus(matrix,scalar)
@@ -121,7 +121,7 @@ class MatrixMathTest: XCTestCase {
     }
 
     func testPlusScalar(){
-        let matrix = MyMatrix([[2]])
+        let matrix = Matrix([[2]])
         let scalar = 2.0
         do{
             let result = try  MatrixMath.plus(matrix,scalar)
@@ -132,7 +132,7 @@ class MatrixMathTest: XCTestCase {
     }
 
     func testTimesScalar(){
-        let matrix = MyMatrix([[1,2],
+        let matrix = Matrix([[1,2],
                                 [3,4]])
         let scalar = 2.0
         do{
@@ -147,7 +147,7 @@ class MatrixMathTest: XCTestCase {
     }
 
     func testMinusScalarException(){
-        let matrix = MyMatrix([[2,2]])
+        let matrix = Matrix([[2,2]])
         let scalar = 2.0
         do{
             let result = try  MatrixMath.minus(matrix,scalar)
@@ -157,7 +157,7 @@ class MatrixMathTest: XCTestCase {
     }
 
     func testPlusScalarException(){
-        let matrix = MyMatrix([[2],[2]])
+        let matrix = Matrix([[2],[2]])
         let scalar = 2.0
         do{
             let result = try  MatrixMath.plus(matrix,scalar)
@@ -172,7 +172,7 @@ class MatrixMathTest: XCTestCase {
     }
 
     func testDivScalar(){
-        let matrix = MyMatrix([[1,2],
+        let matrix = Matrix([[1,2],
                                 [3,4]])
         let scalar = 2.0
         do{
