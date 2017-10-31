@@ -86,6 +86,36 @@ public class Matrix : CustomStringConvertible, Equatable{
 	  }
 	}
 
+	public subscript(_ r: CountableClosedRange<Int>, _ j: Int) -> Matrix {
+	  get {
+	  	let out:Matrix = Matrix(r.count,1)
+	    for i in r{
+	    	out[i,0] = self[i,j]
+	    }
+	    return out
+	  }
+	  set {
+	  	for i in r{
+	    	self[i,j] = newValue[i,0]
+	    }
+	  }
+	}
+
+	public subscript(_ r: CountableRange<Int>, _ j: Int) -> Matrix {
+	  get {
+	  	let out:Matrix = Matrix(r.count,1)
+	    for i in r{
+	    	out[i,0] = self[i,j]
+	    }
+	    return out
+	  }
+	  set {
+	    for i in r{
+	    	self[i,j] = newValue[i,0]
+	    }
+	  }
+	}
+
 	public var rows:Int{
 		return data.count
 	}

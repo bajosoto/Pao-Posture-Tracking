@@ -92,6 +92,53 @@ class MatrixTest: XCTestCase {
                                         [5,6]]))
     }
 
+    func testSubscriptColumnRangeGet(){
+         let matrix = Matrix([[1,2],
+                             [3,4],
+                             [5,6]])
+         let row1 = matrix[0 ..< matrix.columns,0]
+
+         XCTAssertEqual(row1,Matrix([[1],
+                                     [3],
+                                     [5]]))
+    }
+
+    func testSubscriptColumnRangeSet(){
+         let matrix = Matrix([[1,2],
+                             [3,4],
+                             [5,6]])
+         matrix[0 ..< matrix.rows,0] = Matrix([[0],
+                                                  [0],
+                                                  [0]])
+
+         XCTAssertEqual(matrix,Matrix([ [0,2],
+                                        [0,4],
+                                        [0,6]]))
+    }
+    func testSubscriptColumnRangeGet2(){
+         let matrix = Matrix([[1,2],
+                             [3,4],
+                             [5,6]])
+         let row1 = matrix[0 ..< matrix.rows,1]
+
+         XCTAssertEqual(row1,Matrix([[2],
+                                     [4],
+                                     [6]]))
+    }
+
+    func testSubscriptColumnRangeSet2(){
+         let matrix = Matrix([[1,2],
+                             [3,4],
+                             [5,6]])
+         matrix[0 ..< matrix.rows,1] = Matrix([[0],
+                                                  [0],
+                                                  [0]])
+
+         XCTAssertEqual(matrix,Matrix([ [1,0],
+                                        [3,0],
+                                        [5,0]]))
+    }
+
     func testTransposed(){
         let matrix = Matrix([[1,2],
                               [3,4],
@@ -168,6 +215,10 @@ class MatrixTest: XCTestCase {
             ("testSubscriptRangeSet",testSubscriptRangeSet),
             ("testSubscriptRangeGet2",testSubscriptRangeGet2),
             ("testSubscriptRangeSet2",testSubscriptRangeSet2),
+            ("testSubscriptColumnRangeGet",testSubscriptColumnRangeGet),
+            ("testSubscriptColumnRangeSet",testSubscriptColumnRangeSet),
+            ("testSubscriptColumnRangeGet2",testSubscriptColumnRangeGet2),
+            ("testSubscriptColumnRangeSet2",testSubscriptColumnRangeSet2),
             ("testTransposed",testTransposed),
             ("testRmColumn",testRmColumn),
             ("testRmRow",testRmRow),

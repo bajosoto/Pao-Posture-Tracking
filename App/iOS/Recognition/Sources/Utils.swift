@@ -1,3 +1,17 @@
+public func max(_ matrix: Matrix)->Double{
+    var maximum = -Double.greatestFiniteMagnitude
+    for i in 0 ..< matrix.rows{
+        for j in 0 ..< matrix.columns{
+            if (matrix[i,j] > maximum){
+                maximum = matrix[i,j]
+               }
+        }
+        
+    }
+    
+    return maximum
+}
+
 public func mean_row( matrix: Matrix)->Matrix{
 	var sum:Matrix = Matrix(1,matrix.columns)
 	for i in 0..<matrix.rows{
