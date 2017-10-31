@@ -37,7 +37,8 @@ public func ln(x: Double)->Double{
 
 }
 public func inv(_ m: Matrix) throws ->Matrix{
-    return eye(m.rows,m.columns)
+    let d = try det(m)
+    return try cof(m.T)/d
 }
 
 public func cof(_ m: Matrix) throws ->Matrix{

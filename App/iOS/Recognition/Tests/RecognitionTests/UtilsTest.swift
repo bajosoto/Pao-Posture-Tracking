@@ -128,11 +128,11 @@ class UtilsTest: XCTestCase {
     					[4,5,6],
     					[7,8,9]])
     	let result = try! inv(m)
-    	let trueResult = Matrix([ [0.1111 ,0.2222 ,0.1111],
+    	let trueResult = Matrix([ [0.1111 ,-0.2222 ,0.1111],
 								  [-0.2222,-2.5556,1.7778],
 								  [0.1111 ,2.4444 ,-1.5556]])
 
-    	XCTAssertTrue(equals(result,trueResult,within:0.01),"\(result) is not equal to \(trueResult)")
+    	XCTAssertTrue(equals(result,trueResult,within:0.001),"\(result) is not equal to \(trueResult)")
     }
 
     func testInv4(){
@@ -147,7 +147,7 @@ class UtilsTest: XCTestCase {
     							 [0.1111,   -1.2222,    1.1111,   -1.0000],
          						 [0,   		11.0000,   -8.0000,    3.0000] ])
 
-    	XCTAssertTrue(equals(result,trueResult,within:0.01),"\(result) is not equal to \(trueResult)")
+    	XCTAssertTrue(equals(result,trueResult,within:0.001),"\(result) is not equal to \(trueResult)")
     }
 
     func testInvUnequal(){
