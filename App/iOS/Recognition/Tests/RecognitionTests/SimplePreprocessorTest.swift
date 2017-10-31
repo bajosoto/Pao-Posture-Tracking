@@ -4,8 +4,8 @@ import XCTest
 class SimplePreprocessorTest: XCTestCase {
 
     func testAverageFilter(){
-        let measurement1 = Measurement(Matrix([[1.0,1.0,1.0, 2.0,2.0,2.0]]))
-        let measurement2 = Measurement(Matrix([[2.0,2.0,2.0, 1.0,1.0,1.0]]))
+        let measurement1 = RawDataEntry(Matrix([[1.0,1.0,1.0, 2.0,2.0,2.0]]))
+        let measurement2 = RawDataEntry(Matrix([[2.0,2.0,2.0, 1.0,1.0,1.0]]))
 
         let result = SimplePreprocessor.averageFilter([measurement1,measurement2])
 
@@ -19,9 +19,9 @@ class SimplePreprocessorTest: XCTestCase {
     }
 
     func testPeak2Peak(){
-        let measurement1 = Measurement(Matrix([[1.0,1.0,1.0, 0.0,0.0,0.0]]))
-        let measurement2 = Measurement(Matrix([[2.0,2.0,2.0, 1.0,0.0,0.0]]))
-        let measurement3 = Measurement(Matrix([[2.0,2.0,2.0, 0.2,0.2,0.2]]))
+        let measurement1 = RawDataEntry(Matrix([[1.0,1.0,1.0, 0.0,0.0,0.0]]))
+        let measurement2 = RawDataEntry(Matrix([[2.0,2.0,2.0, 1.0,0.0,0.0]]))
+        let measurement3 = RawDataEntry(Matrix([[2.0,2.0,2.0, 0.2,0.2,0.2]]))
 
         let result = SimplePreprocessor.getPeak2Peak([measurement1,measurement2])
 
@@ -29,13 +29,13 @@ class SimplePreprocessorTest: XCTestCase {
     }
 
     func testPreprocessor(){
-        let measurement1 = Measurement(Matrix([[1.0,1.0,1.0, 0.0,0.0,0.0]]))
-        let measurement2 = Measurement(Matrix([[2.0,2.0,2.0, 1.0,0.0,0.0]]))
-        let measurement3 = Measurement(Matrix([[2.0,2.0,2.0, 0.2,0.2,0.2]]))
+        let measurement1 = RawDataEntry(Matrix([[1.0,1.0,1.0, 0.0,0.0,0.0]]))
+        let measurement2 = RawDataEntry(Matrix([[2.0,2.0,2.0, 1.0,0.0,0.0]]))
+        let measurement3 = RawDataEntry(Matrix([[2.0,2.0,2.0, 0.2,0.2,0.2]]))
 
 
         let preprocessor = SimplePreprocessor(windowSize:2)
-        let featureVectors = preprocessor.preprocess(measurements:[measurement1,measurement2,measurement3])
+        let featureVectors = preprocessor.preprocess(rawData:[measurement1,measurement2,measurement3])
         //TODO inser assertion
     }
     

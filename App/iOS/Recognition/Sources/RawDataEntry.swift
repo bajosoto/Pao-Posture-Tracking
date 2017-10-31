@@ -1,4 +1,4 @@
-struct Measurement{
+struct RawDataEntry : Vectorizable{
 	let gyroX: Double
 	let gyroY: Double 
 	let gyroZ: Double

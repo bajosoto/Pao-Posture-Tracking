@@ -1,5 +1,5 @@
 protocol Preprocessor{
 
-	func preprocess(measurements: [Measurement]) -> [FeatureVector]
+	func preprocess(rawData: [RawDataEntry]) -> [FeatureVector]
 	
 }
