@@ -32,7 +32,9 @@ class MatrixTest: XCTestCase {
 
 
     func testRowsCols(){
-        let matrix = Matrix([[1,2],[3,4],[5,6]])
+        let matrix = Matrix([[1,2],
+                             [3,4],
+                             [5,6]])
         XCTAssertEqual(matrix.rows,3)
         XCTAssertEqual(matrix.columns,2)
 
@@ -49,6 +51,45 @@ class MatrixTest: XCTestCase {
         let matrix1 = Matrix([[1,2],[3,4],[5,6]])
         let matrix2 = Matrix([[1,2],[3,5],[5,6]])
         XCTAssertTrue(matrix1 != matrix2)
+    }
+
+    func testSubscriptRangeGet(){
+         let matrix = Matrix([[1,2],
+                             [3,4],
+                             [5,6]])
+         let row1 = matrix[0,0 ..< matrix.columns]
+
+         XCTAssertEqual(row1,Matrix([[1,2]]))
+    }
+
+    func testSubscriptRangeSet(){
+         let matrix = Matrix([[1,2],
+                             [3,4],
+                             [5,6]])
+         matrix[0,0 ..< matrix.columns] = Matrix([[0,0]])
+
+         XCTAssertEqual(matrix,Matrix([ [0,0],
+                                        [3,4],
+                                        [5,6]]))
+    }
+    func testSubscriptRangeGet2(){
+         let matrix = Matrix([[1,2],
+                             [3,4],
+                             [5,6]])
+         let row1 = matrix[1,0 ..< matrix.columns]
+
+         XCTAssertEqual(row1,Matrix([[3,4]]))
+    }
+
+    func testSubscriptRangeSet2(){
+         let matrix = Matrix([[1,2],
+                             [3,4],
+                             [5,6]])
+         matrix[1,0 ..< matrix.columns] = Matrix([[0,0]])
+
+         XCTAssertEqual(matrix,Matrix([ [1,2],
+                                        [0,0],
+                                        [5,6]]))
     }
 
     func testTransposed(){
@@ -100,7 +141,7 @@ class MatrixTest: XCTestCase {
         m2.rmRow(1)
 
         XCTAssertEqual(m1,m2)
-        
+
     }
 
     static var allTests : [(String, (MatrixTest) -> () throws -> Void)] {
@@ -108,9 +149,13 @@ class MatrixTest: XCTestCase {
         	("testInit",testInit),
         	("testSubscript",testSubscript),
             ("testSubscriptRow",testSubscriptRow),
-            ("testRowsCols",testRowsCols),
             ("testEquals",testEquals),
             ("testNotEquals",testNotEquals),
+            ("testRowsCols",testRowsCols),
+            ("testSubscriptRangeGet",testSubscriptRangeGet),
+            ("testSubscriptRangeSet",testSubscriptRangeSet),
+            ("testSubscriptRangeGet2",testSubscriptRangeGet2),
+            ("testSubscriptRangeSet2",testSubscriptRangeSet2),
             ("testTransposed",testTransposed),
             ("testRmColumn",testRmColumn),
             ("testRmRow",testRmRow),

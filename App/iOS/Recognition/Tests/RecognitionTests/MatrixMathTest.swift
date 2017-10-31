@@ -150,7 +150,7 @@ class MatrixMathTest: XCTestCase {
         let matrix = Matrix([[2,2]])
         let scalar = 2.0
         do{
-            let result = try  MatrixMath.minus(matrix,scalar)
+            let _ = try  MatrixMath.minus(matrix,scalar)
             XCTFail("Should throw exception")
         }catch {
         }   
@@ -160,7 +160,7 @@ class MatrixMathTest: XCTestCase {
         let matrix = Matrix([[2],[2]])
         let scalar = 2.0
         do{
-            let result = try  MatrixMath.plus(matrix,scalar)
+            let _ = try  MatrixMath.plus(matrix,scalar)
             XCTFail("Should throw exception")
         }catch {
         } 

@@ -35,16 +35,19 @@ class UtilsTest: XCTestCase {
 	func testTranspose1(){
 		let A = Matrix([[1, 2],[3, 4]])
 
-        let Solution = Matrix([[1], [2]])
+        let Solution = Matrix([[1],
+         					   [2]])
 	    let B:Matrix = A[0,0...1].T
 	    XCTAssertTrue(B==Solution,"\(B)")    	
 
 	}
 	func testTranspose2(){
-		let A = Matrix([[1, 2],[3, 4]])
+		let A = Matrix([[1, 2],
+				 		[3, 4]])
 
-        let Solution = Matrix([[3], [4]])
-	    let B:Matrix = (A[1,0...1]).T
+        let Solution = Matrix([[3], 
+        					   [4]])
+	    let B:Matrix = A[1,0...1].T
 	    XCTAssertTrue(B==Solution,"\(B)")    	
 	}
 

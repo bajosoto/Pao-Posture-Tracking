@@ -1,7 +1,9 @@
 import XCTest
 @testable import RecognitionTests
 
-XCTMain([
+XCTMain([ 
+	 testCase(MatrixTest.allTests),
+     testCase(MatrixMathTest.allTests),
      testCase(OperatorTest.allTests),
      testCase(UtilsTest.allTests),
      testCase(DatasetTest.allTests),
@@ -9,7 +11,6 @@ XCTMain([
      testCase(KnnClassifierTest.allTests),
      testCase(ParzenClassifierTest.allTests),
      testCase(SimplePreprocessorTest.allTests),
-     testCase(MatrixTest.allTests),
-     testCase(MatrixMathTest.allTests),
+    
 
 ])

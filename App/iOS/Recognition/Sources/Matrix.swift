@@ -58,7 +58,7 @@ public class Matrix : CustomStringConvertible, Equatable{
 	  }
 	  set {
 	  	for j in r{
-	    	self[0,j] = newValue[0,j]
+	    	self[i,j] = newValue[0,j]
 	    }
 	  }
 	}
@@ -73,7 +73,7 @@ public class Matrix : CustomStringConvertible, Equatable{
 	  }
 	  set {
 	    for j in r{
-	    	self[0,j] = newValue[0,j]
+	    	self[i,j] = newValue[0,j]
 	    }
 	  }
 	}
