@@ -83,10 +83,12 @@ class UtilsTest: XCTestCase {
     }
 
     func testDet4(){
-    	let m = Matrix([[1,2],
-    					[2,3]])
+    	let m =Matrix([[10,2,3,1],
+    					[4,5,6,2],
+    					[7,8,9,3],
+    					[4,3,2,1]])
 
-    	XCTAssertEqual(det(m),-1)
+    	XCTAssertEqual(det(m),-9)
     }
 
     func testDetUnequal(){
