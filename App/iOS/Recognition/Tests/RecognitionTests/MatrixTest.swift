@@ -144,6 +144,18 @@ class MatrixTest: XCTestCase {
 
     }
 
+    func testInitVectorizable(){
+        let matrix = Matrix([[1,2,3,4,5,6,7],
+                             [7,6,5,4,3,2,1]])
+
+        let v1 = FeatureVector(matrix[0])
+        let v2 = FeatureVector(matrix[1])
+
+        let matrix2 = Matrix([v1,v2])
+
+        XCTAssertEqual(matrix,matrix2)
+    }
+
     static var allTests : [(String, (MatrixTest) -> () throws -> Void)] {
         return [
         	("testInit",testInit),
@@ -160,6 +172,7 @@ class MatrixTest: XCTestCase {
             ("testRmColumn",testRmColumn),
             ("testRmRow",testRmRow),
             ("testDeepCopy",testDeepCopy),
+            ("testInitVectorizable",testInitVectorizable)
         ]
     }
 }

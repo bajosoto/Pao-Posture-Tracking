@@ -33,6 +33,14 @@ public class Matrix : CustomStringConvertible, Equatable{
 		self.init(matrix.array())
 	}
 
+	convenience init(_ objects: [Vectorizable]){
+		var m = Matrix(objects.count,objects[0].toVector().columns)
+		for i in 0 ..< objects.count{
+			m[i,0 ..< m.columns] = objects[i].toVector()
+		}
+		self.init(m)
+	}
+
 	public subscript(_ i: Int, _ j: Int) -> Double {
 	  get {
 	    return data[i][j]

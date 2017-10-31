@@ -31,7 +31,7 @@ class SimplePreprocessor: Preprocessor{
 		
 		vector = vector/norm(vector)
 
-		return	SimpleFeatureVector(vector)
+		return	FeatureVector(vector)
 		
 	}
 
