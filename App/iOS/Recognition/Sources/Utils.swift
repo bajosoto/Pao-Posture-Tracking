@@ -34,7 +34,7 @@ public func cov(matrix: Matrix) -> Matrix{
     return sum/(matrix.rows-1)
 }
 
-public func unique<T where T:Comparable, T:Hashable>(list: [T])->[T]{
+public func unique<T>(list: [T])->[T] where T:Comparable, T:Hashable{
 	return (Array<T>(Set<T>(list))).sorted(by:<)
 }
 

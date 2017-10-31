@@ -10,6 +10,7 @@ import UIKit
 import Charts
 import ChartsRealm
 import RealmSwift
+import Recognition
 
 class DashboardVC: UIViewController, bleConnectionResponder {
 

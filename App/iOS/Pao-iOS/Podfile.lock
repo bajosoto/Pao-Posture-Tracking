@@ -11,12 +11,18 @@ PODS:
   - Realm/Headers (2.10.2)
   - RealmSwift (2.10.2):
     - Realm (= 2.10.2)
+  - Recognition (0.0.1)
 
 DEPENDENCIES:
   - BlueCapKit (~> 0.6)
   - Charts (~> 3.0.4)
   - ChartsRealm (~> 3.0.2)
   - RealmSwift (~> 2.4)
+  - Recognition (from `../Recognition`)
+
+EXTERNAL SOURCES:
+  Recognition:
+    :path: ../Recognition
 
 SPEC CHECKSUMS:
   BlueCapKit: 8c8c4764a9fcd7296ae2a491533bb8ec53f8f61f
@@ -24,7 +30,8 @@ SPEC CHECKSUMS:
   ChartsRealm: ed0332fd409298188a2b71e9548604165c987d42
   Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
   RealmSwift: 07a9ae0505091eda6b2ee7c190c3786d6e90a7b0
+  Recognition: 0942ac61d46d7a7498b74cc0f4a7154bbe328339
 
-PODFILE CHECKSUM: 0b9c00c439a159a78ba01ae9b463d93f564e913d
+PODFILE CHECKSUM: d1f5558c6507a485b3f4e60c084ffd5169cc0596
 
 COCOAPODS: 1.2.1
