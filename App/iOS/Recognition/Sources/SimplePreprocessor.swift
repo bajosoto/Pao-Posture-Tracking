@@ -29,8 +29,6 @@ class SimplePreprocessor: Preprocessor{
 							average.accelZ,
 							peak2peak]])
 		
-		vector = vector/norm(vector)
-
 		return	FeatureVector(vector)
 		
 	}

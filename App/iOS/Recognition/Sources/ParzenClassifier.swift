@@ -103,7 +103,7 @@ class ParzenClassifier {
 		for i in 0 ..< trainset.nSamples{
 			if(trainset.labels[i] == class_){
 				let x = (sample - trainset.samples[i,0..<trainset.samples.columns])/width
-				windowSum += ParzenClassifier.kernel(x:x,width:self.width,mean:trainset.samples[i,0..<trainset.samples.columns])
+				windowSum += ParzenClassifier.kernel(x:x,width:self.width,mean:trainset.samples[i,0..<trainset.samples.columns])/Double(trainset.classSamples(class_id:class_).rows)
 			}
 		}
 		return windowSum/(Double(trainset.classSamples(class_id:class_).rows) * width**sample.rows)

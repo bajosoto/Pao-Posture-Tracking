@@ -6,15 +6,15 @@ class ParzenClassifierTest: XCTestCase {
  
     func testSimpleClassif(){
         let samples = Matrix([[-1,-1],
-                                        [1,1]])
+                              [1,1]])
         let labels = [1,2]
         let dataset =  Dataset(samples:samples,labels:labels)
         let parzenc = ParzenClassifier(trainset:dataset)
         let testsamples = Matrix([[-1,-1],
-                                          [0,0],
-                                          [1,1]])
+                                   [0,0],
+                                   [1,1]])
         let results = parzenc.classifySoft(samples:testsamples)
-       
+
         XCTAssertTrue(0.9999999 <= results[0][1]!)
         XCTAssertTrue(results[0][1]! <= 1.0)
 
