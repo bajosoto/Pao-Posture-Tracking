@@ -23,14 +23,14 @@ class PostureEntry: Object {
     @objc dynamic var postureLbl: String = ""
     
     // Save this entry into realm database
-    func save() {
-        do {
-            let realm = try Realm()
-            try realm.write {
-                realm.add(self)
-            }
-        } catch let error as NSError {
-            fatalError(error.localizedDescription)
-        }
-    }
+//    func save() {
+//        do {
+//            let realm = try Realm()
+//            try realm.write {
+//                realm.add(self)
+//            }
+//        } catch let error as NSError {
+//            fatalError(error.localizedDescription)
+//        }
+//    }
 }
