@@ -20,13 +20,18 @@ class SimplePreprocessor: Preprocessor{
 	func preprocessWindow(_ measurements: [Measurement]) -> FeatureVector{
 		let average = SimplePreprocessor.averageFilter(measurements)
 		let peak2peak = SimplePreprocessor.getPeak2Peak(measurements)
-		return	SimpleFeatureVector(Matrix([[average.gyroX,
-													average.gyroY,
-													average.gyroZ,
-													average.accelX,
-													average.accelY,
-													average.accelZ,
-													peak2peak]]))
+
+		var vector = Matrix([[average.gyroX,
+							average.gyroY,
+							average.gyroZ,
+							average.accelX,
+							average.accelY,
+							average.accelZ,
+							peak2peak]])
+		
+		vector = vector/norm(vector)
+
+		return	SimpleFeatureVector(vector)
 		
 	}
 

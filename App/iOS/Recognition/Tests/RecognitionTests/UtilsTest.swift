@@ -99,7 +99,7 @@ class UtilsTest: XCTestCase {
     					[4,5,6,2],
     					[7,8,9,3]])
 	 	do{
-	 		try det(m)
+	 		try _ = det(m)
 	 		XCTFail("Should have thrown exception")
 	 		}catch{
 
@@ -158,7 +158,7 @@ class UtilsTest: XCTestCase {
     					[4,5,6,2],
     					[7,8,9,3]])
 	 	do{
-	 		try inv(m)
+	 		try _ = inv(m)
 	 		XCTFail("Should have thrown exception")
 	 		}catch{
 
@@ -169,7 +169,7 @@ class UtilsTest: XCTestCase {
     	let m = Matrix([[0,0],
     					[0,0]])
 		do{
-	 		try inv(m)
+	 		try _ = inv(m)
 	 		XCTFail("Should have thrown exception")
  		}catch{
 
