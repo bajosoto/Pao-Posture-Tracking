@@ -162,6 +162,17 @@ class UtilsTest: XCTestCase {
 	 		}
     }
 
+    func testInvSingular(){
+    	let m = Matrix([[0,0],
+    					[0,0]])
+		do{
+	 		try inv(m)
+	 		XCTFail("Should have thrown exception")
+ 		}catch{
+
+ 		}
+
+    }
 
 	static var allTests : [(String, (UtilsTest) -> () throws -> Void)] {
         return [
@@ -183,6 +194,7 @@ class UtilsTest: XCTestCase {
 			("testInv3",testInv3),
             ("testInv4",testInv4),
             ("testInvUnequal",testInvUnequal),
+            ("testInvSingular",testInvSingular),
 
     	]
 	}

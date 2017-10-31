@@ -38,6 +38,11 @@ public func ln(x: Double)->Double{
 }
 public func inv(_ m: Matrix) throws ->Matrix{
     let d = try det(m)
+
+    if (d==0){
+        throw MatrixMathError.singularMatrix
+    }
+
     return try cof(m.T)/d
 }
 
