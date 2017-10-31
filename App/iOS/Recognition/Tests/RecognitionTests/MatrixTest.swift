@@ -63,6 +63,46 @@ class MatrixTest: XCTestCase {
 
     }
 
+    func testRmColumn(){
+        var matrix = Matrix([[1,2],
+                              [3,4],
+                              [5,6]])
+        matrix.rmColumn(0)
+        XCTAssertEqual(matrix,Matrix([[2],
+                                      [4],
+                                      [6]]))
+
+    }
+
+    func testRmRow(){
+        var matrix = Matrix([[1,2],
+                              [3,4],
+                              [5,6]])
+        matrix.rmRow(0)
+        XCTAssertEqual(matrix,Matrix([[3,4],
+                                      [5,6]]))
+
+    }
+
+    func testDeepCopy(){
+        var m1 = Matrix([[1,2],
+                         [3,4],
+                         [5,6]])
+        
+        var m2 = Matrix(m1)
+        
+        XCTAssertEqual(m1,m2)
+
+        m1.rmRow(1)
+
+        XCTAssertNotEqual(m1,m2)
+
+        m2.rmRow(1)
+
+        XCTAssertEqual(m1,m2)
+        
+    }
+
     static var allTests : [(String, (MatrixTest) -> () throws -> Void)] {
         return [
         	("testInit",testInit),
@@ -72,7 +112,9 @@ class MatrixTest: XCTestCase {
             ("testEquals",testEquals),
             ("testNotEquals",testNotEquals),
             ("testTransposed",testTransposed),
-
+            ("testRmColumn",testRmColumn),
+            ("testRmRow",testRmRow),
+            ("testDeepCopy",testDeepCopy),
         ]
     }
 }

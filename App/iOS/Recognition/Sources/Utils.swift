@@ -36,6 +36,22 @@ public func ln(x: Double)->Double{
     return _log(x)/_log(euler())
 
 }
+public func inv(_ m: Matrix)->Matrix{
+    return eye(m.rows,m.columns)
+}
+
+public func det(_ matrix: Matrix) -> Double{
+    if(matrix.rows == 2){
+        return matrix[0,0]*matrix[1,1]-matrix[0,1]*matrix[1,0]
+    }else{
+        var d = 0.0
+        /*for i in 0 ..< matrix.columns{
+            submatrix = matrix[1 ..< matrix.rows,0 ..<]
+            d += ((-1)^i)*det(submatrix)
+        }*/
+        return 0.0
+    }
+}
 
 public func norm(_ m: Matrix) -> Double{
     var sum:Double = 0

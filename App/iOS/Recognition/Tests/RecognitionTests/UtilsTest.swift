@@ -64,10 +64,33 @@ class UtilsTest: XCTestCase {
     }
 
     func testLn(){
-          XCTAssertTrue(ln(x:2) <= 0.693148,"Was\(ln(x:2))")
+    	  XCTAssertTrue(ln(x:2) <= 0.693148,"Was\(ln(x:2))")
           XCTAssertTrue(ln(x:2) >= 0.693146,"Was\(ln(x:2))")      
     }
 
+    func testDet2(){
+    	let m = Matrix([[1,2],
+    					[2,3]])
+
+    	XCTAssertEqual(det(m),-1)
+    }
+	func testDet3(){
+    	let m = Matrix([[1,2],
+    					[2,3]])
+
+    	XCTAssertEqual(det(m),-1)
+    }
+
+    func testDet4(){
+    	let m = Matrix([[1,2],
+    					[2,3]])
+
+    	XCTAssertEqual(det(m),-1)
+    }
+
+    func testDetUnequal(){
+
+    }
 
 	static var allTests : [(String, (UtilsTest) -> () throws -> Void)] {
         return [
@@ -79,7 +102,8 @@ class UtilsTest: XCTestCase {
         	("testTranspose2",testTranspose2), 	
         	("testCov",testCov),
         	("testUnique",testUnique),
-            ("testLn",testLn)
+            ("testLn",testLn),
+            ("testDet2",testDet2),
 
     	]
 	}

@@ -29,6 +29,10 @@ public class Matrix : CustomStringConvertible, Equatable{
 		self.data = dataDouble
 	}
 
+	convenience init(_ matrix: Matrix){
+		self.init(matrix.array())
+	}
+
 	public subscript(_ i: Int, _ j: Int) -> Double {
 	  get {
 	    return data[i][j]
@@ -113,6 +117,21 @@ public class Matrix : CustomStringConvertible, Equatable{
 			}
 		}
 		return transposed
+    }
+
+    public func rmColumn(_ j: Int){
+    	for i in 0 ..< self.rows {
+    		data[i].remove(at:j)
+    	}
+    }
+
+    public func rmRow(_ i: Int){
+    	data.remove(at:i)
+    }
+
+    public func array()-> [[Double]]{
+    	let deepCopy = data
+    	return deepCopy
     }
 	
 }
