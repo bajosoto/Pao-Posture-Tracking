@@ -1,3 +1,14 @@
+public func argmax(_ l: [Double]){
+    var max = -Double.greatestFiniteMagnitude
+    var maxI = 0
+    for i in 0 ..< l.count{
+        if(l[i] > max){
+            max = l[i]
+            maxI = i
+        }
+    }
+}
+
 public func max(_ matrix: Matrix)->Double{
     var maximum = -Double.greatestFiniteMagnitude
     for i in 0 ..< matrix.rows{

@@ -29,14 +29,27 @@ public class Matrix : CustomStringConvertible, Equatable{
 		self.data = dataDouble
 	}
 
+	init(_ data:[[Int16]]){
+		var dataDouble = [[Double]]()
+		for row in data {
+			var rowDouble = [Double]()
+			for element in row {
+				rowDouble.append(Double(element))
+			}
+			dataDouble.append(rowDouble)
+		}
+		
+		self.data = dataDouble
+	}
+
 	convenience init(_ matrix: Matrix){
 		self.init(matrix.array())
 	}
 
 	convenience init(_ objects: [Vectorizable]){
-		var m = Matrix(objects.count,objects[0].toVector().columns)
+		var m = Matrix(objects.count,objects[0].toVector.columns)
 		for i in 0 ..< objects.count{
-			m[i,0 ..< m.columns] = objects[i].toVector()
+			m[i,0 ..< m.columns] = objects[i].toVector
 		}
 		self.init(m)
 	}
