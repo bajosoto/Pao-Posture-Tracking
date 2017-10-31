@@ -1,6 +1,6 @@
 import Glibc
 
-public func equals(this: Matrix, that: Matrix, within: Double)-> Bool{
+public func equals(_ this: Matrix,_ that: Matrix, within: Double)-> Bool{
 	for i in 0..<this.rows{
 		for n in 0..<that.columns{
 			if(abs(this[i,n] - that[i,n]) > within){

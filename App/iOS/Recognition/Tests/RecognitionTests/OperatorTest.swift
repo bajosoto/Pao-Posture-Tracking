@@ -16,14 +16,14 @@ class OperatorTest: XCTestCase {
 
     func testEquals(){
         let A = Matrix([[1, 2],[3, 4]])
-        XCTAssertTrue(equals(this:A,that:A,within:0.1))
+        XCTAssertTrue(equals(A,A,within:0.1))
     }
 
     func testNotEquals(){
         let A = Matrix([[1, 2],[3, 4]])
         let B = Matrix([[1, 2.2],[3, 4]])
 
-        XCTAssertFalse(equals(this:A,that:B,within:0.1))
+        XCTAssertFalse(equals(A,B,within:0.1))
     }
 
     func testDiv(){

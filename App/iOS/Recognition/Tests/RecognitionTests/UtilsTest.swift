@@ -103,6 +103,66 @@ class UtilsTest: XCTestCase {
 	 		}
     }
 
+    func testCofactor(){
+		let m = Matrix([[10,2,3],
+    					[4,5,6],
+    					[7,8,9]])
+
+    	let trueResult = Matrix([[-3,    6,    -3],
+    							 [ 6,   69,   -66],
+    							 [-3,  -48,    42]])
+
+    	XCTAssertEqual(try! cof(m),trueResult)
+    }
+
+   func testInv2(){
+    	let m = Matrix([[1,2],
+    					[2,3]])
+
+    	XCTAssertEqual(try! inv(m),Matrix([[-3,2],
+    									   [2,-1]]))
+    }
+
+    func testInv3(){
+    	let m = Matrix([[10,2,3],
+    					[4,5,6],
+    					[7,8,9]])
+    	let result = try! inv(m)
+    	let trueResult = Matrix([ [0.1111 ,0.2222 ,0.1111],
+								  [-0.2222,-2.5556,1.7778],
+								  [0.1111 ,2.4444 ,-1.5556]])
+
+    	XCTAssertTrue(equals(result,trueResult,within:0.01),"\(result) is not equal to \(trueResult)")
+    }
+
+    func testInv4(){
+    	let m = Matrix([[10,2,3,1],
+    					[4,5,6,2],
+    					[7,8,9,3],
+    					[4,3,2,1]])
+
+    	let result = try! inv(m)
+    	let trueResult = Matrix([[0.1111,   -0.2222,    0.1111,    0.0000],
+   								 [-0.2222,  -2.5556,    1.7778,    0.0000],
+    							 [0.1111,   -1.2222,    1.1111,   -1.0000],
+         						 [0,   		11.0000,   -8.0000,    3.0000] ])
+
+    	XCTAssertTrue(equals(result,trueResult,within:0.01),"\(result) is not equal to \(trueResult)")
+    }
+
+    func testInvUnequal(){
+	 	let m = Matrix([[10,2,3,1],
+    					[4,5,6,2],
+    					[7,8,9,3]])
+	 	do{
+	 		try inv(m)
+	 		XCTFail("Should have thrown exception")
+	 		}catch{
+
+	 		}
+    }
+
+
 	static var allTests : [(String, (UtilsTest) -> () throws -> Void)] {
         return [
         	("testMeanRow",testMeanRow),
@@ -118,7 +178,11 @@ class UtilsTest: XCTestCase {
             ("testDet3",testDet3),
             ("testDet4",testDet4),
             ("testDetUnequal",testDetUnequal),
-
+            ("testCofactor",testCofactor),
+            ("testInv2",testInv2),
+			("testInv3",testInv3),
+            ("testInv4",testInv4),
+            ("testInvUnequal",testInvUnequal),
 
     	]
 	}

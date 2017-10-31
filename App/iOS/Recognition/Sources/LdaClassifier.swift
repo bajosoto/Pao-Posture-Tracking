@@ -14,9 +14,9 @@ class LdaClassifier: Classifier{
 		priors = LdaClassifier.estimatePriors(dataset:trainset)
 		classes = trainset.classes
 		for i in 0 ..< self.classes.count {
-			meanCovMeans.append(0.5*outerProd(vector:self.means[i],matrix:inv(self.covariance)))
+			meanCovMeans.append(0.5*outerProd(vector:self.means[i],matrix: try! inv(self.covariance)))
 			lnPriors.append(ln(x:priors[i]))
-			covMeans.append(inv(self.covariance)*self.means[i].T)
+			covMeans.append(try! inv(self.covariance)*self.means[i].T)
 		}
 	}
 
