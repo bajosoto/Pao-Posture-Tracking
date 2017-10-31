@@ -158,13 +158,14 @@ class DashboardVC: UIViewController, bleConnectionResponder {
 //        postureChart.borderColor = blueColor
 //        postureChart.drawBordersEnabled = false
         postureChart.chartDescription?.text = ""
-        postureChart.animate(yAxisDuration: 1.0, easingOption: .easeOutCubic)
+        // postureChart.animate(yAxisDuration: 1.0, easingOption: .easeOutCubic)
         postureChart.scaleYEnabled = false
         postureChart.highlightPerTapEnabled = false
         postureChart.highlightPerDragEnabled = false
         if(chartDataSet.entryCount > 0) {   // TODO: This should be in terms of the time interval measurements ar etaken
-            postureChart.setVisibleXRangeMaximum(300.0)  // In seconds. Will make the app crash if insufficient data is available
+            postureChart.setVisibleXRangeMaximum(30.0)  // In seconds. Will make the app crash if insufficient data is available
             postureChart.setVisibleXRangeMinimum(3.0)   // In seconds. Will make the app crash if insufficient data is available
+            
         }
         postureChart.legend.enabled = false
         
@@ -231,6 +232,10 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         let xaxis = postureChart.xAxis
         xaxis.valueFormatter = axisFormatDelegate
         
+        // Scroll view to show last item
+        if let lastXVal = postureEntries.last?.date.timeIntervalSince1970 {
+            postureChart.moveViewToX(Double(lastXVal))
+        }
     }
     
     func getPostureEntriesFromDatabase() -> Results<PostureEntry> {
