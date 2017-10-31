@@ -45,11 +45,14 @@ public func det(_ matrix: Matrix) -> Double{
         return matrix[0,0]*matrix[1,1]-matrix[0,1]*matrix[1,0]
     }else{
         var d = 0.0
-        /*for i in 0 ..< matrix.columns{
-            submatrix = matrix[1 ..< matrix.rows,0 ..<]
-            d += ((-1)^i)*det(submatrix)
-        }*/
-        return 0.0
+        for i in 0 ..< matrix.columns{
+            var submatrix = Matrix(matrix)
+            submatrix.rmRow(0)
+            submatrix.rmColumn(i)
+            d += matrix[0,i]*Double((-1)^(1+i+1))*det(submatrix)
+            print("+= \(matrix[0,i])*\(Double((-1)^(1+i+1)))*\(submatrix)")
+        }
+        return d
     }
 }
 

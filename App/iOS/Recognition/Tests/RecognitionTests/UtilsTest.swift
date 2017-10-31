@@ -75,10 +75,11 @@ class UtilsTest: XCTestCase {
     	XCTAssertEqual(det(m),-1)
     }
 	func testDet3(){
-    	let m = Matrix([[1,2],
-    					[2,3]])
+    	let m = Matrix([[10,2,3],
+    					[4,5,6],
+    					[7,8,9]])
 
-    	XCTAssertEqual(det(m),-1)
+    	XCTAssertEqual(det(m),-27)
     }
 
     func testDet4(){
@@ -104,6 +105,8 @@ class UtilsTest: XCTestCase {
         	("testUnique",testUnique),
             ("testLn",testLn),
             ("testDet2",testDet2),
+            ("testDet3",testDet3),
+            ("testDet4",testDet4),
 
     	]
 	}
