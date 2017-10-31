@@ -562,8 +562,18 @@ uint8_t getBleStatus() {
     return ble_conn_status;
 }
 
-void sendMsgBle(char *string) {
+void sendMsgBle(int length, const char* format, ... ) {
 
-    ble_nus_string_send(&m_nus, (uint8_t *)string, strlen(string));
+    char msg[50];
+
+    va_list args;
+    va_start( args, format );
+    // vsprintf (msg,format, args);   // This is the one tha tworks
+    vsprintf (msg,format, args);       // Testing see if I can add the msg type 
+    va_end( args );
+
+    //strcpy(dbgMsg, msg);
+
+    ble_nus_string_send(&m_nus, (uint8_t *)msg, length);
 }
 

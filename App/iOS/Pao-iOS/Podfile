@@ -3,4 +3,7 @@ use_frameworks!
 
 target 'Pao-iOS' do
   pod 'BlueCapKit', '~> 0.6'
+  pod 'Charts', '~> 3.0.4'
+  pod 'ChartsRealm', '~> 3.0.2'
+  pod 'RealmSwift', '~> 2.4'
 end

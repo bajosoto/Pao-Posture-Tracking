@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 #include <string.h>
+#include <stdarg.h>
+#include <stdio.h>
 #include "nordic_common.h"
 #include "nrf.h"
 #include "ble_hci.h"
@@ -48,7 +50,7 @@ void app_timer_init_sergio();
 
 uint8_t getBleStatus();
 
-void sendMsgBle(char *string);
+void sendMsgBle(int length, const char* format, ... );
 
 
 #endif /* BLE_INTERFACE_H__ */

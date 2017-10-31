@@ -40,7 +40,7 @@ int main(void)
 
         if(timer % 50 == 0) {
             if(bsp_board_button_state_get(3)) {
-                sendMsgBle("Tiny Rick!");
+                sendMsgBle(16, "Button 3 Pressed");
             }
             // for(int i = 0; i < BUTTONS_NUMBER; i++) {
             //     if(bsp_board_button_state_get(i)) {
@@ -52,7 +52,11 @@ int main(void)
         if(timer % 20 == 0) {
             getMpuSensors();
             sendMessageEs(MSG02_SENSOR_VALS);
+            sendBleMessageEs(MSG_BLE_02_SENSOR);
         }
+        // if(timer % 50 == 0) {
+        //     sendBleMessageEs(MSG_BLE_02_SENSOR);
+        // }
         if(timer % 100 == 0) {
             bsp_board_led_invert(0);
             timer = 0;
