@@ -49,8 +49,7 @@ public func det(_ matrix: Matrix) -> Double{
             var submatrix = Matrix(matrix)
             submatrix.rmRow(0)
             submatrix.rmColumn(i)
-            d += matrix[0,i]*Double((-1)^(1+i+1))*det(submatrix)
-            print("+= \(matrix[0,i])*\(Double((-1)^(1+i+1)))*\(submatrix)")
+            d += matrix[0,i]*((-1)**(1+i+1))*det(submatrix)
         }
         return d
     }

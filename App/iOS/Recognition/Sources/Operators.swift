@@ -11,12 +11,23 @@ public func equals(this: Matrix, that: Matrix, within: Double)-> Bool{
 	return true
 }
 
-public func ^(this: Double, that: Double)-> Double{
+precedencegroup ExponentiationPrecedence {
+  associativity: right
+  higherThan: MultiplicationPrecedence
+}
+
+infix operator ** : ExponentiationPrecedence
+
+public func **(this: Double, that: Double)-> Double{
 	return pow(this,that)
 }
 
-public func ^(this: Double, that: Int) -> Double{
+public func **(this: Double, that: Int) -> Double{
 	return pow(this,Double(that))
+}
+
+public func **(this: Int, that: Int) -> Double{
+	return pow(Double(this),Double(that))
 }
 
 public func *(this: Matrix, that: Matrix)-> Matrix{

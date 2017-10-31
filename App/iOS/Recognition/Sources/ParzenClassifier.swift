@@ -65,11 +65,11 @@ class ParzenClassifier {
 	}
 	static internal func kernel(x: Matrix,width: Double, mean: Matrix)->Double{
 		//Gaussian with unity covariance
-		let normConst = 1.0/(2.0*pi())^(Double(x.rows)/2.0)
+		let normConst = 1.0/(2.0*pi())**(Double(x.rows)/2.0)
 		let xMu = x-mean;
 		let outerProd = (xMu*(xMu.T))*(-0.5)
 		let scalar = outerProd[0,0]
-		return normConst * (euler()^scalar)
+		return normConst * (euler()**scalar)
 	}
 
 	func classifySoft(samples: Matrix)->[[Int:Double]]{
@@ -106,7 +106,7 @@ class ParzenClassifier {
 				windowSum += ParzenClassifier.kernel(x:x,width:self.width,mean:trainset.samples[i,0..<trainset.samples.columns])
 			}
 		}
-		return windowSum/(Double(trainset.classSamples(class_id:class_).rows) * width^sample.rows)
+		return windowSum/(Double(trainset.classSamples(class_id:class_).rows) * width**sample.rows)
 
 	}
 }
