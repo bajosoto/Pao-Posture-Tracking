@@ -40,16 +40,23 @@ public func inv(_ m: Matrix)->Matrix{
     return eye(m.rows,m.columns)
 }
 
-public func det(_ matrix: Matrix) -> Double{
+public func det(_ matrix: Matrix) throws -> Double{
+    if( matrix.rows != matrix.columns ){
+        throw MatrixMathError.dimensionsDoNotMatch(matrix.rows,matrix.columns)
+    }
+    return doDet(matrix)
+}
+
+internal func doDet(_ matrix: Matrix) -> Double{
     if(matrix.rows == 2){
         return matrix[0,0]*matrix[1,1]-matrix[0,1]*matrix[1,0]
     }else{
         var d = 0.0
         for i in 0 ..< matrix.columns{
-            var submatrix = Matrix(matrix)
+            let submatrix = Matrix(matrix)
             submatrix.rmRow(0)
             submatrix.rmColumn(i)
-            d += matrix[0,i]*((-1)**(1+i+1))*det(submatrix)
+            d += matrix[0,i]*((-1)**(1+i+1))*doDet(submatrix)
         }
         return d
     }

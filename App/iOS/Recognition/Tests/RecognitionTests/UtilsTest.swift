@@ -72,27 +72,35 @@ class UtilsTest: XCTestCase {
     	let m = Matrix([[1,2],
     					[2,3]])
 
-    	XCTAssertEqual(det(m),-1)
+    	XCTAssertEqual(try! det(m),-1)
     }
 	func testDet3(){
     	let m = Matrix([[10,2,3],
     					[4,5,6],
     					[7,8,9]])
 
-    	XCTAssertEqual(det(m),-27)
+    	XCTAssertEqual(try! det(m),-27)
     }
 
     func testDet4(){
-    	let m =Matrix([[10,2,3,1],
+    	let m = Matrix([[10,2,3,1],
     					[4,5,6,2],
     					[7,8,9,3],
     					[4,3,2,1]])
 
-    	XCTAssertEqual(det(m),-9)
+    	XCTAssertEqual(try! det(m),-9)
     }
 
     func testDetUnequal(){
+	 	let m = Matrix([[10,2,3,1],
+    					[4,5,6,2],
+    					[7,8,9,3]])
+	 	do{
+	 		try det(m)
+	 		XCTFail("Should have thrown exception")
+	 		}catch{
 
+	 		}
     }
 
 	static var allTests : [(String, (UtilsTest) -> () throws -> Void)] {
@@ -109,6 +117,8 @@ class UtilsTest: XCTestCase {
             ("testDet2",testDet2),
             ("testDet3",testDet3),
             ("testDet4",testDet4),
+            ("testDetUnequal",testDetUnequal),
+
 
     	]
 	}
