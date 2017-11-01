@@ -20,8 +20,6 @@ class PaoKnnClassifier : PaoClassifier{
 		matrixRep = scaler.transform(matrixRep)
 		let trainset = try! Dataset(samples:matrixRep,labels:labels)
 		classifier = KnnClassifier(trainset:trainset,regularizer:0.0,kNeighbours:kNeighbours)
-
-
 	}
 
 	required convenience init (_ traindata: [IPostureEntry]){
@@ -33,24 +31,25 @@ class PaoKnnClassifier : PaoClassifier{
 		for i in 0 ..< testdata.count{
 			rawData.append(RawSample(testdata[i]))
 		}
-
 		let featureVector = try! preprocessor.preprocess(rawData)
 
 		let sampleMatrix = scaler.transform(Matrix(featureVector))
 
 		let hardLabels = classifier.classify(samples:sampleMatrix)
+		
 		let softLabels = classifier.classifySoft(samples:sampleMatrix)
 
 		var predictions = [Predicition]()
 		for i in 0 ..< softLabels.count{
 			var probabilities = softLabels[i]
-			var badPosture = probabilities[0]! 
-			badPosture += probabilities[1]!
-			badPosture += probabilities[2]!
-			var goodPosture = probabilities[3]!
-			goodPosture += probabilities[4]!
-			goodPosture += probabilities[5]!
-			predictions.append(Predicition(featureVector[0],goodPosture-badPosture,lookupLabel(Double(hardLabels[i]+1))))
+			var badPosture = probabilities[Int(lookupLabel("SitNok"))]! 
+			badPosture += probabilities[Int(lookupLabel("StandNok"))]!
+			badPosture += probabilities[Int(lookupLabel("MovNok"))]!
+			var goodPosture = probabilities[Int(lookupLabel("SitOk"))]!
+			goodPosture += probabilities[Int(lookupLabel("StandOk"))]!
+			goodPosture += probabilities[Int(lookupLabel("MovOk"))]!
+
+			predictions.append(Predicition(featureVector[0],goodPosture-badPosture,lookupLabel(Double(hardLabels[i]))))
 		}
 		
 		return predictions

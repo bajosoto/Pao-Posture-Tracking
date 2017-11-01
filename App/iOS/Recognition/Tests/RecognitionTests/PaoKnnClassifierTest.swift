@@ -35,7 +35,7 @@ class PaoKnnClassifierTest: XCTestCase {
         var l = [PostureEntry]()
         for i in 0 ..< 10{
           let i16 = Int16(i)
-          l.append(PostureEntry([i16,i16,i16,i16,i16,i16],lookupLabel(Double(j))))
+          l.append(PostureEntry([i16,i16,i16,i16,i16,i16],lookupLabel(Double(j+1))))
         } 
         classSamples.append(l)
         samples.append(contentsOf:l) 
@@ -143,7 +143,7 @@ class PaoKnnClassifierTest: XCTestCase {
 
         for i in 0 ..< 10{
           let class_ = classes[j]
-          l.append(PostureEntry(class_[i].map{Int16($0)},lookupLabel(Double(j))))
+          l.append(PostureEntry(class_[i].map{Int16($0)},lookupLabel(Double(j+1))))
         } 
         classSamples.append(l)
         samples.append(contentsOf:l) 
@@ -154,7 +154,15 @@ class PaoKnnClassifierTest: XCTestCase {
           let predictions = classifier.classifySampleSoft(classSamples[j])
 
           for p in predictions{
-              print(p.postureLbl)            
+              XCTAssertEqual(p.postureLbl,lookupLabel(Double(j+1)))
+              if(lookupLabel(p.postureLbl) == 1 ||
+                lookupLabel(p.postureLbl) == 3 ||
+                lookupLabel(p.postureLbl) == 5){
+                XCTAssertEqual(p.posture,1.0)
+              }else{
+                XCTAssertEqual(p.posture,-1.0)
+
+              }            
           }
 
       }
