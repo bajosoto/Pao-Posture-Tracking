@@ -1,3 +1,20 @@
+let labelDict: [String:Double] = [
+        "SitOk"     : 1.0,
+        "SitNok"    : 2.0,
+        "StandOk"   : 3.0,
+        "StandNok"  : 4.0,
+        "MovOk"     : 5.0,
+        "MovNok"    : 6.0,
+    ]
+    
+public func lookupLabel(_ strLabel : String)->Double{
+    return labelDict[strLabel]!
+}
+public func lookupLabel(_ doubleLabel : Double)->String{
+
+    return labelDict.first(where: {$1 == doubleLabel})!.key
+}
+
 public func argmax(_ l: [Double]){
     var max = -Double.greatestFiniteMagnitude
     var maxI = 0

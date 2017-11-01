@@ -10,7 +10,7 @@ class PaoKnnClassifier : PaoClassifier{
 		var labels = [Int]()
 		for i in 0 ..< traindata.count{
 			if ((i+1)%windowSize==0){
-				labels.append(Int(traindata[i].posture))
+				labels.append(Int(lookupLabel(traindata[i].postureLbl)))
 			}
 			rawData.append(RawSample(traindata[i]))
 		}
@@ -50,7 +50,7 @@ class PaoKnnClassifier : PaoClassifier{
 			var goodPosture = probabilities[3]!
 			goodPosture += probabilities[4]!
 			goodPosture += probabilities[5]!
-			predictions.append(Predicition(featureVector[0],goodPosture-badPosture,lookup(Double(hardLabels[i]+1))))
+			predictions.append(Predicition(featureVector[0],goodPosture-badPosture,lookupLabel(Double(hardLabels[i]+1))))
 		}
 		
 		return predictions
