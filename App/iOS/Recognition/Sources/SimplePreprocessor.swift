@@ -55,6 +55,7 @@ class SimplePreprocessor: Preprocessor{
 				let vector2 = Matrix([[rawData[j].accX,rawData[j].accY,rawData[j].accZ]])
 
 				let dist = norm(vector1-vector2)
+
 				if (dist > maxDist){
 					maxDist = dist
 				}

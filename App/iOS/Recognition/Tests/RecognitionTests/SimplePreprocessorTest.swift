@@ -19,13 +19,13 @@ class SimplePreprocessorTest: XCTestCase {
     }
 
     func testPeak2Peak(){
-        let measurement1 = RawSample(Matrix([[1.0,1.0,1.0, 0.0,0.0,0.0]]))
-        let measurement2 = RawSample(Matrix([[2.0,2.0,2.0, 1.0,0.0,0.0]]))
-        let measurement3 = RawSample(Matrix([[2.0,2.0,2.0, 0.2,0.2,0.2]]))
+        let measurement1 = RawSample(Matrix([[0.0,0.0,0.0, 0.0,1.0,0.0]]))
+        let measurement2 = RawSample(Matrix([[1.0,0.0,0.0, 1.0,0.0,0.0]]))
+        let measurement3 = RawSample(Matrix([[0.1,0.1,0.1, 2.1,2.1,2.1]]))
 
-        let result = SimplePreprocessor.getPeak2Peak([measurement1,measurement2])
+        let result = SimplePreprocessor.getPeak2Peak([measurement1,measurement2,measurement3])
 
-        XCTAssertTrue(result == 1.0, "Was \(result)")
+        XCTAssertEqual(1.0, result)
     }
 
     func testWindowSize(){
