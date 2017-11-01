@@ -49,6 +49,11 @@ class PaoKnnClassifierTest: XCTestCase {
   }
 
   func testNormalDistr(){
+
+
+      /* Some random values generated with matlab
+         each class follows a normal distribution around
+         a different mean */
       var class1 = [
         [458,1077,573,-413,652,959],
         [1122,1080,1077,1974,1993,1697],
@@ -135,7 +140,7 @@ class PaoKnnClassifierTest: XCTestCase {
         class5,
         class6
       ]
-
+      /* Generate PostureEntries from the values*/
       var classSamples = [[PostureEntry]]()
       var samples = [PostureEntry]()
       for j in 0 ..< 6 {
@@ -149,12 +154,19 @@ class PaoKnnClassifierTest: XCTestCase {
         samples.append(contentsOf:l) 
       }
 
+      /* Train */
       let classifier = PaoKnnClassifier(samples,windowSize:2,kNeighbours:1)
+      
+      /* Predict
+      *  just classifying the training data again to see if the code works*/
       for j in 0 ..< 6 {
           let predictions = classifier.classifySampleSoft(classSamples[j])
 
           for p in predictions{
               XCTAssertEqual(p.postureLbl,lookupLabel(Double(j+1)))
+
+              /* Since we are classifying the training data with 1 nearest neighbour 
+              *  healthy/unhealthy should just allways be 100%*/
               if(lookupLabel(p.postureLbl) == 1 ||
                 lookupLabel(p.postureLbl) == 3 ||
                 lookupLabel(p.postureLbl) == 5){
