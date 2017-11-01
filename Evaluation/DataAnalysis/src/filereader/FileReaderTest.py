@@ -1,8 +1,8 @@
 import numpy as np
 
-from filereader.FileReader import FileReader
+from src.filereader.FileReader import FileReader
 
-FILE_PATH = "../../res/log.csv"
+FILE_PATH = "../../resource/PostureEntry.csv"
 
 samples, labels, label_names = FileReader.read(FILE_PATH)
 
