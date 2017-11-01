@@ -18,7 +18,6 @@ class KnnClassifier: Classifier{
 
 	internal func train(){
 		for c in trainset.classes{
-			print("Class: \(c)")
 			priors.updateValue(Double(trainset.classSamples(class_id:c).rows)/Double(trainset.nSamples),forKey:c)
 		}
 	}
@@ -33,12 +32,12 @@ class KnnClassifier: Classifier{
 	}
 
 	internal func classifySample(sample: Matrix)->Int{
-		return classifySample_soft(sample:sample).sorted(by: {$0.1 > $1.1})[0].key
+		return classifySampleSoft(sample:sample).sorted(by: {$0.1 > $1.1})[0].key
 
 
 	}
 
-	internal func classifySample_soft(sample: Matrix)->[Int: Double]{
+	internal func classifySampleSoft(sample: Matrix)->[Int: Double]{
 		var distances = [(distance:Double,label:Int)]()
 		var proba: [Int: Double] = [:]
 		var ranking = [(key: Int, value: Double)]()
@@ -76,7 +75,7 @@ class KnnClassifier: Classifier{
 	func classifySoft(samples: Matrix)->[[Int:Double]]{
 		var softLabels:[[Int:Double]] = []
 		for i in 0..<samples.rows{
-			softLabels.append(self.classifySample_soft(sample:samples[i,0..<samples.columns]))
+			softLabels.append(self.classifySampleSoft(sample:samples[i,0..<samples.columns]))
 			
 		}
 		return softLabels
