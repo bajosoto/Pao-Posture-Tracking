@@ -1,11 +1,10 @@
 class PaoKnnClassifier : PaoClassifier{
 	
-	var classifier: Classifier
-	var scaler: Scaler
-	var preprocessor: Preprocessor
+	let classifier: Classifier
+	let scaler: Scaler
+	let preprocessor: Preprocessor
 
-	required init(_ traindata: [IPostureEntry]){
-		var windowSize = 10
+	init(_ traindata: [IPostureEntry],windowSize: Int = 10, kNeighbours: Int = 10){
 		preprocessor = SimplePreprocessor(windowSize:windowSize)
 		var rawData = [RawSample]()
 		var labels = [Int]()
@@ -19,8 +18,14 @@ class PaoKnnClassifier : PaoClassifier{
 		var matrixRep = Matrix(featureVectors)
 		scaler = EqualScaler(matrixRep)
 		matrixRep = scaler.transform(matrixRep)
-		var trainset = try! Dataset(samples:matrixRep,labels:labels)
-		classifier = KnnClassifier(trainset:trainset,regularizer:0.0,kNeighbours:1)
+		let trainset = try! Dataset(samples:matrixRep,labels:labels)
+		classifier = KnnClassifier(trainset:trainset,regularizer:0.0,kNeighbours:kNeighbours)
+
+
+	}
+
+	required convenience init (_ traindata: [IPostureEntry]){
+		self.init(traindata,windowSize:10,kNeighbours:10)
 	}
 
 	func classifySampleSoft(_ testdata: [IPostureEntry]) -> [IPostureEntry]{
@@ -29,16 +34,25 @@ class PaoKnnClassifier : PaoClassifier{
 			rawData.append(RawSample(testdata[i]))
 		}
 
-		var featureVector = try! preprocessor.preprocess(rawData)
+		let featureVector = try! preprocessor.preprocess(rawData)
 
-		var sampleVector = scaler.transform(Matrix(featureVector))
+		let sampleMatrix = scaler.transform(Matrix(featureVector))
 
-		var probabilities = classifier.classifySoft(samples:sampleVector)[0]
+		let hardLabels = classifier.classify(samples:sampleMatrix)
+		let softLabels = classifier.classifySoft(samples:sampleMatrix)
 
-		print(probabilities)
-		var badPosture = probabilities[0]! //+probabilities[1]!+probabilities[2]!
-		var goodPosture = probabilities[3]! //+probabilities[4]!+probabilities[5]!
-
-		return [Predicition(featureVector[0],goodPosture-badPosture)]
+		var predictions = [Predicition]()
+		for i in 0 ..< softLabels.count{
+			var probabilities = softLabels[i]
+			var badPosture = probabilities[0]! 
+			badPosture += probabilities[1]!
+			badPosture += probabilities[2]!
+			var goodPosture = probabilities[3]!
+			goodPosture += probabilities[4]!
+			goodPosture += probabilities[5]!
+			predictions.append(Predicition(featureVector[0],goodPosture-badPosture,lookup(Double(hardLabels[i]+1))))
+		}
+		
+		return predictions
 	}
 }
