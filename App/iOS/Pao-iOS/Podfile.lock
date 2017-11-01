@@ -1,0 +1,30 @@
+PODS:
+  - BlueCapKit (0.6.0)
+  - Charts (3.0.4):
+    - Charts/Core (= 3.0.4)
+  - Charts/Core (3.0.4)
+  - ChartsRealm (3.0.2):
+    - Charts (~> 3.0.2)
+    - RealmSwift (~> 2.4)
+  - Realm (2.10.2):
+    - Realm/Headers (= 2.10.2)
+  - Realm/Headers (2.10.2)
+  - RealmSwift (2.10.2):
+    - Realm (= 2.10.2)
+
+DEPENDENCIES:
+  - BlueCapKit (~> 0.6)
+  - Charts (~> 3.0.4)
+  - ChartsRealm (~> 3.0.2)
+  - RealmSwift (~> 2.4)
+
+SPEC CHECKSUMS:
+  BlueCapKit: 8c8c4764a9fcd7296ae2a491533bb8ec53f8f61f
+  Charts: 0705898046257443f0afbbc3179f4b67507b6e48
+  ChartsRealm: ed0332fd409298188a2b71e9548604165c987d42
+  Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
+  RealmSwift: 07a9ae0505091eda6b2ee7c190c3786d6e90a7b0
+
+PODFILE CHECKSUM: 0b9c00c439a159a78ba01ae9b463d93f564e913d
+
+COCOAPODS: 1.2.1

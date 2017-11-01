@@ -30,6 +30,9 @@ void rs232_open(void) {
 	if(fd_RS232 < 0) {
 		fd_RS232 = open("/dev/cu.usbmodem14211", O_RDWR | O_NONBLOCK);  // Mac sometimes mounts it here
 	}
+	if(fd_RS232 < 0){
+		fd_RS232 = open("/dev/cu.usbmodem1421", O_RDWR | O_NONBLOCK);  // Mac sometimes mounts it here
+	}
 #else
 #   error "Unknown compiler"
 #endif 	

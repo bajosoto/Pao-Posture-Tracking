@@ -19,7 +19,7 @@ void getMpuSensors() {
 	APP_ERROR_CHECK(err_code);
 
 	// printf("\033[3;1HSample # %d\r\nX: %06d\r\nY: %06d\r\nZ: %06d", ++sample_number, acc_values.x, acc_values.y, acc_values.z);
-	bsp_board_led_invert(1);
+	//bsp_board_led_invert(1);
 }
 
 int16_t getMpuVal(sensValType type) {

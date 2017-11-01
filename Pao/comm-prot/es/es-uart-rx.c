@@ -9,6 +9,7 @@
 #include "uart-sm.h"
 #include <inttypes.h>
 #include "pao.h"
+#include "debug-interface.h"
 
 void msg00_status();
 void msg01_quit();
@@ -24,7 +25,8 @@ MsgType msgTable[TOTAL_PC_MESSAGES] = {
 
 void msg00_status() {
 
-	sendMessageEs(MSG00_STATUS_ANS);
+	//sendMessageEs(MSG00_STATUS_ANS);
+	debugMsg("Hello from pao");
 }
 
 void msg01_quit() {
@@ -35,11 +37,11 @@ void msg01_quit() {
 int16_t unfoldSI16(int index) {
 
 	int16_t result = 0;
-	int16_t offset = 3 * index;
+	int16_t offset = 2 * index;
 
-	result |= (rxBuff[1 + offset] & 0xff);
-	result |= (rxBuff[2 + offset] & 0xff) << 8;
-	result = rxBuff[0 + 3 * index] > 0 ? -result : result;
+	result |= (rxBuff[0 + offset] & 0xff);
+	result |= (rxBuff[1 + offset] & 0xff) << 8;
+	// result = rxBuff[0 + 3 * index] > 0 ? -result : result;
 
 	return result;
 }

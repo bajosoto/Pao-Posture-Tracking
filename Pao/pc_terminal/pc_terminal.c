@@ -28,7 +28,7 @@ void  periodicMessage(int sig) {
 
 int main(int argc, char **argv)
 {
-	char c;
+	int c;
 	int i;
 
 	initInterface();

@@ -13,6 +13,9 @@
 void msg00_status_ans();
 void msg01_quit_ans();
 void msg02_sensor_vals();
+void msg03_ble_status();
+void msg04_pickle_rick();
+void msg05_dbg_msg();
 
 int16_t unfoldSI16(int index);
 
@@ -21,7 +24,10 @@ MsgType msgTable[TOTAL_ES_MESSAGES] = {
 	/* Action Name */		/* Length */
 	{{msg00_status_ans}, 	0},				// 00: Performs some action
 	{{msg01_quit_ans}, 		0}, 			// 01: Answer shutdown request
-	{{msg02_sensor_vals}, 	18}, 			// 02: Sensor values to display
+	{{msg02_sensor_vals}, 	12}, 			// 02: Sensor values to display
+	{{msg03_ble_status}, 	1}, 			// 03: BLE connection status change 
+	{{msg04_pickle_rick}, 	0}, 			// 04: Pickle rick
+	{{msg05_dbg_msg}, 		100}, 			// 02: Sensor values to display
 };
 
 void msg00_status_ans() {
@@ -48,14 +54,37 @@ void msg02_sensor_vals() {
 	dispVal(DISP_R, s5);
 }
 
+void msg03_ble_status() {
+
+	switch(rxBuff[0]) {
+		case 0: 
+			dispMsg("BLE device disconnected");
+			break;
+		case 1:
+			dispMsg("BLE device connected");
+			break;
+		default:
+			dispMsg("Unknown BLE status");
+			break;
+	}
+}
+
+void msg04_pickle_rick() {
+	dispMsg("Pickle Rick!");
+}
+
+void msg05_dbg_msg() {
+	dispMsg("%s", rxBuff);
+}
+
 int16_t unfoldSI16(int index) {
 
 	int16_t result = 0;
-	int16_t offset = 3 * index;
+	int16_t offset = 2 * index;
 
-	result |= (rxBuff[1 + offset] & 0xff);
-	result |= (rxBuff[2 + offset] & 0xff) << 8;
-	result = rxBuff[0 + 3 * index] > 0 ? -result : result;
+	result |= (rxBuff[0 + offset] & 0xff);
+	result |= (rxBuff[1 + offset] & 0xff) << 8;
+	// result = rxBuff[0 + 3 * index] > 0 ? -result : result;
 
 	return result;
 }

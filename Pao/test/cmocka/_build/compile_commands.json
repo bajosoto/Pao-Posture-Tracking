@@ -1,0 +1,92 @@
+[
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/src",
+  "command": "/usr/bin/cc  -DCMOCKA_EXPORTS -DHAVE_CONFIG_H=1 -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/src -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/src -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE -fPIC   -o CMakeFiles/cmocka_shared.dir/cmocka.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/src/cmocka.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/src/cmocka.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/product_database_test.dir/product_database.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/product_database.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/product_database.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/product_database_test.dir/product_database_test.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/product_database_test.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/product_database_test.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -DUNIT_TESTING=1 -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/calculator_test.dir/calculator.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/calculator.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/calculator.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/calculator_test.dir/calculator_test.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/calculator_test.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/calculator_test.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -DUNIT_TESTING=1 -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/assert_module_test.dir/assert_module.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/assert_module.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/assert_module.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/assert_module_test.dir/assert_module_test.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/assert_module_test.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/assert_module_test.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -DUNIT_TESTING=1 -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/allocate_module_test.dir/allocate_module.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/allocate_module.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/allocate_module.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/allocate_module_test.dir/allocate_module_test.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/allocate_module_test.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/allocate_module_test.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/key_value_test.dir/key_value.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/key_value.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/key_value.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/key_value_test.dir/key_value_test.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/key_value_test.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/key_value_test.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/assert_macro_test.dir/assert_macro.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/assert_macro.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/assert_macro.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/assert_macro_test.dir/assert_macro_test.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/assert_macro_test.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/assert_macro_test.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/simple_test.dir/simple_test.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/simple_test.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/simple_test.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/customer_database_test.dir/customer_database.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/customer_database.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/customer_database.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/customer_database_test.dir/customer_database_test.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/customer_database_test.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/customer_database_test.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example/chef_wrap",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example/chef_wrap -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/chef_wrap -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/waiter_test_wrap.dir/waiter_test_wrap.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/chef_wrap/waiter_test_wrap.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/chef_wrap/waiter_test_wrap.c"
+},
+{
+  "directory": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example/chef_wrap",
+  "command": "/usr/bin/cc   -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build/example/chef_wrap -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/chef_wrap -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/_build -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example -I/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/include   -std=gnu99 -pedantic -pedantic-errors -Wall -Wextra -Wshadow -Wmissing-prototypes -Wdeclaration-after-statement -Wunused -Wfloat-equal -Wpointer-arith -Wwrite-strings -Wformat-security -Wmissing-format-attribute -Wundef -Wstrict-prototypes -fPIC -fstack-protector -D_GNU_SOURCE -D_LARGEFILE64_SOURCE   -o CMakeFiles/waiter_test_wrap.dir/chef.c.o   -c /home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/chef_wrap/chef.c",
+  "file": "/home/phil/Code/Pao/Pao-Posture-Tracking/Pao/test/cmocka/example/chef_wrap/chef.c"
+}
+]
