@@ -18,6 +18,7 @@ class KnnClassifier: Classifier{
 
 	internal func train(){
 		for c in trainset.classes{
+			print("Class: \(c)")
 			priors.updateValue(Double(trainset.classSamples(class_id:c).rows)/Double(trainset.nSamples),forKey:c)
 		}
 	}

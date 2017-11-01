@@ -4,13 +4,17 @@ class SimplePreprocessor: Preprocessor{
 	init(windowSize: Int = 10){
 		self.windowSize = windowSize
 	}
-	func preprocess(_ rawData: [RawSample]) -> [FeatureVector]{
+	func preprocess(_ rawData: [RawSample]) throws -> [FeatureVector]{
+
+		if(rawData.count < windowSize){
+			throw PreprocessorError.NotEnoughSamples(rawData.count,windowSize)
+		}
 		var vectors = [FeatureVector]()
 
 		var measurementWindow = [RawSample]()
 		for i in 0 ..< rawData.count{	
 			measurementWindow.append(rawData[i])
-			if(i>0 && i%windowSize==0){
+			if(i>0 && (i+1)%windowSize==0){
 				vectors.append(preprocessWindow(measurementWindow))	
 				measurementWindow = [RawSample]()
 			}

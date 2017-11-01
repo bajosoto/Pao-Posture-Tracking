@@ -28,23 +28,47 @@ class SimplePreprocessorTest: XCTestCase {
         XCTAssertTrue(result == 1.0, "Was \(result)")
     }
 
-    func testPreprocessor(){
-        let measurement1 = RawSample(Matrix([[1.0,1.0,1.0, 0.0,0.0,0.0]]))
-        let measurement2 = RawSample(Matrix([[2.0,2.0,2.0, 1.0,0.0,0.0]]))
-        let measurement3 = RawSample(Matrix([[2.0,2.0,2.0, 0.2,0.2,0.2]]))
+    func testWindowSize(){
+         var samples = [RawSample]()
+         let windowSize = 10
+          for i in 0 ..< windowSize{
+              let i16 = Int16(i)
+              samples.append(RawSample(Matrix([[i16,i16,i16,i16,i16,i16]])))
+          }
+          for i in 0 ..< windowSize{
+              let i16 = Int16(i)
+              samples.append(RawSample(Matrix([[i16*10,i16*10,i16*10,i16*10,i16*10,i16*10]])))
+          }
 
 
-        let preprocessor = SimplePreprocessor(windowSize:2)
-        let featureVectors = preprocessor.preprocess([measurement1,measurement2,measurement3])
-        //TODO inser assertion
+        let preprocessor = SimplePreprocessor(windowSize:windowSize)
+        let featureVectors = try! preprocessor.preprocess(samples)
+
+        XCTAssertEqual(featureVectors.count,2)
+    }
+
+    func testNotEnoughSamples(){
+        var samples = [RawSample]()
+        let windowSize = 5
+        for i in 0 ..< windowSize{
+              let i16 = Int16(i)
+              samples.append(RawSample(Matrix([[i16,i16,i16,i16,i16,i16]])))
+        }
+        let preprocessor = SimplePreprocessor(windowSize:10)
+        do{
+            try preprocessor.preprocess(samples)
+            XCTFail("Should have raised NotEnoughSamplesError")
+        }catch{}
+
+        
     }
     
      static var allTests : [(String, (SimplePreprocessorTest) -> () throws -> Void)] {
         return [
           ("testAverageFilter",testAverageFilter),
           ("testPeak2Peak",testPeak2Peak),
-          ("testPreprocessor",testPreprocessor),
-
+          ("testWindowSize",testWindowSize),
+          (" testNotEnoughSamples",testNotEnoughSamples)
         ]
     }
 }

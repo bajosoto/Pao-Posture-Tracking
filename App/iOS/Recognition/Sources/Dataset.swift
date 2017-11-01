@@ -2,7 +2,10 @@ struct Dataset{
 	public let samples:Matrix
 	public let labels:[Int]
 	
-	init(samples: Matrix, labels: [Int]){
+	init(samples: Matrix, labels: [Int]) throws{
+		if( samples.rows != labels.count){
+			throw DatasetError.nLabelsAndNSamplesDoNotMatch(labels.count,samples.rows)
+		}
 		self.samples = samples
 		self.labels = labels
 	}

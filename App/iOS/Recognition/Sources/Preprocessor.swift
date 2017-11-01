@@ -1,5 +1,5 @@
 protocol Preprocessor{
 
-	func preprocess(_ rawData: [RawSample]) -> [FeatureVector]
+	func preprocess(_ rawData: [RawSample]) throws -> [FeatureVector]
 	
 }
