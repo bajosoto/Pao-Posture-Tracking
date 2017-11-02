@@ -3,3 +3,14 @@
 - longer period confident: give a confident speech, walk around depressed
 - do a couple of standups and sitting downs
 - label lying down
+- different sensors
+
+
+- tree structrue
+                move                                                     not move
+        transition activity                                         standing    sitting
+stand2sit    sit2stand    stand2stand sit2sit                   healthy unhealty healthy/unhealthy
+
+
+- features: take a longer window e.g. 10s and analyse signal:
+    - high frequencies -> moving, low frequencies -> not moving
