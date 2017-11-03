@@ -6,21 +6,21 @@ class UtilsTest: XCTestCase {
 	func testMeanRow(){
 		let A = Matrix([[1, 1],[2, 2]])
         let Solution = Matrix([[1.5, 1.5]])
-	    let B = mean_row(matrix:A)
+	    let B = meanRow(matrix:A)
 	    XCTAssertTrue(B==Solution,"\(B)")    
 	}
 
 	func testMeanRow2(){
 		let A = Matrix([[1, 2],[3, 4]])
         let Solution = Matrix([[2, 3]])
-	    let B = mean_row(matrix:A)
+	    let B = meanRow(matrix:A)
 	    XCTAssertTrue(B==Solution,"\(B)")    
 	}
 
 	func testMeanCol(){
 		let A = Matrix([[1, 1],[2, 2]])
         let Solution = Matrix([[1, 2]])
-	    let B = mean_col(matrix:A)
+	    let B = meanCol(matrix:A)
 	    XCTAssertTrue(B==Solution,"\(B)")    
 	}
 
@@ -177,6 +177,10 @@ class UtilsTest: XCTestCase {
 
     }
 
+    func testEvaluate(){
+        XCTFail("Test missing")
+    }
+
 	static var allTests : [(String, (UtilsTest) -> () throws -> Void)] {
         return [
         	("testMeanRow",testMeanRow),
@@ -198,7 +202,7 @@ class UtilsTest: XCTestCase {
             ("testInv4",testInv4),
             ("testInvUnequal",testInvUnequal),
             ("testInvSingular",testInvSingular),
-
+            ("testEvaluate",testEvaluate)
     	]
 	}
 }

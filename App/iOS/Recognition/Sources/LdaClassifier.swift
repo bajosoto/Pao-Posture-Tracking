@@ -59,7 +59,7 @@ class LdaClassifier: Classifier{
 	static func estimateMeans(dataset: Dataset)->[Matrix]{
 		var means = [Matrix]()
 		for i in dataset.classes{
-			means.append(mean_row(matrix:(dataset.classSamples(class_id:i)))) 
+			means.append(meanRow(matrix:(dataset.classSamples(class_id:i)))) 
 		}
 		return means
 	}

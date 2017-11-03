@@ -1,3 +1,15 @@
+func evaluate(_ clf: Classifier,_ dataset: Dataset,_ weights: Matrix) -> Double{
+    
+    let predictions = clf.classify(samples:dataset.samples)
+    
+    return norm((Matrix([predictions]) - Matrix([dataset.labels]))*weights.T)
+
+}
+
+func evaluate(_ clf: Classifier,_ dataset: Dataset) -> Double{
+    return evaluate(clf,dataset,eye(dataset.nSamples,1))
+}
+
 let labelDict: [String:Double] = [
         "SitOk"     : 1.0,
         "SitNok"    : 2.0,
@@ -40,7 +52,7 @@ public func max(_ matrix: Matrix)->Double{
     return maximum
 }
 
-public func mean_row( matrix: Matrix)->Matrix{
+public func meanRow( matrix: Matrix)->Matrix{
 	var sum:Matrix = Matrix(1,matrix.columns)
 	for i in 0..<matrix.rows{
         sum = sum + matrix[i]
@@ -48,15 +60,15 @@ public func mean_row( matrix: Matrix)->Matrix{
     return sum/matrix.rows
 }
 
-public func mean_col(matrix: Matrix)->Matrix{
-	return (mean_row(matrix:matrix.T)).T
+public func meanCol(matrix: Matrix)->Matrix{
+	return (meanRow(matrix:matrix.T)).T
 }
 
 public func cov(matrix: Matrix) -> Matrix{
 	var sum:Matrix = Matrix(matrix.columns, matrix.columns)
 
     for i in 0..<matrix.rows{
-        sum = sum + (matrix[i]-mean_row(matrix:matrix)).T * ((matrix[i]-mean_row(matrix:matrix)))
+        sum = sum + (matrix[i]-meanRow(matrix:matrix)).T * ((matrix[i]-meanRow(matrix:matrix)))
     }
 
     return sum/(matrix.rows-1)

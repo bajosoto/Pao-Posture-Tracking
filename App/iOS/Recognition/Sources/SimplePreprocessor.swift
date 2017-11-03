@@ -44,7 +44,7 @@ class SimplePreprocessor: Preprocessor{
 			matrix[i,0 ..< matrix.columns] = rawData[i].toVector
 		}
 
-		return RawSample(mean_row(matrix:matrix))
+		return RawSample(meanRow(matrix:matrix))
 	}
 
 	internal static func getPeak2Peak(_ rawData: [RawSample]) -> Double{
