@@ -26,3 +26,11 @@ class PreProcessor:
             window[i, :] = data[i * window_size:(i + 1) * window_size, :].reshape(1, -1)
 
         return window
+
+    @staticmethod
+    def split2sequences(data: np.array, window_size=10):
+        lengths = []
+        for i in range(0, int(np.floor((data.shape[0]/window_size))-1)):
+            lengths.append(window_size)
+
+        return data, lengths
