@@ -18,6 +18,17 @@ class MatrixTest: XCTestCase {
 
     }
 
+    func testSubscriptSet(){
+        var matrix = Matrix([[1,2],[3,4]])
+        matrix[0,0] = 0
+        matrix[0,1] = 0 
+        XCTAssertTrue(matrix[0,0] == 0)
+        XCTAssertTrue(matrix[0,1] == 0)
+        XCTAssertTrue(matrix[1,0] == 3)
+        XCTAssertTrue(matrix[1,1] == 4)
+
+    }
+
     func testSubscriptRow(){
         let matrix = Matrix([[1,2],[3,4]])
         let row1 = matrix[0]
@@ -207,6 +218,7 @@ class MatrixTest: XCTestCase {
         return [
         	("testInit",testInit),
         	("testSubscript",testSubscript),
+            ("testSubscriptSet",testSubscript),
             ("testSubscriptRow",testSubscriptRow),
             ("testEquals",testEquals),
             ("testNotEquals",testNotEquals),

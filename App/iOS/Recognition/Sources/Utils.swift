@@ -1,14 +1,32 @@
+func abs(_ m: Matrix) -> Matrix {
+
+    var mAbs = Matrix(m.rows,m.columns)
+    
+    for i in 0 ..< m.rows {
+        for j in 0 ..< m.columns {
+            if(m[i,j] < 0.0){
+                mAbs[i,j] = -1*m[i,j] 
+            }else{
+                mAbs[i,j] = m[i,j]
+            }
+        }
+    }
+    return mAbs
+}
+
 func evaluate(_ clf: Classifier,_ dataset: Dataset,_ weights: Matrix) -> Double{
     
     let predictions = clf.classify(samples:dataset.samples)
     
-    return norm((Matrix([predictions]) - Matrix([dataset.labels]))*weights.T)
-
+    let error = abs((Matrix([predictions]) - Matrix([dataset.labels])))*(weights/dataset.nSamples)
+    return error[0,0]
 }
 
 func evaluate(_ clf: Classifier,_ dataset: Dataset) -> Double{
     return evaluate(clf,dataset,eye(dataset.nSamples,1))
 }
+
+
 
 let labelDict: [String:Double] = [
         "SitOk"     : 1.0,
@@ -27,7 +45,7 @@ public func lookupLabel(_ doubleLabel : Double)->String{
     return labelDict.first(where: {$1 == doubleLabel})!.key
 }
 
-public func argmax(_ l: [Double]){
+public func argmax(_ l: [Double]) -> (Int,Double){
     var max = -Double.greatestFiniteMagnitude
     var maxI = 0
     for i in 0 ..< l.count{
@@ -36,6 +54,8 @@ public func argmax(_ l: [Double]){
             maxI = i
         }
     }
+
+    return (maxI,max)
 }
 
 public func max(_ matrix: Matrix)->Double{
