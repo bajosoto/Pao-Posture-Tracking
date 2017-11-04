@@ -18,12 +18,12 @@ func evaluate(_ clf: Classifier,_ dataset: Dataset,_ weights: Matrix) -> Double{
     
     let predictions = clf.predict(samples:dataset.samples)
     
-    let error = abs((Matrix([predictions]) - Matrix([dataset.labels])))*(weights/dataset.nSamples)
+    let error = abs((Matrix([predictions]) - Matrix([dataset.labels])))*(weights)
     return error[0,0]
 }
 
 func evaluate(_ clf: Classifier,_ dataset: Dataset) -> Double{
-    return evaluate(clf,dataset,eye(dataset.nSamples,1))
+    return evaluate(clf,dataset,ones(dataset.nSamples,1)/dataset.nSamples)
 }
 
 
@@ -172,11 +172,21 @@ public func sqrt(_ x: Double) -> Double{
 
 public func eye(_ rows: Int, _ cols: Int) -> Matrix{
     let mat = Matrix(rows,cols)
-    for i in 0 ..< mat.columns {
-        for j in 0 ..< mat.rows {
+    for i in 0 ..< mat.rows {
+        for j in 0 ..< mat.columns {
             if( i==j){
                 mat[i,j] = 1.0
             }
+        }
+    }
+    return mat
+}
+
+public func ones(_ rows: Int, _ cols: Int) -> Matrix{
+    let mat = Matrix(rows,cols)
+    for i in 0 ..< mat.rows {
+        for j in 0 ..< mat.columns {
+            mat[i,j] = 1.0
         }
     }
     return mat

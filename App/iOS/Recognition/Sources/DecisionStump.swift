@@ -30,6 +30,7 @@ class DecisionStump : Classifier{
 					let clf = DecisionStump(cmp, j, thresh)
 
 					let error = evaluate(clf,trainset,weights)
+					print("Iteration: (\(i),\(j)), error: \(error)")
 
 					if (error < bestError){
 						bestCmp = cmp
