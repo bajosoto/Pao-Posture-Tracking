@@ -16,7 +16,7 @@ class DecisionStumpTest: XCTestCase {
       let sample = Matrix([[1,2,3]])
       let sample2 = Matrix([[1,2,2.4]])
 
-      let clf = DecisionStump(true,2,2.5)
+      let clf = DecisionStump(true,2,2.5,[0,1])
       XCTAssertEqual(clf.predict(samples:sample)[0],0)
       XCTAssertEqual(clf.predict(samples:sample2)[0],1)
 
@@ -34,6 +34,19 @@ class DecisionStumpTest: XCTestCase {
        
   }
 
+   func testTrainingOtherLabels(){
+      let samples = Matrix([[1,1,0],
+                            [1,1,0],
+                            [1,1,1]])
+      let labels = [1,1,2]
+      let clf = DecisionStump(try! Dataset(samples:samples,labels:labels),ones(samples.rows,1)/samples.rows)
+      let predictions = clf.predict(samples:samples)
+
+      XCTAssertEqual(predictions,labels)
+       
+  }
+
+
   func testClassifSoft(){
        XCTFail("Not implemented")
   }
@@ -43,6 +56,7 @@ class DecisionStumpTest: XCTestCase {
         	("testDecision", testDecision),
           ("testInit", testInit),
           ("testTraining", testTraining),
+          ("testTrainingOtherLabels", testTrainingOtherLabels),
           ("testClassifSoft",testClassifSoft)
         ]
     }
