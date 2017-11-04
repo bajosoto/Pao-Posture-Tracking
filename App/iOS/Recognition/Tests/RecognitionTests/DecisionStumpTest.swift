@@ -34,7 +34,7 @@ class DecisionStumpTest: XCTestCase {
        
   }
 
-   func testTrainingOtherLabels(){
+  func testTrainingOtherLabels(){
       let samples = Matrix([[1,1,0],
                             [1,1,0],
                             [1,1,1]])
@@ -43,7 +43,22 @@ class DecisionStumpTest: XCTestCase {
       let predictions = clf.predict(samples:samples)
 
       XCTAssertEqual(predictions,labels)
-       
+      
+  }
+
+  func testWeightedClassification(){
+      let samples = Matrix([[0,1,0],
+                            [0,1,0],
+                            [1,1,1],
+                            [0,1,1],
+                            [0,1,1]])
+      let labels = [0,0,0,1,1]
+      let weights = Matrix([[1/10,1/10,4/10,2/10,2/10]])
+      let clf = DecisionStump(try! Dataset(samples:samples,labels:labels),weights)
+      let predictions = clf.predict(samples:samples)
+
+      XCTAssertEqual(predictions,[1,1,0,1,1])
+      
   }
 
 
@@ -57,7 +72,8 @@ class DecisionStumpTest: XCTestCase {
           ("testInit", testInit),
           ("testTraining", testTraining),
           ("testTrainingOtherLabels", testTrainingOtherLabels),
-          ("testClassifSoft",testClassifSoft)
+          ("testClassifSoft",testClassifSoft),
+          ("testWeightedClassification",testWeightedClassification)
         ]
     }
 }

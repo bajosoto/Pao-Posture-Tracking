@@ -14,6 +14,7 @@ XCTMain([
      testCase(EqualScalerTest.allTests),
      testCase(PaoKnnClassifierTest.allTests),
      testCase(DecisionStumpTest.allTests),
+     testCase(AdaBoostTest.allTests),
     
 
 ])
