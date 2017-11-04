@@ -184,8 +184,14 @@ class UtilsTest: XCTestCase {
                               [1,2,1]])
         let labels = [0,0,1,1]
         let clf = DecisionStump(true,0,1)
+
         XCTAssertEqual(clf.predict(samples:samples),[1,1,1,1])
         XCTAssertEqual(evaluate(clf,try! Dataset(samples:samples,labels:labels)),0.5)
+
+        let clf2 = DecisionStump(false,2,0)
+        XCTAssertEqual(clf2.predict(samples:samples),[0,0,1,1])
+        XCTAssertEqual(evaluate(clf2,try! Dataset(samples:samples,labels:labels)),0.0)
+
     }
 
 	static var allTests : [(String, (UtilsTest) -> () throws -> Void)] {
