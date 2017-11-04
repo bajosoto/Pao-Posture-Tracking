@@ -74,7 +74,7 @@ class DecisionStump : Classifier{
 	}
 
 	internal func predictSample(sample: Matrix)->Int {
-		return self.classes[DecisionStump.decision(sample,self.feature,self.cmpLess,self.threshold)] 
+		return DecisionStump.decision(sample,self.feature,self.cmpLess,self.threshold) 
 	}
 
 	internal static func decision(_ sample: Matrix, _ feature: Int, _ cmpLess: Bool, _ threshold: Double) -> Int {
