@@ -26,8 +26,8 @@ class DecisionStumpTest: XCTestCase {
       let samples = Matrix([[1,1,0],
                             [1,1,0],
                             [1,1,1]])
-      let labels = [1,1,2]
-      let clf = DecisionStump(try! Dataset(samples:samples,labels:labels),eye(samples.rows,1))
+      let labels = [0,0,1]
+      let clf = DecisionStump(try! Dataset(samples:samples,labels:labels),ones(samples.rows,1)/samples.rows)
       let predictions = clf.predict(samples:samples)
 
       XCTAssertEqual(predictions,labels)

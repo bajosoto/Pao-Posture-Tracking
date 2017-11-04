@@ -8,6 +8,21 @@ class DecisionStump : Classifier{
 	}
 
 	init(_ trainset:Dataset, _ weights:Matrix){
+
+		let ret = DecisionStump.train(trainset,weights)
+
+		cmpLess = ret.0
+		threshold = ret.1
+		feature = ret.2
+	}
+
+	init(_ cmpLess: Bool, _ feature: Int, _ threshold: Double){
+		self.cmpLess = cmpLess
+		self.feature = feature
+		self.threshold = threshold
+	}
+
+	internal static func train(_ trainset: Dataset, _ weights: Matrix) -> (Bool,Double,Int){
 		var bestCmp = false
 		var bestThresh = 0.0
 		var bestFeature = 0
@@ -30,29 +45,21 @@ class DecisionStump : Classifier{
 					let clf = DecisionStump(cmp, j, thresh)
 
 					let error = evaluate(clf,trainset,weights)
-					print("Iteration: (\(i),\(j)), error: \(error)")
 
 					if (error < bestError){
 						bestCmp = cmp
 						bestThresh = thresh
 						bestFeature = j
 						bestError = error
+						if (error == 0.0) {
+							return (bestCmp,bestThresh,bestFeature)
+						}
 					}
 				}
 			}
 		}
-
-		cmpLess = bestCmp
-		feature = bestFeature
-		threshold = bestThresh
+		return (bestCmp,bestThresh,bestFeature)
 	}
-
-	init(_ cmpLess: Bool, _ feature: Int, _ threshold: Double){
-		self.cmpLess = cmpLess
-		self.feature = feature
-		self.threshold = threshold
-	}
-
 	func predict(samples: Matrix)->[Int]{
 		var labelsFound = [Int]()
 		for i in 0..<samples.rows{
