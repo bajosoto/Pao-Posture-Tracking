@@ -54,7 +54,7 @@ class DecisionStumpTest: XCTestCase {
                             [0,1,1]])
       let labels = [0,0,0,1,1]
       let weights = Matrix([[1/10,1/10,4/10,2/10,2/10]])
-      let clf = DecisionStump(try! Dataset(samples:samples,labels:labels),weights)
+      let clf = DecisionStump(try! Dataset(samples:samples,labels:labels),weights.T)
       let predictions = clf.predict(samples:samples)
 
       XCTAssertEqual(predictions,[1,1,0,1,1])

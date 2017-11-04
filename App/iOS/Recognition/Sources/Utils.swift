@@ -16,9 +16,14 @@ func abs(_ m: Matrix) -> Matrix {
 
 func evaluate(_ clf: Classifier,_ dataset: Dataset,_ weights: Matrix) -> Double{
     
+    var weights_ = weights
+    if(weights.rows == 1){
+        weights_ = weights.T
+    }
+
     let predictions = clf.predict(samples:dataset.samples)
     
-    let error = abs((Matrix([predictions]) - Matrix([dataset.labels])))*(weights)
+    let error = abs((Matrix([predictions]) - Matrix([dataset.labels])))*(weights_)
     return error[0,0]
 }
 

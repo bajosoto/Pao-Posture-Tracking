@@ -11,16 +11,16 @@ class AdaBoost : Classifier {
 	init(_ trainset: Dataset, _ maxI: Int){
 		let ret = AdaBoost.train(trainset,maxI)
 		
-		totalI = maxI		
 		weights = ret.0
 		beta = ret.1
 		hypotheses = ret.2
+		totalI = ret.3
 	}
 
 	internal static func train(_ trainset:Dataset,_ maxI: Int) -> (Matrix,[Double],[Classifier],Int){
 
-		var weights = ones(maxI,trainset.dim)
-		var normedWeights = ones(maxI,trainset.dim) 
+		var weights = ones(maxI,trainset.nSamples)
+		var normedWeights = ones(maxI,trainset.nSamples) 
 		var error = [Double]()
 		var beta = [Double]()
 		var hypotheses = [Classifier]()
@@ -31,14 +31,18 @@ class AdaBoost : Classifier {
 			let clf = DecisionStump(trainset,normedWeights[i,0 ..< weights.columns])
 			hypotheses.append(clf)
 			let predictions = clf.predict(samples:trainset.samples)
-
 			error.append(evaluate(clf,trainset,weights[i,0 ..< weights.columns]))
-			beta.append(error[i]/(1-error[i]))
-
-			let power = ones(trainset.nSamples,1)-abs(Matrix([predictions]) - Matrix([trainset.labels]))
 			
+			var beta_i = error[i]/(1-error[i])
+
+			if (error[i] == 1.0){
+				beta_i = 100
+			}
+			
+			beta.append(beta_i)
+			let power = ones(trainset.nSamples,1)-abs(Matrix([predictions]) - Matrix([trainset.labels])).T
 			for j in 0 ..< power.rows{
-				weights[i,j] = (weights[i,j]*beta[i])**power[0,j] 
+				weights[i,j] = (weights[i,j]*beta[i])**power[j,0] 
 			}
 
 			if ( i>1 && abs(error[i]-error[i-1]) <= 0.00001){
