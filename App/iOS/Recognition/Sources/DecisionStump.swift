@@ -52,16 +52,16 @@ class DecisionStump : Classifier{
 		self.threshold = threshold
 	}
 
-	func classify(samples: Matrix)->[Int]{
+	func predict(samples: Matrix)->[Int]{
 		var labelsFound = [Int]()
 		for i in 0..<samples.rows{
-			labelsFound.append(self.classifySample(sample:samples[i,0..<samples.columns]))
+			labelsFound.append(self.predictSample(sample:samples[i,0..<samples.columns]))
 			
 		}
 		return labelsFound
 	}
 
-	internal func classifySample(sample: Matrix)->Int {
+	internal func predictSample(sample: Matrix)->Int {
 		return DecisionStump.decision(sample,self.feature,self.cmpLess,self.threshold) 
 	}
 
@@ -81,7 +81,7 @@ class DecisionStump : Classifier{
 		}
 	}
 
-	func classifySoft(samples: Matrix)->[[Int: Double]]{
+	func predictSoft(samples: Matrix)->[[Int: Double]]{
 		return [[:]]
 	}
 }

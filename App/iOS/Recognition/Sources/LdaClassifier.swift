@@ -20,10 +20,10 @@ class LdaClassifier: Classifier{
 		}
 	}
 
-	func classify(samples: Matrix)->[Int]{
+	func predict(samples: Matrix)->[Int]{
 		var labelsFound = [Int]()
 		for i in 0..<samples.rows{
-			labelsFound.append(self.classifySample(sample:samples[i,0..<samples.columns]))
+			labelsFound.append(self.predictSample(sample:samples[i,0..<samples.columns]))
 			
 		}
 		return labelsFound
@@ -35,7 +35,7 @@ class LdaClassifier: Classifier{
 		return v[0,0] //the result is scalar but still stored in datatype matrix -.-
 	}
 
-	private func classifySample(sample: Matrix)->Int{
+	private func predictSample(sample: Matrix)->Int{
 		var maxArg = 0
 		var maxPosterior:Double = -Double.greatestFiniteMagnitude
 		for i in 0..<self.classes.count{
@@ -81,7 +81,7 @@ class LdaClassifier: Classifier{
 		}
 		return priors	
 	}
-	func classifySoft(samples: Matrix)->[[Int:Double]]{
+	func predictSoft(samples: Matrix)->[[Int:Double]]{
 		return [[:]]
 	}
 }

@@ -40,10 +40,10 @@ class ParzenClassifier {
 		return width
 	}
 
-	func classify(samples: Matrix)->[Int]{
+	func predict(samples: Matrix)->[Int]{
 		var labelsFound = [Int]()
 		for i in 0..<samples.rows{
-			labelsFound.append(self.classifySample(sample:samples[i,0..<samples.columns]))
+			labelsFound.append(self.predictSample(sample:samples[i,0..<samples.columns]))
 			
 		}
 		return labelsFound
@@ -52,7 +52,7 @@ class ParzenClassifier {
 	internal func getApparentError()->Double{
 		var error = 0.0
 		for i in 0 ..< self.trainset.nSamples{
-			if(classifySample(sample:self.trainset.samples[i,0..<trainset.dim]) != self.trainset.labels[i]){
+			if(predictSample(sample:self.trainset.samples[i,0..<trainset.dim]) != self.trainset.labels[i]){
 				error += 1
 			}
 		}
@@ -60,8 +60,8 @@ class ParzenClassifier {
 		return error;
 	}
 
-	internal func classifySample(sample: Matrix)->Int{
-		return classifySampleSoft(sample:sample).sorted(by: {$0.1 > $1.1})[0].key
+	internal func predictSample(sample: Matrix)->Int{
+		return predictSampleSoft(sample:sample).sorted(by: {$0.1 > $1.1})[0].key
 	}
 	static internal func kernel(x: Matrix,width: Double, mean: Matrix)->Double{
 		//Gaussian with unity covariance
@@ -72,16 +72,16 @@ class ParzenClassifier {
 		return normConst * (euler()**scalar)
 	}
 
-	func classifySoft(samples: Matrix)->[[Int:Double]]{
+	func predictSoft(samples: Matrix)->[[Int:Double]]{
 		var softLabels:[[Int:Double]] = []
 		for i in 0..<samples.rows{
-			softLabels.append(self.classifySampleSoft(sample:samples[i,0..<samples.columns]))
+			softLabels.append(self.predictSampleSoft(sample:samples[i,0..<samples.columns]))
 			
 		}
 		return softLabels
 	}
 
-	internal func classifySampleSoft(sample: Matrix)->[Int: Double]{
+	internal func predictSampleSoft(sample: Matrix)->[Int: Double]{
 		var classLikelihoods: [Int: Double]=[:]
 		for c in trainset.classes{
 			classLikelihoods.updateValue(priors[c]!*getClassLikelihood(sample,c),forKey:c)

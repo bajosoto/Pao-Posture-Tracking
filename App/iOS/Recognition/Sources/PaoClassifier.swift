@@ -12,7 +12,7 @@ protocol PaoClassifier {
 	 *                  each window results in one classification]
 	 * @return 		   [ list of predictions ]	 
 	 */
-	func classifySampleSoft(_ testdata: [IPostureEntry]) -> [IPostureEntry]
+	func predictSampleSoft(_ testdata: [IPostureEntry]) -> [IPostureEntry]
 }
 
 

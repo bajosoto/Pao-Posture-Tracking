@@ -17,8 +17,8 @@ class DecisionStumpTest: XCTestCase {
       let sample2 = Matrix([[1,2,2.4]])
 
       let clf = DecisionStump(true,2,2.5)
-      XCTAssertEqual(clf.classify(samples:sample)[0],0)
-      XCTAssertEqual(clf.classify(samples:sample2)[0],1)
+      XCTAssertEqual(clf.predict(samples:sample)[0],0)
+      XCTAssertEqual(clf.predict(samples:sample2)[0],1)
 
   }
 
@@ -28,7 +28,7 @@ class DecisionStumpTest: XCTestCase {
                             [1,1,1]])
       let labels = [1,1,2]
       let clf = DecisionStump(try! Dataset(samples:samples,labels:labels),eye(samples.rows,1))
-      let predictions = clf.classify(samples:samples)
+      let predictions = clf.predict(samples:samples)
 
       XCTAssertEqual(predictions,labels)
        

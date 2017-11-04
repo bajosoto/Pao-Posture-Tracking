@@ -13,7 +13,7 @@ class ParzenClassifierTest: XCTestCase {
         let testsamples = Matrix([[-1,-1],
                                    [0,0],
                                    [1,1]])
-        let results = parzenc.classifySoft(samples:testsamples)
+        let results = parzenc.predictSoft(samples:testsamples)
 
         XCTAssertTrue(0.9999999 <= results[0][1]!)
         XCTAssertTrue(results[0][1]! <= 1.0)
@@ -49,7 +49,7 @@ class ParzenClassifierTest: XCTestCase {
                                             [0.25,0.25],
                                             [0.5,0.5],
                                             [1,1]])
-        let results = parzenc.classify(samples:testsamples)
+        let results = parzenc.predict(samples:testsamples)
         XCTAssertTrue(results[0]==1,"Was:\(results[0])")
         XCTAssertTrue(results[1]==1,"Was:\(results[1])")
         XCTAssertTrue(results[2]==1,"Was:\(results[2])")
@@ -78,7 +78,7 @@ class ParzenClassifierTest: XCTestCase {
                                             [-4.5,-6],
                                             [5,4.5],
                                             [4.5,5]])
-        let results = parzenc.classify(samples:testsamples)
+        let results = parzenc.predict(samples:testsamples)
         XCTAssertTrue(results[0]==1,"Was:\(results[0])")
         XCTAssertTrue(results[1]==1,"Was:\(results[1])")
         XCTAssertTrue(results[2]==2,"Was:\(results[2])")

@@ -36,7 +36,7 @@ class PaoKnnClassifier : PaoClassifier{
 		self.init(traindata,windowSize:10,kNeighbours:10)
 	}
 
-	func classifySampleSoft(_ testdata: [IPostureEntry]) -> [IPostureEntry]{
+	func predictSampleSoft(_ testdata: [IPostureEntry]) -> [IPostureEntry]{
 
 		/* convert data to local type*/
 		var rawData = [RawSample]()
@@ -51,10 +51,10 @@ class PaoKnnClassifier : PaoClassifier{
 		let sampleMatrix = scaler.transform(Matrix(featureVector))
 
 		/* get the hard labels*/
-		let hardLabels = classifier.classify(samples:sampleMatrix)
+		let hardLabels = classifier.predict(samples:sampleMatrix)
 		
 		/* get the soft labels*/
-		let softLabels = classifier.classifySoft(samples:sampleMatrix)
+		let softLabels = classifier.predictSoft(samples:sampleMatrix)
 
 		/* create output data type for each classified sample*/
 		var predictions = [Predicition]()

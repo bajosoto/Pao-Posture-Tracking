@@ -36,7 +36,7 @@ class KnnClassifierTest: XCTestCase {
         let dataset =  try! Dataset(samples:samples,labels:labels)
         let knnc = KnnClassifier(trainset:dataset)
         let testsamples = Matrix([[-15,-3]])
-        let results = knnc.classify(samples:testsamples)
+        let results = knnc.predict(samples:testsamples)
         XCTAssertTrue(results[0]==1,"Was:\(results[0])")
 	}
 
@@ -56,7 +56,7 @@ class KnnClassifierTest: XCTestCase {
                                             [-4.5,-6],
                                             [5,4.5],
                                             [4.5,5]])
-        let results = knnc.classify(samples:testsamples)
+        let results = knnc.predict(samples:testsamples)
         XCTAssertTrue(results[0]==1,"Was:\(results[0])")
         XCTAssertTrue(results[1]==1,"Was:\(results[1])")
         XCTAssertTrue(results[2]==2,"Was:\(results[2])")
@@ -77,7 +77,7 @@ class KnnClassifierTest: XCTestCase {
         let knnc = KnnClassifier(trainset:dataset,kNeighbours:4)
         let testsamples = Matrix([  [-5,-4.5],
                                             [0,1]])
-        let results = knnc.classifySoft(samples:testsamples)
+        let results = knnc.predictSoft(samples:testsamples)
         XCTAssertEqual(results[0],[2: 0.0,1: 1.0])
         XCTAssertEqual(results[1],[2: 0.75,1: 0.25])
 

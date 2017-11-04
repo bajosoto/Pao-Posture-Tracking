@@ -10,16 +10,16 @@ protocol Classifier {
 
 
 	/**
-	 * [classify one or several samples. Hard labelled classification]
-	 * @samples 		Matrix 		[Samples to classify each row will be classified as one sample]
+	 * [predict one or several samples. Hard labelled classification]
+	 * @samples 		Matrix 		[Samples to predict each row will be classified as one sample]
 	 * @return			[Int]		[List of assigned class labels]
 	 */
-	func classify(samples: Matrix)->[Int]
+	func predict(samples: Matrix)->[Int]
 
 	/**
-	 * [classify one or several samples. Soft labelled classification]
-	 * @samples 		Matrix 		[Samples to classify each row will be classified as one sample]
+	 * [predict one or several samples. Soft labelled classification]
+	 * @samples 		Matrix 		[Samples to predict each row will be classified as one sample]
 	 * @return			[Vector]	[Vectors containing the probability for each class]
 	 */
-	func classifySoft(samples: Matrix)->[[Int: Double]]
+	func predictSoft(samples: Matrix)->[[Int: Double]]
 }

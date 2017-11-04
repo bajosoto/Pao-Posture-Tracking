@@ -42,7 +42,7 @@ class PaoKnnClassifierTest: XCTestCase {
       }
       let classifier = PaoKnnClassifier(samples,windowSize:10,kNeighbours:2)
       for j in 0 ..< 6 {
-          let prediction = classifier.classifySampleSoft(classSamples[j])
+          let prediction = classifier.predictSampleSoft(classSamples[j])
           //print(prediction[0].posture)
 
       }
@@ -158,14 +158,14 @@ class PaoKnnClassifierTest: XCTestCase {
       let classifier = PaoKnnClassifier(samples,windowSize:2,kNeighbours:1)
       
       /* Predict
-      *  just classifying the training data again to see if the code works*/
+      *  just predicting the training data again to see if the code works*/
       for j in 0 ..< 6 {
-          let predictions = classifier.classifySampleSoft(classSamples[j])
+          let predictions = classifier.predictSampleSoft(classSamples[j])
 
           for p in predictions{
               XCTAssertEqual(p.postureLbl,lookupLabel(Double(j+1)))
 
-              /* Since we are classifying the training data with 1 nearest neighbour 
+              /* Since we are predicting the training data with 1 nearest neighbour 
               *  healthy/unhealthy should just allways be 100%*/
               if(lookupLabel(p.postureLbl) == 1 ||
                 lookupLabel(p.postureLbl) == 3 ||
