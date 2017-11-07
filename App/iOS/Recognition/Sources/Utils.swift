@@ -1,3 +1,13 @@
+func sum(_ m: Matrix) -> Double {
+    var sum:Double = 0
+    for i in 0 ..< m.rows {
+        for j in 0 ..< m.columns {
+        sum += m[i,j]
+        }
+    }
+    return sum
+}
+
 func abs(_ m: Matrix) -> Matrix {
 
     var mAbs = Matrix(m.rows,m.columns)
@@ -165,9 +175,9 @@ internal func doDet(_ matrix: Matrix) -> Double{
 
 public func norm(_ m: Matrix) -> Double{
     var sum:Double = 0
-    for i in 0 ..< m.columns {
-        for j in 0 ..< m.rows {
-        sum += m[j,i]*m[j,i]
+    for i in 0 ..< m.rows {
+        for j in 0 ..< m.columns {
+        sum += m[i,j]**2
         }
     }
     return sum.squareRoot()

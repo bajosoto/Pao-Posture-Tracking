@@ -1,6 +1,6 @@
 class DecisionStump : Classifier{
 
-	let cmpLess:Bool
+	let cmpLarge:Bool
 	let feature:Int
 	let threshold: Double
 	let classes: [Int]
@@ -13,15 +13,15 @@ class DecisionStump : Classifier{
 		classes = trainset.classes
 		let ret = DecisionStump.train(trainset,weights)
 
-		cmpLess = ret.0
+		cmpLarge = ret.0
 		threshold = ret.1
 		feature = ret.2
 	}
 
-	init(_ cmpLess: Bool, _ feature: Int, _ threshold: Double, _ classes: [Int]){
+	init(_ cmpLarge: Bool, _ feature: Int, _ threshold: Double, _ classes: [Int]){
 		
 		self.classes = classes
-		self.cmpLess = cmpLess
+		self.cmpLarge = cmpLarge
 		self.feature = feature
 		self.threshold = threshold
 	}
@@ -74,18 +74,18 @@ class DecisionStump : Classifier{
 	}
 
 	internal func predictSample(sample: Matrix)->Int {
-		return DecisionStump.decision(sample,self.feature,self.cmpLess,self.threshold) 
+		return classes[DecisionStump.decision(sample,self.feature,self.cmpLarge,self.threshold)] 
 	}
 
-	internal static func decision(_ sample: Matrix, _ feature: Int, _ cmpLess: Bool, _ threshold: Double) -> Int {
-		if (cmpLess) {
-			if (sample[0,feature] <= threshold){
+	internal static func decision(_ sample: Matrix, _ feature: Int, _ cmpLarge: Bool, _ threshold: Double) -> Int {
+		if (cmpLarge) {
+			if (sample[0,feature] >= threshold){
 				return 1
 			}else{
 				return 0
 			}
 		}else{
-			if (sample[0,feature] > threshold){
+			if (sample[0,feature] < threshold){
 				return 1
 			}else{
 				return 0
