@@ -34,7 +34,6 @@ class AdaBoost : Classifier {
 			error.append(evaluate(clf,trainset,weights[i,0 ..< weights.columns]))
 			
 			var beta_i = error[i]/(1-error[i])
-
 			if (error[i] == 1.0){
 				beta_i = 100
 			}

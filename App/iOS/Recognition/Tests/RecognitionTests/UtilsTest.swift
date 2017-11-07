@@ -194,6 +194,19 @@ class UtilsTest: XCTestCase {
 
     }
 
+    func testEvaluateWeights(){
+        let samples = Matrix([[1,1,0],
+                              [1,2,0],
+                              [1,1,1],
+                              [1,2,1]])
+        let labels = [0,0,1,1]
+        let clf = DecisionStump(true,0,1,[0,1])
+        let weights = Matrix([[0.375, 0.375, 0.125, 0.125]])
+        XCTAssertEqual(clf.predict(samples:samples),[1,1,1,1])
+        XCTAssertEqual(evaluate(clf,try! Dataset(samples:samples,labels:labels),weights),6/8)
+
+    }
+
 	static var allTests : [(String, (UtilsTest) -> () throws -> Void)] {
         return [
         	("testMeanRow",testMeanRow),
@@ -215,7 +228,9 @@ class UtilsTest: XCTestCase {
             ("testInv4",testInv4),
             ("testInvUnequal",testInvUnequal),
             ("testInvSingular",testInvSingular),
-            ("testEvaluate",testEvaluate)
+            ("testEvaluate",testEvaluate),
+            ("testEvaluateWeights",testEvaluateWeights)
+
     	]
 	}
 }
