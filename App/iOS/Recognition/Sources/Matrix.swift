@@ -54,6 +54,14 @@ public class Matrix : CustomStringConvertible, Equatable{
 		self.init(m)
 	}
 
+	public subscript(_ idxs: [Int]) -> Matrix {
+		var submatrix = Matrix(idxs.count,self.columns)
+		for i in 0 ..< idxs.count {
+			submatrix[i,0 ..< self.columns] = self[idxs[i]]
+		}
+		return submatrix
+	}
+
 	public subscript(_ i: Int, _ j: Int) -> Double {
 	  get {
 	    return data[i][j]

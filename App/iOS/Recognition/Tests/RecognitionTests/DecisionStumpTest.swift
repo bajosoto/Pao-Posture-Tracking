@@ -61,6 +61,36 @@ class DecisionStumpTest: XCTestCase {
       
   }
 
+  func testImpurity(){
+      let samples = Matrix([[0,1,0],
+                            [0,1,0],
+                            [1,1,1],
+                            [0,1,1],
+                            [0,1,1]])
+      let labels = [0,0,0,1,1]
+    
+      XCTAssertEqual(DecisionStump.impurity(try! Dataset(samples:samples,labels:labels)),0.0)
+  }
+
+  func testSplit(){
+      let samples = Matrix([[0,1,0],
+                            [0,1,0],
+                            [1,1,1],
+                            [0,1,1],
+                            [0,1,1]])
+      let labels = [0,0,0,1,1]
+    
+      let splits = DecisionStump.split(try! Dataset(samples:samples,labels:labels),[0,0,1,1,1])
+
+      XCTAssertEqual(splits.0.samples, Matrix([[0,1,0],
+                                               [0,1,0]]))
+      XCTAssertEqual(splits.0.labels, [0,0])
+      
+      XCTAssertEqual(splits.1.samples, Matrix([[1,1,1],
+                                               [0,1,1],
+                                               [0,1,1]]))
+      XCTAssertEqual(splits.1.labels, [0,1,1])
+  }
 
   func testClassifSoft(){
        XCTFail("Not implemented")
@@ -70,10 +100,13 @@ class DecisionStumpTest: XCTestCase {
         return [
         	("testDecision", testDecision),
           ("testInit", testInit),
+          ("testImpurity",testImpurity),
+          ("testSplit",testSplit),
           ("testTraining", testTraining),
           ("testTrainingOtherLabels", testTrainingOtherLabels),
           ("testClassifSoft",testClassifSoft),
-          ("testWeightedClassification",testWeightedClassification)
+          ("testWeightedClassification",testWeightedClassification),
+
         ]
     }
 }

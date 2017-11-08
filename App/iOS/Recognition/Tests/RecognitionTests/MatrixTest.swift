@@ -150,6 +150,16 @@ class MatrixTest: XCTestCase {
                                         [5,0]]))
     }
 
+    func testSubscriptList(){
+        let matrix = Matrix([[1,2],
+                             [3,4],
+                             [5,6]])
+
+         XCTAssertEqual(matrix[[0,2]],Matrix([ [1,2],
+                                               [5,6]]))
+
+    }
+
     func testTransposed(){
         let matrix = Matrix([[1,2],
                               [3,4],
@@ -231,6 +241,7 @@ class MatrixTest: XCTestCase {
             ("testSubscriptColumnRangeSet",testSubscriptColumnRangeSet),
             ("testSubscriptColumnRangeGet2",testSubscriptColumnRangeGet2),
             ("testSubscriptColumnRangeSet2",testSubscriptColumnRangeSet2),
+            ("testSubscriptList",testSubscriptList),
             ("testTransposed",testTransposed),
             ("testRmColumn",testRmColumn),
             ("testRmRow",testRmRow),
