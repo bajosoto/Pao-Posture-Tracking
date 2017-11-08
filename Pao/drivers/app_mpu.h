@@ -7,11 +7,16 @@
 #ifndef APP_MPU_H__
 #define APP_MPU_H__
 
-#define MPU60x0
+// Sergio: We're now using MPU9150 since the map is identical to 9250, the one we use on the board
+// #define MPU60x0
+#define MPU9150
 
 #include <stdbool.h>
 #include <stdint.h>
 #include "nrf_drv_config.h"
+
+// Sergio: including this one so we get TWI_COUNT sooner
+#include "nrf_peripherals.h"
 
 #if defined(MPU60x0)
     #include "mpu60x0_register_map.h"
@@ -343,6 +348,10 @@ uint32_t mpu_config_ff_detection(uint16_t mg, uint8_t duration);
  * are similar, but AK8963 has adjustable resoultion (14 and 16 bits) while AK8975C has 13 bit resolution fixed. 
  */
 
+// Sergio:
+#if (TWI_COUNT < 1)
+    #error "TWI_COUNT < 1"
+#endif
 
 #if (defined(MPU9150) || defined(MPU9255)) && (TWI_COUNT >= 1) // Magnetometer only works with TWI so check if TWI is enabled
 

@@ -9,13 +9,13 @@
 #include "boards.h"
 #include "uart.h"
 #include "uart-sm.h"
-#include "app_mpu.h"
 #include "mpu_interface.h"
 #include "ble_interface.h"
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 #include "debug-interface.h"
 #include "es-ble-tx.h"
+#include "app_mpu.h"
 
 int programRunning;
 
