@@ -422,7 +422,7 @@ int mpu_read_reg(unsigned char reg, unsigned char *data)
  */
 int mpu_init(struct int_param_s *int_param)
 {
-    unsigned char data[6], rev;
+    unsigned char data[6]; //, rev;
 
     /* Reset device. */
     data[0] = BIT_RESET;
@@ -435,44 +435,47 @@ int mpu_init(struct int_param_s *int_param)
     if (i2c_write(st.hw->addr, st.reg->pwr_mgmt_1, 1, data))
     	return -1;
 
-    // change memory bank to read id
-    data[0] = ((0x10 & 0x1F) | 0x20 | 0x40);
+    //    // change memory bank to read id
+ //    data[0] = ((0x10 & 0x1F) | 0x20 | 0x40);
 
-    if (i2c_write(st.hw->addr, st.reg->bank_sel, 1, data))
-        return -3;
+ //    if (i2c_write(st.hw->addr, st.reg->bank_sel, 1, data))
+ //        return -3;
 
-    if (i2c_read(st.hw->addr, st.reg->accel_offs, 6, data))
-        return -1;
-    rev = ((data[5] & 0x01) << 2) | ((data[3] & 0x01) << 1) |
-        (data[1] & 0x01);
+ //    if (i2c_read(st.hw->addr, st.reg->accel_offs, 6, data))
+ //        return -1;
+ //    rev = ((data[5] & 0x01) << 2) | ((data[3] & 0x01) << 1) |
+ //        (data[1] & 0x01);
 
-    if (rev) {
-        if (rev == 1)
-            st.chip_cfg.accel_half = 1;
-        else if (rev == 2)
-            st.chip_cfg.accel_half = 0;
-        else {
-            log_e("Unsupported software product rev %d.", rev);
-            return -1;
-        }
-    } else {
-        if (i2c_read(st.hw->addr, st.reg->prod_id, 1, data))
-            return -1;
-        rev = data[0] & 0x0F;
-        if (!rev) {
-            log_e("Product ID read as 0 indicates device is either "
-                "incompatible or an MPU3050.");
-            return -1;
-        } else if (rev == 4) {
-            log_i("Half sensitivity part found.");
-            st.chip_cfg.accel_half = 1;
-        } else
-            st.chip_cfg.accel_half = 0;
-    }
-	// change memory bank to default
-	data[0] = 0x00 & 0x1F;
-    if (i2c_write(st.hw->addr, st.reg->bank_sel, 1, data))
-        return -3;
+ //    if (rev) {
+ //        if (rev == 1)
+ //            st.chip_cfg.accel_half = 1;
+ //        else if (rev == 2)
+ //            st.chip_cfg.accel_half = 0;
+ //        else {
+ //            log_e("Unsupported software product rev %d.\n", rev);
+ //            return -1;
+ //        }
+ //    } else {
+ //        if (i2c_read(st.hw->addr, st.reg->prod_id, 1, data))
+ //            return -1;
+ //        rev = data[0] & 0x0F;
+ //        if (!rev) {
+ //            log_e("Product ID read as 0 indicates device is either "
+ //                "incompatible or an MPU3050.\n");
+ //            return -1;
+ //        } else if (rev == 4) {
+ //            log_i("Half sensitivity part found.\n");
+ //            st.chip_cfg.accel_half = 1;
+ //        } else
+ //            st.chip_cfg.accel_half = 0;
+ //    }
+    // // change memory bank to default
+    // data[0] = 0x00 & 0x1F;
+ //    if (i2c_write(st.hw->addr, st.reg->bank_sel, 1, data))
+ //        return -3;
+
+    // Sergio: Set half sensitivity to 0, instead of all the code commented above.
+    st.chip_cfg.accel_half = 0;
 
     /* Set to invalid values to ensure no I2C writes are skipped. */
     st.chip_cfg.sensors = 0xFF;
