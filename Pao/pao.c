@@ -20,6 +20,8 @@ int main(void)
     // Old mpu init:
     //mpu_setup();
 
+    nrf_delay_ms(5000);
+
     // New mpu init:
     twi_init();
     imu_init(true, 100);

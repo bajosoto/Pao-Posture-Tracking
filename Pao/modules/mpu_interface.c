@@ -5,8 +5,6 @@
 #include "mpu_interface.h"
 #include "mpu_wrapper.h"
 
-// accel_values_t acc_values;
-// gyro_values_t gyr_values;
 
 void getMpuSensors() {
 
@@ -29,22 +27,22 @@ int16_t getMpuVal(sensValType type) {
 
 	switch(type) {
 	case ACC_X:
-		return acc_values.x;
+		return sax;
 		break; 
 	case ACC_Y:
-		return acc_values.y;
+		return say;
 		break;
 	case ACC_Z:
-		return acc_values.z;
+		return saz;
 		break;
 	case GYR_X:
-		return gyr_values.x;
+		return sp;
 		break;
 	case GYR_Y:
-		return gyr_values.y;
+		return sq;
 		break;
 	case GYR_Z:
-		return gyr_values.z;
+		return sr;
 		break;
 	default:
 		return -1;

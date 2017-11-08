@@ -38,8 +38,8 @@ typedef enum sensValType_t {
 	GYR_Z,
 } sensValType;
 
-accel_values_t acc_values;
-gyro_values_t gyr_values;
+// accel_values_t acc_values;
+// gyro_values_t gyr_values;
 
 int16_t phi, theta, psi;
 int16_t sp, sq, sr;
