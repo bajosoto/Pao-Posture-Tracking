@@ -69,6 +69,7 @@ SRC_FILES += \
   $(PROJ_DIR)/drivers/mpu-motion-driver/inv_mpu.c \
   $(PROJ_DIR)/drivers/mpu-motion-driver/ml.c \
   $(PROJ_DIR)/drivers/mpu-motion-driver/mpu_wrapper.c \
+  $(PROJ_DIR)/drivers/nrf_drv_mpu_twi.c \
   $(SDK_ROOT)/components/drivers_nrf/twi_master/nrf_drv_twi.c \
   $(PROJ_DIR)/modules/mpu_interface.c \
   $(PROJ_DIR)/modules/ble_interface.c \

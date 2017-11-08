@@ -3,11 +3,14 @@
 #include "app_error.h"
 #include "boards.h"
 #include "mpu_interface.h"
+#include "mpu_wrapper.h"
 
 // accel_values_t acc_values;
 // gyro_values_t gyr_values;
 
 void getMpuSensors() {
+
+	get_dmp_data();
 
 	// uint32_t err_code;
 	// // Read accelerometer sensor values

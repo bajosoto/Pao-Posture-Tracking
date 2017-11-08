@@ -29,7 +29,6 @@ void update_euler_from_quaternions(int32_t *quat)
 	psi = (int16_t) (atan2(2.0*(q[1]*q[2] + q[0]*q[3]), q[0]*q[0] + q[1]*q[1] - q[2]*q[2] - q[3]*q[3])*10430.0);
 }
 
-// reading & conversion takes 3.2 ms!!! hurray (still lots of time till 10)
 void get_dmp_data(void)
 {
 	int8_t read_stat;
@@ -103,11 +102,11 @@ void imu_init(bool dmp, uint16_t freq)
 	// printf("\rmpu conf fifo  : %d\n", mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL));
 
 	//mpu	
-	debugMsg("Initializing mpu...");
+	// debugMsg("Initializing mpu...");
 	mpu_init(NULL);
-	debugMsg("Setting sensors...");
+	// debugMsg("Setting sensors...");
 	mpu_set_sensors(INV_XYZ_GYRO | INV_XYZ_ACCEL);
-	debugMsg("Configuring fifo...");
+	// debugMsg("Configuring fifo...");
 	mpu_configure_fifo(INV_XYZ_GYRO | INV_XYZ_ACCEL);
 
 	mpu_set_int_level(0);
