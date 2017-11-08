@@ -15,7 +15,10 @@
 #include "nrf_log_ctrl.h"
 #include "debug-interface.h"
 #include "es-ble-tx.h"
-#include "app_mpu.h"
+#include <math.h>
+#include "twi.h"
+#include "mpu_wrapper.h"
+// #include "app_mpu.h"
 
 int programRunning;
 

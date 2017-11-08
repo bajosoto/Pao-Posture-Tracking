@@ -1,7 +1,33 @@
 #ifndef MPU_INTERFACE_H_
 #define MPU_INTERFACE_H_
 
-#include "app_mpu.h"
+// #include "app_mpu.h"
+
+/**@brief Structure to hold acceleromter values. 
+ * Sequence of z, y, and x is important to correspond with 
+ * the sequence of which z, y, and x data are read from the sensor.
+ * All values are unsigned 16 bit integers
+*/
+typedef struct
+{
+    int16_t z;
+    int16_t y;
+    int16_t x;
+}accel_values_t;
+
+
+/**@brief Structure to hold gyroscope values. 
+ * Sequence of z, y, and x is important to correspond with 
+ * the sequence of which z, y, and x data are read from the sensor.
+ * All values are unsigned 16 bit integers
+*/
+typedef struct
+{
+    int16_t z;
+    int16_t y;
+    int16_t x;
+}gyro_values_t;
+
 
 typedef enum sensValType_t {
 	ACC_X, 
@@ -13,7 +39,13 @@ typedef enum sensValType_t {
 } sensValType;
 
 accel_values_t acc_values;
-gyro_values_t gyro_values;
+gyro_values_t gyr_values;
+
+int16_t phi, theta, psi;
+int16_t sp, sq, sr;
+int16_t sax, say, saz;
+uint8_t sensor_fifo_count;
+
 
 void getMpuSensors();
 int16_t getMpuVal(sensValType type);

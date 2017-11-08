@@ -16,7 +16,13 @@ int main(void)
     bsp_board_buttons_init();
     uart_service_init();
     //NRF_LOG_INIT(NULL);  // TODO_SERGIO: Using LOG to find RAM start and end address
-    mpu_setup();
+    
+    // Old mpu init:
+    //mpu_setup();
+
+    // New mpu init:
+    twi_init();
+    imu_init(true, 100);
 
     // Bluetooth
     app_timer_init_sergio();
