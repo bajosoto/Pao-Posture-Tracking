@@ -100,6 +100,10 @@ bool check_sensor_int_flag(void)
 	return false;
 }
 
+void on_tap_detected(unsigned char direction, unsigned char count){
+	debugMsg("Tappy tap!\tDir: %d\tCount: %d", direction, count);
+}
+
 void imu_init(bool dmp, uint16_t freq)
 {
 	static int8_t gyro_orientation[9] = {	1, 0, 0,
@@ -142,6 +146,7 @@ void imu_init(bool dmp, uint16_t freq)
 		debugMsg("dmp set rate   : %d", dmp_set_fifo_rate(100));
 		debugMsg("dmp set state  : %d", mpu_set_dmp_state(1));
 		debugMsg("dlpf set freq  : %d", mpu_set_lpf(10));
+		debugMsg("register tap cb  : %d", dmp_register_tap_cb(on_tap_detected));
 
 		// dmp_load_motion_driver_firmware();
 		// dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_orientation));
