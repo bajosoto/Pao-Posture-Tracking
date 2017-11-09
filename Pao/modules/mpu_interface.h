@@ -36,6 +36,9 @@ typedef enum sensValType_t {
 	GYR_X,
 	GYR_Y,
 	GYR_Z,
+	DMP_X,
+	DMP_Y,
+	DMP_Z,
 } sensValType;
 
 // accel_values_t acc_values;

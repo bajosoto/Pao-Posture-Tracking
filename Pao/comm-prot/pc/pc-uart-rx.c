@@ -24,7 +24,7 @@ MsgType msgTable[TOTAL_ES_MESSAGES] = {
 	/* Action Name */		/* Length */
 	{{msg00_status_ans}, 	0},				// 00: Performs some action
 	{{msg01_quit_ans}, 		0}, 			// 01: Answer shutdown request
-	{{msg02_sensor_vals}, 	12}, 			// 02: Sensor values to display
+	{{msg02_sensor_vals}, 	18}, 			// 02: Sensor values to display
 	{{msg03_ble_status}, 	1}, 			// 03: BLE connection status change 
 	{{msg04_pickle_rick}, 	0}, 			// 04: Pickle rick
 	{{msg05_dbg_msg}, 		100}, 			// 02: Sensor values to display
@@ -46,12 +46,18 @@ void msg02_sensor_vals() {
 	int16_t s3 = unfoldSI16(3);
 	int16_t s4 = unfoldSI16(4);
 	int16_t s5 = unfoldSI16(5);
+	int16_t s6 = unfoldSI16(6);
+	int16_t s7 = unfoldSI16(7);
+	int16_t s8 = unfoldSI16(8);
 	dispVal(DISP_AX, s0);
 	dispVal(DISP_AY, s1);
 	dispVal(DISP_AZ, s2);
 	dispVal(DISP_P, s3);
 	dispVal(DISP_Q, s4);
 	dispVal(DISP_R, s5);
+	dispVal(DISP_PHI, s6);
+	dispVal(DISP_THE, s7);
+	dispVal(DISP_PSI, s8);
 }
 
 void msg03_ble_status() {

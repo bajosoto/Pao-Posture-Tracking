@@ -13,7 +13,7 @@
 
 #define QUAT_SENS       0x040000000 //1073741824.f //2^30
 
-#define MPU_MPU_INT_PIN     5	// This is most likely wrong
+#define MPU_MPU_INT_PIN     5	// Sergio: TODO - This is most likely wrong. I think it's 29
 
 void update_euler_from_quaternions(int32_t *quat) 
 {

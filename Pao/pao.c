@@ -45,6 +45,11 @@ int main(void)
         if (app_uart_get(&cr) == NRF_SUCCESS){
             setrxByte(cr);
         }
+        // TODO: add ble
+
+        // if (check_sensor_int_flag()) {
+        //     getMpuSensors();
+        // }
 
         if(timer % 50 == 0) {
             if(bsp_board_button_state_get(3)) {
@@ -58,7 +63,6 @@ int main(void)
             // }
         }
         if(timer % 20 == 0) {
-            getMpuSensors();
             sendMessageEs(MSG02_SENSOR_VALS);
             sendBleMessageEs(MSG_BLE_02_SENSOR);
         }
