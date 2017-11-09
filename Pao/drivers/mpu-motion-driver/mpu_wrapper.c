@@ -13,7 +13,7 @@
 
 #define QUAT_SENS       0x040000000 //1073741824.f //2^30
 
-#define MPU_MPU_INT_PIN     5	// Sergio: TODO - This is most likely wrong. I think it's 29
+#define MPU_MPU_INT_PIN     29	// Sergio: TODO - This is most likely wrong. I think it's 29
 
 void update_euler_from_quaternions(int32_t *quat) 
 {
@@ -37,6 +37,7 @@ void get_dmp_data(void)
 
 	if (!(read_stat = dmp_read_fifo(gyro, accel, quat, NULL, &dmp_sensors, &sensor_fifo_count)))
 	{
+		//debugMsg("sensor fifo count: %d", sensor_fifo_count);
 		update_euler_from_quaternions(quat);
 		if (dmp_sensors & INV_XYZ_GYRO)
 		{
@@ -51,7 +52,7 @@ void get_dmp_data(void)
 			saz = accel[2];
 		}
 	}
-	else debugMsg("Error reading sensor fifo: %d\n", read_stat);
+	//else debugMsg("Error reading sensor fifo: %d\n", read_stat);
 }
 
 void get_raw_sensor_data(void)
@@ -92,6 +93,10 @@ void imu_init(bool dmp, uint16_t freq)
 	static int8_t gyro_orientation[9] = {	1, 0, 0,
 											0, 1, 0,
 											0, 0, 1	};
+
+
+	// enable gpio interrupt pin (although we don't use it as interrupt, just GPIO)
+	nrf_gpio_cfg_input(MPU_MPU_INT_PIN, 0);
 
 	// tap feature is there to set freq to 100Hz, a bug provided by invensense :)
 	uint16_t dmp_features = DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_GYRO_CAL | DMP_FEATURE_TAP;
