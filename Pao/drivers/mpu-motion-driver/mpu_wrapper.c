@@ -52,6 +52,15 @@ void get_dmp_data(void)
 			saz = accel[2];
 		}
 	}
+
+	unsigned long count = 0;
+	if(dmp_get_pedometer_step_count(&count)) {
+		debugMsg("no pedo");
+	} else {
+		debugMsg("pedo: %lu", count);
+	}
+
+
 	//else debugMsg("Error reading sensor fifo: %d\n", read_stat);
 }
 
@@ -99,7 +108,12 @@ void imu_init(bool dmp, uint16_t freq)
 	nrf_gpio_cfg_input(MPU_MPU_INT_PIN, 0);
 
 	// tap feature is there to set freq to 100Hz, a bug provided by invensense :)
-	uint16_t dmp_features = DMP_FEATURE_6X_LP_QUAT | DMP_FEATURE_SEND_RAW_ACCEL | DMP_FEATURE_SEND_CAL_GYRO | DMP_FEATURE_GYRO_CAL | DMP_FEATURE_TAP;
+	uint16_t dmp_features = DMP_FEATURE_6X_LP_QUAT | 
+							DMP_FEATURE_SEND_RAW_ACCEL | 
+							DMP_FEATURE_SEND_CAL_GYRO | 
+							DMP_FEATURE_GYRO_CAL | 
+							DMP_FEATURE_TAP |
+							DMP_FEATURE_PEDOMETER;
 
 	// //mpu	
 	debugMsg("mpu init result: %d", mpu_init(NULL));
