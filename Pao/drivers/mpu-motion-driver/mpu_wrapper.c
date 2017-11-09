@@ -53,12 +53,15 @@ void get_dmp_data(void)
 		}
 	}
 
-	unsigned long count = 0;
-	if(dmp_get_pedometer_step_count(&count)) {
-		debugMsg("no pedo");
-	} else {
-		debugMsg("pedo: %lu", count);
-	}
+
+	// Sergio: Pedometer is working. I disabled it for now until we figure out what to do with this.
+
+	// unsigned long count = 0;
+	// if(dmp_get_pedometer_step_count(&count)) {
+	// 	debugMsg("no pedo");
+	// } else {
+	// 	debugMsg("pedo: %lu", count);
+	// }
 
 
 	//else debugMsg("Error reading sensor fifo: %d\n", read_stat);
