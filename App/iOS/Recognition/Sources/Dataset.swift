@@ -52,13 +52,11 @@ struct Dataset{
 		}
 		var newSamples = Matrix(self.nSamples + dataset.nSamples,dataset.dim)
 		var newLabels = [Int]()
-		print(newSamples)
 
 		if(self.samples.rows > 0){
 			newSamples[0 ..< self.samples.rows] = self.samples
 			newLabels.append(contentsOf:self.labels)
 		}
-		print(newSamples)
 		newSamples[self.samples.rows  ..< newSamples.rows] = dataset.samples
 
 		newLabels.append(contentsOf:dataset.labels)
