@@ -75,6 +75,28 @@ public class Matrix : CustomStringConvertible, Equatable{
 	  get {
 	    return Matrix([data[i]])
 	  }
+	  set {
+	  	for j in 0 ..< self.columns{
+	  		self[i,j] = newValue[0,j]
+	  	}
+	  }
+	}
+
+	public subscript(_ ir: CountableRange<Int>) -> Matrix {
+	  get {
+	  	var l = [[Double]]()
+	  	for i in ir{
+	  		l.append(self[i].array()[0])
+	  	}
+	    return Matrix(l)
+	  }	
+	  set {
+	  	var n = 0
+	  	for i in ir{
+	  		self[i] = newValue[n]
+	  		n += 1
+	  	}
+	  }
 	}
 
 	public subscript(_ i: Int, _ r: CountableClosedRange<Int>) -> Matrix {

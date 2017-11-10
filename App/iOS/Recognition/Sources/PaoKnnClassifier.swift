@@ -28,8 +28,8 @@ class PaoKnnClassifier : PaoClassifier{
 		matrixRep = scaler.transform(matrixRep)
 
 		/*generate trainingset and train*/
-		let trainset = try! Dataset(samples:matrixRep,labels:labels)
-		classifier = KnnClassifier(trainset:trainset,regularizer:0.0,kNeighbours:kNeighbours)
+		let trainset = try! Dataset(matrixRep,labels)
+		classifier = KnnClassifier(trainset:trainset,kNeighbours:kNeighbours)
 	}
 
 	required convenience init (_ traindata: [IPostureEntry]){

@@ -33,7 +33,7 @@ class KnnClassifierTest: XCTestCase {
                                       [13,9],
                                       [7,8]])
         let labels = [1,1,1,1,1,2,2,2,2,2]
-        let dataset =  try! Dataset(samples:samples,labels:labels)
+        let dataset =  try! Dataset(samples,labels)
         let knnc = KnnClassifier(trainset:dataset)
         let testsamples = Matrix([[-15,-3]])
         let results = knnc.predict(samples:testsamples)
@@ -50,7 +50,7 @@ class KnnClassifierTest: XCTestCase {
                                       [5,6],
                                       [4,5]])
         let labels = [1,1,1,1,2,2,2,2]
-        let dataset =  try! Dataset(samples:samples,labels:labels)
+        let dataset =  try! Dataset(samples,labels)
         let knnc = KnnClassifier(trainset:dataset)
         let testsamples = Matrix([  [-5,-4.5],
                                             [-4.5,-6],
@@ -73,7 +73,7 @@ class KnnClassifierTest: XCTestCase {
                                       [5,6],
                                       [4,4]])
         let labels = [1,1,1,1,2,2,2,2]
-        let dataset =  try! Dataset(samples:samples,labels:labels)
+        let dataset =  try! Dataset(samples,labels)
         let knnc = KnnClassifier(trainset:dataset,kNeighbours:4)
         let testsamples = Matrix([  [-5,-4.5],
                                             [0,1]])

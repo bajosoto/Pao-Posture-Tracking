@@ -5,7 +5,7 @@ class AdaBoost : Classifier {
 	let hypotheses: [Classifier]
 	let totalI: Int
 	let classes: [Int]
-	required convenience init(trainset:Dataset,regularizer:Double){
+	required convenience init(trainset:Dataset){
 		self.init(trainset,1000)
 	}
 
@@ -36,7 +36,7 @@ class AdaBoost : Classifier {
 			
 			//print("Normed weights: \(normedWeights) = \(weights[i])/\(sum(weights[i]))")
 			
-			let clf = DecisionStump(trainset,normedWeights)
+			let clf = DecisionStump(trainset,normedWeights.array()[0])
 			hypotheses.append(clf)
 			
 			let predictions = clf.predict(samples:trainset.samples)

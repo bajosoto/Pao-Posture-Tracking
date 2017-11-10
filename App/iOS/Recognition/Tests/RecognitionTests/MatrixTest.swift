@@ -103,6 +103,17 @@ class MatrixTest: XCTestCase {
                                         [5,6]]))
     }
 
+    func testSubscriptRowRangeSet(){
+         let matrix = Matrix([[1,2],
+                             [3,4],
+                             [5,6]])
+         matrix[1 ..< 3] = Matrix([[0,0],[0,0]])
+
+         XCTAssertEqual(matrix,Matrix([ [1,2],
+                                        [0,0],
+                                        [0,0]]))   
+    }
+
     func testSubscriptColumnRangeGet(){
          let matrix = Matrix([[1,2],
                              [3,4],
@@ -246,7 +257,8 @@ class MatrixTest: XCTestCase {
             ("testRmColumn",testRmColumn),
             ("testRmRow",testRmRow),
             ("testDeepCopy",testDeepCopy),
-            ("testInitVectorizable",testInitVectorizable)
+            ("testInitVectorizable",testInitVectorizable),
+            ("testSubscriptRowRangeSet",testSubscriptRowRangeSet),
         ]
     }
 }

@@ -4,13 +4,11 @@ class KnnClassifier: Classifier{
 	internal let kNeighbours: Int
 	internal var priors: [Int: Double] = [:]
 
-	required init(trainset: Dataset,regularizer: Double = 0.0001){
-		self.trainset = trainset
-		self.kNeighbours = 2
-		train()
+	required convenience init(trainset: Dataset){
+		self.init(trainset:trainset,kNeighbours:2)
 	}
 
-	required init(trainset: Dataset,regularizer: Double = 0.0001, kNeighbours: Int = 2){
+	required init(trainset: Dataset, kNeighbours: Int = 2){
 		self.trainset = trainset
 		self.kNeighbours = kNeighbours
 		train()

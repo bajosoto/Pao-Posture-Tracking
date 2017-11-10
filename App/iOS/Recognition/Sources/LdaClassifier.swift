@@ -8,7 +8,11 @@ class LdaClassifier: Classifier{
 	var covMeans 	 = [Matrix]()
 	var meanCovMeans = [Double]()
 
-	required init(trainset: Dataset,regularizer: Double = 0.0001){
+	required convenience init(trainset: Dataset){
+		self.init(trainset:trainset,regularizer:0.00001)
+	}
+
+	init(trainset: Dataset,regularizer: Double){
 		means = LdaClassifier.estimateMeans(dataset:trainset)
 		covariance = LdaClassifier.estimateCov(dataset:trainset,regularizer:regularizer)
 		priors = LdaClassifier.estimatePriors(dataset:trainset)

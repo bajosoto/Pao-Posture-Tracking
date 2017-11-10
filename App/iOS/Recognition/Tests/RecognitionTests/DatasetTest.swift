@@ -10,7 +10,7 @@ class DatasetTest: XCTestCase {
     								  [4,5,6],
     								  [7,8,9]])
     	let labels = [1,1,2]
-        let dataset =  try! Dataset(samples:samples,labels:labels)
+        let dataset =  try! Dataset(samples,labels)
         XCTAssertEqual(dataset.dim,3)
         XCTAssertEqual(dataset.nSamples,3)
         XCTAssertEqual(dataset.classes,[1,2])
@@ -19,7 +19,7 @@ class DatasetTest: XCTestCase {
     func testClassSamples(){
     	let samples = Matrix([[1,2,3],[4,5,6],[7,8,9]])
     	let labels = [1,1,2]
-        let dataset =  try! Dataset(samples:samples,labels:labels)
+        let dataset =  try! Dataset(samples,labels)
         let result1 = dataset.classSamples(class_id:2)
         let result2 = dataset.classSamples(class_id:1)
 
@@ -37,9 +37,23 @@ class DatasetTest: XCTestCase {
         let samples = Matrix([[1,2,3],[4,5,6],[7,8,9]])
         let labels = [1,2]
         do{
-            try Dataset(samples:samples,labels:labels)
+            try Dataset(samples,labels)
             XCTFail("Should have raised exception")
         }catch{}
+    }
+
+    func testAppend(){
+        let samples = Matrix([[1,2,3],
+                              [4,5,6]])
+        let labels = [1,2]
+
+        let set_ = try! Dataset(samples,labels)
+        let setAppended = try! set_.append(try! Dataset(Matrix([[7,8,9]]),[1]))
+
+        XCTAssertEqual(setAppended.samples,Matrix([ [1,2,3],
+                                                    [4,5,6],
+                                                    [7,8,9]]))
+        XCTAssertEqual(setAppended.labels,[1,2,1])
     }
 
     static var allTests : [(String, (DatasetTest) -> () throws -> Void)] {
@@ -47,6 +61,7 @@ class DatasetTest: XCTestCase {
         	("testInit",testInit),
         	("testClassSamples",testClassSamples),
             ("testDimensionException",testDimensionException),
+            ("testAppend",testAppend)
         ]
     }
 }

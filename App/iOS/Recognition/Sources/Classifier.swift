@@ -4,9 +4,8 @@ protocol Classifier {
 	 * Depending on the chosen classifier and the amount of data this can
 	 * take a while]
 	 * @trainset: 		Dataset [Dataset with labelled samples]
-	 * @regularizer:	Double 	[Regularization factor]
 	 */
-	init(trainset:Dataset,regularizer:Double)
+	init(trainset:Dataset)
 
 
 	/**

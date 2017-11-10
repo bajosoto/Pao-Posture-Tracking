@@ -13,6 +13,7 @@ XCTMain([
      testCase(SimplePreprocessorTest.allTests),
      testCase(EqualScalerTest.allTests),
      testCase(PaoKnnClassifierTest.allTests),
+     testCase(DecisionTreeTest.allTests),
      testCase(DecisionStumpTest.allTests),
      testCase(AdaBoostTest.allTests),
     

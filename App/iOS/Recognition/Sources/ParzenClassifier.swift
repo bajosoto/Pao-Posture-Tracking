@@ -4,12 +4,6 @@ class ParzenClassifier {
 	internal var width: Double
 	internal var priors: [Int: Double] = [:]
 
-	init(trainset:Dataset,regularizer:Double){
-		self.trainset = trainset
-		self.width = sqrt(Double(trainset.nSamples))/2
-		self.width = train(trainset)
-	}
-
 	init(trainset:Dataset){
 		self.trainset = trainset
 		self.width = sqrt(Double(trainset.nSamples))/2
