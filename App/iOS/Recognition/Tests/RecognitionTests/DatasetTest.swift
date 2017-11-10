@@ -56,12 +56,23 @@ class DatasetTest: XCTestCase {
         XCTAssertEqual(setAppended.labels,[1,2,1])
     }
 
+    func testAppendEmpty(){
+        let set_ = Dataset()
+        let setAppended = try! set_.append(try! Dataset(Matrix([[7,8,9]]),[1]))
+
+        XCTAssertEqual(setAppended.samples,Matrix([[7,8,9]]))
+        XCTAssertEqual(setAppended.labels,[1])
+    }
+
+
     static var allTests : [(String, (DatasetTest) -> () throws -> Void)] {
         return [
         	("testInit",testInit),
         	("testClassSamples",testClassSamples),
             ("testDimensionException",testDimensionException),
-            ("testAppend",testAppend)
+            ("testAppend",testAppend),
+            ("testAppendEmpty",testAppendEmpty),
+
         ]
     }
 }

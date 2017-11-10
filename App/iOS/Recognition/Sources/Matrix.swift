@@ -164,7 +164,11 @@ public class Matrix : CustomStringConvertible, Equatable{
 	}
 
 	public var columns:Int{
-		return data[0].count
+		if(self.rows > 0){
+			return data[0].count
+		}else{
+			return 0
+		}
 	}
 
 	public var description : String{

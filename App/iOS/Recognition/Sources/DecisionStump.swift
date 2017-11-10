@@ -52,12 +52,21 @@ class DecisionStump : Classifier{
 					var set1 = Dataset()
 					var weights1 = [Double]()
 					for n in 0 ..< trainset.nSamples {
+						print(n)
 						if(decision(trainset.samples[n],j,cmp,thresh)==1){
+							print("decided")
 							set1 = try! set1.append(try! Dataset(trainset.samples[n],[trainset.labels[n]]))
+							print("appended")
 							weights1.append(weights[n])
+							print("appended")
 						}else{
+							print("decided")
+
 							set0 = try! set1.append(try! Dataset(trainset.samples[n],[trainset.labels[n]]))
+							print("appended")
+							
 							weights0.append(weights[n])
+							print("appended")
 
 						}
 					}
@@ -92,6 +101,7 @@ class DecisionStump : Classifier{
 	}
 
 	internal static func decision(_ sample: Matrix, _ feature: Int, _ cmpLarge: Bool, _ threshold: Double) -> Int {
+
 		if (cmpLarge) {
 			if (sample[0,feature] >= threshold){
 				return 1
