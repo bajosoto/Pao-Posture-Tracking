@@ -54,67 +54,34 @@ class DecisionStumpTest: XCTestCase {
       
   }
 
-  /*
+  
   func testInit(){
       let sample = Matrix([[1,2,3]])
       let sample2 = Matrix([[1,2,2.4]])
 
-      let clf = DecisionStump(true,2,2.5,[0,1])
-      XCTAssertEqual(clf.predict(samples:sample)[0],1)
-      XCTAssertEqual(clf.predict(samples:sample2)[0],0)
+      let clf = DecisionStump(true,2,2.5)
+      XCTAssertEqual(clf.label(sample),1)
+      XCTAssertEqual(clf.label(sample2),0)
 
   }
 
   
-  func testWeightedClassification(){
+  func testWeightedLabeling(){
       let samples = Matrix([[0,1,0],
                             [0,1,0],
                             [1,1,1],
                             [0,1,1],
                             [0,1,1]])
       let labels = [0,0,0,1,1]
-      let weights = Matrix([[0.1,0.1,0.4,0.2,0.2]])
-      let clf = DecisionStump(try! Dataset(samples,labels),weights.T)
-      let predictions = clf.predict(samples:samples)
-
-      XCTAssertEqual(predictions,[1,1,0,1,1])
+      let weights = [0.1,0.1,0.4,0.2,0.2]
+      let (bestCmp,bestThresh,bestFeature) = DecisionStump.train(try! Dataset(samples,labels),weights)
       
-  }
-
-  func testImpurity(){
-      let samples = Matrix([[0,1,0],
-                            [0,1,0],
-                            [1,1,1],
-                            [0,1,1],
-                            [0,1,1]])
-      let labels = [0,0,0,1,1]
-    
-      //XCTAssertEqual(DecisionStump.impurity(try! Dataset(samples,labels)),0.0)
-  }
-
-  func testSplit(){
-      let samples = Matrix([[0,1,0],
-                            [0,1,0],
-                            [1,1,1],
-                            [0,1,1],
-                            [0,1,1]])
-      let labels = [0,0,0,1,1]
-    
-      let splits = DecisionStump.split(try! Dataset(samples,labels),[0,0,1,1,1])
-
-      XCTAssertEqual(splits.0.samples, Matrix([[0,1,0],
-                                               [0,1,0]]))
-      XCTAssertEqual(splits.0.labels, [0,0])
       
-      XCTAssertEqual(splits.1.samples, Matrix([[1,1,1],
-                                               [0,1,1],
-                                               [0,1,1]]))
-      XCTAssertEqual(splits.1.labels, [0,1,1])
+      XCTAssertEqual(bestFeature,0)
+      XCTAssertEqual(bestThresh,1.0)
+      XCTAssertEqual(bestCmp,true)
   }
 
-  func testClassifSoft(){
-       XCTFail("Not implemented")
-  }*/
 
 	static var allTests : [(String, (DecisionStumpTest) -> () throws -> Void)] {
         return [
@@ -122,8 +89,9 @@ class DecisionStumpTest: XCTestCase {
           ("testTraining", testTraining),
           ("testTrainingOtherLabels", testTrainingOtherLabels),
           ("testTrainingMoreClasses",testTrainingMoreClasses),
-
-/*          ("testInit", testInit),
+          ("testInit", testInit),
+          ("testWeightedLabeling",testWeightedLabeling)
+/*          
           ("testClassifSoft",testClassifSoft),
           ("testWeightedClassification",testWeightedClassification),
 */
