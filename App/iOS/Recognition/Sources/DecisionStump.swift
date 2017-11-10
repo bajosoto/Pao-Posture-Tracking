@@ -54,25 +54,17 @@ class DecisionStump : Classifier{
 					for n in 0 ..< trainset.nSamples {
 						print(n)
 						if(decision(trainset.samples[n],j,cmp,thresh)==1){
-							print("decided")
 							set1 = try! set1.append(try! Dataset(trainset.samples[n],[trainset.labels[n]]))
-							print("appended")
 							weights1.append(weights[n])
-							print("appended")
 						}else{
-							print("decided")
-
 							set0 = try! set1.append(try! Dataset(trainset.samples[n],[trainset.labels[n]]))
-							print("appended")
-							
 							weights0.append(weights[n])
-							print("appended")
-
 						}
 					}
 
 					let impurity = DecisionTree.impurity(set0,weights0) + DecisionTree.impurity(set1,weights1)
 
+					print(impurity)
 					if (impurity < bestImpurity){
 						bestCmp = cmp
 						bestThresh = thresh
