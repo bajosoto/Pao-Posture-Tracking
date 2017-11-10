@@ -30,14 +30,13 @@ class DecisionStump : Classifier{
 		var bestCmp = false
 		var bestThresh = 0.0
 		var bestFeature = 0
-		var bestImpurity = 1.0
+		var bestImpurity = Double.greatestFiniteMagnitude
 
 		for o in 0 ..< 2 {
 			let cmp = o == 0
 			for j in 0 ..< trainset.dim {
 				let sortedSamples = Matrix(trainset.samples.array().sorted{$0[j] < $1[j]})
 				var threshPrev = -Double.greatestFiniteMagnitude
-
 				for i in 0 ..< trainset.nSamples {
 					let thresh = sortedSamples[i,j]
 					if (thresh <= threshPrev){
@@ -45,27 +44,31 @@ class DecisionStump : Classifier{
 					}
 
 					threshPrev = thresh
-					
 					/* split TODO move to own fcn */
 					var set0 = Dataset()
 					var weights0 = [Double]()
 					var set1 = Dataset()
 					var weights1 = [Double]()
 					for n in 0 ..< trainset.nSamples {
-						print(n)
 						if(decision(trainset.samples[n],j,cmp,thresh)==1){
 							set1 = try! set1.append(try! Dataset(trainset.samples[n],[trainset.labels[n]]))
 							weights1.append(weights[n])
 						}else{
-							set0 = try! set1.append(try! Dataset(trainset.samples[n],[trainset.labels[n]]))
+							set0 = try! set0.append(try! Dataset(trainset.samples[n],[trainset.labels[n]]))
 							weights0.append(weights[n])
 						}
 					}
-
-					let impurity = DecisionTree.impurity(set0,weights0) + DecisionTree.impurity(set1,weights1)
-
-					print(impurity)
+					
+					var impurity = 0.0
+					if(set0.nSamples > 0){
+						impurity += DecisionTree.impurity(set0,(Matrix([weights0])/sum(Matrix([weights0]))).array()[0])
+					}
+					if(set1.nSamples > 0){
+						impurity += DecisionTree.impurity(set1,(Matrix([weights1])/sum(Matrix([weights1]))).array()[0])
+					}
+					
 					if (impurity < bestImpurity){
+						
 						bestCmp = cmp
 						bestThresh = thresh
 						bestFeature = j

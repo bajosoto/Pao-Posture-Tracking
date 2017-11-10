@@ -13,7 +13,6 @@ struct Dataset{
 	init(){
 		samples = Matrix(0,0)
 		labels = [Int]()
-		print(samples)
 	}
 
 	var dim:Int{

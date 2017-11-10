@@ -17,10 +17,11 @@ class DecisionStumpTest: XCTestCase {
                             [1,1,0],
                             [1,1,1]])
       let labels = [0,0,1]
-      let clf = DecisionStump(trainset:try! Dataset(samples,labels))
-      let predictions = clf.predict(samples:samples)
+      let (bestCmp,bestThresh,bestFeature) = DecisionStump.train(try! Dataset(samples,labels),[Double](repeating: 1/3, count: 3))
 
-      XCTAssertEqual(predictions,labels)
+      XCTAssertEqual(bestFeature,2)
+      XCTAssertEqual(bestThresh,1.0)
+      XCTAssertEqual(bestCmp,true)
        
   }
 
