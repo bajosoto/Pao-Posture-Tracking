@@ -29,11 +29,28 @@ class DecisionStumpTest: XCTestCase {
       let samples = Matrix([[1,1,0],
                             [1,1,0],
                             [1,1,1]])
-      let labels = [1,1,2]
-      let clf = DecisionStump(trainset:try! Dataset(samples,labels))
-      let predictions = clf.predict(samples:samples)
+      let labels = [1,1,5]
+      let (bestCmp,bestThresh,bestFeature) = DecisionStump.train(try! Dataset(samples,labels),[Double](repeating: 1/3, count: 3))
 
-      XCTAssertEqual(predictions,labels)
+      XCTAssertEqual(bestFeature,2)
+      XCTAssertEqual(bestThresh,1.0)
+      XCTAssertEqual(bestCmp,true)
+      
+  }
+
+  func testTrainingMoreClasses(){
+      let samples = Matrix([[1,1,0],
+                            [1,1,0],
+                            [1,1,0],
+                            [1,1,1],
+                            [1,1,1],
+                            [1,1,1]])
+      let labels = [1,2,2,3,4,4]
+      let (bestCmp,bestThresh,bestFeature) = DecisionStump.train(try! Dataset(samples,labels),[Double](repeating: 1/3, count: 6))
+
+      XCTAssertEqual(bestFeature,2)
+      XCTAssertEqual(bestThresh,1.0)
+      XCTAssertEqual(bestCmp,true)
       
   }
 
@@ -103,8 +120,10 @@ class DecisionStumpTest: XCTestCase {
         return [
         	("testDecision", testDecision),
           ("testTraining", testTraining),
-/*          ("testInit", testInit),
           ("testTrainingOtherLabels", testTrainingOtherLabels),
+          ("testTrainingMoreClasses",testTrainingMoreClasses),
+
+/*          ("testInit", testInit),
           ("testClassifSoft",testClassifSoft),
           ("testWeightedClassification",testWeightedClassification),
 */
