@@ -22,8 +22,8 @@ class DecisionTree : DecisionNode, Classifier{
 
 	}
 
-	func predictSampleSoft(_ sample: Matrix) -> [Int] {
-		return children[decisionRule.label(sample)].predictSoftSample(sample)
+	func predictSampleSoft(_ sample: Matrix) -> [Int: Double] {
+		return children[decisionRule.label(sample)].predictSampleSoft(sample)
 	}
 
 	internal static func impurity(_ data: Dataset) -> Double{
@@ -62,13 +62,13 @@ class DecisionTree : DecisionNode, Classifier{
 	}
 
 	internal func predictSample(sample: Matrix)->Int{
-		return predictSampleSoft(sample:sample).sorted(by: {$0.1 > $1.1})[0].key
+		return predictSampleSoft(sample).sorted(by: {$0.1 > $1.1})[0].key
 	}
 
 	func predictSoft(samples: Matrix)->[[Int: Double]]{
 		var softLabels:[[Int:Double]] = []
 		for i in 0..<samples.rows{
-			softLabels.append(self.predictSampleSoft(sample:samples[i,0..<samples.columns]))
+			softLabels.append(self.predictSampleSoft(samples[i]))
 			
 		}
 		return softLabels

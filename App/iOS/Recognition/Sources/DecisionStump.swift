@@ -25,7 +25,7 @@ class DecisionStump {
 		var bestThresh = 0.0
 		var bestFeature = 0
 		var bestImpurity = Double.greatestFiniteMagnitude
-		var weightMatrix = Matrix([weights])
+		var weightMatrix = Matrix([weights]).T
 
 		for o in 0 ..< 2 {
 			let cmp = o == 0
@@ -37,16 +37,20 @@ class DecisionStump {
 					if (thresh <= threshPrev){
 						continue;
 					}
-
 					threshPrev = thresh
 
 					let sets = DecisionStump(cmp,j,thresh).split(trainset)
+					let splitIdxs = DecisionStump.getSplitIdxs(DecisionStump.label(trainset.samples,j,cmp,thresh))
 					
 					var impurity = 0.0
 					for i in 0 ..< sets.count{
-						var weightSubset = weightMatrix[DecisionStump.getSplitIdxs(DecisionStump.label(trainset.samples,j,cmp,thresh))[i]]
+
+						if(sets[i].nSamples < 1){
+							continue
+						}
+						var weightSubset = weightMatrix[splitIdxs[i]]
 						weightSubset = weightSubset/sum(weightSubset)
-						impurity += DecisionTree.impurity(sets[i],weightSubset.array()[0])
+						impurity += DecisionTree.impurity(sets[i],weightSubset.T.array()[0])
 					}
 					
 					if (impurity < bestImpurity){
@@ -68,6 +72,7 @@ class DecisionStump {
 	func split(_ dataset: Dataset) -> [Dataset] {
 		let splitLabels = DecisionStump.label(dataset.samples,self.feature,self.cmpLarge,self.threshold)
 		let splitIdxs = DecisionStump.getSplitIdxs(splitLabels)
+		
 		return DecisionStump.split(dataset,splitIdxs)
 	}
 
@@ -76,20 +81,25 @@ class DecisionStump {
 	}
 
 	internal static func getSplitIdxs(_ labels: [Int])->[[Int]]{
-		var idx = [[Int]]()
+		var idx = [Int: [Int]]()
+
 		for i in 0 ..< labels.count{
-			if(labels[i] > idx.count){
-				idx.append([Int]())
+			if(idx[labels[i]] == nil){
+				idx.updateValue([Int](),forKey:labels[i])
 			}
 
-			idx[labels[i]].append(i)
+			idx[labels[i]]!.append(i)
 		}
+		return Array(idx.values)
 	}
 	
 	internal static func split(_ data: Dataset,_ idxs: [[Int]]) -> [Dataset]{
 
 		var sets = [Dataset]()
 		for l in idxs{
+			if (l.count == 0){
+				continue
+			}
 			let labels = Matrix([data.labels]).T[l].T.array()[0].map{Int($0)}//looks wicked but is just selecting a the subset l of labels
 			sets.append(try! Dataset(data.samples[l],labels))
 		}
@@ -106,7 +116,6 @@ class DecisionStump {
 
 
 	internal static func label(sample: Matrix, _ feature: Int, _ cmpLarge: Bool, _ threshold: Double) -> Int {
-
 		if (cmpLarge) {
 			if (sample[0,feature] >= threshold){
 				return 1

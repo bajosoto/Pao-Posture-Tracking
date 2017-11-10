@@ -5,10 +5,10 @@ class DecisionLeaf : DecisionNode{
 	init(_ trainset: Dataset){
 		self.trainset = trainset
 	}
-	func predictSoftSample(_ sample: Matrix) -> [Int]{
-		var probas = [Int]()
+	func predictSampleSoft(_ sample: Matrix) -> [Int: Double]{
+		var probas = [Int: Double]()
 		for m in trainset.classes{
-			probas.append(trainset.labels.filter{$0==m}.count/trainset.nSamples)
+			probas.updateValue(Double(trainset.labels.filter{$0==m}.count)/Double(trainset.nSamples),forKey:m)
 		}
 		return probas
 	}

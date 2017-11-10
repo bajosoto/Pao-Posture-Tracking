@@ -24,7 +24,7 @@ func abs(_ m: Matrix) -> Matrix {
     return mAbs
 }
 
-func evaluate(_ clf: Classifier,_ dataset: Dataset,_ weights: Matrix) -> Double{
+func evaluate(_ predictions: [Int],_ dataset: Dataset,_ weights: Matrix) -> Double{
     
 
     var weights_ = weights
@@ -32,15 +32,13 @@ func evaluate(_ clf: Classifier,_ dataset: Dataset,_ weights: Matrix) -> Double{
         weights_ = weights.T
     }
 
-    let predictions = clf.predict(samples:dataset.samples)
-    
     let error = abs((Matrix([predictions]) - Matrix([dataset.labels])))*(weights_)
 
     return error[0,0]
 }
 
-func evaluate(_ clf: Classifier,_ dataset: Dataset) -> Double{
-    return evaluate(clf,dataset,ones(dataset.nSamples,1)/dataset.nSamples)
+func evaluate(_ predictions: [Int],_ dataset: Dataset) -> Double{
+    return evaluate(predictions,dataset,ones(dataset.nSamples,1)/dataset.nSamples)
 }
 
 

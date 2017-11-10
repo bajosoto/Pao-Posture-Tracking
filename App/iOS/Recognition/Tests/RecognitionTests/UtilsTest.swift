@@ -183,14 +183,10 @@ class UtilsTest: XCTestCase {
                               [1,1,1],
                               [1,2,1]])
         let labels = [0,0,1,1]
-        let clf = DecisionStump(true,0,1,[0,1])
 
-        XCTAssertEqual(clf.predict(samples:samples),[1,1,1,1])
-        XCTAssertEqual(evaluate(clf,try! Dataset(samples,labels)),0.5)
+        XCTAssertEqual(evaluate([1,1,1,1],try! Dataset(samples,labels)),0.5)
 
-        let clf2 = DecisionStump(false,2,0,[0,1])
-        XCTAssertEqual(clf2.predict(samples:samples),[0,0,1,1])
-        XCTAssertEqual(evaluate(clf2,try! Dataset(samples,labels)),0.0)
+        XCTAssertEqual(evaluate([0,0,1,1],try! Dataset(samples,labels)),0.0)
 
     }
 
@@ -200,10 +196,8 @@ class UtilsTest: XCTestCase {
                               [1,1,1],
                               [1,2,1]])
         let labels = [0,0,1,1]
-        let clf = DecisionStump(true,0,1,[0,1])
         let weights = Matrix([[0.375, 0.375, 0.125, 0.125]])
-        XCTAssertEqual(clf.predict(samples:samples),[1,1,1,1])
-        XCTAssertEqual(evaluate(clf,try! Dataset(samples,labels),weights),6/8)
+        XCTAssertEqual(evaluate([1,1,1,1],try! Dataset(samples,labels),weights),6/8)
 
     }
 

@@ -40,7 +40,7 @@ class AdaBoost : Classifier {
 			hypotheses.append(clf)
 			
 			let predictions = clf.predict(samples:trainset.samples)
-			error.append(evaluate(clf,trainset,normedWeights))
+			error.append(evaluate(predictions,trainset,normedWeights))
 			//print("Predictions: \(predictions)")
 			
 			//print("Error: \(error[i])")
