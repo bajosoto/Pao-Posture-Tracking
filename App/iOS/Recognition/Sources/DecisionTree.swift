@@ -1,19 +1,19 @@
-class DecisionTree : DecisionNode{
+class DecisionTree : DecisionNode, Classifier{
 	let children:[DecisionNode]
 	let decisionRule: DecisionStump
 
-	init(_ trainset: Dataset, maxDepth: Int, minImpurity: Double, weights: [Double]){
+	init(_ trainset: Dataset, weights: [Double], maxDepth: Int, minImpurity: Double = 0.0){
 		
 		decisionRule = DecisionStump(trainset,weights)
 
-		let sets = DecisionTree.split(trainset,decisionRule.predict(samples:trainset.samples))
+		let sets = decisionRule.split(trainset)
 
 		var children = [DecisionNode]()
 		for set_ in sets {
 			if(DecisionTree.impurity(set_) <= minImpurity || maxDepth == 1){
 				children.append(DecisionLeaf(trainset))
 			}else{
-				children.append(DecisionTree(trainset,maxDepth:maxDepth-1,minImpurity:minImpurity,weights:weights))
+				children.append(DecisionTree(trainset,weights:weights,maxDepth:maxDepth-1,minImpurity:minImpurity))
 			}	
 		}
 
@@ -22,28 +22,8 @@ class DecisionTree : DecisionNode{
 
 	}
 
-	func predictSoftSample(_ sample: Matrix) -> [Int] {
-		return children[decisionRule.predict(samples:sample)[0]].predictSoftSample(sample)
-	}
-
-
-	internal static func split(_ data: Dataset, _ labels: [Int]) -> [Dataset]{
-
-		var idx = [[Int]]()
-		for i in 0 ..< labels.count{
-			if(labels[i] > idx.count){
-				idx.append([Int]())
-			}
-
-			idx[labels[i]].append(i)
-		}
-
-		var sets = [Dataset]()
-		for l in idx{
-			let labels = Matrix([data.labels]).T[l].T.array()[0].map{Int($0)}//looks wicked but is just selecting a the subset l of labels
-			sets.append(try! Dataset(data.samples[l],labels))
-		}
-		return sets
+	func predictSampleSoft(_ sample: Matrix) -> [Int] {
+		return children[decisionRule.label(sample)].predictSoftSample(sample)
 	}
 
 	internal static func impurity(_ data: Dataset) -> Double{
@@ -68,5 +48,29 @@ class DecisionTree : DecisionNode{
 		return -1*purity
 	}
 
-	
+	required convenience init(trainset:Dataset){
+		self.init(trainset,weights:[Double](repeating: 1.0/Double(trainset.nSamples), count: trainset.nSamples),maxDepth:trainset.classes.count+trainset.dim,minImpurity:0.0)
+	}
+
+	func predict(samples: Matrix)->[Int]{
+		var labelsFound = [Int]()
+		for i in 0..<samples.rows{
+			labelsFound.append(self.predictSample(sample:samples[i,0..<samples.columns]))
+			
+		}
+		return labelsFound
+	}
+
+	internal func predictSample(sample: Matrix)->Int{
+		return predictSampleSoft(sample:sample).sorted(by: {$0.1 > $1.1})[0].key
+	}
+
+	func predictSoft(samples: Matrix)->[[Int: Double]]{
+		var softLabels:[[Int:Double]] = []
+		for i in 0..<samples.rows{
+			softLabels.append(self.predictSampleSoft(sample:samples[i,0..<samples.columns]))
+			
+		}
+		return softLabels
+	}
 }

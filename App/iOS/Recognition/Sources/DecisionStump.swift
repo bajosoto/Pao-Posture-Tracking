@@ -1,16 +1,11 @@
-class DecisionStump : Classifier{
+class DecisionStump {
 
 	let cmpLarge:Bool
 	let feature:Int
 	let threshold: Double
-	let classes: [Int]
-	required convenience init(trainset:Dataset){
-		self.init(trainset,[Double](repeating: 1.0/Double(trainset.nSamples), count: trainset.nSamples))
-	}
-
+	
 	init(_ trainset:Dataset, _ weights:[Double]){
 
-		classes = trainset.classes
 		let ret = DecisionStump.train(trainset,weights)
 
 		cmpLarge = ret.0
@@ -18,9 +13,8 @@ class DecisionStump : Classifier{
 		feature = ret.2
 	}
 
-	init(_ cmpLarge: Bool, _ feature: Int, _ threshold: Double, _ classes: [Int]){
+	init(_ cmpLarge: Bool, _ feature: Int, _ threshold: Double){
 		
-		self.classes = classes
 		self.cmpLarge = cmpLarge
 		self.feature = feature
 		self.threshold = threshold
@@ -31,6 +25,7 @@ class DecisionStump : Classifier{
 		var bestThresh = 0.0
 		var bestFeature = 0
 		var bestImpurity = Double.greatestFiniteMagnitude
+		var weightMatrix = Matrix([weights])
 
 		for o in 0 ..< 2 {
 			let cmp = o == 0
@@ -44,27 +39,14 @@ class DecisionStump : Classifier{
 					}
 
 					threshPrev = thresh
-					/* split TODO move to own fcn */
-					var set0 = Dataset()
-					var weights0 = [Double]()
-					var set1 = Dataset()
-					var weights1 = [Double]()
-					for n in 0 ..< trainset.nSamples {
-						if(decision(trainset.samples[n],j,cmp,thresh)==1){
-							set1 = try! set1.append(try! Dataset(trainset.samples[n],[trainset.labels[n]]))
-							weights1.append(weights[n])
-						}else{
-							set0 = try! set0.append(try! Dataset(trainset.samples[n],[trainset.labels[n]]))
-							weights0.append(weights[n])
-						}
-					}
+
+					let sets = DecisionStump(cmp,j,thresh).split(trainset)
 					
 					var impurity = 0.0
-					if(set0.nSamples > 0){
-						impurity += DecisionTree.impurity(set0,(Matrix([weights0])/sum(Matrix([weights0]))).array()[0])
-					}
-					if(set1.nSamples > 0){
-						impurity += DecisionTree.impurity(set1,(Matrix([weights1])/sum(Matrix([weights1]))).array()[0])
+					for i in 0 ..< sets.count{
+						var weightSubset = weightMatrix[DecisionStump.getSplitIdxs(DecisionStump.label(trainset.samples,j,cmp,thresh))[i]]
+						weightSubset = weightSubset/sum(weightSubset)
+						impurity += DecisionTree.impurity(sets[i],weightSubset.array()[0])
 					}
 					
 					if (impurity < bestImpurity){
@@ -82,20 +64,48 @@ class DecisionStump : Classifier{
 		}
 		return (bestCmp,bestThresh,bestFeature)
 	}
-	func predict(samples: Matrix)->[Int]{
-		var labelsFound = [Int]()
-		for i in 0..<samples.rows{
-			labelsFound.append(self.predictSample(samples[i,0..<samples.columns]))
-			
+
+	func split(_ dataset: Dataset) -> [Dataset] {
+		let splitLabels = DecisionStump.label(dataset.samples,self.feature,self.cmpLarge,self.threshold)
+		let splitIdxs = DecisionStump.getSplitIdxs(splitLabels)
+		return DecisionStump.split(dataset,splitIdxs)
+	}
+
+	func label(_ sample: Matrix) -> Int {
+		return DecisionStump.label(sample:sample,self.feature,self.cmpLarge,self.threshold)
+	}
+
+	internal static func getSplitIdxs(_ labels: [Int])->[[Int]]{
+		var idx = [[Int]]()
+		for i in 0 ..< labels.count{
+			if(labels[i] > idx.count){
+				idx.append([Int]())
+			}
+
+			idx[labels[i]].append(i)
 		}
-		return labelsFound
+	}
+	
+	internal static func split(_ data: Dataset,_ idxs: [[Int]]) -> [Dataset]{
+
+		var sets = [Dataset]()
+		for l in idxs{
+			let labels = Matrix([data.labels]).T[l].T.array()[0].map{Int($0)}//looks wicked but is just selecting a the subset l of labels
+			sets.append(try! Dataset(data.samples[l],labels))
+		}
+		return sets
 	}
 
-	internal func predictSample(_ sample: Matrix)->Int {
-		return classes[DecisionStump.decision(sample,self.feature,self.cmpLarge,self.threshold)] 
+	internal static func label(_ samples: Matrix, _ feature: Int, _ cmpLarge: Bool, _ threshold: Double) -> [Int]{
+		var labels = [Int]()
+		for i in 0 ..< samples.rows{
+			labels.append(DecisionStump.label(sample:samples[i],feature,cmpLarge,threshold))
+		}
+		return labels
 	}
 
-	internal static func decision(_ sample: Matrix, _ feature: Int, _ cmpLarge: Bool, _ threshold: Double) -> Int {
+
+	internal static func label(sample: Matrix, _ feature: Int, _ cmpLarge: Bool, _ threshold: Double) -> Int {
 
 		if (cmpLarge) {
 			if (sample[0,feature] >= threshold){
@@ -112,7 +122,4 @@ class DecisionStump : Classifier{
 		}
 	}
 
-	func predictSoft(samples: Matrix)->[[Int: Double]]{
-		return [[:]]
-	}
 }
