@@ -15,6 +15,7 @@ XCTMain([
      testCase(PaoKnnClassifierTest.allTests),
      testCase(DecisionTreeTest.allTests),
      testCase(DecisionStumpTest.allTests),
+     testCase(DecisionLeafTest.allTests),
      testCase(AdaBoostTest.allTests),
     
 

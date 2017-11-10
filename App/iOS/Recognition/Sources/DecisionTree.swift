@@ -1,9 +1,10 @@
 class DecisionTree : DecisionNode, Classifier{
 	let children:[DecisionNode]
 	let decisionRule: DecisionStump
-
+	let trainset: Dataset
 	init(_ trainset: Dataset, weights: [Double], maxDepth: Int, minImpurity: Double = 0.0){
 		
+		self.trainset = trainset
 		decisionRule = DecisionStump(trainset,weights)
 
 		let sets = decisionRule.split(trainset)
@@ -11,9 +12,11 @@ class DecisionTree : DecisionNode, Classifier{
 		var children = [DecisionNode]()
 		for set_ in sets {
 			if(DecisionTree.impurity(set_) <= minImpurity || maxDepth == 1){
-				children.append(DecisionLeaf(trainset))
+				print("DecisionTree::new leaf")
+				children.append(DecisionLeaf(set_))
 			}else{
-				children.append(DecisionTree(trainset,weights:weights,maxDepth:maxDepth-1,minImpurity:minImpurity))
+				print("DecisionTree::new child")
+				children.append(DecisionTree(set_,weights:weights,maxDepth:maxDepth-1,minImpurity:minImpurity))
 			}	
 		}
 
@@ -23,7 +26,17 @@ class DecisionTree : DecisionNode, Classifier{
 	}
 
 	func predictSampleSoft(_ sample: Matrix) -> [Int: Double] {
-		return children[decisionRule.label(sample)].predictSampleSoft(sample)
+		var probas = [Int:Double]()
+		for m in trainset.classes {
+			probas.updateValue(0.0,forKey:m)
+		}
+		let probasRet = children[decisionRule.label(sample)].predictSampleSoft(sample)
+
+		for m in probasRet.keys {
+			probas.updateValue(probasRet[m]!,forKey:m)
+		}
+
+		return probas
 	}
 
 	internal static func impurity(_ data: Dataset) -> Double{

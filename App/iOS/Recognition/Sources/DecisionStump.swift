@@ -11,6 +11,8 @@ class DecisionStump {
 		cmpLarge = ret.0
 		threshold = ret.1
 		feature = ret.2
+
+		print("Decision stump: \(cmpLarge)| \(feature) | \(threshold)")
 	}
 
 	init(_ cmpLarge: Bool, _ feature: Int, _ threshold: Double){

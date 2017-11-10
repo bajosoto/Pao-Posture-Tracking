@@ -39,10 +39,38 @@ class DecisionTreeTest: XCTestCase {
       XCTAssertEqual(DecisionTree.impurity(try! Dataset(samples,[0,0,0,0,0]),[0.2,0.4,0.2,0.1,0.1]),0.0)  
   }
 
-      func testWeightedImpurity3(){
+  func testWeightedImpurity3(){
       let samples = Matrix([[1,1,1]])
    
       XCTAssertEqual(DecisionTree.impurity(try! Dataset(samples,[0]),[1.0]),0.0)  
+  }
+
+  func testPrediction(){
+      let samples = Matrix([[0,1,0],
+                            [0,1,0],
+                            [1,1,1],
+                            [0,1,1],
+                            [0,1,1]])
+      let labels = [0,0,0,1,1]
+
+      let clf = DecisionTree(trainset: try! Dataset(samples,labels))
+  
+      XCTAssertEqual(clf.predict(samples: samples),labels)
+  }
+
+  func testPredictionMaxDepth(){
+      let samples = Matrix([[0,1,0],
+                            [0,1,1]])
+      let labels = [1,0]
+
+      let clf = DecisionTree(try! Dataset(samples,labels),weights:[Double](repeating: 1/2, count:2),maxDepth:1)
+  
+      XCTAssertEqual(clf.predict(samples: samples),labels) 
+      XCTAssertEqual(clf.predictSampleSoft(samples[0])[0]!,0.0)
+      XCTAssertEqual(clf.predictSampleSoft(samples[0])[1]!,1.0)
+      XCTAssertEqual(clf.predictSampleSoft(samples[1])[0]!,1.0)
+      XCTAssertEqual(clf.predictSampleSoft(samples[1])[1]!,0.0)
+
   }
 
 
@@ -52,6 +80,8 @@ class DecisionTreeTest: XCTestCase {
           ("testWeightedImpurity",testWeightedImpurity),
           ("testWeightedImpurity2",testWeightedImpurity2),
           ("testWeightedImpurity3",testWeightedImpurity3),
+          ("testPrediction",testPrediction),
+          ("testPredictionMaxDepth",testPredictionMaxDepth),
 
           ]
     }

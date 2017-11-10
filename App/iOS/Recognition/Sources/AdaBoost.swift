@@ -36,7 +36,7 @@ class AdaBoost : Classifier {
 			
 			//print("Normed weights: \(normedWeights) = \(weights[i])/\(sum(weights[i]))")
 			
-			let clf = DecisionTree(trainset,weights:normedWeights.array()[0],maxDepth:trainset.classes.count)
+			let clf = DecisionTree(trainset,weights:normedWeights.array()[0],maxDepth:1)
 			hypotheses.append(clf)
 			
 			let predictions = clf.predict(samples:trainset.samples)
