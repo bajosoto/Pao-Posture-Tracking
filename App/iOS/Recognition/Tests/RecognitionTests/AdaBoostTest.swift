@@ -13,7 +13,7 @@ class AdaBoostTest: XCTestCase {
                             [0, 1, 1]])
       let labels = [1,1,1,2,2,2]
 
-      let clf = AdaBoost(try! Dataset(samples,labels),1000)
+      let clf = AdaBoost(try! Dataset(samples,labels),100)
 
       XCTAssertEqual(clf.predict(samples:samples),[0,0,0,1,1,1])
 	}

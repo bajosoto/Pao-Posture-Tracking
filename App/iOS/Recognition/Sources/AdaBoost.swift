@@ -46,9 +46,6 @@ class AdaBoost : Classifier {
 			
 			print("Error: \(error[i])")
 			var beta_i = error[i]/(1-error[i])
-			if (error[i] == 1.0){
-				beta_i = 100
-			}
 			//print("Beta: \(beta_i)")
 			beta.append(beta_i)
 			let power = ones(trainset.nSamples,1)-abs(Matrix([predictions]) - Matrix([trainset.labels])).T
