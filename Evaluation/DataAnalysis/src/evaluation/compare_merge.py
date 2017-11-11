@@ -25,8 +25,8 @@ samples_raw_3 = samples_raw_3[:, 0:6]
 
 samples_raw = np.vstack([samples_raw_1, samples_raw_2])
 labels = np.vstack([labels_1, labels_2])
-window_size = 30
-average = PreProcessor.average(samples_raw, window_size)
+window_size = 20
+average = PreProcessor.median(samples_raw, window_size)
 p2p = PreProcessor.peak2peak(samples_raw, window_size)
 
 labels_reduced = labels[0::window_size]

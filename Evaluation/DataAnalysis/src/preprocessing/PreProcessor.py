@@ -11,6 +11,14 @@ class PreProcessor:
         return average
 
     @staticmethod
+    def median(data: np.array, window_size=10):
+        median = np.zeros(shape=(int(np.floor(data.shape[0] / window_size)), data.shape[1]))
+        for i in range(0, int(np.floor(data.shape[0] / window_size)) - 1):
+            median[i, :] = np.median(data[i * window_size:(i + 1) * window_size, :], axis=0)
+
+        return median
+
+    @staticmethod
     def peak2peak(data: np.array, window_size=10):
         p2p = np.zeros(shape=(int(np.floor(data.shape[0] / window_size)), 1))
         for i in range(0, int(np.floor(data.shape[0] / window_size)) - 1):
