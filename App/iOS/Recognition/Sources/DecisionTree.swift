@@ -19,7 +19,7 @@ class DecisionTree : DecisionNode, Classifier{
 				children.append(DecisionTree(set_,weights:weights,maxDepth:maxDepth-1,minImpurity:minImpurity))
 			}	
 		}
-
+		print("Decision Tree created")
 		self.children = children
 
 
@@ -30,8 +30,12 @@ class DecisionTree : DecisionNode, Classifier{
 		for m in trainset.classes {
 			probas.updateValue(0.0,forKey:m)
 		}
-		let probasRet = children[decisionRule.label(sample)].predictSampleSoft(sample)
-
+		var probasRet: [Int: Double]
+		if(children.count > 1){
+			probasRet = children[decisionRule.label(sample)].predictSampleSoft(sample)
+		}else{
+			probasRet = children[0].predictSampleSoft(sample)		
+		}
 		for m in probasRet.keys {
 			probas.updateValue(probasRet[m]!,forKey:m)
 		}

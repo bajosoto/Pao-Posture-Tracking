@@ -22,14 +22,14 @@ class AdaBoost : Classifier {
 
 	internal static func train(_ trainset:Dataset,_ maxI: Int) -> (Matrix,[Double],[Classifier],Int){
 
-		var weights = ones(maxI,trainset.nSamples)/trainset.nSamples
+		var weights = ones(maxI+1,trainset.nSamples)/trainset.nSamples
 		var error = [Double]()
 		var beta = [Double]()
 		var hypotheses = [Classifier]()
 		var totalI = 0
 		for i in 0 ..< maxI {
 			totalI = i
-			//print("Total I: \(i)")
+			print("Total I: \(i)")
 			//print("Weights: \(weights[i])")
 
 			let	normedWeights = weights[i]/sum(weights[i])
@@ -40,10 +40,11 @@ class AdaBoost : Classifier {
 			hypotheses.append(clf)
 			
 			let predictions = clf.predict(samples:trainset.samples)
-			error.append(evaluate(predictions,trainset,normedWeights))
 			//print("Predictions: \(predictions)")
+
+			error.append(evaluate(predictions,trainset,normedWeights))
 			
-			//print("Error: \(error[i])")
+			print("Error: \(error[i])")
 			var beta_i = error[i]/(1-error[i])
 			if (error[i] == 1.0){
 				beta_i = 100

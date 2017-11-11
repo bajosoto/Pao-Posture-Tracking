@@ -8,7 +8,7 @@ class DecisionLeaf : DecisionNode{
 	func predictSampleSoft(_ sample: Matrix) -> [Int: Double]{
 		var probas = [Int: Double]()
 		for m in trainset.classes{
-			probas.updateValue(Double(trainset.labels.filter{$0==m}.count)/Double(trainset.nSamples),forKey:m)
+			probas.updateValue(Double(trainset.classSamples(class_id:m).rows)/Double(trainset.nSamples),forKey:m)
 		}
 		return probas
 	}
