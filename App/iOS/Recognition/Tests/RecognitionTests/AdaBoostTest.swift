@@ -15,12 +15,28 @@ class AdaBoostTest: XCTestCase {
 
       let clf = AdaBoost(try! Dataset(samples,labels),100)
 
-      XCTAssertEqual(clf.predict(samples:samples),[0,0,0,1,1,1])
+      XCTAssertEqual(clf.predict(samples:samples),[1,1,1,2,2,2])
 	}
+
+  func testClassifMultiClass(){
+      let samples = Matrix([[0, 1, 0],
+                            [0, 0, 0], 
+                            [1, 1, 1], 
+                            [0, 1, 1], 
+                            [0, 0, 1], 
+                            [0, 1, 1]])
+      let labels = [1,1,3,2,2,2]
+
+      let clf = AdaBoost(try! Dataset(samples,labels),100)
+
+      XCTAssertEqual(clf.predict(samples:samples),[1,1,3,2,2,2])
+  }
 
 	static var allTests : [(String, (AdaBoostTest) -> () throws -> Void)] {
         return [
         	("testClassif",testClassif),
+          ("testClassifMultiClass",testClassifMultiClass),
+
         ]
     }
 }
