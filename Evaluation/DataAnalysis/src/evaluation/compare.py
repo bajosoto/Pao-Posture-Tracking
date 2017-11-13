@@ -27,7 +27,9 @@ classifiers_subset = {
     "Random Forest": RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
     "Neural Net": MLPClassifier(alpha=1, max_iter=2000),
     "AdaBoost": AdaBoostClassifier(),
-    "QDA": QuadraticDiscriminantAnalysis()}
+    "QDA": QuadraticDiscriminantAnalysis(),
+    "Decision Tree": DecisionTreeClassifier(max_depth=5),
+}
 
 
 def compare(samples, labels, classifiers, folds):

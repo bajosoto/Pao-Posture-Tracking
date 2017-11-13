@@ -14,12 +14,13 @@ FILE_PATH_3 = "../../resource/PostureEntry_11_02_chest_sitting_phil.csv"
 
 N_VALIDATIONS = 20
 samples_raw_1, labels_1, _ = FileReader.read(FILE_PATH_1)
-samples_raw_1 = samples_raw_1[(labels_1.ravel() == 0) | (labels_1.ravel() == 1), 0:6]
-labels_1 = labels_1[(labels_1.ravel() == 0) | (labels_1.ravel() == 1)]
+# samples_raw_1 = samples_raw_1[(labels_1.ravel() == 0) | (labels_1.ravel() == 1), 0:6]
+# labels_1 = labels_1[(labels_1.ravel() == 0) | (labels_1.ravel() == 1)]
+samples_raw_1 = samples_raw_1[:, 0:6]
 
 samples_raw_2, labels_2, _ = FileReader.read(FILE_PATH_2)
-samples_raw_2 = samples_raw_2[(labels_2.ravel() == 0) | (labels_2.ravel() == 1), :]
-labels_2 = labels_2[(labels_2.ravel() == 0) | (labels_2.ravel() == 1)]
+# samples_raw_2 = samples_raw_2[(labels_2.ravel() == 0) | (labels_2.ravel() == 1), :]
+# labels_2 = labels_2[(labels_2.ravel() == 0) | (labels_2.ravel() == 1)]
 
 samples_raw_3, labels_3, _ = FileReader.read(FILE_PATH_3)
 samples_raw_3 = samples_raw_3[:, 0:6]
@@ -32,7 +33,7 @@ window_min = 5
 window_max = 120
 window_step = 5
 for window_size in range(window_min, window_max, window_step):
-    samples_filtered, labels_reduced = PreProcessor.median(samples_raw,labels, window_size)
+    samples_filtered, labels_reduced = PreProcessor.average(samples_raw,labels, window_size)
     samples_features = preprocessing.scale(samples_filtered)
 
     scores.append(compare_selected(samples_features, labels_reduced, N_VALIDATIONS))
@@ -54,5 +55,5 @@ for i, name in enumerate(classifiers_subset):
 legend(legends)
 xlabel("window size")
 ylabel("classification error")
-title("Median filter - front/back mixed users")
+title("Median filter - all classes - front/back mixed users")
 show()
