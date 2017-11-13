@@ -73,6 +73,19 @@ class DecisionTreeTest: XCTestCase {
 
   }
 
+  func testPredictionMultiClass(){
+      let samples = Matrix([[0,1,0],
+                            [0,1,0],
+                            [1,1,1],
+                            [0,1,1],
+                            [0,1,1]])
+      let labels = [0,0,2,1,1]
+
+      let clf = DecisionTree(trainset: try! Dataset(samples,labels))
+  
+      XCTAssertEqual(clf.predict(samples: samples),labels)
+  }
+
 
 	static var allTests : [(String, (DecisionTreeTest) -> () throws -> Void)] {
         return [
@@ -82,6 +95,7 @@ class DecisionTreeTest: XCTestCase {
           ("testWeightedImpurity3",testWeightedImpurity3),
           ("testPrediction",testPrediction),
           ("testPredictionMaxDepth",testPredictionMaxDepth),
+          ("testPredictionMultiClass",testPredictionMultiClass),
 
           ]
     }
