@@ -6,21 +6,21 @@ class UtilsTest: XCTestCase {
 	func testMeanRow(){
 		let A = Matrix([[1, 1],[2, 2]])
         let Solution = Matrix([[1.5, 1.5]])
-	    let B = mean_row(matrix:A)
+	    let B = meanRow(matrix:A)
 	    XCTAssertTrue(B==Solution,"\(B)")    
 	}
 
 	func testMeanRow2(){
 		let A = Matrix([[1, 2],[3, 4]])
         let Solution = Matrix([[2, 3]])
-	    let B = mean_row(matrix:A)
+	    let B = meanRow(matrix:A)
 	    XCTAssertTrue(B==Solution,"\(B)")    
 	}
 
 	func testMeanCol(){
 		let A = Matrix([[1, 1],[2, 2]])
         let Solution = Matrix([[1, 2]])
-	    let B = mean_col(matrix:A)
+	    let B = meanCol(matrix:A)
 	    XCTAssertTrue(B==Solution,"\(B)")    
 	}
 
@@ -177,6 +177,30 @@ class UtilsTest: XCTestCase {
 
     }
 
+    func testEvaluate(){
+        let samples = Matrix([[1,1,0],
+                              [1,2,0],
+                              [1,1,1],
+                              [1,2,1]])
+        let labels = [0,0,1,1]
+
+        XCTAssertEqual(evaluate([1,1,1,1],try! Dataset(samples,labels)),0.5)
+
+        XCTAssertEqual(evaluate([0,0,1,1],try! Dataset(samples,labels)),0.0)
+
+    }
+
+    func testEvaluateWeights(){
+        let samples = Matrix([[1,1,0],
+                              [1,2,0],
+                              [1,1,1],
+                              [1,2,1]])
+        let labels = [0,0,1,1]
+        let weights = Matrix([[0.375, 0.375, 0.125, 0.125]])
+        XCTAssertEqual(evaluate([1,1,1,1],try! Dataset(samples,labels),weights),6/8)
+
+    }
+
 	static var allTests : [(String, (UtilsTest) -> () throws -> Void)] {
         return [
         	("testMeanRow",testMeanRow),
@@ -198,6 +222,8 @@ class UtilsTest: XCTestCase {
             ("testInv4",testInv4),
             ("testInvUnequal",testInvUnequal),
             ("testInvSingular",testInvSingular),
+            ("testEvaluate",testEvaluate),
+            ("testEvaluateWeights",testEvaluateWeights)
 
     	]
 	}

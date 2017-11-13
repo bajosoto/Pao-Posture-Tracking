@@ -1,4 +1,4 @@
 protocol Vectorizable{
 
-	func toVector()->Matrix
+	var toVector: Matrix {get}
 }

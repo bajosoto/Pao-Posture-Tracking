@@ -10,7 +10,7 @@ class LdaClassifierTest: XCTestCase {
                                       [7,8,9],
     								  [7,8,9]])
     	let labels = [1,1,2,2]
-        let dataset =  Dataset(samples:samples,labels:labels)
+        let dataset =  try! Dataset(samples,labels)
         let means = LdaClassifier.estimateMeans(dataset:dataset)
 
         XCTAssertTrue(means[0] == Matrix([[2.5,3.5,4.5]]),"\(means[0])")
@@ -25,7 +25,7 @@ class LdaClassifierTest: XCTestCase {
                                       [7,8,9],
                                       [7,8,9]])
         let labels = [1,1,2,2]
-        let dataset =  Dataset(samples:samples,labels:labels)
+        let dataset =  try! Dataset(samples,labels)
         let cov = LdaClassifier.estimateCov(dataset:dataset,regularizer:0.0)
 
         XCTAssertTrue(cov == Matrix([[2.25,2.25,2.25],
@@ -40,7 +40,7 @@ class LdaClassifierTest: XCTestCase {
                                       [7,8,9],
                                       [7,8,9]])
         let labels = [1,1,2,2]
-        let dataset =  Dataset(samples:samples,labels:labels)
+        let dataset =  try! Dataset(samples,labels)
         let priors = LdaClassifier.estimatePriors(dataset:dataset)
 
         XCTAssertTrue(priors[0]==0.5,"Priors_0 = \(priors[0])")
@@ -54,11 +54,11 @@ class LdaClassifierTest: XCTestCase {
                                       [7,8],
                                       [7,8]])
         let labels = [1,1,2,2]
-        let dataset =  Dataset(samples:samples,labels:labels)
-        let ldc = LdaClassifier(trainset:dataset)
-        let res1 = ldc.classify(samples:Matrix([[1,2]]))
+        let dataset =  try! Dataset(samples,labels)
+        let ldc = LdaClassifier(dataset)
+        let res1 = ldc.predict(samples:Matrix([[1,2]]))
         XCTAssertTrue(res1[0]==1,"Res1: \(res1)")
-        let res2 = ldc.classify(samples:Matrix([[7,8]]))
+        let res2 = ldc.predict(samples:Matrix([[7,8]]))
         XCTAssertTrue(res2[0]==2,"Res2: \(res2)")
 
         
@@ -76,13 +76,13 @@ class LdaClassifierTest: XCTestCase {
                                       [13,9],
                                       [7,8]])
         let labels = [1,1,1,1,1,2,2,2,2,2]
-        let dataset =  Dataset(samples:samples,labels:labels)
-        let ldc = LdaClassifier(trainset:dataset)
+        let dataset =  try! Dataset(samples,labels)
+        let ldc = LdaClassifier(dataset)
         let testsamples = Matrix([  [-15,-3],
                                             [-19,-21],
                                             [7,8],
                                             [15,9]])
-        let results = ldc.classify(samples:testsamples)
+        let results = ldc.predict(samples:testsamples)
         XCTAssertTrue(results[0]==1,"Was:\(results[0])")
         XCTAssertTrue(results[1]==1,"Was:\(results[1])")
         XCTAssertTrue(results[2]==2,"Was:\(results[2])")

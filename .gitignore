@@ -111,3 +111,5 @@ xcuserdata/
 *.ipa
 *.dSYM.zip
 *.dSYM
+
+*.idea
