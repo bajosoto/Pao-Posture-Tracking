@@ -6,6 +6,8 @@
 #include "mpu_wrapper.h"
 
 
+int16_t theta_cal = 0;
+
 void getMpuSensors() {
 
 	get_dmp_data();

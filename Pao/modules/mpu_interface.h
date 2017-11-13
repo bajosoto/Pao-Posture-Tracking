@@ -45,9 +45,11 @@ typedef enum sensValType_t {
 // gyro_values_t gyr_values;
 
 int16_t phi, theta, psi;
+int16_t raw_phi, raw_theta, raw_psi;
 int16_t sp, sq, sr;
 int16_t sax, say, saz;
 uint8_t sensor_fifo_count;
+int16_t phi_cal, theta_cal, psi_cal;
 
 
 void getMpuSensors();

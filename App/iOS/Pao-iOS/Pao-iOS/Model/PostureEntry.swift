@@ -18,6 +18,9 @@ class PostureEntry: Object {
     @objc dynamic var gyrX: Int16 = Int16(0)
     @objc dynamic var gyrY: Int16 = Int16(0)
     @objc dynamic var gyrZ: Int16 = Int16(0)
+    @objc dynamic var phi: Int16 = Int16(0)
+    @objc dynamic var theta: Int16 = Int16(0)
+    @objc dynamic var psi: Int16 = Int16(0)
     @objc dynamic var p2p: Double = Double(0)
     @objc dynamic var posture: Double = 0
     @objc dynamic var postureLbl: String = ""
