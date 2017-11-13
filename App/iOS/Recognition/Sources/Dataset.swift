@@ -2,9 +2,17 @@ struct Dataset{
 	public let samples:Matrix
 	public let labels:[Int]
 	
-	init(samples: Matrix, labels: [Int]){
+	init(_ samples: Matrix,_ labels: [Int]) throws{
+		if( samples.rows != labels.count){
+			throw DatasetError.nLabelsAndNSamplesDoNotMatch(labels.count,samples.rows)
+		}
 		self.samples = samples
 		self.labels = labels
+	}
+
+	init(){
+		samples = Matrix(0,0)
+		labels = [Int]()
 	}
 
 	var dim:Int{
@@ -35,6 +43,23 @@ struct Dataset{
 		}
 
 		return classSamples
+	}
+
+	public func append(_ dataset: Dataset) throws -> Dataset{
+		if (self.dim != 0 && dataset.dim != self.dim){
+			throw DatasetError.dimensionsDoNotMatch(dataset.dim,self.dim)
+		}
+		var newSamples = Matrix(self.nSamples + dataset.nSamples,dataset.dim)
+		var newLabels = [Int]()
+
+		if(self.samples.rows > 0){
+			newSamples[0 ..< self.samples.rows] = self.samples
+			newLabels.append(contentsOf:self.labels)
+		}
+		newSamples[self.samples.rows  ..< newSamples.rows] = dataset.samples
+
+		newLabels.append(contentsOf:dataset.labels)
+		return try! Dataset(newSamples,newLabels)
 	}
 
 }

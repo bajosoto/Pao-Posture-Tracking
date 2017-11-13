@@ -18,6 +18,17 @@ class MatrixTest: XCTestCase {
 
     }
 
+    func testSubscriptSet(){
+        var matrix = Matrix([[1,2],[3,4]])
+        matrix[0,0] = 0
+        matrix[0,1] = 0 
+        XCTAssertTrue(matrix[0,0] == 0)
+        XCTAssertTrue(matrix[0,1] == 0)
+        XCTAssertTrue(matrix[1,0] == 3)
+        XCTAssertTrue(matrix[1,1] == 4)
+
+    }
+
     func testSubscriptRow(){
         let matrix = Matrix([[1,2],[3,4]])
         let row1 = matrix[0]
@@ -92,6 +103,17 @@ class MatrixTest: XCTestCase {
                                         [5,6]]))
     }
 
+    func testSubscriptRowRangeSet(){
+         let matrix = Matrix([[1,2],
+                             [3,4],
+                             [5,6]])
+         matrix[1 ..< 3] = Matrix([[0,0],[0,0]])
+
+         XCTAssertEqual(matrix,Matrix([ [1,2],
+                                        [0,0],
+                                        [0,0]]))   
+    }
+
     func testSubscriptColumnRangeGet(){
          let matrix = Matrix([[1,2],
                              [3,4],
@@ -137,6 +159,16 @@ class MatrixTest: XCTestCase {
          XCTAssertEqual(matrix,Matrix([ [1,0],
                                         [3,0],
                                         [5,0]]))
+    }
+
+    func testSubscriptList(){
+        let matrix = Matrix([[1,2],
+                             [3,4],
+                             [5,6]])
+
+         XCTAssertEqual(matrix[[0,2]],Matrix([ [1,2],
+                                               [5,6]]))
+
     }
 
     func testTransposed(){
@@ -207,6 +239,7 @@ class MatrixTest: XCTestCase {
         return [
         	("testInit",testInit),
         	("testSubscript",testSubscript),
+            ("testSubscriptSet",testSubscript),
             ("testSubscriptRow",testSubscriptRow),
             ("testEquals",testEquals),
             ("testNotEquals",testNotEquals),
@@ -219,11 +252,13 @@ class MatrixTest: XCTestCase {
             ("testSubscriptColumnRangeSet",testSubscriptColumnRangeSet),
             ("testSubscriptColumnRangeGet2",testSubscriptColumnRangeGet2),
             ("testSubscriptColumnRangeSet2",testSubscriptColumnRangeSet2),
+            ("testSubscriptList",testSubscriptList),
             ("testTransposed",testTransposed),
             ("testRmColumn",testRmColumn),
             ("testRmRow",testRmRow),
             ("testDeepCopy",testDeepCopy),
-            ("testInitVectorizable",testInitVectorizable)
+            ("testInitVectorizable",testInitVectorizable),
+            ("testSubscriptRowRangeSet",testSubscriptRowRangeSet),
         ]
     }
 }

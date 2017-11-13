@@ -35,7 +35,10 @@ void sendMessageEs(TxMsgEs msgType){
 				splitSI16(getMpuVal(GYR_X), 6);
 				splitSI16(getMpuVal(GYR_Y), 8);
 				splitSI16(getMpuVal(GYR_Z), 10);
-				sendPacket(msgType, 12);
+				splitSI16(getMpuVal(DMP_X), 12);
+				splitSI16(getMpuVal(DMP_Y), 14);
+				splitSI16(getMpuVal(DMP_Z), 16);
+				sendPacket(msgType, 18);
 				break;
 			case MSG03_BLE_STATUS:
 				txBuff[0] = getBleStatus();

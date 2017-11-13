@@ -20,6 +20,8 @@
 #define MPU_TWI_SCL_PIN 3
 #define MPU_TWI_SDA_PIN 4
 #else
+// #define MPU_TWI_SCL_PIN 1        // Sergio: From what I see in the schematic, these are 7 and 30...
+// #define MPU_TWI_SDA_PIN 2
 #define MPU_TWI_SCL_PIN 7
 #define MPU_TWI_SDA_PIN 30
 #endif

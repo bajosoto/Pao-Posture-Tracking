@@ -1,3 +1,78 @@
+func sum(_ m: Matrix) -> Double {
+    var sum:Double = 0
+    for i in 0 ..< m.rows {
+        for j in 0 ..< m.columns {
+        sum += m[i,j]
+        }
+    }
+    return sum
+}
+
+func abs(_ m: Matrix) -> Matrix {
+
+    var mAbs = Matrix(m.rows,m.columns)
+    
+    for i in 0 ..< m.rows {
+        for j in 0 ..< m.columns {
+            if(m[i,j] < 0.0){
+                mAbs[i,j] = -1*m[i,j] 
+            }else{
+                mAbs[i,j] = m[i,j]
+            }
+        }
+    }
+    return mAbs
+}
+
+func evaluate(_ predictions: [Int],_ dataset: Dataset,_ weights: Matrix) -> Double{
+    
+
+    var weights_ = weights
+    if(weights.rows == 1){
+        weights_ = weights.T
+    }
+
+    let error = abs((Matrix([predictions]) - Matrix([dataset.labels])))*(weights_)
+
+    return error[0,0]
+}
+
+func evaluate(_ predictions: [Int],_ dataset: Dataset) -> Double{
+    return evaluate(predictions,dataset,ones(dataset.nSamples,1)/dataset.nSamples)
+}
+
+
+
+let labelDict: [String:Double] = [
+        "SitOk"     : 1.0,
+        "SitNok"    : 2.0,
+        "StandOk"   : 3.0,
+        "StandNok"  : 4.0,
+        "MovOk"     : 5.0,
+        "MovNok"    : 6.0,
+    ]
+    
+public func lookupLabel(_ strLabel : String)->Double{
+    return labelDict[strLabel]!
+}
+public func lookupLabel(_ doubleLabel : Double)->String{
+
+    return labelDict.first(where: {$1 == doubleLabel})!.key
+}
+
+public func argmax(_ l: [Double]) -> (Int,Double){
+    var max = -Double.greatestFiniteMagnitude
+    var maxI = 0
+    for i in 0 ..< l.count{
+        if(l[i] > max){
+            max = l[i]
+            maxI = i
+        }
+    }
+
+    return (maxI,max)
+}
+
 public func max(_ matrix: Matrix)->Double{
     var maximum = -Double.greatestFiniteMagnitude
     for i in 0 ..< matrix.rows{
@@ -12,7 +87,7 @@ public func max(_ matrix: Matrix)->Double{
     return maximum
 }
 
-public func mean_row( matrix: Matrix)->Matrix{
+public func meanRow( matrix: Matrix)->Matrix{
 	var sum:Matrix = Matrix(1,matrix.columns)
 	for i in 0..<matrix.rows{
         sum = sum + matrix[i]
@@ -20,15 +95,15 @@ public func mean_row( matrix: Matrix)->Matrix{
     return sum/matrix.rows
 }
 
-public func mean_col(matrix: Matrix)->Matrix{
-	return (mean_row(matrix:matrix.T)).T
+public func meanCol(matrix: Matrix)->Matrix{
+	return (meanRow(matrix:matrix.T)).T
 }
 
 public func cov(matrix: Matrix) -> Matrix{
 	var sum:Matrix = Matrix(matrix.columns, matrix.columns)
 
     for i in 0..<matrix.rows{
-        sum = sum + (matrix[i]-mean_row(matrix:matrix)).T * ((matrix[i]-mean_row(matrix:matrix)))
+        sum = sum + (matrix[i]-meanRow(matrix:matrix)).T * ((matrix[i]-meanRow(matrix:matrix)))
     }
 
     return sum/(matrix.rows-1)
@@ -98,9 +173,9 @@ internal func doDet(_ matrix: Matrix) -> Double{
 
 public func norm(_ m: Matrix) -> Double{
     var sum:Double = 0
-    for i in 0 ..< m.columns {
-        for j in 0 ..< m.rows {
-        sum += m[j,i]*m[j,i]
+    for i in 0 ..< m.rows {
+        for j in 0 ..< m.columns {
+        sum += m[i,j]**2
         }
     }
     return sum.squareRoot()
@@ -112,8 +187,8 @@ public func sqrt(_ x: Double) -> Double{
 
 public func eye(_ rows: Int, _ cols: Int) -> Matrix{
     let mat = Matrix(rows,cols)
-    for i in 0 ..< mat.columns {
-        for j in 0 ..< mat.rows {
+    for i in 0 ..< mat.rows {
+        for j in 0 ..< mat.columns {
             if( i==j){
                 mat[i,j] = 1.0
             }
@@ -121,3 +196,16 @@ public func eye(_ rows: Int, _ cols: Int) -> Matrix{
     }
     return mat
 }
+
+
+public func ones(_ rows: Int, _ cols: Int) -> Matrix{
+    let mat = Matrix(rows,cols)
+    for i in 0 ..< mat.rows {
+        for j in 0 ..< mat.columns {
+            mat[i,j] = 1.0
+        }
+    }
+    return mat
+}
+
+

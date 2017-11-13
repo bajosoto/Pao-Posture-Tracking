@@ -64,8 +64,11 @@ SRC_FILES += \
   $(PROJ_DIR)/comm-prot/es/es-ble-rx.c \
   $(PROJ_DIR)/comm-prot/es/es-ble-tx.c \
   $(PROJ_DIR)/drivers/uart.c \
-  $(PROJ_DIR)/drivers/app_mpu.c \
-  $(SDK_ROOT)/components/drivers_nrf/twi_master/nrf_drv_twi.c \
+  $(PROJ_DIR)/drivers/twi.c \
+  $(PROJ_DIR)/drivers/mpu-motion-driver/inv_mpu_dmp_motion_driver.c \
+  $(PROJ_DIR)/drivers/mpu-motion-driver/inv_mpu.c \
+  $(PROJ_DIR)/drivers/mpu-motion-driver/ml.c \
+  $(PROJ_DIR)/drivers/mpu-motion-driver/mpu_wrapper.c \
   $(PROJ_DIR)/drivers/nrf_drv_mpu_twi.c \
   $(PROJ_DIR)/modules/mpu_interface.c \
   $(PROJ_DIR)/modules/ble_interface.c \
@@ -77,6 +80,9 @@ SRC_FILES += \
   $(SDK_ROOT)/components/ble/common/ble_srv_common.c \
   $(SDK_ROOT)/components/libraries/fstorage/fstorage.c \
   $(PROJ_DIR)/modules/debug-interface.c \
+
+
+  # $(SDK_ROOT)/components/drivers_nrf/twi_master/nrf_drv_twi.c \
 
   # $(PROJ_DIR)/comm-prot/sm/uart-sm.c \
   # $(PROJ_DIR)/comm-prot/es/es-uart-rx.c \
@@ -215,7 +221,8 @@ INC_FOLDERS += \
   $(SDK_ROOT)/components/ble/ble_services/ble_nus/ \
   $(SDK_ROOT)/components/ble/ble_advertising/  \
   $(SDK_ROOT)/components/libraries/timer \
-  $(SDK_ROOT)/components/libraries/fstorage
+  $(SDK_ROOT)/components/libraries/fstorage \
+  $(PROJ_DIR)/drivers/mpu-motion-driver/
 
   # $(PROJ_DIR)/comm-prot/sm \
   # $(PROJ_DIR)/comm-prot/es \

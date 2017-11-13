@@ -16,7 +16,15 @@ int main(void)
     bsp_board_buttons_init();
     uart_service_init();
     //NRF_LOG_INIT(NULL);  // TODO_SERGIO: Using LOG to find RAM start and end address
-    mpu_setup();
+    
+    // Old mpu init:
+    //mpu_setup();
+
+    nrf_delay_ms(5000);
+
+    // New mpu init:
+    twi_init();
+    imu_init(true, 100);
 
     // Bluetooth
     app_timer_init_sergio();
@@ -37,6 +45,11 @@ int main(void)
         if (app_uart_get(&cr) == NRF_SUCCESS){
             setrxByte(cr);
         }
+        // TODO: add ble
+
+        if (check_sensor_int_flag()) {
+            getMpuSensors();
+        }
 
         if(timer % 50 == 0) {
             if(bsp_board_button_state_get(3)) {
@@ -50,7 +63,7 @@ int main(void)
             // }
         }
         if(timer % 20 == 0) {
-            getMpuSensors();
+            // getMpuSensors();
             sendMessageEs(MSG02_SENSOR_VALS);
             sendBleMessageEs(MSG_BLE_02_SENSOR);
         }

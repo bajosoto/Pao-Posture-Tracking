@@ -228,9 +228,6 @@ class BleConnection {
         self._responder?.redrawConsole()
     }
     
-    
-    
-    
     //func receive(dataAsString: String!) {
     func receive(rawData: Data) {
         // Do some processing here
@@ -250,14 +247,21 @@ class BleConnection {
             }
             break
         case 2:
-            let s0: Int16 = unfoldSI16(index: 1);
-            let s1: Int16 = unfoldSI16(index: 3);
-            let s2: Int16 = unfoldSI16(index: 5);
-            let s3: Int16 = unfoldSI16(index: 7);
-            let s4: Int16 = unfoldSI16(index: 9);
-            let s5: Int16 = unfoldSI16(index: 11);
-            //self.logMsg(message: "\(s0),\(s1),\(s2),\(s3),\(s4),\(s5)")
-            self._responder?.getSensorData(s0, s1, s2, s3, s4, s5)
+            let s0: Int16 = unfoldSI16(index: 1)
+            let s1: Int16 = unfoldSI16(index: 3)
+            let s2: Int16 = unfoldSI16(index: 5)
+            let s3: Int16 = unfoldSI16(index: 7)
+            let s4: Int16 = unfoldSI16(index: 9)
+            let s5: Int16 = unfoldSI16(index: 11)
+            let s6: Int16 = unfoldSI16(index: 13)
+            let s7: Int16 = unfoldSI16(index: 15)
+            let s8: Int16 = unfoldSI16(index: 17)
+            
+            //self.logMsg(message: "\(s0),\(s1),\(s2),\(s3),\(s4),\(s5),\(s6)")
+            self._responder?.getSensorData(s0, s1, s2, s3, s4, s5, s6, s7, s8)
+            break
+        case 3:
+            self.logMsg(message: "Double Tap!")
             break
         default:
             self.logMsg(message: "Unknown Message received (\(bleRxBuff[0]))")
@@ -322,5 +326,6 @@ protocol bleConnectionResponder: class {
     func onPaoFound()
     func onMsgReceived(message: String!)
     func redrawConsole()
-    func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16)
+    func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16,
+                       _ phi: Int16, _ theta: Int16, _ psi: Int16)
 }
