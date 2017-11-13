@@ -6,4 +6,5 @@ target 'Pao-iOS' do
   pod 'Charts', '~> 3.0.4'
   pod 'ChartsRealm', '~> 3.0.2'
   pod 'RealmSwift', '~> 2.4'
+  pod 'Recognition', :path => '../Recognition'
 end

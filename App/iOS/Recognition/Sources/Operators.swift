@@ -1,4 +1,4 @@
-import Glibc
+import Foundation
 
 public func equals(_ this: Matrix,_ that: Matrix, within: Double)-> Bool{
 	for i in 0..<this.rows{
