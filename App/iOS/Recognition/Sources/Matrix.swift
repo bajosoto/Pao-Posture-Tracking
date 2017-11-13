@@ -1,6 +1,10 @@
 public class Matrix : CustomStringConvertible, Equatable{
 	var data: [[Double]]
 
+	convenience init(){
+		self.init(0,0)
+	}
+
 	init(_ nrows:Int, _ ncols:Int){
 		data = [[Double]]()
 		for _ in 0 ..< nrows {
@@ -29,16 +33,37 @@ public class Matrix : CustomStringConvertible, Equatable{
 		self.data = dataDouble
 	}
 
+	init(_ data:[[Int16]]){
+		var dataDouble = [[Double]]()
+		for row in data {
+			var rowDouble = [Double]()
+			for element in row {
+				rowDouble.append(Double(element))
+			}
+			dataDouble.append(rowDouble)
+		}
+		
+		self.data = dataDouble
+	}
+
 	convenience init(_ matrix: Matrix){
 		self.init(matrix.array())
 	}
 
 	convenience init(_ objects: [Vectorizable]){
-		var m = Matrix(objects.count,objects[0].toVector().columns)
+		var m = Matrix(objects.count,objects[0].toVector.columns)
 		for i in 0 ..< objects.count{
-			m[i,0 ..< m.columns] = objects[i].toVector()
+			m[i,0 ..< m.columns] = objects[i].toVector
 		}
 		self.init(m)
+	}
+
+	public subscript(_ idxs: [Int]) -> Matrix {
+		var submatrix = Matrix(idxs.count,self.columns)
+		for i in 0 ..< idxs.count {
+			submatrix[i,0 ..< self.columns] = self[idxs[i]]
+		}
+		return submatrix
 	}
 
 	public subscript(_ i: Int, _ j: Int) -> Double {
@@ -53,6 +78,28 @@ public class Matrix : CustomStringConvertible, Equatable{
 	public subscript(_ i: Int) -> Matrix {
 	  get {
 	    return Matrix([data[i]])
+	  }
+	  set {
+	  	for j in 0 ..< self.columns{
+	  		self[i,j] = newValue[0,j]
+	  	}
+	  }
+	}
+
+	public subscript(_ ir: CountableRange<Int>) -> Matrix {
+	  get {
+	  	var l = [[Double]]()
+	  	for i in ir{
+	  		l.append(self[i].array()[0])
+	  	}
+	    return Matrix(l)
+	  }	
+	  set {
+	  	var n = 0
+	  	for i in ir{
+	  		self[i] = newValue[n]
+	  		n += 1
+	  	}
 	  }
 	}
 
@@ -121,7 +168,11 @@ public class Matrix : CustomStringConvertible, Equatable{
 	}
 
 	public var columns:Int{
-		return data[0].count
+		if(self.rows > 0){
+			return data[0].count
+		}else{
+			return 0
+		}
 	}
 
 	public var description : String{

@@ -8,12 +8,12 @@ class ParzenClassifierTest: XCTestCase {
         let samples = Matrix([[-1,-1],
                               [1,1]])
         let labels = [1,2]
-        let dataset =  Dataset(samples:samples,labels:labels)
+        let dataset =  try! Dataset(samples,labels)
         let parzenc = ParzenClassifier(trainset:dataset)
         let testsamples = Matrix([[-1,-1],
                                    [0,0],
                                    [1,1]])
-        let results = parzenc.classifySoft(samples:testsamples)
+        let results = parzenc.predictSoft(samples:testsamples)
 
         XCTAssertTrue(0.9999999 <= results[0][1]!)
         XCTAssertTrue(results[0][1]! <= 1.0)
@@ -41,7 +41,7 @@ class ParzenClassifierTest: XCTestCase {
                                         [1,1]])
 
         let labels = [1,2]
-        let dataset =  Dataset(samples:samples,labels:labels)
+        let dataset =  try! Dataset(samples,labels)
         let parzenc = ParzenClassifier(trainset:dataset)
         let testsamples = Matrix([  [-1,-1],
                                             [-0.5,-0.5],
@@ -49,7 +49,7 @@ class ParzenClassifierTest: XCTestCase {
                                             [0.25,0.25],
                                             [0.5,0.5],
                                             [1,1]])
-        let results = parzenc.classify(samples:testsamples)
+        let results = parzenc.predict(samples:testsamples)
         XCTAssertTrue(results[0]==1,"Was:\(results[0])")
         XCTAssertTrue(results[1]==1,"Was:\(results[1])")
         XCTAssertTrue(results[2]==1,"Was:\(results[2])")
@@ -72,13 +72,13 @@ class ParzenClassifierTest: XCTestCase {
                                       [5,6],
                                       [4,5]])
         let labels = [1,1,1,1,2,2,2,2]
-        let dataset =  Dataset(samples:samples,labels:labels)
+        let dataset =  try! Dataset(samples,labels)
         let parzenc = ParzenClassifier(trainset:dataset)
         let testsamples = Matrix([  [-5,-4.5],
                                             [-4.5,-6],
                                             [5,4.5],
                                             [4.5,5]])
-        let results = parzenc.classify(samples:testsamples)
+        let results = parzenc.predict(samples:testsamples)
         XCTAssertTrue(results[0]==1,"Was:\(results[0])")
         XCTAssertTrue(results[1]==1,"Was:\(results[1])")
         XCTAssertTrue(results[2]==2,"Was:\(results[2])")
