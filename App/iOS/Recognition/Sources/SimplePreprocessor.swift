@@ -24,13 +24,24 @@ class SimplePreprocessor: Preprocessor{
 
 	func preprocess(_ rawData: [RawSample], _ labels: [Int]) throws -> ([FeatureVector],[Int]){
 		var labels_reduced = [Int]()
+		var labelsMat = Matrix([labels]).T
 		for i in 0 ..< labels.count{
-			//TODO replace this with majority vote
-			if ((i+1)%windowSize==0){
-				labels_reduced.append(labels[i])
-			}
+			labels_reduced.append(SimplePreprocessor.majorityVote(labelsMat[i*self.windowSize ..< (i+1)*self.windowSize]))
 		}
 		return (try self.preprocess(rawData),labels_reduced)
+	}
+
+	internal static func majorityVote(_ labels: Matrix) -> Int{
+		var votes = [Int: Double]()
+		for i in unique(list:labels.array()[0]){	
+			votes[Int(i)]! = 0.0
+		}
+		for i in unique(list:labels.array()[0]){
+			if(labels[Int(i),0] == i){
+				votes[Int(i)]! += 1
+			}
+		}
+		return votes.sorted(by: {$0.1 > $1.1})[0].key	
 	}
 
 	func preprocessWindow(_ rawData: [RawSample]) -> FeatureVector{
