@@ -33,7 +33,7 @@ window_min = 5
 window_max = 120
 window_step = 5
 for window_size in range(window_min, window_max, window_step):
-    samples_filtered, labels_reduced = PreProcessor.average(samples_raw,labels, window_size)
+    samples_filtered, labels_reduced = PreProcessor.average(samples_raw, labels, window_size)
     samples_features = preprocessing.scale(samples_filtered)
 
     scores.append(compare_selected(samples_features, labels_reduced, N_VALIDATIONS))
@@ -55,5 +55,5 @@ for i, name in enumerate(classifiers_subset):
 legend(legends)
 xlabel("window size")
 ylabel("classification error")
-title("Median filter - all classes - front/back mixed users")
+title("Average filter - all classes - front/back mixed users")
 show()

@@ -23,8 +23,8 @@ classifiers_all = {
     "QDA": QuadraticDiscriminantAnalysis()}
 
 classifiers_subset = {
+    "Linear SVM": SVC(kernel="linear", C=0.025),
     "6 Neighbors": KNeighborsClassifier(10),
-    "Random Forest": RandomForestClassifier(max_depth=5, n_estimators=10, max_features=1),
     "Neural Net": MLPClassifier(alpha=1, max_iter=2000),
     "AdaBoost": AdaBoostClassifier(),
     "QDA": QuadraticDiscriminantAnalysis(),
