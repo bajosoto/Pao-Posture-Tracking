@@ -1,18 +1,23 @@
 class LdaClassifier: Classifier{
 	
-	let means 		 : [Matrix]
-	let covariance 	 : Matrix
-	let priors 	 	 : [Double]
-	let classes 	 : [Int]
+	var means 		 = [Matrix]()
+	var covariance 	 = Matrix()
+	var priors 	 	 = [Double]()
+	var classes 	 = [Int]()
 	var lnPriors 	 = [Double]()
 	var covMeans 	 = [Matrix]()
 	var meanCovMeans = [Double]()
 
-	required convenience init(trainset: Dataset){
-		self.init(trainset:trainset,regularizer:0.00001)
+	init(_ trainset: Dataset,regularizer: Double = 0.00001){
+		self.train(trainset,regularizer:regularizer)
 	}
 
-	init(trainset: Dataset,regularizer: Double){
+
+	func train(_ trainset: Dataset){
+		self.train(trainset,regularizer:0.00001)
+	}
+
+	func train(_ trainset: Dataset,regularizer: Double){
 		means = LdaClassifier.estimateMeans(dataset:trainset)
 		covariance = LdaClassifier.estimateCov(dataset:trainset,regularizer:regularizer)
 		priors = LdaClassifier.estimatePriors(dataset:trainset)

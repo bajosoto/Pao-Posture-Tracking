@@ -7,10 +7,19 @@
 
 class EqualScaler : Scaler {
 	
-	var maximum: [Double]
-	var minimum: [Double]
+	var maximum = [Double]()
+	var minimum = [Double]()
 
-	required init(_ m: Matrix){
+	init(_ m: Matrix){
+		self.train(m)
+	}
+
+	init(){
+		maximum = [Double]()
+		minimum = [Double]()
+	}
+
+	func train(_ m: Matrix){
 		maximum = [Double]()
 		minimum = [Double]()
 		for j in 0 ..< m.columns{

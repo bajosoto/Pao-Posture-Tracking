@@ -1,22 +1,28 @@
 class ParzenClassifier : Classifier{
 
-	internal let trainset: Dataset
-	internal var width: Double
+	internal var trainset = Dataset()
+	internal var width =  0.0
 	internal var priors: [Int: Double] = [:]
 
 	required init(trainset:Dataset){
+		self.train(trainset)
+	}
+	init(trainset:Dataset,maxApparentErr: Double, maxI: Int, learningRate: Double){
 		self.trainset = trainset
 		self.width = sqrt(Double(trainset.nSamples))/2
-		self.width = train(trainset)
+		self.train(trainset,maxApparentErr,maxI,learningRate)
 	}
-	init(trainset:Dataset,regularizer:Double,maxApparentErr: Double, maxI: Int, learningRate: Double){
+
+	func train(_ trainset: Dataset){
 		self.trainset = trainset
 		self.width = sqrt(Double(trainset.nSamples))/2
-		self.width = train(trainset,maxApparentErr,maxI,learningRate)
+		self.train(trainset)
 	}
 
-	internal func train(_ trainset: Dataset,_ maxApparentErr: Double = 0.000001, _ maxI: Int = 1000, _ learningRate: Double = 10.0)->Double{
-
+	func train(_ trainset: Dataset,_ maxApparentErr: Double = 0.000001, _ maxI: Int = 1000, _ learningRate: Double = 10.0){
+		self.trainset = trainset
+		self.width = sqrt(Double(trainset.nSamples))/2
+		
 		var errorLast = 1.0
 		var width = self.width
 		for c in trainset.classes{
@@ -31,7 +37,7 @@ class ParzenClassifier : Classifier{
 				errorLast = error
 			}
 		}
-		return width
+		self.width = width
 	}
 
 	internal func getApparentError()->Double{

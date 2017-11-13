@@ -1,7 +1,7 @@
 class SimplePreprocessor: Preprocessor{
 	
 	let windowSize: Int
-	init(windowSize: Int = 10){
+	init(_ windowSize: Int = 10){
 		self.windowSize = windowSize
 	}
 	func preprocess(_ rawData: [RawSample]) throws -> [FeatureVector]{
@@ -21,6 +21,18 @@ class SimplePreprocessor: Preprocessor{
 		}
 		return vectors
 	}
+
+	func preprocess(_ rawData: [RawSample], _ labels: [Int]) throws -> ([FeatureVector],[Int]){
+		var labels_reduced = [Int]()
+		for i in 0 ..< labels.count{
+			//TODO replace this with majority vote
+			if ((i+1)%windowSize==0){
+				labels_reduced.append(labels[i])
+			}
+		}
+		return (try self.preprocess(rawData),labels_reduced)
+	}
+
 	func preprocessWindow(_ rawData: [RawSample]) -> FeatureVector{
 		let average = SimplePreprocessor.averageFilter(rawData)
 		let peak2peak = SimplePreprocessor.getPeak2Peak(rawData)

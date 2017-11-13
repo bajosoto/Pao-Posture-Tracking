@@ -1,9 +1,13 @@
 class DecisionStump {
 
-	let cmpLarge:Bool
-	let feature:Int
-	let threshold: Double
+	var cmpLarge = false
+	var feature = 0
+	var threshold = 0.0
 	
+	init(){
+
+	}
+
 	init(_ trainset:Dataset, _ weights:[Double]){
 
 		let ret = DecisionStump.train(trainset,weights)

@@ -1,9 +1,17 @@
 class DecisionTree : DecisionNode, Classifier{
-	let children:[DecisionNode]
-	let decisionRule: DecisionStump
-	let trainset: Dataset
-	init(_ trainset: Dataset, weights: [Double], maxDepth: Int, minImpurity: Double = 0.0){
+	var children = [DecisionNode]()
+	var decisionRule = DecisionStump()
+	var trainset = Dataset()
+	init(_ trainset: Dataset, _ weights: [Double], _ maxDepth: Int = 10, _ minImpurity: Double = 0.0){
+		self.train(trainset,weights,maxDepth,minImpurity)
 		
+	}
+
+	convenience init(_ trainset:Dataset){
+		self.init(trainset,[Double](repeating: 1.0/Double(trainset.nSamples), count: trainset.nSamples),trainset.classes.count+trainset.dim,0.0)
+	}
+
+	func train(_ trainset: Dataset,_ weights: [Double],_ maxDepth: Int,_ minImpurity: Double = 0.0){
 		self.trainset = trainset
 		decisionRule = DecisionStump(trainset,weights)
 
@@ -14,12 +22,14 @@ class DecisionTree : DecisionNode, Classifier{
 			if(DecisionTree.impurity(set_) <= minImpurity || maxDepth == 1){
 				children.append(DecisionLeaf(set_))
 			}else{
-				children.append(DecisionTree(set_,weights:weights,maxDepth:maxDepth-1,minImpurity:minImpurity))
+				children.append(DecisionTree(set_,weights,maxDepth-1,minImpurity))
 			}	
 		}
 		self.children = children
+	}
 
-
+	func train(_ trainset:Dataset){
+		self.train(trainset,[Double](repeating: 1.0/Double(trainset.nSamples), count: trainset.nSamples),trainset.classes.count+trainset.dim,0.0)
 	}
 
 	func predictSoft(sample: Matrix) -> [Int: Double] {
@@ -62,8 +72,5 @@ class DecisionTree : DecisionNode, Classifier{
 		return -1*purity
 	}
 
-	required convenience init(trainset:Dataset){
-		self.init(trainset,weights:[Double](repeating: 1.0/Double(trainset.nSamples), count: trainset.nSamples),maxDepth:trainset.classes.count+trainset.dim,minImpurity:0.0)
-	}
 
 }

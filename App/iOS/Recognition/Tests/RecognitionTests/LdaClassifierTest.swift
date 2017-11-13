@@ -55,7 +55,7 @@ class LdaClassifierTest: XCTestCase {
                                       [7,8]])
         let labels = [1,1,2,2]
         let dataset =  try! Dataset(samples,labels)
-        let ldc = LdaClassifier(trainset:dataset)
+        let ldc = LdaClassifier(dataset)
         let res1 = ldc.predict(samples:Matrix([[1,2]]))
         XCTAssertTrue(res1[0]==1,"Res1: \(res1)")
         let res2 = ldc.predict(samples:Matrix([[7,8]]))
@@ -77,7 +77,7 @@ class LdaClassifierTest: XCTestCase {
                                       [7,8]])
         let labels = [1,1,1,1,1,2,2,2,2,2]
         let dataset =  try! Dataset(samples,labels)
-        let ldc = LdaClassifier(trainset:dataset)
+        let ldc = LdaClassifier(dataset)
         let testsamples = Matrix([  [-15,-3],
                                             [-19,-21],
                                             [7,8],

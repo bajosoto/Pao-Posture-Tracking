@@ -41,7 +41,7 @@ class SimplePreprocessorTest: XCTestCase {
           }
 
 
-        let preprocessor = SimplePreprocessor(windowSize:windowSize)
+        let preprocessor = SimplePreprocessor(windowSize)
         let featureVectors = try! preprocessor.preprocess(samples)
 
         XCTAssertEqual(featureVectors.count,2)
@@ -54,7 +54,7 @@ class SimplePreprocessorTest: XCTestCase {
               let i16 = Int16(i)
               samples.append(RawSample(Matrix([[i16,i16,i16,i16,i16,i16]])))
         }
-        let preprocessor = SimplePreprocessor(windowSize:10)
+        let preprocessor = SimplePreprocessor(10)
         do{
             try preprocessor.preprocess(samples)
             XCTFail("Should have raised NotEnoughSamplesError")

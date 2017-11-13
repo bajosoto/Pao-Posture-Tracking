@@ -1,11 +1,11 @@
 protocol Classifier {
 	/**
-	 * [Constructor create a classifier object by training it from a dataset
+	 * [Train classifier from a dataset
 	 * Depending on the chosen classifier and the amount of data this can
 	 * take a while]
 	 * @trainset: 		Dataset [Dataset with labelled samples]
 	 */
-	init(trainset:Dataset)
+	func train(_ trainset:Dataset)
 
 
 	/**

@@ -53,7 +53,7 @@ class DecisionTreeTest: XCTestCase {
                             [0,1,1]])
       let labels = [0,0,0,1,1]
 
-      let clf = DecisionTree(trainset: try! Dataset(samples,labels))
+      let clf = DecisionTree(try! Dataset(samples,labels))
   
       XCTAssertEqual(clf.predict(samples: samples),labels)
   }
@@ -63,7 +63,7 @@ class DecisionTreeTest: XCTestCase {
                             [0,1,1]])
       let labels = [1,0]
 
-      let clf = DecisionTree(try! Dataset(samples,labels),weights:[Double](repeating: 1/2, count:2),maxDepth:1)
+      let clf = DecisionTree(try! Dataset(samples,labels),[Double](repeating: 1/2, count:2),1)
   
       XCTAssertEqual(clf.predict(samples: samples),labels) 
       XCTAssertEqual(clf.predictSoft(sample:samples[0])[0]!,0.0)
@@ -81,7 +81,7 @@ class DecisionTreeTest: XCTestCase {
                             [0,1,1]])
       let labels = [0,0,2,1,1]
 
-      let clf = DecisionTree(trainset: try! Dataset(samples,labels))
+      let clf = DecisionTree(try! Dataset(samples,labels))
   
       XCTAssertEqual(clf.predict(samples: samples),labels)
   }

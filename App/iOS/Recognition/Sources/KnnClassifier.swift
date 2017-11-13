@@ -1,20 +1,25 @@
 class KnnClassifier: Classifier{
 	
-	internal let trainset: Dataset
-	internal let kNeighbours: Int
+	internal var trainset: Dataset = Dataset()
+	internal var kNeighbours: Int = 2
 	internal var priors: [Int: Double] = [:]
 
-	required convenience init(trainset: Dataset){
-		self.init(trainset:trainset,kNeighbours:2)
+	func train(_ trainset: Dataset){
+		self.train(trainset,kNeighbours:self.kNeighbours)
 	}
 
-	required init(trainset: Dataset, kNeighbours: Int = 2){
+	init(trainset: Dataset, kNeighbours: Int = 2){
+		train(trainset,kNeighbours:kNeighbours)
+	}
+
+	init(kNeighbours: Int = 2){
+		self.kNeighbours = kNeighbours
+	}
+
+	func train(_ trainset: Dataset, kNeighbours: Int){
 		self.trainset = trainset
 		self.kNeighbours = kNeighbours
-		train()
-	}
 
-	internal func train(){
 		for c in trainset.classes{
 			priors.updateValue(Double(trainset.classSamples(class_id:c).rows)/Double(trainset.nSamples),forKey:c)
 		}

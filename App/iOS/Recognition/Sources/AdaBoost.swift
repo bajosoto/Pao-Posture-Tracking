@@ -1,18 +1,31 @@
 class AdaBoost : Classifier {
 	
-	let weights: Matrix
-	let beta: [Double]
-	let hypotheses: [Classifier]
-	let totalI: Int
-	let classes: [Int]
+	var weights = Matrix()
+	var beta = [Double]()
+	var hypotheses = [Classifier]()
+	var totalI = 0
+	var classes = [Int]()
 	required convenience init(trainset:Dataset){
 		self.init(trainset,1000)
+	}
+
+	init(){
+		
 	}
 
 	init(_ trainset: Dataset, _ maxI: Int){
 
 		classes = trainset.classes
-		let ret = AdaBoost.train(trainset,maxI)
+		self.train(trainset,maxI)
+	}
+
+	func train(_ trainset: Dataset){
+		self.train(trainset)
+
+	}
+
+	func train(_ trainset: Dataset, _ maxI: Int){
+		let ret = AdaBoost.train(trainset,1000)
 		
 		weights = ret.0
 		beta = ret.1
@@ -35,7 +48,7 @@ class AdaBoost : Classifier {
 			
 			//print("Normed weights: \(normedWeights) = \(weights[i])/\(sum(weights[i]))")
 			
-			let clf = DecisionTree(trainset,weights:normedWeights.array()[0],maxDepth:trainset.classes.count-1)
+			let clf = DecisionTree(trainset,normedWeights.array()[0],trainset.classes.count-1)
 			hypotheses.append(clf)
 			
 			let predictions = clf.predict(samples:trainset.samples)

@@ -1,6 +1,10 @@
 public class Matrix : CustomStringConvertible, Equatable{
 	var data: [[Double]]
 
+	convenience init(){
+		self.init(0,0)
+	}
+
 	init(_ nrows:Int, _ ncols:Int){
 		data = [[Double]]()
 		for _ in 0 ..< nrows {

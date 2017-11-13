@@ -4,7 +4,7 @@ protocol PaoClassifier {
 	 * trains a classifier
 	 * @param traindata [array of raw data]
 	 */
-	init(_ traindata: [IPostureEntry])
+	func train(_ traindata: [IPostureEntry])
 
 	/**
 	 * classifiy a bunch of samples
