@@ -24,23 +24,16 @@ labels_2 = labels_2[(labels_2.ravel() == 0) | (labels_2.ravel() == 1)]
 samples_raw_3, labels_3, _ = FileReader.read(FILE_PATH_3)
 samples_raw_3 = samples_raw_3[:, 0:6]
 
-samples_raw = np.vstack([samples_raw_1, samples_raw_2])
-labels = np.vstack([labels_1, labels_2])
+samples_raw = np.vstack([samples_raw_1, samples_raw_2, samples_raw_3])
+labels = np.vstack([labels_1, labels_2, labels_3])
 
 scores = []
 window_min = 5
 window_max = 120
 window_step = 5
 for window_size in range(window_min, window_max, window_step):
-    average = PreProcessor.average(samples_raw, window_size)
-
-    labels_reduced = labels[0::window_size]
-    if labels_reduced.shape[0] != average.shape[0]:
-        labels_reduced = labels_reduced[:-1]
-
-    samples_features = np.zeros(shape=(int(np.floor(samples_raw.shape[0] / window_size)), 6))
-    samples_features[:, 0:6] = average[:, 0:6]
-    samples_features = preprocessing.scale(samples_features)
+    samples_filtered, labels_reduced = PreProcessor.median(samples_raw,labels, window_size)
+    samples_features = preprocessing.scale(samples_filtered)
 
     scores.append(compare_selected(samples_features, labels_reduced, N_VALIDATIONS))
 
@@ -61,5 +54,5 @@ for i, name in enumerate(classifiers_subset):
 legend(legends)
 xlabel("window size")
 ylabel("classification error")
-title("Average filter")
+title("Median filter - front/back mixed users")
 show()

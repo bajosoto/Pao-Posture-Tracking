@@ -24,4 +24,3 @@ class FileReader:
                 if n_elements is not None and n > n_elements:
                     break
         return data, labels, label_names
-

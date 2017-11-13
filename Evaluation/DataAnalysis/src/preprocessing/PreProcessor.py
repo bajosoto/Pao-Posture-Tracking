@@ -1,22 +1,34 @@
 import numpy as np
+from numpy.ma import count
 
 
 class PreProcessor:
     @staticmethod
-    def average(data: np.array, window_size=10):
-        average = np.zeros(shape=(int(np.floor(data.shape[0] / window_size)), data.shape[1]))
-        for i in range(0, int(np.floor(data.shape[0] / window_size)) - 1):
-            average[i, :] = np.mean(data[i * window_size:(i + 1) * window_size, :], axis=0)
-
-        return average
+    def majoritiy_vote(labels: np.array, window: np.array):
+        votes = {}
+        for c in np.unique(labels):
+            votes[c] = (window == c).sum()
+        return max(votes, key=votes.get)
 
     @staticmethod
-    def median(data: np.array, window_size=10):
-        median = np.zeros(shape=(int(np.floor(data.shape[0] / window_size)), data.shape[1]))
-        for i in range(0, int(np.floor(data.shape[0] / window_size)) - 1):
-            median[i, :] = np.median(data[i * window_size:(i + 1) * window_size, :], axis=0)
+    def average(data: np.array,labels: np.array, window_size=10):
+        max_i = int(np.floor(data.shape[0] / window_size))
+        average = np.zeros(shape=(max_i, data.shape[1]))
+        labels_filtered = np.zeros(shape=(max_i, 1))
+        for i in range(0, max_i - 1):
+            average[i, :] = np.average(data[i * window_size:(i + 1) * window_size, :], axis=0)
+            labels_filtered[i] = PreProcessor.majoritiy_vote(labels, labels[i*window_size:(i + 1) * window_size])
+        return average, labels_filtered
 
-        return median
+    @staticmethod
+    def median(data: np.array, labels: np.array, window_size=10):
+        max_i = int(np.floor(data.shape[0] / window_size))
+        median = np.zeros(shape=(max_i, data.shape[1]))
+        labels_filtered = np.zeros(shape=(max_i, 1))
+        for i in range(0, max_i - 1):
+            median[i, :] = np.median(data[i * window_size:(i + 1) * window_size, :], axis=0)
+            labels_filtered[i] = PreProcessor.majoritiy_vote(labels, labels[i*window_size:(i + 1) * window_size])
+        return median, labels_filtered
 
     @staticmethod
     def peak2peak(data: np.array, window_size=10):
@@ -38,7 +50,7 @@ class PreProcessor:
     @staticmethod
     def split2sequences(data: np.array, window_size=10):
         lengths = []
-        for i in range(0, int(np.floor((data.shape[0]/window_size))-1)):
+        for i in range(0, int(np.floor((data.shape[0] / window_size)) - 1)):
             lengths.append(window_size)
 
         return data, lengths
