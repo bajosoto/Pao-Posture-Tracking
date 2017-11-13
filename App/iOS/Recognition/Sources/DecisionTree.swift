@@ -22,16 +22,16 @@ class DecisionTree : DecisionNode, Classifier{
 
 	}
 
-	func predictSampleSoft(_ sample: Matrix) -> [Int: Double] {
+	func predictSoft(sample: Matrix) -> [Int: Double] {
 		var probas = [Int:Double]()
 		for m in trainset.classes {
 			probas.updateValue(0.0,forKey:m)
 		}
 		var probasRet: [Int: Double]
 		if(children.count > 1){
-			probasRet = children[decisionRule.label(sample)].predictSampleSoft(sample)
+			probasRet = children[decisionRule.label(sample)].predictSoft(sample:sample)
 		}else{
-			probasRet = children[0].predictSampleSoft(sample)		
+			probasRet = children[0].predictSoft(sample:sample)		
 		}
 		for m in probasRet.keys {
 			probas.updateValue(probasRet[m]!,forKey:m)

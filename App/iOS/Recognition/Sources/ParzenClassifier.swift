@@ -37,7 +37,7 @@ class ParzenClassifier : Classifier{
 	internal func getApparentError()->Double{
 		var error = 0.0
 		for i in 0 ..< self.trainset.nSamples{
-			if(predictSample(sample:self.trainset.samples[i,0..<trainset.dim]) != self.trainset.labels[i]){
+			if(predict(sample:self.trainset.samples[i,0..<trainset.dim]) != self.trainset.labels[i]){
 				error += 1
 			}
 		}
@@ -55,7 +55,7 @@ class ParzenClassifier : Classifier{
 		return normConst * (euler()**scalar)
 	}
 
-	internal func predictSampleSoft(_ sample: Matrix)->[Int: Double]{
+	internal func predictSoft(sample: Matrix)->[Int: Double]{
 		var classLikelihoods: [Int: Double]=[:]
 		for c in trainset.classes{
 			classLikelihoods.updateValue(priors[c]!*getClassLikelihood(sample,c),forKey:c)

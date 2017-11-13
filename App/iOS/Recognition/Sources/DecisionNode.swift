@@ -1,3 +1,3 @@
 protocol DecisionNode {
-	func predictSampleSoft(_ sample: Matrix)->[Int: Double]
+	func predictSoft(sample: Matrix)->[Int: Double]
 }

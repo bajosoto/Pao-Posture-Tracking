@@ -85,7 +85,7 @@ class LdaClassifier: Classifier{
 		}
 		return priors	
 	}
-	func predictSampleSoft(_ sample: Matrix)->[Int:Double]{
+	func predictSoft(sample: Matrix)->[Int:Double]{
 		return [:]
 	}
 }

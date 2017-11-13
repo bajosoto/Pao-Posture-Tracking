@@ -75,7 +75,7 @@ class AdaBoost : Classifier {
 
 
 
-	func predictSampleSoft(_ sample: Matrix) -> [Int: Double]{
+	func predictSoft(sample: Matrix) -> [Int: Double]{
 		var probas = [Int: Double]()
 		for m in classes{
 			probas.updateValue(0.0,forKey:m)

@@ -13,8 +13,8 @@ class DecisionLeafTest: XCTestCase {
       let clf = DecisionLeaf(try! Dataset(samples,labels))
       
       for i in 0 ..< samples.rows{
-        XCTAssertEqual(clf.predictSampleSoft(samples[i])[0]!,2.0/3.0)
-        XCTAssertEqual(clf.predictSampleSoft(samples[i])[1]!,1.0/3.0)
+        XCTAssertEqual(clf.predictSoft(sample:samples[i])[0]!,2.0/3.0)
+        XCTAssertEqual(clf.predictSoft(sample:samples[i])[1]!,1.0/3.0)
       }
       
   }

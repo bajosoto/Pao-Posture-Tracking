@@ -66,10 +66,10 @@ class DecisionTreeTest: XCTestCase {
       let clf = DecisionTree(try! Dataset(samples,labels),weights:[Double](repeating: 1/2, count:2),maxDepth:1)
   
       XCTAssertEqual(clf.predict(samples: samples),labels) 
-      XCTAssertEqual(clf.predictSampleSoft(samples[0])[0]!,0.0)
-      XCTAssertEqual(clf.predictSampleSoft(samples[0])[1]!,1.0)
-      XCTAssertEqual(clf.predictSampleSoft(samples[1])[0]!,1.0)
-      XCTAssertEqual(clf.predictSampleSoft(samples[1])[1]!,0.0)
+      XCTAssertEqual(clf.predictSoft(sample:samples[0])[0]!,0.0)
+      XCTAssertEqual(clf.predictSoft(sample:samples[0])[1]!,1.0)
+      XCTAssertEqual(clf.predictSoft(sample:samples[1])[0]!,1.0)
+      XCTAssertEqual(clf.predictSoft(sample:samples[1])[1]!,0.0)
 
   }
 

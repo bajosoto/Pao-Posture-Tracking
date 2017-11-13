@@ -20,7 +20,7 @@ class KnnClassifier: Classifier{
 		}
 	}
 
-	internal func predictSampleSoft(_ sample: Matrix)->[Int: Double]{
+	internal func predictSoft(sample: Matrix)->[Int: Double]{
 		var distances = [(distance:Double,label:Int)]()
 		var proba: [Int: Double] = [:]
 		var ranking = [(key: Int, value: Double)]()
