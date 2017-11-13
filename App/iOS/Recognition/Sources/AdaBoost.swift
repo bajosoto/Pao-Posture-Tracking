@@ -63,15 +63,6 @@ class AdaBoost : Classifier {
 		return (weights,beta,hypotheses,totalI)
 	}
 
-	func predict(samples: Matrix)->[Int] {
-		var labelsFound = [Int]()
-		for i in 0..<samples.rows{
-			labelsFound.append(self.predictSample(sample:samples[i]))
-			
-		}
-		return labelsFound
-	}
-
 	internal static func loss( _ predictions: [Int], _ labels: [Int]) -> Matrix{
 		var loss = Matrix(predictions.count,1)
 		for i in 0 ..< predictions.count {
@@ -82,12 +73,9 @@ class AdaBoost : Classifier {
 		return loss
 	}
 
-	internal func predictSample(sample: Matrix) -> Int{
-		return predictSampleSoft(sample:sample).sorted(by: {$0.1 > $1.1})[0].key
-		
-	}
 
-	func predictSampleSoft(sample: Matrix) -> [Int: Double]{
+
+	func predictSampleSoft(_ sample: Matrix) -> [Int: Double]{
 		var probas = [Int: Double]()
 		for m in classes{
 			probas.updateValue(0.0,forKey:m)
@@ -111,12 +99,5 @@ class AdaBoost : Classifier {
 		}
 		return probas
 	}
-	func predictSoft(samples: Matrix)->[[Int: Double]] {
-		var softLabels:[[Int:Double]] = []
-		for i in 0..<samples.rows{
-			softLabels.append(self.predictSampleSoft(sample:samples[i,0..<samples.columns]))
-			
-		}
-		return softLabels
-	}
+
 }

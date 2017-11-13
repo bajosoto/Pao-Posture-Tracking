@@ -66,25 +66,4 @@ class DecisionTree : DecisionNode, Classifier{
 		self.init(trainset,weights:[Double](repeating: 1.0/Double(trainset.nSamples), count: trainset.nSamples),maxDepth:trainset.classes.count+trainset.dim,minImpurity:0.0)
 	}
 
-	func predict(samples: Matrix)->[Int]{
-		var labelsFound = [Int]()
-		for i in 0..<samples.rows{
-			labelsFound.append(self.predictSample(sample:samples[i,0..<samples.columns]))
-			
-		}
-		return labelsFound
-	}
-
-	internal func predictSample(sample: Matrix)->Int{
-		return predictSampleSoft(sample).sorted(by: {$0.1 > $1.1})[0].key
-	}
-
-	func predictSoft(samples: Matrix)->[[Int: Double]]{
-		var softLabels:[[Int:Double]] = []
-		for i in 0..<samples.rows{
-			softLabels.append(self.predictSampleSoft(samples[i]))
-			
-		}
-		return softLabels
-	}
 }
