@@ -445,7 +445,8 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         // No functionality here
     }
     
-    func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16) {
+    func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16,
+                       _ phi: Int16, _ theta: Int16, _ psi: Int16) {
         
         var shouldSaveSample = false
         var shouldClassifySample = false
@@ -458,7 +459,8 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             }
             
             if(shouldSaveSample == true) {
-                self.classifier.addToDataset(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, label: self.currLabel)
+                self.classifier.addToDataset(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz,
+                                             phi: phi, theta: theta, psi: psi, label: self.currLabel)
                 self.sampleCnt += 1
             } else if(shouldClassifySample == true) {
                 print("classifying...")

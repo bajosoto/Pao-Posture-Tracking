@@ -34,7 +34,10 @@ void sendBleMessageEs(TxMsgBleEs msgType){
 				splitSI16Ble(getMpuVal(GYR_X), 7);
 				splitSI16Ble(getMpuVal(GYR_Y), 9);
 				splitSI16Ble(getMpuVal(GYR_Z), 11);
-				sendMsgBle(13, "%c%c%c%c%c%c%c%c%c%c%c%c", 2, 
+				splitSI16Ble(getMpuVal(DMP_X), 13);
+				splitSI16Ble(getMpuVal(DMP_Y), 15);
+				splitSI16Ble(getMpuVal(DMP_Z), 17);
+				sendMsgBle(19, "%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c%c", 2, 
 					bleTxBuff[1], 
 					bleTxBuff[2], 
 					bleTxBuff[3], 
@@ -46,7 +49,16 @@ void sendBleMessageEs(TxMsgBleEs msgType){
 					bleTxBuff[9], 
 					bleTxBuff[10], 
 					bleTxBuff[11],
-					bleTxBuff[12] );
+					bleTxBuff[12],
+					bleTxBuff[13],
+					bleTxBuff[14],
+					bleTxBuff[15],
+					bleTxBuff[16],
+					bleTxBuff[17],
+					bleTxBuff[18] );
+				break;
+			case MSG_BLE_03_DBL_TAP:
+				sendMsgBle(1, "%c", 3);
 				break;
 			// case MSG03_BLE_STATUS:
 			// 	txBuff[0] = getBleStatus();

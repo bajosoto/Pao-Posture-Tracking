@@ -51,7 +51,8 @@ class Classifier {
         trainSet = procRealm.objects(PostureEntry.self)
     }
     
-    public func addToDataset(ax:Int16, ay:Int16, az:Int16, gx:Int16, gy:Int16, gz:Int16, label:String) {
+    public func addToDataset(ax:Int16, ay:Int16, az:Int16, gx:Int16, gy:Int16, gz:Int16, phi: Int16, theta:Int16,
+                             psi:Int16, label:String) {
         // Create and store entry in raw Realm
         let rawEntry = PostureEntry()
         rawEntry.accX = ax
@@ -60,6 +61,9 @@ class Classifier {
         rawEntry.gyrX = gx
         rawEntry.gyrY = gy
         rawEntry.gyrZ = gz
+        rawEntry.phi = phi
+        rawEntry.theta = theta
+        rawEntry.psi = psi
         rawEntry.postureLbl = label
         try! rawRealm.write {
             rawRealm.add(rawEntry)
