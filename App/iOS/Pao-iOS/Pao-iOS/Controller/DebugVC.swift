@@ -23,6 +23,9 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
     @IBOutlet weak var gxLbl: UILabel!
     @IBOutlet weak var gyLbl: UILabel!
     @IBOutlet weak var gzLbl: UILabel!
+    @IBOutlet weak var phiLabel: UILabel!
+    @IBOutlet weak var thetaLabel: UILabel!
+    @IBOutlet weak var psiLabel: UILabel!
     
     
     var _bleConn: BleConnection!
@@ -172,7 +175,8 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
         consoleTextView.scrollRangeToVisible(bottom)
     }
     
-    func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16) {
+    func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16,
+                       _ phi: Int16, _ theta: Int16, _ psi: Int16) {
         DispatchQueue.main.async {  //UIKit is not thread safe
             self.axLbl.text = "\(ax)"
             self.ayLbl.text = "\(ay)"
@@ -180,6 +184,9 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
             self.gxLbl.text = "\(gx)"
             self.gyLbl.text = "\(gy)"
             self.gzLbl.text = "\(gz)"
+            self.phiLabel.text = "\(phi)"
+            self.thetaLabel.text = "\(theta)"
+            self.psiLabel.text = "\(psi)"
         }
         
         var shouldSaveSample = false
@@ -193,7 +200,8 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
             }
             
             if(shouldSaveSample == true) {
-                self.classifier.addToDataset(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, label: self.currLabel)
+                self.classifier.addToDataset(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, phi: phi,
+                                             theta: theta, psi: psi, label: self.currLabel)
                 self.sampleCnt += 1
             } else if(shouldClassifySample == true) {
                 print("classifying...")

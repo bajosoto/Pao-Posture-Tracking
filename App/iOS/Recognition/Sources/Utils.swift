@@ -109,7 +109,7 @@ public func cov(matrix: Matrix) -> Matrix{
     return sum/(matrix.rows-1)
 }
 
-public func unique<T where T:Comparable, T:Hashable>(list: [T])->[T]{
+public func unique<T>(list: [T])->[T] where T:Comparable, T:Hashable{
 	return (Array<T>(Set<T>(list))).sorted(by:<)
 }
 
@@ -197,6 +197,7 @@ public func eye(_ rows: Int, _ cols: Int) -> Matrix{
     return mat
 }
 
+
 public func ones(_ rows: Int, _ cols: Int) -> Matrix{
     let mat = Matrix(rows,cols)
     for i in 0 ..< mat.rows {
@@ -206,3 +207,4 @@ public func ones(_ rows: Int, _ cols: Int) -> Matrix{
     }
     return mat
 }
+

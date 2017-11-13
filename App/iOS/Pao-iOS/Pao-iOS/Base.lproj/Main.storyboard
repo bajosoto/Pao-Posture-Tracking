@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,7 +45,7 @@
                                         <rect key="frame" x="110" y="80" width="20" height="20"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scanning for paó" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFF-RO-P0l">
-                                        <rect key="frame" x="0.0" y="108" width="240" height="27.333333333333371"/>
+                                        <rect key="frame" x="0.0" y="108" width="240" height="27.333333333333343"/>
                                         <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -308,10 +308,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ckw-Lo-F9j" userLabel="Asset Btn Config View" customClass="AssetBtnConfigView" customModule="Pao_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="178.66666666666669" y="0.0" width="66.000000000000028" height="90"/>
+                                                <rect key="frame" x="178.66666666666666" y="0.0" width="66" height="90"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKr-X7-rDf" userLabel="btnConfig">
-                                                        <rect key="frame" x="0.0" y="0.0" width="66.000000000000028" height="90"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="66" height="90"/>
                                                         <connections>
                                                             <action selector="onBtnConfigDrag:" destination="3wQ-he-Asj" eventType="touchDragExit" id="ko9-l0-z6U"/>
                                                             <action selector="onBtnConfigPressed:" destination="3wQ-he-Asj" eventType="touchDown" id="YXS-bD-0Cd"/>
@@ -506,13 +506,13 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="o5I-r9-Zj8">
-                                    <rect key="frame" x="5" y="85.333333333333343" width="187" height="66.000000000000028"/>
+                                    <rect key="frame" x="5" y="85.333333333333329" width="187" height="65.999999999999986"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MAN-mz-veJ" customClass="AssetBtnTrainStandingOkView" customModule="Pao_iOS" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="90" height="66.000000000000014"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="66"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Enm-Ex-MWK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66.000000000000014"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66"/>
                                                     <connections>
                                                         <action selector="onBtnTrainStndOkDrag:" destination="3wQ-he-Asj" eventType="touchDragExit" id="52h-5P-qaw"/>
                                                         <action selector="onBtnTrainStndOkPressed:" destination="3wQ-he-Asj" eventType="touchDown" id="tGx-Fk-Yk1"/>
@@ -531,10 +531,10 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V4n-I6-RW5" customClass="AssetBtnTrainStandingNokView" customModule="Pao_iOS" customModuleProvider="target">
-                                            <rect key="frame" x="97" y="0.0" width="90" height="66.000000000000014"/>
+                                            <rect key="frame" x="97" y="0.0" width="90" height="66"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edH-Yf-gnF">
-                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66.000000000000014"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66"/>
                                                     <connections>
                                                         <action selector="onBtnTrainStndNokDrag:" destination="3wQ-he-Asj" eventType="touchDragExit" id="zUG-fM-wqL"/>
                                                         <action selector="onBtnTrainStndNokPressed:" destination="3wQ-he-Asj" eventType="touchDown" id="yHL-BK-41r"/>
@@ -555,13 +555,13 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="MjR-eI-w0I">
-                                    <rect key="frame" x="5" y="170.66666666666669" width="187" height="66.000000000000028"/>
+                                    <rect key="frame" x="5" y="170.66666666666666" width="187" height="66"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z39-aW-zeh" customClass="AssetBtnTrainMovingOkView" customModule="Pao_iOS" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="90" height="66.000000000000028"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="66"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PUX-PX-A1z">
-                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66.000000000000028"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66"/>
                                                     <connections>
                                                         <action selector="onBtnTrainMvOkDrag:" destination="3wQ-he-Asj" eventType="touchDragExit" id="NxS-IZ-TPc"/>
                                                         <action selector="onBtnTrainMvOkPressed:" destination="3wQ-he-Asj" eventType="touchUpInside" id="t7J-Z1-tN2"/>
@@ -581,10 +581,10 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zvg-uz-vrI" customClass="AssetBtnTrainMovingNokView" customModule="Pao_iOS" customModuleProvider="target">
-                                            <rect key="frame" x="97" y="0.0" width="90" height="66.000000000000028"/>
+                                            <rect key="frame" x="97" y="0.0" width="90" height="66"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uqp-0I-Rop">
-                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66.000000000000028"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="66"/>
                                                     <connections>
                                                         <action selector="onBtnTrainMvNokDrag:" destination="3wQ-he-Asj" eventType="touchDragExit" id="SyK-GW-C7y"/>
                                                         <action selector="onBtnTrainMvNokPressed:" destination="3wQ-he-Asj" eventType="touchDown" id="g0C-Al-PzP"/>
@@ -605,10 +605,10 @@
                                     </subviews>
                                 </stackView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ls9-OP-rH8" customClass="AssetBtnBackView" customModule="Pao_iOS" customModuleProvider="target">
-                                    <rect key="frame" x="53.666666666666664" y="256" width="90" height="66"/>
+                                    <rect key="frame" x="53.666666666666671" y="256" width="90.000000000000014" height="66"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4LY-6A-xoY">
-                                            <rect key="frame" x="0.0" y="0.0" width="89.999999999999986" height="66"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="90" height="66"/>
                                             <connections>
                                                 <action selector="onBtnTrainBackDrag:" destination="3wQ-he-Asj" eventType="touchDragExit" id="pw1-Xs-ZFY"/>
                                                 <action selector="onBtnTrainBackPressed:" destination="3wQ-he-Asj" eventType="touchDown" id="e2n-Lv-bvT"/>
@@ -744,7 +744,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="7EXXXX" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="nh8-IZ-GMR" userLabel="HexValTxt">
-                                <rect key="frame" x="241.33333333333331" y="204" width="119.99999999999994" height="20"/>
+                                <rect key="frame" x="241.33333333333337" y="204" width="120" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="58u-FU-RL0"/>
                                     <constraint firstAttribute="height" constant="20" id="AkT-nF-z3F"/>
@@ -754,7 +754,7 @@
                                 <textInputTraits key="textInputTraits" keyboardAppearance="alert"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3Q-PD-hU5" userLabel="HexValLine">
-                                <rect key="frame" x="241.33333333333331" y="224" width="119.99999999999994" height="1"/>
+                                <rect key="frame" x="241.33333333333337" y="224" width="120" height="1"/>
                                 <color key="backgroundColor" red="0.1843137255" green="0.8862745098" blue="0.68627450980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="iZL-g7-xZd"/>
@@ -1365,6 +1365,9 @@
                         <outlet property="gyLbl" destination="XML-jF-fFj" id="gc8-VB-4Dk"/>
                         <outlet property="gzLbl" destination="nn9-Qv-Oja" id="VEM-tr-REX"/>
                         <outlet property="msgHexValueTxtFld" destination="nh8-IZ-GMR" id="sqN-iv-C1T"/>
+                        <outlet property="phiLabel" destination="S9R-uN-466" id="CoH-Hw-g80"/>
+                        <outlet property="psiLabel" destination="Lyf-N9-f8g" id="sN0-VZ-hUd"/>
+                        <outlet property="thetaLabel" destination="nWJ-au-cGd" id="tqb-ac-PFM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g71-9i-xZB" userLabel="First Responder" sceneMemberID="firstResponder"/>
