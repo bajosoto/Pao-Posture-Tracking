@@ -12,14 +12,11 @@ class DecisionTree : DecisionNode, Classifier{
 		var children = [DecisionNode]()
 		for set_ in sets {
 			if(DecisionTree.impurity(set_) <= minImpurity || maxDepth == 1){
-				print("DecisionTree::new leaf")
 				children.append(DecisionLeaf(set_))
 			}else{
-				print("DecisionTree::new child")
 				children.append(DecisionTree(set_,weights:weights,maxDepth:maxDepth-1,minImpurity:minImpurity))
 			}	
 		}
-		print("Decision Tree created")
 		self.children = children
 
 

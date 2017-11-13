@@ -29,7 +29,6 @@ class AdaBoost : Classifier {
 		var totalI = 0
 		for i in 0 ..< maxI {
 			totalI = i
-			print("Total I: \(i)")
 			//print("Weights: \(weights[i])")
 
 			let	normedWeights = weights[i]/sum(weights[i])
@@ -44,7 +43,6 @@ class AdaBoost : Classifier {
 
 			error.append(evaluate(predictions,trainset,normedWeights))
 			
-			print("Error: \(error[i])")
 			var beta_i = (error[i]+regularizer)/(1-error[i])
 			//print("Beta: \(beta_i)")
 			beta.append(beta_i)
