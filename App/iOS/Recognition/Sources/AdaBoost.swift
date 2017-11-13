@@ -20,7 +20,7 @@ class AdaBoost : Classifier {
 		totalI = ret.3
 	}
 
-	internal static func train(_ trainset:Dataset,_ maxI: Int) -> (Matrix,[Double],[Classifier],Int){
+	internal static func train(_ trainset:Dataset,_ maxI: Int, _ regularizer: Double = 0.000001) -> (Matrix,[Double],[Classifier],Int){
 
 		var weights = ones(maxI+1,trainset.nSamples)/trainset.nSamples
 		var error = [Double]()
@@ -45,10 +45,10 @@ class AdaBoost : Classifier {
 			error.append(evaluate(predictions,trainset,normedWeights))
 			
 			print("Error: \(error[i])")
-			var beta_i = error[i]/(1-error[i])
+			var beta_i = (error[i]+regularizer)/(1-error[i])
 			//print("Beta: \(beta_i)")
 			beta.append(beta_i)
-			let power = ones(trainset.nSamples,1)-lossFcn(predictions,trainset.labels)
+			let power = ones(trainset.nSamples,1)-loss(predictions,trainset.labels)
 
 			//print("Power: \(power) = \((ones(trainset.nSamples,1)).T) - \((abs(Matrix([predictions]) - Matrix([trainset.labels])).T).T)")
 			for j in 0 ..< power.rows{
@@ -56,8 +56,8 @@ class AdaBoost : Classifier {
 			}
 
 
-			if ( i>1 && abs(error[i]-error[i-1]) <= 0.00001 ||
-				error[i] == 0){
+			if ( i>1 && (abs(error[i]-error[i-1]) <= 0.00001 ||
+				error[i] == 0)){
 				break;
 			}
 		}
@@ -74,7 +74,7 @@ class AdaBoost : Classifier {
 		return labelsFound
 	}
 
-	internal static func lossFcn( _ predictions: [Int], _ labels: [Int]) -> Matrix{
+	internal static func loss( _ predictions: [Int], _ labels: [Int]) -> Matrix{
 		var loss = Matrix(predictions.count,1)
 		for i in 0 ..< predictions.count {
 			if(predictions[i] != labels[i]){
@@ -85,6 +85,11 @@ class AdaBoost : Classifier {
 	}
 
 	internal func predictSample(sample: Matrix) -> Int{
+		return predictSampleSoft(sample:sample).sorted(by: {$0.1 > $1.1})[0].key
+		
+	}
+
+	func predictSampleSoft(sample: Matrix) -> [Int: Double]{
 		var probas = [Int: Double]()
 		for m in classes{
 			probas.updateValue(0.0,forKey:m)
@@ -92,15 +97,28 @@ class AdaBoost : Classifier {
 		for i in 0 ..< self.totalI {
 			let clf = hypotheses[i]
 			let logBeta = _log(1/beta[i])
-			let predictedClass = clf.predict(samples:sample)[0]
-			probas[predictedClass]! += logBeta
+			let softLabels = clf.predictSoft(samples:sample)[0]
+			/*Instead of adding 1*logBeta we weigh it with the confidence*/
+			for m in classes{
+				probas[m]! += softLabels[m]!*logBeta
+			}
 		}
-		print(probas)
-		return probas.sorted(by: {$0.1 > $1.1})[0].key
+		/* Normalize*/
+		var sum = 0.0
+		for m in classes{
+				sum += probas[m]!
+		}
+		for m in classes{
+				probas[m]! /= sum
+		}
+		return probas
 	}
-
-
 	func predictSoft(samples: Matrix)->[[Int: Double]] {
-		return [[:]]
+		var softLabels:[[Int:Double]] = []
+		for i in 0..<samples.rows{
+			softLabels.append(self.predictSampleSoft(sample:samples[i,0..<samples.columns]))
+			
+		}
+		return softLabels
 	}
 }
