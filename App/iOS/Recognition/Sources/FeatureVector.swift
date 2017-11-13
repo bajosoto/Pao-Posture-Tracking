@@ -18,7 +18,7 @@ struct FeatureVector : Vectorizable{
 		peak2peakAccel = vector[0,6]
 	}
 
-	func toVector()->Matrix{
+	var toVector:Matrix{
 		return Matrix([[gyroX,gyroY,gyroZ,accelX,accelY,accelZ,peak2peakAccel]])
 	}
 }

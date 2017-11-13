@@ -1,14 +1,23 @@
 class LdaClassifier: Classifier{
 	
-	let means 		 : [Matrix]
-	let covariance 	 : Matrix
-	let priors 	 	 : [Double]
-	let classes 	 : [Int]
+	var means 		 = [Matrix]()
+	var covariance 	 = Matrix()
+	var priors 	 	 = [Double]()
+	var classes 	 = [Int]()
 	var lnPriors 	 = [Double]()
 	var covMeans 	 = [Matrix]()
 	var meanCovMeans = [Double]()
 
-	required init(trainset: Dataset,regularizer: Double = 0.0001){
+	init(_ trainset: Dataset,regularizer: Double = 0.00001){
+		self.train(trainset,regularizer:regularizer)
+	}
+
+
+	func train(_ trainset: Dataset){
+		self.train(trainset,regularizer:0.00001)
+	}
+
+	func train(_ trainset: Dataset,regularizer: Double){
 		means = LdaClassifier.estimateMeans(dataset:trainset)
 		covariance = LdaClassifier.estimateCov(dataset:trainset,regularizer:regularizer)
 		priors = LdaClassifier.estimatePriors(dataset:trainset)
@@ -20,10 +29,10 @@ class LdaClassifier: Classifier{
 		}
 	}
 
-	func classify(samples: Matrix)->[Int]{
+	func predict(samples: Matrix)->[Int]{
 		var labelsFound = [Int]()
 		for i in 0..<samples.rows{
-			labelsFound.append(self.classifySample(sample:samples[i,0..<samples.columns]))
+			labelsFound.append(self.predictSample(sample:samples[i,0..<samples.columns]))
 			
 		}
 		return labelsFound
@@ -35,7 +44,7 @@ class LdaClassifier: Classifier{
 		return v[0,0] //the result is scalar but still stored in datatype matrix -.-
 	}
 
-	private func classifySample(sample: Matrix)->Int{
+	private func predictSample(sample: Matrix)->Int{
 		var maxArg = 0
 		var maxPosterior:Double = -Double.greatestFiniteMagnitude
 		for i in 0..<self.classes.count{
@@ -59,7 +68,7 @@ class LdaClassifier: Classifier{
 	static func estimateMeans(dataset: Dataset)->[Matrix]{
 		var means = [Matrix]()
 		for i in dataset.classes{
-			means.append(mean_row(matrix:(dataset.classSamples(class_id:i)))) 
+			means.append(meanRow(matrix:(dataset.classSamples(class_id:i)))) 
 		}
 		return means
 	}
@@ -81,7 +90,7 @@ class LdaClassifier: Classifier{
 		}
 		return priors	
 	}
-	func classifySoft(samples: Matrix)->[[Int:Double]]{
-		return [[:]]
+	func predictSoft(sample: Matrix)->[Int:Double]{
+		return [:]
 	}
 }

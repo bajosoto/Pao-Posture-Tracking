@@ -1,37 +1,18 @@
-class PaoClassifier{
-	/*
-	
-	var classifier: Classifier
-	var scaler: Scaler
-	var preprocessor: Preprocessor
+protocol PaoClassifier {
 
-	init(traindata: [Vectorizable], labels[Int]){
-		//this we should replace with the respective input
-		var rawData = traindata.map(RawDataEntry($0))
+	/**
+	 * trains a classifier
+	 * @param traindata [array of raw data]
+	 */
+	func train(_ traindata: [IPostureEntry])
 
-		preprocessor = SimplePreprocessor
-		
-		var featureVectors = preprocessor.preprocess(rawData)
-
-		var sampleMatrix = Matrix(featureVectors)
-
-		scaler = Scaler(sampleMatrix)
-		
-		sampleMatrix = scaler.transform(samples)
-		
-		trainset = Dataset(sampleMatrix,labels)
-
-		classifier = ParzenClassifier(trainset,labels)
-
-	}
-
-	func classifySampleSoft(testsample: Vectorizable) -> [Double]{
-
-
-		var featureVector = preprocessor.preprocess(RawDataEntry(testsample))
-
-		var sampleVector = scaler.transform(Matrix(featureVector))
-
-		return classifier.classifySoft(sampleVector)
-	}*/
+	/**
+	 * classifiy a bunch of samples
+	 * @param testdata [raw data, should be multiples of the selected window size
+	 *                  each window results in one classification]
+	 * @return 		   [ list of predictions ]	 
+	 */
+	func predictSampleSoft(_ testdata: [IPostureEntry]) -> [IPostureEntry]
 }
+
+
