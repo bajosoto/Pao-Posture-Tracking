@@ -1,10 +1,10 @@
-class SimplePreprocessor: Preprocessor{
+ public class SimplePreprocessor: Preprocessor{
 	
 	let windowSize: Int
-	init(_ windowSize: Int = 10){
+	public init(_ windowSize: Int = 10){
 		self.windowSize = windowSize
 	}
-	func preprocess(_ rawData: [RawSample]) throws -> [FeatureVector]{
+	public func preprocess(_ rawData: [RawSample]) throws -> [FeatureVector]{
 
 		if(rawData.count < windowSize){
 			throw PreprocessorError.NotEnoughSamples(rawData.count,windowSize)
@@ -22,10 +22,11 @@ class SimplePreprocessor: Preprocessor{
 		return vectors
 	}
 
-	func preprocess(_ rawData: [RawSample], _ labels: [Int]) throws -> ([FeatureVector],[Int]){
+	public func preprocess(_ rawData: [RawSample], _ labels: [Int]) throws -> ([FeatureVector],[Int]){
 		var labels_reduced = [Int]()
 		var labelsMat = Matrix([labels]).T
-		for i in 0 ..< labels.count{
+        let iterations = labels.count / self.windowSize
+		for i in 0 ..< iterations {
 			labels_reduced.append(SimplePreprocessor.majorityVote(labelsMat[i*self.windowSize ..< (i+1)*self.windowSize]))
 		}
 		return (try self.preprocess(rawData),labels_reduced)
@@ -33,8 +34,8 @@ class SimplePreprocessor: Preprocessor{
 
 	internal static func majorityVote(_ labels: Matrix) -> Int{
 		var votes = [Int: Double]()
-		for i in unique(list:labels.array()[0]){	
-			votes[Int(i)]! = 0.0
+		for i in unique(list:labels.array()[0]){
+			votes[Int(i)] = 0.0
 		}
 		for i in unique(list:labels.array()[0]){
 			if(labels[Int(i),0] == i){

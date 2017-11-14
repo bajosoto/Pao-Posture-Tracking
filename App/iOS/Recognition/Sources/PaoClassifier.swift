@@ -1,4 +1,4 @@
-protocol PaoClassifier {
+public protocol PaoClassifier {
 
 	/**
 	 * trains a classifier

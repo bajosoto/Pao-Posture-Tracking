@@ -1,17 +1,17 @@
-class  BasePaoClassifier: PaoClassifier {
+public class  BasePaoClassifier: PaoClassifier {
 
 	let classifier: Classifier
 	let scaler: Scaler
 	let preprocessor: Preprocessor
 
-	init(_ traindata: [IPostureEntry], _ classifier: Classifier,_ preprocessor: Preprocessor = SimplePreprocessor(), _ scaler: Scaler = EqualScaler()){
+	public init(_ traindata: [IPostureEntry], _ classifier: Classifier,_ preprocessor: Preprocessor = SimplePreprocessor(), _ scaler: Scaler = EqualScaler()){
 		self.classifier = classifier
 		self.scaler = scaler
 		self.preprocessor = preprocessor
 		self.train(traindata)
 	}
 
-	func train(_ traindata: [IPostureEntry]){
+	public func train(_ traindata: [IPostureEntry]){
 
 		/* convert the posture entries to local type raw data and put labels in seperate list*/
 		var rawData = [RawSample]()
@@ -36,7 +36,7 @@ class  BasePaoClassifier: PaoClassifier {
 		self.classifier.train(trainset)
 	}
 
-	func predictSampleSoft(_ testdata: [IPostureEntry]) -> [IPostureEntry]{
+	public func predictSampleSoft(_ testdata: [IPostureEntry]) -> [IPostureEntry]{
 
 		/* convert data to local type*/
 		var rawData = [RawSample]()

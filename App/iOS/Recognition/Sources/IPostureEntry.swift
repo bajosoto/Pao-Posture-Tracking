@@ -1,4 +1,4 @@
-protocol IPostureEntry {
+public protocol IPostureEntry {
     var accX: Int16 {get set}
     var accY: Int16 {get set}
     var accZ: Int16 {get set}

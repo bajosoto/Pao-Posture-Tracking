@@ -417,6 +417,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnTrainBackReleased(_ sender: Any) {
         btnTrainBack.isPressed = false
+        classifier.train()
         isClassifying = true
         animateTrainButtonsOut()
     }
@@ -465,8 +466,9 @@ class DashboardVC: UIViewController, bleConnectionResponder {
                 self.sampleCnt += 1
             } else if(shouldClassifySample == true) {
                 print("classifying...")
-                self.classifier.classifyKnn(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, nNeighbours: 15)
+//                self.classifier.classifyKnn(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, nNeighbours: 15)
                 self.sampleCnt += 1
+                // TODO: Disabled temporarily. Do something here later just like in DebugVC
             }
             
             if(self.sampleCnt == 10) {
