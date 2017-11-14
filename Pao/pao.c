@@ -15,12 +15,16 @@ int main(void)
     bsp_board_leds_init();
     bsp_board_buttons_init();
     uart_service_init();
+
+    /* Configure buzzer */
+    init_vibrator();
+
     //NRF_LOG_INIT(NULL);  // TODO_SERGIO: Using LOG to find RAM start and end address
     
     // Old mpu init:
     //mpu_setup();
 
-    nrf_delay_ms(5000);
+    nrf_delay_ms(2000);
 
     // New mpu init:
     twi_init();
@@ -62,7 +66,7 @@ int main(void)
             //     }
             // }
         }
-        if(timer % 20 == 0) {
+        if(timer % 20 == 0) {  // Every 100ms
             // getMpuSensors();
             sendMessageEs(MSG02_SENSOR_VALS);
             sendBleMessageEs(MSG_BLE_02_SENSOR);
@@ -70,10 +74,14 @@ int main(void)
         // if(timer % 50 == 0) {
         //     sendBleMessageEs(MSG_BLE_02_SENSOR);
         // }
+
         if(timer % 100 == 0) {
             bsp_board_led_invert(0);
+            //buzz(10);        // Testing only
             timer = 0;
         }
+
+        increment_buzz_time();
 
         nrf_delay_ms(5);
         timer++;

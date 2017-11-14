@@ -20,6 +20,8 @@ void get_raw_sensor_data(void);
 
 bool check_sensor_int_flag(void);
 
+void calibrate_mpu();
+
 void imu_init(bool dmp, uint16_t freq);
 
 #endif // MPU_WRAPPER_H__

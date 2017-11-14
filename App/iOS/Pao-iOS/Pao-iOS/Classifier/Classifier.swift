@@ -183,6 +183,14 @@ class Classifier {
                 
                 _bleConn.logMsg(message: "Stored classified sample: \(newClassifiedEntry.postureLbl), \(newClassifiedEntry.posture.format(f: ".2"))")
                 print("Stored classified sample: \(newEntry.postureLbl)")
+                
+                // For debugging only
+                if newClassifiedEntry.posture < 0.0 {
+                    _bleConn.write(msg: "7E030A")
+                    _bleConn.logMsg(message: "Should be buzzing now")
+                }
+                // End for debugging
+                
             } else {
                 _bleConn.logMsg(message: "classificationResult was nil")
             }

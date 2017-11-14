@@ -65,6 +65,7 @@ SRC_FILES += \
   $(PROJ_DIR)/comm-prot/es/es-ble-tx.c \
   $(PROJ_DIR)/drivers/uart.c \
   $(PROJ_DIR)/drivers/twi.c \
+  $(PROJ_DIR)/drivers/vibrator.c \
   $(PROJ_DIR)/drivers/mpu-motion-driver/inv_mpu_dmp_motion_driver.c \
   $(PROJ_DIR)/drivers/mpu-motion-driver/inv_mpu.c \
   $(PROJ_DIR)/drivers/mpu-motion-driver/ml.c \

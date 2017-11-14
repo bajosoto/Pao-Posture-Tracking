@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "nrf_delay.h"
+#include "nrf_gpio.h"
 #include "boards.h"
 #include "uart.h"
 #include "uart-sm.h"
@@ -18,6 +19,7 @@
 #include <math.h>
 #include "twi.h"
 #include "mpu_wrapper.h"
+#include "vibrator.h"
 // #include "app_mpu.h"
 
 int programRunning;

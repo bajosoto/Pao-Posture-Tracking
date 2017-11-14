@@ -13,6 +13,7 @@
 #include "es-ble-tx.h"
 #include "mpu_interface.h"
 #include "nrf_delay.h"
+#include "vibrator.h"
 
 #define QUAT_SENS       0x040000000 //1073741824.f //2^30
 
@@ -111,15 +112,20 @@ bool check_sensor_int_flag(void)
 void on_tap_detected(unsigned char direction, unsigned char count){
 	//debugMsg("Tappy tap!\tDir: %d\tCount: %d", direction, count);
 	if(count == 2) {
-		debugMsg("Double tap!\tDir: %d\tCount: %d", direction, count);
-		nrf_delay_ms(500);
 		sendBleMessageEs(MSG_BLE_03_DBL_TAP);
-		debugMsg("Calibration done");
-		phi_cal = raw_phi;
-		theta_cal = raw_theta;
-		psi_cal = raw_psi;
+		debugMsg("Double tap!\tDir: %d\tCount: %d", direction, count);
+		calibrate_mpu();	
 	}
-	
+}
+
+void calibrate_mpu() {
+	nrf_delay_ms(500);
+	debugMsg("Calibration done");
+	debugMsgBle("Calibration done");
+	phi_cal = raw_phi;
+	theta_cal = raw_theta;
+	psi_cal = raw_psi;
+	buzz(25);
 }
 
 void imu_init(bool dmp, uint16_t freq)

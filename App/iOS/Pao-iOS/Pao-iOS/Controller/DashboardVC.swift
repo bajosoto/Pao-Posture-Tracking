@@ -479,11 +479,12 @@ class DashboardVC: UIViewController, bleConnectionResponder {
                 
                 // Calculate value for posture bar
                 var postureBarVal = 0.5
-                let lastPostureProb = self.classifier.entriesRealm.objects(PostureEntry.self).last?.posture
-                // 0.5 +/- 0...0.5
-                postureBarVal += lastPostureProb! / 2.0     // Unsafe unwrap! TODO: Change this
-                self.postureBar.posture = CGFloat(postureBarVal)
-                self.updateChartWithData()
+                if let lastPostureProb = self.classifier.entriesRealm.objects(PostureEntry.self).last?.posture {
+                    // 0.5 +/- 0...0.5
+                    postureBarVal += lastPostureProb / 2.0     // Unsafe unwrap! TODO: Change this
+                    self.postureBar.posture = CGFloat(postureBarVal)
+                    self.updateChartWithData()
+                }
             }
             
             
