@@ -1,4 +1,4 @@
-class RawSample : Vectorizable{
+public class RawSample : Vectorizable{
     var accX: Double
     var accY: Double
     var accZ: Double
@@ -6,7 +6,7 @@ class RawSample : Vectorizable{
     var gyrY: Double
     var gyrZ: Double
     
-    init(_ e: IPostureEntry){
+    public init(_ e: IPostureEntry){
     	
     	accX = Double(e.accX)
     	accY = Double(e.accY)
@@ -17,7 +17,7 @@ class RawSample : Vectorizable{
 
     }
 
-    init( _ m: Matrix){
+    public init( _ m: Matrix){
     	
     	accX = m[0,0]
     	accY = m[0,1]

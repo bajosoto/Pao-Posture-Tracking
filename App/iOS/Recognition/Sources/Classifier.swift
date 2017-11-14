@@ -1,4 +1,4 @@
-protocol Classifier {
+public protocol Classifier {
 	/**
 	 * [Train classifier from a dataset
 	 * Depending on the chosen classifier and the amount of data this can

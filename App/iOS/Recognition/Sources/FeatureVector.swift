@@ -1,4 +1,4 @@
-struct FeatureVector : Vectorizable{
+public struct FeatureVector : Vectorizable{
 
 	let gyroX: Double
 	let gyroY: Double
@@ -8,7 +8,7 @@ struct FeatureVector : Vectorizable{
 	let accelZ: Double
 	let peak2peakAccel: Double
 
-	init(_ vector: Matrix){
+	public init(_ vector: Matrix){
 		gyroX = vector[0,0]
 		gyroY = vector[0,1]
 		gyroZ = vector[0,2]

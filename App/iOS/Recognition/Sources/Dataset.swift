@@ -1,4 +1,4 @@
-struct Dataset{
+public struct Dataset{
 	public let samples:Matrix
 	public let labels:[Int]
 	

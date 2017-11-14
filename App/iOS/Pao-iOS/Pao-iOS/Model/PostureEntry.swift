@@ -8,8 +8,9 @@
 
 import Foundation
 import RealmSwift
+import Recognition
 
-class PostureEntry: Object {
+class PostureEntry: Object, IPostureEntry {
     // TODO: I think these should be '@objc dynamic'
     @objc dynamic var date: Date = Date()
     @objc dynamic var accX: Int16 = Int16(0)
