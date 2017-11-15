@@ -62,12 +62,26 @@ public class  BasePaoClassifier: PaoClassifier {
 
 			/* calculate percentage of healthy/unhealthy*/
 			var probabilities = softLabels[i]
-			var badPosture = probabilities[Int(lookupLabel("SitNok"))]! 
-			badPosture += probabilities[Int(lookupLabel("StandNok"))]!
-			badPosture += probabilities[Int(lookupLabel("MovNok"))]!
-			var goodPosture = probabilities[Int(lookupLabel("SitOk"))]!
-			goodPosture += probabilities[Int(lookupLabel("StandOk"))]!
-			goodPosture += probabilities[Int(lookupLabel("MovOk"))]!
+			var badPosture = 0.0
+			var goodPosture = 0.0
+			if let sitNok = probabilities[Int(lookupLabel("SitNok"))]{
+				badPosture += sitNok
+			} 
+			if let standNok = probabilities[Int(lookupLabel("StandNok"))]{
+				badPosture += standNok
+			}
+			if let movNok = probabilities[Int(lookupLabel("MovNok"))]{
+				badPosture += movNok
+			}
+			if let sitOk = probabilities[Int(lookupLabel("SitOk"))]{
+				goodPosture += sitOk
+			}
+			if let standOk = probabilities[Int(lookupLabel("StandOk"))]{
+				goodPosture += standOk
+			}
+			if let movOk = probabilities[Int(lookupLabel("MovOk"))]{
+				goodPosture += movOk
+			}
 
 			/* put it all together */
 			predictions.append(Predicition(featureVector[0],goodPosture-badPosture,lookupLabel(Double(hardLabels[i]))))
