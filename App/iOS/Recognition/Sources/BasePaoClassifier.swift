@@ -83,11 +83,6 @@ public class  BasePaoClassifier: PaoClassifier {
 				goodPosture += movOk
 			}
 
-			/*normalize*/
-			let sum = goodPosture + badPosture
-			goodPosture /= sum
-			badPosture /= sum
-
 			/* put it all together */
 			predictions.append(Predicition(featureVector[0],goodPosture-badPosture,lookupLabel(Double(hardLabels[i]))))
 		}
