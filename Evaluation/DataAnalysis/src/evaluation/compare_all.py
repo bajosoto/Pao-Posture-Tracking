@@ -12,9 +12,6 @@ FILE_PATH_3 = "../../resource/PostureEntry_DMP_Ozan.csv"
 
 N_VALIDATIONS = 30
 samples_raw, labels_raw, label_names = FileReader.readAll([FILE_PATH_1, FILE_PATH_2, FILE_PATH_3])
-
-window_size = 10
-
 scores = []
 # samples_filtered, labels_reduced = PreProcessor.average(samples_raw, labels_raw, window_size)
 samples_features = preprocessing.scale(samples_raw)
