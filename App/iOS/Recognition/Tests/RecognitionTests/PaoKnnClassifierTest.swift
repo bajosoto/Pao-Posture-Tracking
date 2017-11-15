@@ -43,6 +43,29 @@ class PaoKnnClassifierTest: XCTestCase {
       let classifier = PaoKnnClassifier(samples,windowSize:10,kNeighbours:2)
       for j in 0 ..< 6 {
           let prediction = classifier.predictSampleSoft(classSamples[j])
+          XCTAssertTrue(-1.0 <= prediction[0].posture && prediction[0].posture <= 1.0)
+          
+          //print(prediction[0].posture)
+
+      }
+  }
+
+  func testMissingClass(){
+      var classSamples = [[PostureEntry]]()
+      var samples = [PostureEntry]()
+      for j in 0 ..< 3 {
+        var l = [PostureEntry]()
+        for i in 0 ..< 10{
+          let i16 = Int16(i)
+          l.append(PostureEntry([i16,i16,i16,i16,i16,i16],lookupLabel(Double(j+1))))
+        } 
+        classSamples.append(l)
+        samples.append(contentsOf:l) 
+      }
+      let classifier = PaoKnnClassifier(samples,windowSize:10,kNeighbours:2)
+      for j in 0 ..< 3 {
+          let prediction = classifier.predictSampleSoft(classSamples[j])
+          XCTAssertTrue(-1.0 <= prediction[0].posture && prediction[0].posture <= 1.0)
           //print(prediction[0].posture)
 
       }
@@ -186,7 +209,8 @@ class PaoKnnClassifierTest: XCTestCase {
 	static var allTests : [(String, (PaoKnnClassifierTest) -> () throws -> Void)] {
         return [
             ("testSimple",testSimple),
-            ("testNormalDistr",testNormalDistr)    	
+            ("testNormalDistr",testNormalDistr),
+            ("testMissingClass",testMissingClass)    	
         ]
     }
 }
