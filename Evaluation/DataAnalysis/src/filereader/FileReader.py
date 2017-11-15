@@ -13,7 +13,7 @@ class FileReader:
                 if n == 0: continue
                 elements = line.split(',')
                 sample = elements[1:len(elements) - 3]
-                label = elements[len(elements) - 1]
+                label = elements[len(elements) - 1].replace("\n", "")
                 if label not in label_names:
                     label_names.append(label)
                 if n == 1:

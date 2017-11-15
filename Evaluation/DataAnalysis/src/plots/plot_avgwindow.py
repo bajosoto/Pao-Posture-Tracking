@@ -9,9 +9,9 @@ from src.filereader.FileReader import FileReader
 
 FILE_PATH_1 = "../../resource/PostureEntry_DMP_Phil_Monday.csv"
 FILE_PATH_2 = "../../resource/PostureEntry_DMP_Sergio_Monday.csv"
-
+FILE_PATH_3 = "../../resource/PostureEntry_DMP_Ozan.csv"
 N_VALIDATIONS = 20
-samples_raw, labels_raw, _ = FileReader.readAll([FILE_PATH_1, FILE_PATH_2])
+samples_raw, labels_raw, _ = FileReader.readAll([FILE_PATH_1, FILE_PATH_2, FILE_PATH_3])
 
 window_size = 20
 
