@@ -28,5 +28,5 @@ void debugMsgBle(const char* format, ... ) {
     va_end( args );
 
 	sendMsgBle(strlen(msg) + 1, "%c%s", 1, msg);
-	debugMsg("strlen: %d, message: %s", strlen(msg) + 1, msg);
+	debugMsg("Ble Msg -> strlen: %d, message: %s", strlen(msg) + 1, msg);
 }

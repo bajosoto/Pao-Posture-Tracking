@@ -61,19 +61,24 @@ void get_dmp_data(void)
 			saz = accel[2];
 		}
 	}
-
+	//else debugMsg("Error reading sensor fifo: %d\n", read_stat);
 
 	// Sergio: Pedometer is working. I disabled it for now until we figure out what to do with this.
 
 	// unsigned long count = 0;
-	// if(dmp_get_pedometer_step_count(&count)) {
+	// if(dmp_get_pedometer_step_count(&pedo)) {
 	// 	debugMsg("no pedo");
 	// } else {
 	// 	debugMsg("pedo: %lu", count);
 	// }
 
+	
+	
+}
 
-	//else debugMsg("Error reading sensor fifo: %d\n", read_stat);
+void get_dmp_pedo() {
+	// Update pedometer step value
+	dmp_get_pedometer_step_count(&pedo);
 }
 
 void get_raw_sensor_data(void)

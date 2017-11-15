@@ -50,9 +50,11 @@ int16_t sp, sq, sr;
 int16_t sax, say, saz;
 uint8_t sensor_fifo_count;
 int16_t phi_cal, theta_cal, psi_cal;
+long unsigned int pedo;
 
 
 void getMpuSensors();
+void getPedo();
 int16_t getMpuVal(sensValType type);
 
 #endif /* MPU_INTERFACE_H_ */

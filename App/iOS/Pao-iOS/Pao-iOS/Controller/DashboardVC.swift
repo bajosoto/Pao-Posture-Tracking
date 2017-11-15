@@ -164,7 +164,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         postureChart.highlightPerTapEnabled = false
         postureChart.highlightPerDragEnabled = false
         if(chartDataSet.entryCount > 0) {   // TODO: This should be in terms of the time interval measurements ar etaken
-            postureChart.setVisibleXRangeMaximum(30.0)  // In seconds. Will make the app crash if insufficient data is available
+            postureChart.setVisibleXRangeMaximum(300.0)  // In seconds. Will make the app crash if insufficient data is available
             postureChart.setVisibleXRangeMinimum(3.0)   // In seconds. Will make the app crash if insufficient data is available
             
         }
@@ -195,8 +195,8 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         postureChart.xAxis.gridColor = whiteAlphaColor
         
         
-        postureChart.leftAxis.axisMinimum = -1.0
-        postureChart.leftAxis.axisMaximum = 1.0
+        postureChart.leftAxis.axisMinimum = -1.05
+        postureChart.leftAxis.axisMaximum = 1.05
         postureChart.leftAxis.drawGridLinesEnabled = false
         postureChart.leftAxis.drawZeroLineEnabled = true
         postureChart.leftAxis.axisLineWidth = 0
@@ -205,8 +205,8 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         postureChart.leftAxis.drawLabelsEnabled = false
         postureChart.leftAxis.removeAllLimitLines()
         
-        postureChart.rightAxis.axisMinimum = -1.0
-        postureChart.rightAxis.axisMaximum = 1.0
+        postureChart.rightAxis.axisMinimum = -1.05
+        postureChart.rightAxis.axisMaximum = 1.05
         postureChart.rightAxis.drawGridLinesEnabled = false
         postureChart.rightAxis.drawZeroLineEnabled = true
         postureChart.rightAxis.axisLineWidth = 0
@@ -233,10 +233,10 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         let xaxis = postureChart.xAxis
         xaxis.valueFormatter = axisFormatDelegate
         
-        // Scroll view to show last item
-        if let lastXVal = postureEntries.last?.date.timeIntervalSince1970 {
-            postureChart.moveViewToX(Double(lastXVal))
-        }
+        // Scroll view to show last item  -> I disabled it because it's annoying that it wont let you zoom in and explore without resetting. maybe when interval period is longer...
+//        if let lastXVal = postureEntries.last?.date.timeIntervalSince1970 {
+//            postureChart.moveViewToX(Double(lastXVal))
+//        }
     }
     
     func getPostureEntriesFromDatabase() -> Results<PostureEntry> {

@@ -60,3 +60,7 @@ int16_t getMpuVal(sensValType type) {
 		break;
 	}
 }
+
+void getPedo() {
+	get_dmp_pedo();
+}

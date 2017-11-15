@@ -194,6 +194,7 @@ class Classifier {
             } else {
                 _bleConn.logMsg(message: "classificationResult was nil")
             }
+            // Empty the samples buffer
             samplesBuffer.removeAll()
         }
     }
