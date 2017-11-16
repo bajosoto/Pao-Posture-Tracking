@@ -59,6 +59,7 @@ void buzz(char msx10) {
 }
 
 void start_snooze() {
+    buzz(5);
     debugMsg("Snoozing...");
     debugMsgBle("Snoozing...");
     buzz_snooze = 20000;    // 20 seconds
