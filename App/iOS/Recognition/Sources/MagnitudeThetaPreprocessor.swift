@@ -2,11 +2,11 @@
 	
 	override func preprocessWindow(_ rawData: [RawSample]) -> FeatureVector{
 		let average = SimplePreprocessor.averageFilter(rawData)
-		let peak2peak = SimplePreprocessor.getPeak2Peak(rawData)
+		let magnitude = norm(Matrix([[average.accX,average.accY,average.accZ]]))
 
 		var vector = Matrix([[average.theta,
 							  average.phi,
-							  peak2peak]])
+							  magnitude]])
 		
 		return	MagnitudeThetaVector(vector)
 		
