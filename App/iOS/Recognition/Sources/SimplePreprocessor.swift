@@ -43,7 +43,6 @@
 							average.accY,
 							average.accZ,
 							average.phi,
-							average.psi,
 							average.theta,
 							peak2peak]])
 		
