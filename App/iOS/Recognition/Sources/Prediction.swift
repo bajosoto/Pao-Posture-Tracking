@@ -12,21 +12,6 @@ class Predicition : IPostureEntry{
     var posture: Double
     var postureLbl: String
 
-    init(_ featureVector: FeatureVector, _ posture: Double, _ postureLbl: String = ""){
-    	self.accX = Int16(featureVector.accelX)
-    	self.accY = Int16(featureVector.accelY)
-    	self.accZ = Int16(featureVector.accelZ)
-    	self.gyrX = Int16(featureVector.gyroX)
-    	self.gyrY = Int16(featureVector.gyroY)
-    	self.gyrZ = Int16(featureVector.gyroZ)
-        self.phi = Int16(featureVector.phi)
-        self.theta = Int16(featureVector.theta)
-        self.psi = Int16(featureVector.psi)
-    	self.p2p = featureVector.peak2peakAccel
-    	self.posture = posture
-    	self.postureLbl = postureLbl
-    }
-
     init(_ posture: Double, _ postureLbl: String = ""){
         self.accX = Int16(0)
         self.accY = Int16(0)

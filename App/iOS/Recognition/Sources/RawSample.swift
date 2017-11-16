@@ -35,7 +35,7 @@ public class RawSample : Vectorizable{
         theta = m[0,8]    	
     }
 
-	var toVector:Matrix{
+	public var toVector:Matrix{
 		return Matrix([[accX,accY,accZ,gyrX,gyrY,gyrZ,phi,psi,theta]])
 	}
 
