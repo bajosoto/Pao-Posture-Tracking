@@ -27,22 +27,9 @@
 		var labelsMat = Matrix([labels]).T
         let iterations = labels.count / self.windowSize
 		for i in 0 ..< iterations {
-			labels_reduced.append(SimplePreprocessor.majorityVote(labelsMat[i*self.windowSize ..< (i+1)*self.windowSize]))
+			labels_reduced.append(majorityVote(labelsMat[i*self.windowSize ..< (i+1)*self.windowSize].T.array()[0].map{Int($0)}))
 		}
 		return (try self.preprocess(rawData),labels_reduced)
-	}
-
-	internal static func majorityVote(_ labels: Matrix) -> Int{
-		var votes = [Int: Double]()
-		for i in unique(list:labels.array()[0]){
-			votes[Int(i)] = 0.0
-		}
-		for i in unique(list:labels.array()[0]){
-			if(labels[Int(i),0] == i){
-				votes[Int(i)]! += 1
-			}
-		}
-		return votes.sorted(by: {$0.1 > $1.1})[0].key	
 	}
 
 	func preprocessWindow(_ rawData: [RawSample]) -> FeatureVector{
@@ -55,6 +42,9 @@
 							average.accX,
 							average.accY,
 							average.accZ,
+							average.phi,
+							average.psi,
+							average.theta,
 							peak2peak]])
 		
 		return	FeatureVector(vector)
