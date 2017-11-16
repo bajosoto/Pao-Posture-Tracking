@@ -504,8 +504,10 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnTrainBackReleased(_ sender: Any) {
         btnTrainBack.isPressed = false
+        classifier.train()
         isClassifying = true
         animateTrainButtonsOut()
+        
     }
     @IBAction func onBtnTrainBackDrag(_ sender: Any) {
         btnTrainBack.isPressed = false
@@ -575,7 +577,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             } else if(shouldClassifySample == true) {
                 print("classifying...")
 //                self.classifier.classifyKnn(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, nNeighbours: 15)
-                self.classifier.addAndClassifySample(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz)
+                self.classifier.addAndClassifySample(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, phi: phi, theta: theta, psi: psi)
                 self.sampleCnt += 1
                 
                 // Calculate value for posture bar

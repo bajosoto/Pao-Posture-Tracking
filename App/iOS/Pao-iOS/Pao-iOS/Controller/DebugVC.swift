@@ -133,6 +133,7 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
     @IBAction func onBtnPingRelease(_ sender: Any) {
         btnPing.isPressed = false
         bleConn.logMsg(message: "Ping...")
+        bleConn.write(msg: "7E00")
     }
     @IBAction func onBtnPingDrag(_ sender: Any) {
         btnPing.isPressed = false
@@ -211,7 +212,7 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
                 // get posture (number)
                 
 //                self.classifier.classifyKnn(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, nNeighbours: 15)
-                self.classifier.addAndClassifySample(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz)
+                self.classifier.addAndClassifySample(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, phi: phi, theta: theta, psi: psi)
                 
                 self.sampleCnt += 1
             }
