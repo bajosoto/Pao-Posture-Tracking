@@ -6,6 +6,7 @@ typedef enum TxBleMsgEs_t {
 	MSG_BLE_01_DEBUG,					// 01:	Debug console message in App
 	MSG_BLE_02_SENSOR,					// 02:	Accelerometer and Gyro data
 	MSG_BLE_03_DBL_TAP,					// 03: 	Double tap detected
+	MSG_BLE_04_PEDO, 					// 04: 	Pedometer data
 	TOTAL_TX_BLE_MESSAGES
 } TxMsgBleEs;
 

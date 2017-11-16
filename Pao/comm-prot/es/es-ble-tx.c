@@ -55,7 +55,9 @@ void sendBleMessageEs(TxMsgBleEs msgType){
 					bleTxBuff[15],
 					bleTxBuff[16],
 					bleTxBuff[17],
-					bleTxBuff[18] );
+					bleTxBuff[18],
+					bleTxBuff[19],
+					bleTxBuff[20] );
 				break;
 			case MSG_BLE_03_DBL_TAP:
 				sendMsgBle(1, "%c", 3);
@@ -72,6 +74,12 @@ void sendBleMessageEs(TxMsgBleEs msgType){
 			// 	}
 			// 	sendPacket(msgType, MAX_DBG_MSG_LENGTH);
 			// 	break;
+			case MSG_BLE_04_PEDO:
+				splitSI16Ble(getMpuVal(DMP_PEDO), 1);
+				sendMsgBle(3, "%c%c", 4, 
+					bleTxBuff[1], 
+					bleTxBuff[2]);
+				break;
 			case TOTAL_TX_BLE_MESSAGES:					// Only including this to avoid the warning [-Wswitch]
 				break;
 			default:

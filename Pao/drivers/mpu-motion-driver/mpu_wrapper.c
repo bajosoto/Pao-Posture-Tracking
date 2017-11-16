@@ -77,6 +77,7 @@ void get_dmp_data(void)
 void get_dmp_pedo() {
 	// Update pedometer step value
 	dmp_get_pedometer_step_count(&pedo);
+	debugMsg("pedo: %lu", pedo);
 }
 
 void get_raw_sensor_data(void)
@@ -122,7 +123,7 @@ void on_tap_detected(unsigned char direction, unsigned char count){
 }
 
 void calibrate_mpu() {
-	nrf_delay_ms(500);
+	nrf_delay_ms(100);
 	debugMsg("Calibration done");
 	debugMsgBle("Calibration done");
 	phi_cal = raw_phi;

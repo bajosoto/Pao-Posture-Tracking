@@ -473,6 +473,10 @@
                         <outlet property="btnTrainStndNok" destination="V4n-I6-RW5" id="iAC-AF-Vs2"/>
                         <outlet property="btnTrainStndOk" destination="MAN-mz-veJ" id="Bhu-6K-RgK"/>
                         <outlet property="btnTrainView" destination="txC-oY-PwM" id="JX5-jT-YX3"/>
+                        <outlet property="goalMovingBarView" destination="aQe-pm-dvt" id="0E2-KZ-uG4"/>
+                        <outlet property="goalSitBarView" destination="yYh-qF-rbj" id="c7p-La-WD7"/>
+                        <outlet property="goalStandingBarView" destination="BPX-r2-PC2" id="qxV-JW-h4v"/>
+                        <outlet property="goalStepsBarView" destination="cii-v5-Nvh" id="kMD-56-wnT"/>
                         <outlet property="goalsConfigView" destination="AcC-qI-GrW" id="QAV-hM-u7N"/>
                         <outlet property="movingGoalLbl" destination="WbW-NL-UK7" id="YnP-VL-itJ"/>
                         <outlet property="movingSlider" destination="a8q-DC-ML5" id="LXb-ET-KFe"/>
@@ -759,7 +763,7 @@
                                 </view>
                             </subviews>
                         </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SITTING: 25%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A95-9A-6hy">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SITTING: 20%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A95-9A-6hy">
                             <rect key="frame" x="19.999999999999993" y="48" width="98.333333333333314" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="HIn-jX-6Mo"/>
@@ -786,8 +790,8 @@
                             <color key="textColor" white="1" alpha="0.49510380990000002" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STEPS: 2000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95s-Jz-t1Y">
-                            <rect key="frame" x="20.000000000000007" y="240" width="88.666666666666686" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STEPS: 15" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95s-Jz-t1Y">
+                            <rect key="frame" x="20" y="240" width="71" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="5aE-gx-7gu"/>
                             </constraints>

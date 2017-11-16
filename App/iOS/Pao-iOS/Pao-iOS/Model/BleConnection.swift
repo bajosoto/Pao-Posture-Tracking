@@ -263,6 +263,9 @@ class BleConnection {
         case 3:
             self.logMsg(message: "Double Tap!")
             break
+        case 4:
+            let s0: Int16 = unfoldSI16(index: 1)
+            self._responder?.getPedo(s0)
         default:
             self.logMsg(message: "Unknown Message received (\(bleRxBuff[0]))")
             break
@@ -328,4 +331,5 @@ protocol bleConnectionResponder: class {
     func redrawConsole()
     func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16,
                        _ phi: Int16, _ theta: Int16, _ psi: Int16)
+    func getPedo(_ pedo: Int16)
 }

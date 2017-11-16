@@ -55,6 +55,9 @@ int16_t getMpuVal(sensValType type) {
 	case DMP_Z:
 		return psi;
 		break;
+	case DMP_PEDO:
+		return pedo;
+		break;
 	default:
 		return -1;
 		break;

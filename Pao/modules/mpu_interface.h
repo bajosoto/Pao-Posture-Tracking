@@ -39,6 +39,7 @@ typedef enum sensValType_t {
 	DMP_X,
 	DMP_Y,
 	DMP_Z,
+	DMP_PEDO,
 } sensValType;
 
 // accel_values_t acc_values;

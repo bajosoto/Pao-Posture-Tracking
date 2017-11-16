@@ -225,4 +225,8 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
         }
     }
     
+    func getPedo(_ pedo: Int16) {
+        bleConn.logMsg(message: "Got pedo... \(pedo)")
+    }
+    
 }

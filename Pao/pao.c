@@ -79,6 +79,7 @@ int main(void)
 
         if(timer % 100 == 0) {
             getPedo();
+            sendBleMessageEs(MSG_BLE_04_PEDO);
             bsp_board_led_invert(0);
             //buzz(10);        // Testing only
             timer = 0;

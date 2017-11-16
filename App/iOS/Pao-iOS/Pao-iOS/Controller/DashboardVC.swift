@@ -48,12 +48,25 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     @IBOutlet weak var standingGoalLbl: UILabel!
     @IBOutlet weak var movingGoalLbl: UILabel!
     @IBOutlet weak var stepsGoalLbl: UILabel!
+
+    // Goal circle bar views
+    @IBOutlet weak var goalSitBarView: PaoSittingGoalView!
+    @IBOutlet weak var goalStandingBarView: PaoStandingGoalView!
+    @IBOutlet weak var goalMovingBarView: PaoMovingGoalView!
+    @IBOutlet weak var goalStepsBarView: PaoStepsGoalView!
     
     // Goal targets
     var goalSit: Float = 0.2
     var goalStand: Float = 0.4
     var goalMove: Float = 0.5
-    var goalSteps: Float = 20000.0
+    var goalSteps: Float = 15.0
+    
+    // Goal currents
+    var currSit: Float = 0
+    var currStand: Float = 0
+    var currMove: Float = 0
+    var currSteps: Float = 0
+    
     
     var effect: UIVisualEffect!
     
@@ -585,6 +598,13 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             
         }
     }
+    
+    
+    func getPedo(_ pedo: Int16) {
+        currSteps = Float(pedo)
+        goalStepsBarView.posture = CGFloat(currSteps / goalSteps)
+    }
+    
 }
 
 extension UIViewController: IAxisValueFormatter {

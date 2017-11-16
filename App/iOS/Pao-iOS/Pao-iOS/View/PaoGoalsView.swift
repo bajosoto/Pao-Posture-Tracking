@@ -42,7 +42,7 @@ class PaoStepsGoalView: UIView {
     var posture: CGFloat {
         set(newPosture) {
             if newPosture > 1.0 {
-                _posture = 0.0
+                _posture = 1.0
             } else if newPosture < 0 {
                 _posture = 0
             } else {
@@ -58,7 +58,7 @@ class PaoStepsGoalView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        PaoDrawingAssets.drawPaoStepGoal(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, postureGoalPercentage: 0.3)
+        PaoDrawingAssets.drawPaoStepGoal(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, postureGoalPercentage: posture)
     }
 }
 
