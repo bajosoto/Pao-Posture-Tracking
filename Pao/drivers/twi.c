@@ -119,6 +119,10 @@ void SPI0_TWI0_IRQHandler(void)
 		debugMsg("TWI error, code: %lx | from device: %ld", NRF_TWI0->ERRORSRC, NRF_TWI0->ADDRESS);
 		NRF_TWI0->ERRORSRC = 3;
         NRF_TWI0->EVENTS_ERROR = 0;
+
+        // Sergio: I'm hoping this will stop the program from freezing whenever there's a TWI error
+        sent = true;
+        read = true;
 	}
 
 }
