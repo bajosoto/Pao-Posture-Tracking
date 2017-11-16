@@ -72,8 +72,6 @@ void get_dmp_data(void)
 	// 	debugMsg("pedo: %lu", count);
 	// }
 
-	
-	
 }
 
 void get_dmp_pedo() {
@@ -102,8 +100,6 @@ void get_raw_sensor_data(void)
 			saz = accel[2];
 		}
 	}
-	/* call the Kalman filter now to filter the raw data */
-	// Kalmanfilter_phi_theta();
 }
 
 

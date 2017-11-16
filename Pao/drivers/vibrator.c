@@ -33,6 +33,7 @@ void increment_buzz_time() {
         buzz_timer += 5;        // 5ms from main loop
         if(buzz_timer >= buzz_timeout) {
             buzzing = 0;
+            nrf_gpio_pin_clear(BUZZ_PORT);
         }
     } else {
         nrf_gpio_pin_clear(BUZZ_PORT);

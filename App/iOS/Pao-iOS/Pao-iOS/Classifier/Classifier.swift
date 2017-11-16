@@ -19,8 +19,12 @@ class Classifier {
     private var _bleConn: BleConnection
     // Current sample number counter
     //private var _sampleCount = 0
-    // Max number of samples before classifying
+    // Max number of samples before classifying (window size)
     private var _numSamples = 10
+    // Number of consecutive bad postures before buzzing.
+    private var _numBadPosturesThresh: Int
+    // Current amount of bad postures
+    private var _numBadPosturesCount = 0
 //    private var axBuff = 0
 //    private var ayBuff = 0
 //    private var azBuff = 0
@@ -41,6 +45,8 @@ class Classifier {
     
     init(numSamples:Int, bleConn: BleConnection) {
         _numSamples = numSamples
+        // Currently pao sends data every 100ms, therefore the division result is seconds (5s for demo purposes)
+        _numBadPosturesThresh = Int((10.0 / Double(_numSamples)) * 5)
         _bleConn = bleConn
         var procConfig = Realm.Configuration()
         var rawConfig = Realm.Configuration()
@@ -184,10 +190,21 @@ class Classifier {
                 _bleConn.logMsg(message: "Stored classified sample: \(newClassifiedEntry.postureLbl), \(newClassifiedEntry.posture.format(f: ".2"))")
                 print("Stored classified sample: \(newEntry.postureLbl)")
                 
-                // For debugging only
+                // If bad posture detected
                 if newClassifiedEntry.posture < 0.0 {
-                    _bleConn.write(msg: "7E030A")
-                    _bleConn.logMsg(message: "Should be buzzing now")
+                    // Increment bad posture count
+                    _numBadPosturesCount += 1
+                    // Check if amount of bad postures threshold has been reached
+                    if _numBadPosturesCount >= _numBadPosturesThresh {
+                        // Buzz for 100 ms (0A = 10, which is then multiplied by 10 on ES side, in ms)
+                        _bleConn.write(msg: "7E030A")
+                        _bleConn.logMsg(message: "Should be buzzing now")
+                        // Reset bad postures count
+                        _numBadPosturesCount = 0
+                    }
+                } else {
+                    // Reset bad postures count
+                    _numBadPosturesCount = 0
                 }
                 // End for debugging
                 
