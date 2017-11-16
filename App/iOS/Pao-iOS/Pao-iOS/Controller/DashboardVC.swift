@@ -292,6 +292,9 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnHelpReleased(_ sender: Any) {
         btnHelpView.isPressed = false
+        classifier.train()
+        // Send ping message (which also calibrates)
+        bleConn.write(msg: "7E00")
     }
     @IBAction func onBtnHelpDrag(_ sender: Any) {
         btnHelpView.isPressed = false
@@ -417,7 +420,6 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnTrainBackReleased(_ sender: Any) {
         btnTrainBack.isPressed = false
-        classifier.train()
         isClassifying = true
         animateTrainButtonsOut()
     }
