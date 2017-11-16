@@ -305,14 +305,34 @@ class PaoKnnClassifierTest: XCTestCase {
       }
   }
 
+  func testSimpleManhattan(){
+      var classSamples = [[PostureEntry]]()
+      var samples = [PostureEntry]()
+      for j in 0 ..< 6 {
+        var l = [PostureEntry]()
+        for i in 0 ..< 10{
+          let i16 = Int16(i)
+          l.append(PostureEntry([i16,i16,i16,i16,i16,i16,i16,i16,i16],lookupLabel(Double(j+1))))
+        } 
+        classSamples.append(l)
+        samples.append(contentsOf:l) 
+      }
+      let classifier = BasePaoClassifier(samples,KnnClassifier(trainset:Dataset(),kNeighbours:1,metric:"manhattan"),EqualScaler(),PostMajorityVote(10))
+      for j in 0 ..< 6 {
+          let prediction = classifier.predictSampleSoft(classSamples[j])
+          //print(prediction[0].posture)
 
+      }
+  }
   
 
 	static var allTests : [(String, (PaoKnnClassifierTest) -> () throws -> Void)] {
         return [
             ("testSimple",testSimple),
             ("testNormalDistr",testNormalDistr),
-            ("testNormalDistrPostProcess",testNormalDistrPostProcess)    	
+            ("testNormalDistrPostProcess",testNormalDistrPostProcess),
+            ("testSimpleManhattan",testSimpleManhattan),      
+
         ]
     }
 }
