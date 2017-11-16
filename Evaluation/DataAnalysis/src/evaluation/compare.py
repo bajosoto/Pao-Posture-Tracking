@@ -10,8 +10,7 @@ from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 
 classifiers_all = {
-    "3 Neighbors": KNeighborsClassifier(3),
-    "10 Neighbors": KNeighborsClassifier(10),
+    "6 Neighbors": KNeighborsClassifier(6),
     "LDA": LinearDiscriminantAnalysis(),
     "Naive Bayes": GaussianNB(),
     "Decision Tree": DecisionTreeClassifier(max_depth=5),
@@ -19,12 +18,11 @@ classifiers_all = {
     "Neural Net": MLPClassifier(alpha=1, max_iter=2000),
     "AdaBoost": AdaBoostClassifier(),
     "Linear SVM": SVC(kernel="linear", C=0.025),
-    "RBF SVM": SVC(gamma=2, C=1),
     "QDA": QuadraticDiscriminantAnalysis()}
 
 classifiers_subset = {
-    "Linear SVM": SVC(kernel="linear", C=0.025),
-    "6 Neighbors": KNeighborsClassifier(10),
+#    "Linear SVM": SVC(kernel="linear", C=0.025),
+    "6 Neighbors": KNeighborsClassifier(6),
     "Neural Net": MLPClassifier(alpha=1, max_iter=2000),
     "AdaBoost": AdaBoostClassifier(),
     "QDA": QuadraticDiscriminantAnalysis(),

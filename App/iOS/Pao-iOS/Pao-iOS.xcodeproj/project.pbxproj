@@ -82,6 +82,7 @@
 		497BDC2F1F94014A006A612A /* Classifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classifier.swift; sourceTree = "<group>"; };
 		497FD28A1F93811900CE9AE5 /* AssetBtnTrainBtnsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetBtnTrainBtnsView.swift; sourceTree = "<group>"; };
 		49BDDD1F1F84EAC80052FA32 /* PostureEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostureEntry.swift; sourceTree = "<group>"; };
+		49E75BC41FBA2E9F00857F6F /* Recognition.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Recognition.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		49F1AB461F811C8700148162 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		7B2DA017E3B105073B5AB5BA /* Pods-Pao-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pao-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pao-iOS/Pods-Pao-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		92BA08F6ADB8FE059A8650BE /* Pods-Pao-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pao-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pao-iOS/Pods-Pao-iOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 		30FF5F3F4ED1BBA21071BE50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49E75BC41FBA2E9F00857F6F /* Recognition.framework */,
 				49F1AB461F811C8700148162 /* CoreBluetooth.framework */,
 				F507ADCA9AF73B05A9849F44 /* Pods_Pao_iOS.framework */,
 			);

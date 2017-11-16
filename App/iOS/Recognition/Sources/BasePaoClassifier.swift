@@ -1,17 +1,45 @@
-class  BasePaoClassifier: PaoClassifier {
+public class  BasePaoClassifier: PaoClassifier {
 
 	let classifier: Classifier
-	let scaler: Scaler
-	let preprocessor: Preprocessor
+	let scaler: Scaler?
+	let preprocessor: Preprocessor?
+	let postprocessor: Postprocessor?
 
-	init(_ traindata: [IPostureEntry], _ classifier: Classifier,_ preprocessor: Preprocessor = SimplePreprocessor(), _ scaler: Scaler = EqualScaler()){
+
+	public init(_ traindata: [IPostureEntry], _ classifier: Classifier, _ scaler: Scaler = EqualScaler()){
+		self.postprocessor = nil
+		self.classifier = classifier
+		self.scaler = scaler
+		self.preprocessor = nil
+		self.train(traindata)
+	}
+	public init(_ traindata: [IPostureEntry], _ classifier: Classifier,_ preprocessor: Preprocessor = SimplePreprocessor(), _ scaler: Scaler = EqualScaler()){
+		self.postprocessor = nil
 		self.classifier = classifier
 		self.scaler = scaler
 		self.preprocessor = preprocessor
 		self.train(traindata)
 	}
 
-	func train(_ traindata: [IPostureEntry]){
+	public init(_ traindata: [IPostureEntry], _ classifier: Classifier,_ preprocessor: Preprocessor = SimplePreprocessor(), _ scaler: Scaler = EqualScaler(), _ postprocessor: Postprocessor){
+		self.postprocessor = postprocessor
+		self.classifier = classifier
+		self.scaler = scaler
+		self.preprocessor = preprocessor
+		self.train(traindata)
+
+	}
+
+	public init(_ traindata: [IPostureEntry], _ classifier: Classifier,_ scaler: Scaler = EqualScaler(), _ postprocessor: Postprocessor){
+		self.postprocessor = postprocessor
+		self.classifier = classifier
+		self.scaler = scaler
+		self.preprocessor = nil
+		self.train(traindata)
+
+	}
+
+	public func train(_ traindata: [IPostureEntry]){
 
 		/* convert the posture entries to local type raw data and put labels in seperate list*/
 		var rawData = [RawSample]()
@@ -21,22 +49,29 @@ class  BasePaoClassifier: PaoClassifier {
 			rawData.append(RawSample(traindata[i]))
 		}
 
+
 		/* apply preprocessing*/
-		let filtered = try! preprocessor.preprocess(rawData,labels)
+		var filtered: ([Vectorizable],[Int]) = (rawData,labels)
+		if preprocessor != nil{
+			let preprocessed = (try! preprocessor!.preprocess(rawData,labels))
+			filtered.0 = preprocessed.0.map{$0 as Vectorizable}
+			filtered.1 = preprocessed.1
+		}
 
 		/* convert to matrix */
 		var matrixRep = Matrix(filtered.0)
 		
 		/* apply scaling*/
-		self.scaler.train(matrixRep)
-		matrixRep = scaler.transform(matrixRep)
+		self.scaler?.train(matrixRep)
+		matrixRep = scaler?.transform(matrixRep) ?? matrixRep
 
 		/*generate trainingset and train*/
 		let trainset = try! Dataset(matrixRep,filtered.1)
 		self.classifier.train(trainset)
+
 	}
 
-	func predictSampleSoft(_ testdata: [IPostureEntry]) -> [IPostureEntry]{
+	public func predictSampleSoft(_ testdata: [IPostureEntry]) -> [IPostureEntry]{
 
 		/* convert data to local type*/
 		var rawData = [RawSample]()
@@ -45,16 +80,24 @@ class  BasePaoClassifier: PaoClassifier {
 		}
 
 		/* apply preprocessing -> average filter and peak2peak*/
-		let featureVector = try! preprocessor.preprocess(rawData)
+		var featureVector:[Vectorizable] = rawData
+		if preprocessor != nil {
+		featureVector = try! preprocessor!.preprocess(rawData).map{$0 as Vectorizable}
+
+		}
 
 		/* apply same scaling as on the training set*/
-		let sampleMatrix = scaler.transform(Matrix(featureVector))
+		let sampleMatrix = scaler?.transform(Matrix(featureVector)) ?? Matrix(featureVector)
 
 		/* get the hard labels*/
-		let hardLabels = classifier.predict(samples:sampleMatrix)
+		var hardLabels = classifier.predict(samples:sampleMatrix)
+
+		hardLabels = try! postprocessor?.postprocess(hardLabels) ?? hardLabels
 		
 		/* get the soft labels*/
-		let softLabels = classifier.predictSoft(samples:sampleMatrix)
+		var softLabels = classifier.predictSoft(samples:sampleMatrix)
+
+		softLabels = try! postprocessor?.postprocess(predictionSoft:softLabels) ?? softLabels
 
 		/* create output data type for each classified sample*/
 		var predictions = [Predicition]()
@@ -70,7 +113,7 @@ class  BasePaoClassifier: PaoClassifier {
 			goodPosture += probabilities[Int(lookupLabel("MovOk"))]!
 
 			/* put it all together */
-			predictions.append(Predicition(featureVector[0],goodPosture-badPosture,lookupLabel(Double(hardLabels[i]))))
+			predictions.append(Predicition(goodPosture-badPosture,lookupLabel(Double(hardLabels[i]))))
 		}
 		
 		return predictions

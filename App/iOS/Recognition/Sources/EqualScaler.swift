@@ -5,21 +5,21 @@
  * that way all features should be in the range of ~ 0..1
  */
 
-class EqualScaler : Scaler {
+public class EqualScaler : Scaler {
 	
 	var maximum = [Double]()
 	var minimum = [Double]()
 
-	init(_ m: Matrix){
+	public init(_ m: Matrix){
 		self.train(m)
 	}
 
-	init(){
+	public init(){
 		maximum = [Double]()
 		minimum = [Double]()
 	}
 
-	func train(_ m: Matrix){
+    public func train(_ m: Matrix){
 		maximum = [Double]()
 		minimum = [Double]()
 		for j in 0 ..< m.columns{
@@ -28,8 +28,8 @@ class EqualScaler : Scaler {
 		}
 	}
 
-	func transform(_ m:Matrix)->Matrix{
-		var m_transform = Matrix(m.rows,m.columns)
+    public func transform(_ m:Matrix)->Matrix{
+        let m_transform = Matrix(m.rows,m.columns)
 
 		for i in 0 ..< m.rows {
 			for j in 0 ..< m.columns{

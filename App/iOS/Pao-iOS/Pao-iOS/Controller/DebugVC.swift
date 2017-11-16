@@ -205,7 +205,14 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
                 self.sampleCnt += 1
             } else if(shouldClassifySample == true) {
                 print("classifying...")
-                self.classifier.classifyKnn(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, nNeighbours: 15)
+                // accumulate 10 samples
+                // Array of 10 posture entries []
+                // predictSampleSoft(_ testdata: [IPostureEntry]) -> [IPostureEntry]
+                // get label
+                // get posture (number)
+                
+//                self.classifier.classifyKnn(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, nNeighbours: 15)
+                self.classifier.addAndClassifySample(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz)
                 self.sampleCnt += 1
             }
             
