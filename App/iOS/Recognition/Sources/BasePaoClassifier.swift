@@ -46,8 +46,8 @@ public class  BasePaoClassifier: PaoClassifier {
 
 	public func predictSampleSoft(_ testdata: [IPostureEntry]) -> [IPostureEntry]{
 
-		if(testdata.count > 0){
-			/* convert data to local type*/
+		if(testdata.count > 0 && classifier.isTrained){
+			/* convert data to  local type*/
 			var rawData = [RawSample]()
 			for i in 0 ..< testdata.count{
 				rawData.append(RawSample(testdata[i]))

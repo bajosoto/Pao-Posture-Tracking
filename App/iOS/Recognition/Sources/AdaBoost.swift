@@ -5,6 +5,7 @@ class AdaBoost : Classifier {
 	var hypotheses = [Classifier]()
 	var totalI = 0
 	var classes = [Int]()
+	var isTrained = false
 	required convenience init(trainset:Dataset){
 		self.init(trainset,1000)
 	}
@@ -31,6 +32,7 @@ class AdaBoost : Classifier {
 		beta = ret.1
 		hypotheses = ret.2
 		totalI = ret.3
+		isTrained = true
 	}
 
 	internal static func train(_ trainset:Dataset,_ maxI: Int, _ regularizer: Double = 0.000001) -> (Matrix,[Double],[Classifier],Int){

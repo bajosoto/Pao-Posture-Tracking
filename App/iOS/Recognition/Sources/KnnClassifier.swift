@@ -25,6 +25,10 @@ class KnnClassifier: Classifier{
 		}
 	}
 
+	var isTrained: Bool{
+		return trainset.nSamples > 0
+	}
+
 	internal func predictSoft(sample: Matrix)->[Int: Double]{
 		var distances = [(distance:Double,label:Int)]()
 		var proba: [Int: Double] = [:]

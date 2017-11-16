@@ -36,6 +36,8 @@ public protocol Classifier {
 	 * @return		Dict		[Dictionary containing the probability for each class]
 	 */
 	func predictSoft(sample: Matrix)->[Int: Double]
+
+	var isTrained:Bool {get}
 }
 
 extension Classifier {

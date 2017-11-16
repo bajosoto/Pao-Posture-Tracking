@@ -2,6 +2,7 @@ class DecisionTree : DecisionNode, Classifier{
 	var children = [DecisionNode]()
 	var decisionRule = DecisionStump()
 	var trainset = Dataset()
+	var isTrained = false
 	init(_ trainset: Dataset, _ weights: [Double], _ maxDepth: Int = 10, _ minImpurity: Double = 0.0){
 		self.train(trainset,weights,maxDepth,minImpurity)
 		
@@ -26,6 +27,7 @@ class DecisionTree : DecisionNode, Classifier{
 			}	
 		}
 		self.children = children
+		self.isTrained = true
 	}
 
 	func train(_ trainset:Dataset){

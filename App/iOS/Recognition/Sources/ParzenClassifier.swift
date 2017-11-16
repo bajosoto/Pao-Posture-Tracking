@@ -3,6 +3,7 @@ class ParzenClassifier : Classifier{
 	internal var trainset = Dataset()
 	internal var width =  0.0
 	internal var priors: [Int: Double] = [:]
+	var isTrained = false
 
 	required init(trainset:Dataset){
 		self.train(trainset)
@@ -38,6 +39,7 @@ class ParzenClassifier : Classifier{
 			}
 		}
 		self.width = width
+		isTrained = true
 	}
 
 	internal func getApparentError()->Double{
