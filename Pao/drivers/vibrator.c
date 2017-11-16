@@ -5,6 +5,7 @@
 
 int buzz_timer = 0;
 int buzz_timeout = 0;
+int buzz_snooze = 0;      
 char buzzing = 0;
 
 void init_vibrator(){
@@ -38,13 +39,27 @@ void increment_buzz_time() {
     } else {
         nrf_gpio_pin_clear(BUZZ_PORT);
     }
+
+    // Decrement snooze
+    if (buzz_snooze - 5 <= 0) {
+        buzz_snooze = 0;
+    } else {
+        buzz_snooze -= 5;
+    }
 }
 
 void buzz(char msx10) {
 
-    buzz_timer = 0;
-    buzz_timeout = msx10 * 10;
-    buzzing = 1;
-	nrf_gpio_pin_set(BUZZ_PORT);
-	
+    if(buzz_snooze == 0) {              // If not snoozing
+        buzz_timer = 0;
+        buzz_timeout = msx10 * 10;
+        buzzing = 1;
+        nrf_gpio_pin_set(BUZZ_PORT);        
+    }
+}
+
+void start_snooze() {
+    debugMsg("Snoozing...");
+    debugMsgBle("Snoozing...");
+    buzz_snooze = 20000;    // 20 seconds
 }

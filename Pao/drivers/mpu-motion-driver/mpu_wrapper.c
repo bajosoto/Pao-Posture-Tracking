@@ -114,8 +114,10 @@ void on_tap_detected(unsigned char direction, unsigned char count){
 	//debugMsg("Tappy tap!\tDir: %d\tCount: %d", direction, count);
 	if(count == 2) {
 		sendBleMessageEs(MSG_BLE_03_DBL_TAP);
-		debugMsg("Double tap!\tDir: %d\tCount: %d", direction, count);
-		calibrate_mpu();	
+		// debugMsg("Double tap!\tDir: %d\tCount: %d", direction, count);
+		// Calibration is no longer done here, but in software and via BLE message
+		// calibrate_mpu();	
+		start_snooze();
 	}
 }
 
