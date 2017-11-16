@@ -123,7 +123,7 @@ void on_tap_detected(unsigned char direction, unsigned char count){
 }
 
 void calibrate_mpu() {
-	nrf_delay_ms(100);
+	//nrf_delay_ms(100);
 	debugMsg("Calibration done");
 	debugMsgBle("Calibration done");
 	phi_cal = raw_phi;

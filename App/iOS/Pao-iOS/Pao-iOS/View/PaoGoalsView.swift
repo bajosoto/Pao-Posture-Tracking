@@ -15,7 +15,7 @@ class PaoMovingGoalView: UIView {
     var posture: CGFloat {
         set(newPosture) {
             if newPosture > 1.0 {
-                _posture = 0.0
+                _posture = 1.0
             } else if newPosture < 0 {
                 _posture = 0
             } else {
@@ -69,7 +69,7 @@ class PaoStandingGoalView: UIView {
     var posture: CGFloat {
         set(newPosture) {
             if newPosture > 1.0 {
-                _posture = 0.0
+                _posture = 1.0
             } else if newPosture < 0 {
                 _posture = 0
             } else {
@@ -98,7 +98,7 @@ class PaoSittingGoalView: UIView {
     var posture: CGFloat {
         set(newPosture) {
             if newPosture > 1.0 {
-                _posture = 0.0
+                _posture = 1.0
             } else if newPosture < 0 {
                 _posture = 0
             } else {
