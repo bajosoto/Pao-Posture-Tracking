@@ -575,15 +575,8 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             } else if(shouldClassifySample == true) {
                 print("classifying...")
 //                self.classifier.classifyKnn(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, nNeighbours: 15)
+                self.classifier.addAndClassifySample(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz)
                 self.sampleCnt += 1
-                // TODO: Disabled temporarily. Do something here later just like in DebugVC
-            }
-            
-            if(self.sampleCnt == 10) {
-                self.sampleCnt = 0
-                if(self.isSampling == false) {
-                    self.currLabel = ""
-                }
                 
                 // Calculate value for posture bar
                 var postureBarVal = 0.5
@@ -591,7 +584,15 @@ class DashboardVC: UIViewController, bleConnectionResponder {
                     // 0.5 +/- 0...0.5
                     postureBarVal += lastPostureProb / 2.0     // Unsafe unwrap! TODO: Change this
                     self.postureBar.posture = CGFloat(postureBarVal)
-                    self.updateChartWithData()
+                    self.updateChartWithData()  // Too much overhead putting this here!
+                }
+                
+            }
+            
+            if(self.sampleCnt == 10) {      // I think this is not needed anymore?
+                self.sampleCnt = 0
+                if(self.isSampling == false) {
+                    self.currLabel = ""
                 }
             }
             
