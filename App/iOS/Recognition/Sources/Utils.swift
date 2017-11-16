@@ -41,7 +41,16 @@ func evaluate(_ predictions: [Int],_ dataset: Dataset) -> Double{
     return evaluate(predictions,dataset,ones(dataset.nSamples,1)/dataset.nSamples)
 }
 
-
+func majorityVote(_ elements: [Int]) -> Int {
+    var votes = [Int: Double]()
+    for i in unique(list:elements){
+        votes[i] = 0.0
+    }
+    for i in 0 ..< elements.count{
+        votes[elements[i]]! += 1
+    }
+    return votes.sorted(by: {$0.1 > $1.1})[0].key
+}
 
 let labelDict: [String:Double] = [
         "SitOk"     : 1.0,

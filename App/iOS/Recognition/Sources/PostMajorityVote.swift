@@ -6,24 +6,41 @@ class PostMajorityVote: Postprocessor{
 	}
 
 	func postprocess(_ prediction: [Int]) throws -> [Int]{
-		return [try postprocessWindow(prediction)]
+		if(prediction.count < windowSize){
+			throw PostprocessorError.NotEnoughSamples(prediction.count,windowSize)
+		}
+		var results = [Int]()
+
+		var window = [Int]()
+		for i in 0 ..< prediction.count{	
+			window.append(prediction[i])
+			if(i>0 && (i+1)%windowSize==0){
+				results.append(try postprocessWindow(window))	
+				window = [Int]()
+			}
+		}
+		return results
 	}
 	
 	public func postprocessWindow(_ prediction: [Int]) throws -> Int{
-		var votes = [Int: Double]()
-		for i in unique(list:prediction){
-			votes[i] = 0.0
-		}
-		for i in unique(list:prediction){
-			if(prediction[i] == i){
-				votes[i]! += 1
-			}
-		}
-		return votes.sorted(by: {$0.1 > $1.1})[0].key
+		return majorityVote(prediction)
 	}
 
 	public func postprocess(predictionSoft: [[Int: Double]]) throws -> [[Int: Double]]{
-		return [try postprocessWindow(predictionSoft:predictionSoft)]
+		if(predictionSoft.count < windowSize){
+			throw PostprocessorError.NotEnoughSamples(predictionSoft.count,windowSize)
+		}
+		var results = [[Int: Double]]()
+
+		var window = [[Int: Double]]()
+		for i in 0 ..< predictionSoft.count{	
+			window.append(predictionSoft[i])
+			if(i>0 && (i+1)%windowSize==0){
+				results.append(try postprocessWindow(predictionSoft:window))	
+				window = [[Int: Double]]()
+			}
+		}
+		return results
 	}
 
 	func postprocessWindow(predictionSoft: [[Int: Double]]) throws -> [Int: Double]{
