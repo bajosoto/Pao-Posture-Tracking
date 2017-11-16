@@ -178,14 +178,14 @@
                                             <constraint firstAttribute="width" constant="40" id="hEI-Uf-CZD"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="W4n-Tk-Sat" userLabel="Goals">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="W4n-Tk-Sat" userLabel="Goals">
                                         <rect key="frame" x="20" y="295" width="374" height="86"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yYh-qF-rbj" customClass="PaoSittingGoalView" customModule="Pao_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="106" height="86"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="83" height="86"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SITTING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5d-8V-1Pu">
-                                                        <rect key="frame" x="0.0" y="69" width="106" height="21"/>
+                                                        <rect key="frame" x="0.0" y="69" width="83" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="0r7-xC-eEh"/>
                                                         </constraints>
@@ -202,10 +202,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPX-r2-PC2" customClass="PaoStandingGoalView" customModule="Pao_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="134" y="0.0" width="106" height="86"/>
+                                                <rect key="frame" x="97" y="0.0" width="83" height="86"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STANDING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHM-ad-kLa">
-                                                        <rect key="frame" x="0.0" y="69" width="106" height="21"/>
+                                                        <rect key="frame" x="0.0" y="69" width="83" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="fNR-jL-JJK"/>
                                                         </constraints>
@@ -222,10 +222,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQe-pm-dvt" customClass="PaoMovingGoalView" customModule="Pao_iOS" customModuleProvider="target">
-                                                <rect key="frame" x="268" y="0.0" width="106" height="86"/>
+                                                <rect key="frame" x="194" y="0.0" width="83" height="86"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOVING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ov0-3l-nLl">
-                                                        <rect key="frame" x="0.0" y="69" width="106" height="21"/>
+                                                        <rect key="frame" x="0.0" y="69" width="83" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="82h-VD-IE9"/>
                                                         </constraints>
@@ -239,6 +239,26 @@
                                                     <constraint firstItem="Ov0-3l-nLl" firstAttribute="leading" secondItem="aQe-pm-dvt" secondAttribute="leading" id="3io-CK-a7s"/>
                                                     <constraint firstAttribute="bottom" secondItem="Ov0-3l-nLl" secondAttribute="bottom" constant="-4" id="gz4-ux-j67"/>
                                                     <constraint firstAttribute="trailing" secondItem="Ov0-3l-nLl" secondAttribute="trailing" id="mhe-CR-yBU"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cii-v5-Nvh" customClass="PaoStepsGoalView" customModule="Pao_iOS" customModuleProvider="target">
+                                                <rect key="frame" x="291" y="0.0" width="83" height="86"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STEPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g17-cp-xr2">
+                                                        <rect key="frame" x="0.0" y="69" width="83" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="21" id="pl0-54-Dxk"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="15"/>
+                                                        <color key="textColor" white="1" alpha="0.49510380990000002" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="g17-cp-xr2" secondAttribute="trailing" id="1qI-hF-MV0"/>
+                                                    <constraint firstItem="g17-cp-xr2" firstAttribute="leading" secondItem="cii-v5-Nvh" secondAttribute="leading" id="91X-5u-efM"/>
+                                                    <constraint firstAttribute="bottom" secondItem="g17-cp-xr2" secondAttribute="bottom" constant="-4" id="VAa-pa-fHJ"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
