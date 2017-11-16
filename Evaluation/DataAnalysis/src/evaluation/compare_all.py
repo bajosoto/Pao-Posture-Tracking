@@ -13,8 +13,8 @@ FILE_PATH_3 = "../../resource/PostureEntry_DMP_Ozan.csv"
 N_VALIDATIONS = 30
 samples_raw, labels_raw, label_names = FileReader.readAll([FILE_PATH_1, FILE_PATH_2, FILE_PATH_3])
 scores = []
-# samples_filtered, labels_reduced = PreProcessor.average(samples_raw, labels_raw, window_size)
-samples_features = preprocessing.scale(samples_raw)
+samples_filtered, labels_reduced = PreProcessor.magnitude_theta(samples_raw, labels_raw,5)
+samples_features = preprocessing.scale(samples_filtered)
 
 # samples_features = PCA().fit_transform(samples_features)
-compare(samples_features, labels_raw,classifiers_all, N_VALIDATIONS)
+compare(samples_features, labels_reduced,classifiers_all, N_VALIDATIONS)

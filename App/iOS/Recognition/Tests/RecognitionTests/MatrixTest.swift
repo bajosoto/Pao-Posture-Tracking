@@ -224,8 +224,8 @@ class MatrixTest: XCTestCase {
     }
 
     func testInitVectorizable(){
-        let matrix = Matrix([[1,2,3,4,5,6,7],
-                             [7,6,5,4,3,2,1]])
+        let matrix = Matrix([[1,2,3,4,5,6,7,8,9,10],
+                             [7,6,5,4,3,2,1,0,-1,-2]])
 
         let v1 = FeatureVector(matrix[0])
         let v2 = FeatureVector(matrix[1])

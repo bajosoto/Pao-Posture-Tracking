@@ -26,7 +26,7 @@ cm = {}
 accuracy = {}
 
 for i in range(N_VALIDATIONS):
-    train_data, test_data, train_labels, test_labels = train_test_split(samples_raw, labels_raw,
+    train_data, test_data, train_labels, test_labels = train_test_split(samples_features, labels_raw,
                                                                         test_size=0.33)
     for _, name in enumerate(classifiers_subset):
         if name not in cm.keys():

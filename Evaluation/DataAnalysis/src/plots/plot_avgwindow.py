@@ -20,8 +20,7 @@ window_min = 5
 window_max = 100
 window_step = 5
 for window_size in range(window_min, window_max, window_step):
-    samples_filtered, labels_reduced = PreProcessor.median(samples_raw, labels_raw, window_size)
-    np.hstack((samples_filtered, PreProcessor.peak2peak(samples_raw, window_size)))
+    samples_filtered, labels_reduced = PreProcessor.magnitude_theta(samples_raw, labels_raw,window_size)
     samples_features = preprocessing.scale(samples_filtered)
     scores.append(compare(samples_features, labels_reduced, classifiers_all, N_VALIDATIONS))
 

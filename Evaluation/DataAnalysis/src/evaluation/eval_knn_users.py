@@ -14,16 +14,19 @@ from src.filereader.FileReader import FileReader
 FILE_PATH_1 = "../../resource/PostureEntry_DMP_Phil_Monday.csv"
 FILE_PATH_2 = "../../resource/PostureEntry_DMP_Sergio_Monday.csv"
 FILE_PATH_3 = "../../resource/PostureEntry_DMP_Ozan.csv"
-
+paths = [FILE_PATH_1, FILE_PATH_2, FILE_PATH_3]
 N_VALIDATIONS = 30
-samples_raw, labels_raw, label_names = FileReader.readAll([FILE_PATH_1, FILE_PATH_2, FILE_PATH_3])
-
-window_size = 10
 
 # samples_filtered, labels_reduced = PreProcessor.average(samples_raw, labels_raw, window_size)
-samples_features = preprocessing.scale(samples_raw)
-scores = []
-metrics = ['minkowski','manhattan', 'chebyshev', 'mahalanobis']
+scores_mean = 0.0
+scores_std = 0.0
+for path in paths:
+    samples_raw, labels_raw, label_names = FileReader.readAll([path])
+    samples_features = preprocessing.scale(samples_raw)
+    scores_clf = cross_val_score(KNeighborsClassifier(5, metric='manhattan', algorithm='kd_tree'), samples_features,
+                                 labels_raw.ravel(), cv=N_VALIDATIONS)
+    scores_mean += scores_clf.mean()
+    scores_std += scores_clf.std()
 
-for metric in metrics:  # samples_features = PCA().fit_transform(samples_features)
-    print(str(cross_val_score(KNeighborsClassifier(5, metric=metric, algorithm='kd_tree'), samples_features,labels_raw.ravel(), cv=N_VALIDATIONS).mean()))
+print("Mean:" + str(scores_mean/3))
+print("Std:" + str(scores_std/3))

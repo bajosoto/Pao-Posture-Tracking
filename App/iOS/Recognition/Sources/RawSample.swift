@@ -5,6 +5,9 @@ public class RawSample : Vectorizable{
     var gyrX: Double
     var gyrY: Double
     var gyrZ: Double
+    var phi: Double
+    var psi: Double
+    var theta: Double
     
     public init(_ e: IPostureEntry){
     	
@@ -14,7 +17,9 @@ public class RawSample : Vectorizable{
     	gyrX = Double(e.gyrX)
     	gyrY = Double(e.gyrY)
     	gyrZ = Double(e.gyrZ)
-
+        phi = Double(e.phi)
+        psi = Double(e.psi)
+        theta = Double(e.theta)
     }
 
     public init( _ m: Matrix){
@@ -25,11 +30,13 @@ public class RawSample : Vectorizable{
     	gyrX = m[0,3]
     	gyrY = m[0,4]
     	gyrZ = m[0,5]
-    	
+        phi = m[0,6]
+        psi = m[0,7]
+        theta = m[0,8]    	
     }
 
 	var toVector:Matrix{
-		return Matrix([[accX,accY,accZ,gyrX,gyrY,gyrZ]])
+		return Matrix([[accX,accY,accZ,gyrX,gyrY,gyrZ,phi,psi,theta]])
 	}
 
 	}

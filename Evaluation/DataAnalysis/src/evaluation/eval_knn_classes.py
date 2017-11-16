@@ -18,12 +18,11 @@ FILE_PATH_3 = "../../resource/PostureEntry_DMP_Ozan.csv"
 N_VALIDATIONS = 30
 samples_raw, labels_raw, label_names = FileReader.readAll([FILE_PATH_1, FILE_PATH_2, FILE_PATH_3])
 
-window_size = 10
+labels_raw[labels_raw == 2] = 0
+labels_raw[labels_raw == 3] = 1
 
 # samples_filtered, labels_reduced = PreProcessor.average(samples_raw, labels_raw, window_size)
 samples_features = preprocessing.scale(samples_raw)
-scores = []
-metrics = ['minkowski','manhattan', 'chebyshev', 'mahalanobis']
 
-for metric in metrics:  # samples_features = PCA().fit_transform(samples_features)
-    print(str(cross_val_score(KNeighborsClassifier(5, metric=metric, algorithm='kd_tree'), samples_features,labels_raw.ravel(), cv=N_VALIDATIONS).mean()))
+print(str(cross_val_score(KNeighborsClassifier(5, metric='manhattan', algorithm='kd_tree'), samples_features,
+                          labels_raw.ravel(), cv=N_VALIDATIONS).mean()))
