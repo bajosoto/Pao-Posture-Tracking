@@ -8,7 +8,6 @@ public struct SimpleFeatureVector : FeatureVector{
 	let accelZ: Double
 	let phi: Double
 	let theta: Double
-	let psi: Double
 	let peak2peakAccel: Double
 
 	public init(_ vector: Matrix){
@@ -19,14 +18,13 @@ public struct SimpleFeatureVector : FeatureVector{
 		accelY = vector[0,4]
 		accelZ = vector[0,5]
 		phi = vector[0,6]
-		psi = vector[0,7]
-		theta = vector[0,8]
+		theta = vector[0,7]
 
-		peak2peakAccel = vector[0,6]
+		peak2peakAccel = vector[0,8]
 	}
 
 	public var toVector:Matrix{
-		return Matrix([[gyroX,gyroY,gyroZ,accelX,accelY,accelZ,phi,psi,theta,peak2peakAccel]])
+		return Matrix([[gyroX,gyroY,gyroZ,accelX,accelY,accelZ,phi,theta,peak2peakAccel]])
 	}
 }
 	
