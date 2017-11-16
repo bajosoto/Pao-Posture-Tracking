@@ -16,9 +16,13 @@ void update_euler_from_quaternions(int32_t *quat);
 
 void get_dmp_data(void);
 
+void get_dmp_pedo();
+
 void get_raw_sensor_data(void);
 
 bool check_sensor_int_flag(void);
+
+void calibrate_mpu();
 
 void imu_init(bool dmp, uint16_t freq);
 

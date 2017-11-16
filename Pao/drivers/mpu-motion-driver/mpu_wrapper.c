@@ -13,6 +13,7 @@
 #include "es-ble-tx.h"
 #include "mpu_interface.h"
 #include "nrf_delay.h"
+#include "vibrator.h"
 
 #define QUAT_SENS       0x040000000 //1073741824.f //2^30
 
@@ -60,19 +61,23 @@ void get_dmp_data(void)
 			saz = accel[2];
 		}
 	}
-
+	//else debugMsg("Error reading sensor fifo: %d\n", read_stat);
 
 	// Sergio: Pedometer is working. I disabled it for now until we figure out what to do with this.
 
 	// unsigned long count = 0;
-	// if(dmp_get_pedometer_step_count(&count)) {
+	// if(dmp_get_pedometer_step_count(&pedo)) {
 	// 	debugMsg("no pedo");
 	// } else {
 	// 	debugMsg("pedo: %lu", count);
 	// }
 
+}
 
-	//else debugMsg("Error reading sensor fifo: %d\n", read_stat);
+void get_dmp_pedo() {
+	// Update pedometer step value
+	dmp_get_pedometer_step_count(&pedo);
+	debugMsg("pedo: %lu", pedo);
 }
 
 void get_raw_sensor_data(void)
@@ -96,8 +101,6 @@ void get_raw_sensor_data(void)
 			saz = accel[2];
 		}
 	}
-	/* call the Kalman filter now to filter the raw data */
-	// Kalmanfilter_phi_theta();
 }
 
 
@@ -111,15 +114,22 @@ bool check_sensor_int_flag(void)
 void on_tap_detected(unsigned char direction, unsigned char count){
 	//debugMsg("Tappy tap!\tDir: %d\tCount: %d", direction, count);
 	if(count == 2) {
-		debugMsg("Double tap!\tDir: %d\tCount: %d", direction, count);
-		nrf_delay_ms(500);
 		sendBleMessageEs(MSG_BLE_03_DBL_TAP);
-		debugMsg("Calibration done");
-		phi_cal = raw_phi;
-		theta_cal = raw_theta;
-		psi_cal = raw_psi;
+		// debugMsg("Double tap!\tDir: %d\tCount: %d", direction, count);
+		// Calibration is no longer done here, but in software and via BLE message
+		// calibrate_mpu();	
+		start_snooze();
 	}
-	
+}
+
+void calibrate_mpu() {
+	//nrf_delay_ms(100);
+	debugMsg("Calibration done");
+	debugMsgBle("Calibration done");
+	phi_cal = raw_phi;
+	theta_cal = raw_theta;
+	psi_cal = raw_psi;
+	buzz(25);
 }
 
 void imu_init(bool dmp, uint16_t freq)
@@ -164,7 +174,7 @@ void imu_init(bool dmp, uint16_t freq)
 		debugMsg("dmp set rate   : %d", dmp_set_fifo_rate(100));
 		debugMsg("dmp set state  : %d", mpu_set_dmp_state(1));
 		debugMsg("dlpf set freq  : %d", mpu_set_lpf(10));
-		debugMsg("register tap cb  : %d", dmp_register_tap_cb(on_tap_detected));
+		//debugMsg("register tap cb  : %d", dmp_register_tap_cb(on_tap_detected));
 
 		// dmp_load_motion_driver_firmware();
 		// dmp_set_orientation(inv_orientation_matrix_to_scalar(gyro_orientation));

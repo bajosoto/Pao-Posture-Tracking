@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		038A0CEE387CA640F9B20DEC /* Pods_Pao_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F507ADCA9AF73B05A9849F44 /* Pods_Pao_iOS.framework */; };
-		492A89891F85A2650067A6F8 /* PaoSittingGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492A89881F85A2650067A6F8 /* PaoSittingGoalView.swift */; };
-		492A898B1F85A6720067A6F8 /* PaoStandingGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492A898A1F85A6720067A6F8 /* PaoStandingGoalView.swift */; };
-		492A898D1F85A6B20067A6F8 /* PaoMovingGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492A898C1F85A6B20067A6F8 /* PaoMovingGoalView.swift */; };
+		492A898D1F85A6B20067A6F8 /* PaoGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492A898C1F85A6B20067A6F8 /* PaoGoalsView.swift */; };
 		4942F10E1F811B5500F378A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942F10D1F811B5500F378A9 /* AppDelegate.swift */; };
 		4942F1101F811B5500F378A9 /* BleConnectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4942F10F1F811B5500F378A9 /* BleConnectVC.swift */; };
 		4942F1131F811B5500F378A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4942F1111F811B5500F378A9 /* Main.storyboard */; };
@@ -46,9 +44,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		492A89881F85A2650067A6F8 /* PaoSittingGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoSittingGoalView.swift; sourceTree = "<group>"; };
-		492A898A1F85A6720067A6F8 /* PaoStandingGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoStandingGoalView.swift; sourceTree = "<group>"; };
-		492A898C1F85A6B20067A6F8 /* PaoMovingGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoMovingGoalView.swift; sourceTree = "<group>"; };
+		492A898C1F85A6B20067A6F8 /* PaoGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaoGoalsView.swift; sourceTree = "<group>"; };
 		4942F10A1F811B5500F378A9 /* Pao-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pao-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4942F10D1F811B5500F378A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4942F10F1F811B5500F378A9 /* BleConnectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleConnectVC.swift; sourceTree = "<group>"; };
@@ -161,9 +157,7 @@
 				49578C7A1F86DD060050C192 /* PaoDrawingAssets.swift */,
 				4951427A1F82CAA300A2921E /* PaoFindingView.swift */,
 				495CDAC91F84450B00B0D7B9 /* PaoPostureBarView.swift */,
-				492A89881F85A2650067A6F8 /* PaoSittingGoalView.swift */,
-				492A898A1F85A6720067A6F8 /* PaoStandingGoalView.swift */,
-				492A898C1F85A6B20067A6F8 /* PaoMovingGoalView.swift */,
+				492A898C1F85A6B20067A6F8 /* PaoGoalsView.swift */,
 				49578C7C1F86E4500050C192 /* AssetBackgroundView.swift */,
 				49578C7E1F86F1C40050C192 /* AssetTitleBarView.swift */,
 				49578C801F8781580050C192 /* AssetManSlouchingView.swift */,
@@ -341,10 +335,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				492A89891F85A2650067A6F8 /* PaoSittingGoalView.swift in Sources */,
 				49BDDD201F84EAC80052FA32 /* PostureEntry.swift in Sources */,
 				49578C9F1F8874710050C192 /* AssetConsoleWindowView.swift in Sources */,
-				492A898D1F85A6B20067A6F8 /* PaoMovingGoalView.swift in Sources */,
+				492A898D1F85A6B20067A6F8 /* PaoGoalsView.swift in Sources */,
 				49578C7D1F86E4500050C192 /* AssetBackgroundView.swift in Sources */,
 				49578C911F87B8C30050C192 /* DebugVC.swift in Sources */,
 				497FD28B1F93811900CE9AE5 /* AssetBtnTrainBtnsView.swift in Sources */,
@@ -353,7 +346,6 @@
 				49578C7F1F86F1C40050C192 /* AssetTitleBarView.swift in Sources */,
 				49578C891F87907B0050C192 /* AssetBtnConfigView.swift in Sources */,
 				495CDACA1F84450B00B0D7B9 /* PaoPostureBarView.swift in Sources */,
-				492A898B1F85A6720067A6F8 /* PaoStandingGoalView.swift in Sources */,
 				4942F1101F811B5500F378A9 /* BleConnectVC.swift in Sources */,
 				49578CA31F887C160050C192 /* AssetBtnExport.swift in Sources */,
 				49578C991F8860240050C192 /* AssetAccIconView.swift in Sources */,

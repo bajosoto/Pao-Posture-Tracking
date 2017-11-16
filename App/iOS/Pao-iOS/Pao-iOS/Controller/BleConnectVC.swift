@@ -84,6 +84,9 @@ class BleConnectVC: UIViewController, UITextViewDelegate, bleConnectionResponder
         // Nothing to do
     }
 
+    func getPedo(_ pedo: Int16) {
+        
+    }
     
 }
 

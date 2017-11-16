@@ -22,6 +22,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     @IBOutlet weak var btnDebugView: AssetBtnDebugView!
     @IBOutlet weak var btnConfigView: AssetBtnConfigView!
     @IBOutlet weak var btnHelpView: AssetBtnHelpView!
+    @IBOutlet weak var btnGoalsView: UIButton!
     
     // Train Buttons
     @IBOutlet weak var btnTrainSitOk: AssetBtnTrainSittingOkView!
@@ -32,9 +33,40 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     @IBOutlet weak var btnTrainMvNok: AssetBtnTrainMovingNokView!
     @IBOutlet weak var btnTrainBack: AssetBtnBackView!
     
+    @IBOutlet weak var btnGoalsBackView: AssetBtnBackView!
     
     @IBOutlet weak var BlurEffectVC: UIVisualEffectView!
     @IBOutlet var trainButtonsView: UIView!
+    @IBOutlet var goalsConfigView: UIView!
+    
+    // Sliders
+    @IBOutlet weak var sittingSlider: UISlider!
+    @IBOutlet weak var standingSlider: UISlider!
+    @IBOutlet weak var movingSlider: UISlider!
+    @IBOutlet weak var stepsSlider: UISlider!
+    @IBOutlet weak var sittingGoalLbl: UILabel!
+    @IBOutlet weak var standingGoalLbl: UILabel!
+    @IBOutlet weak var movingGoalLbl: UILabel!
+    @IBOutlet weak var stepsGoalLbl: UILabel!
+
+    // Goal circle bar views
+    @IBOutlet weak var goalSitBarView: PaoSittingGoalView!
+    @IBOutlet weak var goalStandingBarView: PaoStandingGoalView!
+    @IBOutlet weak var goalMovingBarView: PaoMovingGoalView!
+    @IBOutlet weak var goalStepsBarView: PaoStepsGoalView!
+    
+    // Goal targets
+    var goalSit: Float = 0.2
+    var goalStand: Float = 0.4
+    var goalMove: Float = 0.5
+    var goalSteps: Float = 15.0
+    
+    // Goal currents
+    var currSit: Float = 0
+    var currStand: Float = 0
+    var currMove: Float = 0
+    var currSteps: Float = 0
+    
     
     var effect: UIVisualEffect!
     
@@ -87,8 +119,24 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         effect = BlurEffectVC.effect
         BlurEffectVC.effect = nil
         
+        // Goal slider colors
+        sittingSlider.minimumTrackTintColor = paoBarBlue
+        sittingSlider.maximumTrackTintColor = paoBarGreen
+        standingSlider.minimumTrackTintColor = paoBarBlue
+        standingSlider.maximumTrackTintColor = paoBarGreen
+        movingSlider.minimumTrackTintColor = paoBarBlue
+        movingSlider.maximumTrackTintColor = paoBarGreen
+        stepsSlider.minimumTrackTintColor = paoBarBlue
+        stepsSlider.maximumTrackTintColor = paoBarGreen
+        
+        sittingSlider.value = goalSit
+        standingSlider.value = goalStand
+        movingSlider.value = goalMove
+        stepsSlider.value = goalSteps
+        
         // Corners for train buttons view
         trainButtonsView.layer.cornerRadius = 5
+        goalsConfigView.layer.cornerRadius = 5
         
         // Set this VC as the current responder
         if let bleConnResp = self as bleConnectionResponder? {
@@ -108,6 +156,28 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         // Plot data
         updateChartWithData()
 
+    }
+    
+    func animateGoalViewIn() {
+        self.view.addSubview(goalsConfigView)
+        goalsConfigView.center = self.view.center
+        goalsConfigView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        goalsConfigView.alpha = 0
+        UIView.animate(withDuration: 0.2) {
+            self.BlurEffectVC.effect = self.effect
+            self.goalsConfigView.alpha = 1
+            self.goalsConfigView.transform = CGAffineTransform.identity
+        }
+    }
+    
+    func animateGoalViewOut() {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.goalsConfigView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.goalsConfigView.alpha = 0
+            self.BlurEffectVC.effect = nil
+        }) { (success:Bool) in
+            self.goalsConfigView.removeFromSuperview()
+        }
     }
     
     func animateTrainButtonsIn() {
@@ -164,7 +234,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         postureChart.highlightPerTapEnabled = false
         postureChart.highlightPerDragEnabled = false
         if(chartDataSet.entryCount > 0) {   // TODO: This should be in terms of the time interval measurements ar etaken
-            postureChart.setVisibleXRangeMaximum(30.0)  // In seconds. Will make the app crash if insufficient data is available
+            postureChart.setVisibleXRangeMaximum(300.0)  // In seconds. Will make the app crash if insufficient data is available
             postureChart.setVisibleXRangeMinimum(3.0)   // In seconds. Will make the app crash if insufficient data is available
             
         }
@@ -195,8 +265,8 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         postureChart.xAxis.gridColor = whiteAlphaColor
         
         
-        postureChart.leftAxis.axisMinimum = -1.0
-        postureChart.leftAxis.axisMaximum = 1.0
+        postureChart.leftAxis.axisMinimum = -1.05
+        postureChart.leftAxis.axisMaximum = 1.05
         postureChart.leftAxis.drawGridLinesEnabled = false
         postureChart.leftAxis.drawZeroLineEnabled = true
         postureChart.leftAxis.axisLineWidth = 0
@@ -205,8 +275,8 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         postureChart.leftAxis.drawLabelsEnabled = false
         postureChart.leftAxis.removeAllLimitLines()
         
-        postureChart.rightAxis.axisMinimum = -1.0
-        postureChart.rightAxis.axisMaximum = 1.0
+        postureChart.rightAxis.axisMinimum = -1.05
+        postureChart.rightAxis.axisMaximum = 1.05
         postureChart.rightAxis.drawGridLinesEnabled = false
         postureChart.rightAxis.drawZeroLineEnabled = true
         postureChart.rightAxis.axisLineWidth = 0
@@ -233,10 +303,10 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         let xaxis = postureChart.xAxis
         xaxis.valueFormatter = axisFormatDelegate
         
-        // Scroll view to show last item
-        if let lastXVal = postureEntries.last?.date.timeIntervalSince1970 {
-            postureChart.moveViewToX(Double(lastXVal))
-        }
+        // Scroll view to show last item  -> I disabled it because it's annoying that it wont let you zoom in and explore without resetting. maybe when interval period is longer...
+//        if let lastXVal = postureEntries.last?.date.timeIntervalSince1970 {
+//            postureChart.moveViewToX(Double(lastXVal))
+//        }
     }
     
     func getPostureEntriesFromDatabase() -> Results<PostureEntry> {
@@ -250,6 +320,20 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         
     }
     
+    @IBAction func onBtnGoalsReleased(_ sender: Any) {
+        animateGoalViewIn()
+    }
+    
+    @IBAction func onBtnGoalsBackPressed(_ sender: Any) {
+        btnGoalsBackView.isPressed = true
+    }
+    @IBAction func onBtnGoalsBackReleased(_ sender: Any) {
+        btnGoalsBackView.isPressed = false
+        animateGoalViewOut()
+    }
+    @IBAction func onBtnGoalsBackDrag(_ sender: Any) {
+        btnGoalsBackView.isPressed = false
+    }
     
     @IBAction func onbtnTrainPressed(_ sender: Any) {
         btnTrainView.isPressed = true
@@ -292,6 +376,9 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnHelpReleased(_ sender: Any) {
         btnHelpView.isPressed = false
+        // Send ping message (which also calibrates)
+        bleConn.write(msg: "7E00")
+        classifier.train()
     }
     @IBAction func onBtnHelpDrag(_ sender: Any) {
         btnHelpView.isPressed = false
@@ -417,7 +504,6 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnTrainBackReleased(_ sender: Any) {
         btnTrainBack.isPressed = false
-        classifier.train()
         isClassifying = true
         animateTrainButtonsOut()
     }
@@ -425,6 +511,28 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         btnTrainBack.isPressed = false
     }
     
+    
+    // Sliders
+    @IBAction func onSittingSliderChange(_ sender: Any) {
+        goalSit = sittingSlider.value
+        sittingGoalLbl.text = String(format: "SITTING: %.0f%%", goalSit * 100)
+        
+    }
+    
+    @IBAction func onStandingSliderChange(_ sender: Any) {
+        goalStand = standingSlider.value
+        standingGoalLbl.text = String(format: "STANDING: %.0f%%", goalStand * 100)
+    }
+    
+    @IBAction func onMovingSliderChange(_ sender: Any) {
+        goalMove = movingSlider.value
+        movingGoalLbl.text = String(format: "MOVING: %.0f%%", goalMove * 100)
+    }
+
+    @IBAction func onStepsSliderChange(_ sender: Any) {
+        goalSteps = stepsSlider.value
+        stepsGoalLbl.text = String(format: "STEPS: %.0f", goalSteps)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? DebugVC {
@@ -467,28 +575,37 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             } else if(shouldClassifySample == true) {
                 print("classifying...")
 //                self.classifier.classifyKnn(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, nNeighbours: 15)
+                self.classifier.addAndClassifySample(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz)
                 self.sampleCnt += 1
-                // TODO: Disabled temporarily. Do something here later just like in DebugVC
+                
+                // Calculate value for posture bar
+                var postureBarVal = 0.5
+                if let lastPostureProb = self.classifier.entriesRealm.objects(PostureEntry.self).last?.posture {
+                    // 0.5 +/- 0...0.5
+                    postureBarVal += lastPostureProb / 2.0     // Unsafe unwrap! TODO: Change this
+                    self.postureBar.posture = CGFloat(postureBarVal)
+                    self.updateChartWithData()  // Too much overhead putting this here!
+                }
+                
             }
             
-            if(self.sampleCnt == 10) {
+            if(self.sampleCnt == 10) {      // I think this is not needed anymore?
                 self.sampleCnt = 0
                 if(self.isSampling == false) {
                     self.currLabel = ""
                 }
-                
-                // Calculate value for posture bar
-                var postureBarVal = 0.5
-                let lastPostureProb = self.classifier.entriesRealm.objects(PostureEntry.self).last?.posture
-                // 0.5 +/- 0...0.5
-                postureBarVal += lastPostureProb! / 2.0     // Unsafe unwrap! TODO: Change this
-                self.postureBar.posture = CGFloat(postureBarVal)
-                self.updateChartWithData()
             }
             
             
         }
     }
+    
+    
+    func getPedo(_ pedo: Int16) {
+        currSteps = Float(pedo)
+        goalStepsBarView.posture = CGFloat(currSteps / goalSteps)
+    }
+    
 }
 
 extension UIViewController: IAxisValueFormatter {

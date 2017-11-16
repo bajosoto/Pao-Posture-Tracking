@@ -2,6 +2,8 @@
 #include "es-ble-rx.h"
 #include "debug-interface.h"
 #include "es-ble-tx.h"
+#include "vibrator.h"
+#include "mpu_wrapper.h"
 
 // =========================================================================== //
 //								BLE Messages
@@ -13,6 +15,7 @@ uint8_t bleRxBuff[BLE_BUFFER_SIZE];
 void ble_msg00_ping();
 void ble_msg01_dummy_data();
 void ble_msg02_dummy_signed_int32();
+void ble_msg03_vibrate();
 
 // Message table
 BleMsgType bleMsgTable[TOTAL_BLE_MESSAGES_APP] = {
@@ -20,6 +23,7 @@ BleMsgType bleMsgTable[TOTAL_BLE_MESSAGES_APP] = {
 	{ble_msg00_ping, 				0},				// 00:	Requests board status
 	{ble_msg01_dummy_data, 			4}, 			// 01:	Dummy 4 byte data
 	{ble_msg02_dummy_signed_int32, 	4},				// 02:	Dummy 32-bit signed int
+	{ble_msg03_vibrate, 			1},				// 03:	Vibrate/Buzz
 };
 
 
@@ -27,6 +31,7 @@ BleMsgType bleMsgTable[TOTAL_BLE_MESSAGES_APP] = {
 void ble_msg00_ping(){
 	bsp_board_led_invert(1);
 	sendBleMessageEs(MSG_BLE_00_PONG);
+	calibrate_mpu();
 	//sendBleMessageEs(MSG_BLE_02_SENSOR);
 	//debugMsgBle("Hello! %d", -4673);        // Example of how to use debugMsgBle
 }
@@ -37,6 +42,10 @@ void ble_msg01_dummy_data(){
 
 void ble_msg02_dummy_signed_int32(){
 
+}
+
+void ble_msg03_vibrate() {
+	buzz(bleRxBuff[0]);
 }
 
 

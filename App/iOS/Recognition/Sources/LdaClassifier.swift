@@ -7,6 +7,7 @@ class LdaClassifier: Classifier{
 	var lnPriors 	 = [Double]()
 	var covMeans 	 = [Matrix]()
 	var meanCovMeans = [Double]()
+	var isTrained = false
 
 	init(_ trainset: Dataset,regularizer: Double = 0.00001){
 		self.train(trainset,regularizer:regularizer)
@@ -27,6 +28,7 @@ class LdaClassifier: Classifier{
 			lnPriors.append(ln(x:priors[i]))
 			covMeans.append(try! inv(self.covariance)*self.means[i].T)
 		}
+		isTrained = true
 	}
 
 	func predict(samples: Matrix)->[Int]{
