@@ -169,6 +169,8 @@ class Classifier {
         // If the sample is the last in the window
         if samplesBuffer.count == _numSamples {
             
+            
+            
             // Get an array of classified PostureEntries (probably only 1 since the full window size is sent)
             if let classificationResult = myPaoKnn?.predictSampleSoft(samplesBuffer) { // as? [PostureEntry] {
                 // Grab the first result TODO: If we're sending the window size, it should only produce one. Otherwise change this
