@@ -64,7 +64,7 @@ class PaoKnnClassifierTest: XCTestCase {
         var l = [PostureEntry]()
         for i in 0 ..< 10{
           let i16 = Int16(i)
-          l.append(PostureEntry([i16,i16,i16,i16,i16,i16],lookupLabel(Double(j+1))))
+          l.append(PostureEntry([i16,i16,i16,i16,i16,i16,i16,i16,i16],lookupLabel(Double(j+1))))
         } 
         classSamples.append(l)
         samples.append(contentsOf:l) 
@@ -211,7 +211,7 @@ class PaoKnnClassifierTest: XCTestCase {
         var l = [PostureEntry]()
         for i in 0 ..< 10{
           let i16 = Int16(i)
-          l.append(PostureEntry([i16,i16,i16,i16,i16,i16],lookupLabel(Double(j+1))))
+          l.append(PostureEntry([i16,i16,i16,i16,i16,i16,i16,i16,i16],lookupLabel(Double(j+1))))
         } 
         classSamples.append(l)
         samples.append(contentsOf:l) 

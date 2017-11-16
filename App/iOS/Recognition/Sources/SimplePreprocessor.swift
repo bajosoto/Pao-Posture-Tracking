@@ -47,7 +47,7 @@
 							average.theta,
 							peak2peak]])
 		
-		return	FeatureVector(vector)
+		return	SimpleFeatureVector(vector)
 		
 	}
 
