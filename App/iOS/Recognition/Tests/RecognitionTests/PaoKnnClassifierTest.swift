@@ -142,7 +142,11 @@ class PaoKnnClassifierTest: XCTestCase {
       for j in 0 ..< 6 {
         var l = [PostureEntry]()
 
-        for i in 0 ..< 10{
+        for i in 0 ..< 5{
+          let class_ = classes[j]
+          l.append(PostureEntry(class_[i].map{Int16($0)},lookupLabel(Double(j+1))))
+        }
+        for i in 0 ..< 5{
           let class_ = classes[j]
           l.append(PostureEntry(class_[i].map{Int16($0)},lookupLabel(Double(j+1))))
         } 

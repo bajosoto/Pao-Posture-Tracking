@@ -21,6 +21,7 @@ public class  BasePaoClassifier: PaoClassifier {
 			rawData.append(RawSample(traindata[i]))
 		}
 
+
 		/* apply preprocessing*/
 		let filtered = try! preprocessor.preprocess(rawData,labels)
 
@@ -34,6 +35,7 @@ public class  BasePaoClassifier: PaoClassifier {
 		/*generate trainingset and train*/
 		let trainset = try! Dataset(matrixRep,filtered.1)
 		self.classifier.train(trainset)
+
 	}
 
 	public func predictSampleSoft(_ testdata: [IPostureEntry]) -> [IPostureEntry]{

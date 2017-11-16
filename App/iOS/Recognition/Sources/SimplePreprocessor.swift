@@ -55,6 +55,9 @@
 							average.accX,
 							average.accY,
 							average.accZ,
+							average.phi,
+							average.psi,
+							average.theta,
 							peak2peak]])
 		
 		return	FeatureVector(vector)
