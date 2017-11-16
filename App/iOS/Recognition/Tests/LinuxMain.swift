@@ -17,6 +17,7 @@ XCTMain([
      testCase(DecisionStumpTest.allTests),
      testCase(DecisionLeafTest.allTests),
      testCase(AdaBoostTest.allTests),
+     testCase(PostMajorityVoteTest.allTests),
     
 
 ])
