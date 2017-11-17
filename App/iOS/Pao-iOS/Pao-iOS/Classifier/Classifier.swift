@@ -25,6 +25,8 @@ class Classifier {
     private var _numBadPosturesThresh: Int
     // Current amount of bad postures
     private var _numBadPosturesCount = 0
+    
+    var hasBeenTrained = false
 //    private var axBuff = 0
 //    private var ayBuff = 0
 //    private var azBuff = 0
@@ -69,6 +71,7 @@ class Classifier {
             trainSetForFramework.append(sample)
         }
         myPaoKnn = PaoKnnClassifier(self.trainSetForFramework)
+        hasBeenTrained = true
     }
     
     public func addToDataset(ax:Int16, ay:Int16, az:Int16, gx:Int16, gy:Int16, gz:Int16, phi: Int16, theta:Int16,

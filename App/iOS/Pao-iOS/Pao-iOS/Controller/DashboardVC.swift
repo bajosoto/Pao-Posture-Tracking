@@ -55,13 +55,18 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     @IBOutlet weak var goalMovingBarView: PaoMovingGoalView!
     @IBOutlet weak var goalStepsBarView: PaoStepsGoalView!
     
-    // Goal targets
+    // Goal targets (percentage / steps)
     var goalSit: Float = 0.2
     var goalStand: Float = 0.4
     var goalMove: Float = 0.5
     var goalSteps: Float = 15.0
     
-    // Goal currents
+    // Goal total (to calculate percentage)
+    var totSit: Float = 0
+    var totStand: Float = 0
+    var totMove: Float = 0
+    
+    // Goal currents (good postures / steps)
     var currSit: Float = 0
     var currStand: Float = 0
     var currMove: Float = 0
@@ -208,6 +213,18 @@ class DashboardVC: UIViewController, bleConnectionResponder {
 //        postureEntry.posture = randInt // random number between -1 and 1
 //        postureEntry.save()
 //        updateChartWithData()
+        
+        // Reset numbers for demo
+        totSit = 0
+        currSit = 0
+        totStand = 0
+        currStand = 0
+        totMove = 0
+        currMove = 0
+        
+        // Reset history for demo
+        classifier.entriesRealm.deleteAll()
+        updateChartWithData()
     }
     
     func updateChartWithData() {
@@ -579,18 +596,54 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             } else if(shouldClassifySample == true) {
                 print("classifying...")
 //                self.classifier.classifyKnn(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, nNeighbours: 15)
-                self.classifier.addAndClassifySample(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, phi: phi, theta: theta, psi: psi)
-                self.sampleCnt += 1
                 
-                // Calculate value for posture bar
-                var postureBarVal = 0.5
-                if let lastPostureProb = self.classifier.entriesRealm.objects(PostureEntry.self).last?.posture {
-                    // 0.5 +/- 0...0.5
-                    postureBarVal += lastPostureProb / 2.0     // Unsafe unwrap! TODO: Change this
-                    self.postureBar.posture = CGFloat(postureBarVal)
-                    self.updateChartWithData()  // Too much overhead putting this here!
+                if self.classifier.hasBeenTrained {
+                    self.classifier.addAndClassifySample(ax: ax, ay: ay, az: az, gx: gx, gy: gy, gz: gz, phi: phi, theta: theta, psi: psi)
+                    self.sampleCnt += 1
+                    
+                    
+                    var postureBarVal = 0.5
+                    if let lastPostureProb = self.classifier.entriesRealm.objects(PostureEntry.self).last {
+                        // Calculate value for posture bar
+                        // 0.5 +/- 0...0.5
+                        postureBarVal += lastPostureProb.posture / 2.0     // Unsafe unwrap! TODO: Change this
+                        self.postureBar.posture = CGFloat(postureBarVal)
+                        self.updateChartWithData()  // Too much overhead putting this here!
+                        
+                        // calculate goals
+                        switch lastPostureProb.postureLbl {
+                        case "SitOk":
+                            self.totSit += 1.0
+                            self.currSit += 1.0
+                            self.goalSitBarView.posture = CGFloat((self.currSit / self.totSit) / self.goalSit)
+                            break
+                        case "SitNok":
+                            self.totSit += 1.0
+                            self.goalSitBarView.posture = CGFloat((self.currSit / self.totSit) / self.goalSit)
+                            break
+                        case "StandOk":
+                            self.totStand += 1.0
+                            self.currStand += 1.0
+                            // self.goalStandingBarView.posture = CGFloat((self.currStand / self.totStand) / self.goalStand)
+                            break
+                        case "StandNok":
+                            self.totStand += 1.0
+                            // self.goalStandingBarView.posture = CGFloat((self.currStand / self.totStand) / self.goalStand)
+                            break
+                        case "MovOk":
+                            self.totMove += 1.0
+                            self.currMove += 1.0
+                            self.goalMovingBarView.posture = CGFloat((self.currMove / self.totMove) / self.goalMove)
+                            break
+                        case "MovNok":
+                            self.totMove += 1.0
+                            self.goalMovingBarView.posture = CGFloat((self.currMove / self.totMove) / self.goalMove)
+                            break
+                            default:
+                            break
+                        }
+                    }
                 }
-                
             }
             
             if(self.sampleCnt == 10) {      // I think this is not needed anymore?

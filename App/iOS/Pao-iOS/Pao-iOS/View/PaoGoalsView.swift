@@ -31,13 +31,13 @@ class PaoMovingGoalView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        PaoDrawingAssets.drawPaoMovingGoal(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, postureGoalPercentage: 0.1)
+        PaoDrawingAssets.drawPaoMovingGoal(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, postureGoalPercentage: _posture)
     }
 }
 
 class PaoStepsGoalView: UIView {
     
-    private var _posture: CGFloat = 0.0
+    private var _posture: CGFloat = 0.5
     
     var posture: CGFloat {
         set(newPosture) {
@@ -58,13 +58,13 @@ class PaoStepsGoalView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        PaoDrawingAssets.drawPaoStepGoal(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, postureGoalPercentage: posture)
+        PaoDrawingAssets.drawPaoStepGoal(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, postureGoalPercentage: _posture)
     }
 }
 
 class PaoStandingGoalView: UIView {
     
-    private var _posture: CGFloat = 0.0
+    private var _posture: CGFloat = 0.5
     
     var posture: CGFloat {
         set(newPosture) {
@@ -85,7 +85,7 @@ class PaoStandingGoalView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        PaoDrawingAssets.drawPaoStandingGoal(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, postureGoalPercentage: 0.90)
+        PaoDrawingAssets.drawPaoStandingGoal(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height), resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, postureGoalPercentage: _posture)
     }
     
 }
@@ -114,7 +114,7 @@ class PaoSittingGoalView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        PaoDrawingAssets.drawPaoSittingGoal(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height) , resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, postureGoalPercentage: 0.5)
+        PaoDrawingAssets.drawPaoSittingGoal(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height) , resizing: PaoDrawingAssets.ResizingBehavior.aspectFit, postureGoalPercentage: _posture)
     }
     
 }
