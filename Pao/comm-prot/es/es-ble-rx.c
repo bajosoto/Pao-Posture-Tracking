@@ -16,6 +16,7 @@ void ble_msg00_ping();
 void ble_msg01_dummy_data();
 void ble_msg02_dummy_signed_int32();
 void ble_msg03_vibrate();
+void ble_msg04_snooze();
 
 // Message table
 BleMsgType bleMsgTable[TOTAL_BLE_MESSAGES_APP] = {
@@ -24,6 +25,7 @@ BleMsgType bleMsgTable[TOTAL_BLE_MESSAGES_APP] = {
 	{ble_msg01_dummy_data, 			4}, 			// 01:	Dummy 4 byte data
 	{ble_msg02_dummy_signed_int32, 	4},				// 02:	Dummy 32-bit signed int
 	{ble_msg03_vibrate, 			1},				// 03:	Vibrate/Buzz
+	{ble_msg04_snooze, 				0},				// 04:	Start snooze
 };
 
 
@@ -46,6 +48,10 @@ void ble_msg02_dummy_signed_int32(){
 
 void ble_msg03_vibrate() {
 	buzz(bleRxBuff[0]);
+}
+
+void ble_msg04_snooze() {
+	start_snooze();
 }
 
 

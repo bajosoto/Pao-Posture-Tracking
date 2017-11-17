@@ -25,6 +25,8 @@ class Classifier {
     private var _numBadPosturesThresh: Int
     // Current amount of bad postures
     private var _numBadPosturesCount = 0
+    
+    var hasBeenTrained = false
 //    private var axBuff = 0
 //    private var ayBuff = 0
 //    private var azBuff = 0
@@ -69,6 +71,7 @@ class Classifier {
             trainSetForFramework.append(sample)
         }
         myPaoKnn = PaoKnnClassifier(self.trainSetForFramework)
+        hasBeenTrained = true
     }
     
     public func addToDataset(ax:Int16, ay:Int16, az:Int16, gx:Int16, gy:Int16, gz:Int16, phi: Int16, theta:Int16,
@@ -151,7 +154,8 @@ class Classifier {
 //        }
     }
     
-    public func addAndClassifySample(ax:Int16, ay:Int16, az:Int16, gx:Int16, gy:Int16, gz:Int16) {
+    public func addAndClassifySample(ax:Int16, ay:Int16, az:Int16, gx:Int16, gy:Int16, gz:Int16, phi: Int16, theta:Int16,
+                                     psi:Int16) {
         
         // Create a new PostureEntry with new sample data
         let newEntry = PostureEntry()
@@ -161,6 +165,10 @@ class Classifier {
         newEntry.gyrX = gx
         newEntry.gyrY = gy
         newEntry.gyrZ = gz
+        newEntry.phi = phi
+        newEntry.theta = theta
+        newEntry.psi = psi
+        
         // Add sample to the array of PostureEntries
         samplesBuffer.append(newEntry)
         
@@ -169,49 +177,52 @@ class Classifier {
         // If the sample is the last in the window
         if samplesBuffer.count == _numSamples {
             
-            
-            
-            // Get an array of classified PostureEntries (probably only 1 since the full window size is sent)
-            if let classificationResult = myPaoKnn?.predictSampleSoft(samplesBuffer) { // as? [PostureEntry] {
-                // Grab the first result TODO: If we're sending the window size, it should only produce one. Otherwise change this
-                let newClassifiedEntry:PostureEntry = PostureEntry()
-                newClassifiedEntry.accX = classificationResult[0].accX
-                newClassifiedEntry.accY = classificationResult[0].accY
-                newClassifiedEntry.accZ = classificationResult[0].accZ
-                newClassifiedEntry.gyrX = classificationResult[0].gyrX
-                newClassifiedEntry.gyrY = classificationResult[0].gyrY
-                newClassifiedEntry.gyrZ = classificationResult[0].gyrZ
-                newClassifiedEntry.postureLbl = classificationResult[0].postureLbl
-                newClassifiedEntry.posture = classificationResult[0].posture
-                
-                try! entriesRealm.write {
-                    // Add first PostureEntry to Realm TODO: If there's more than one, we need to add those too
-                    entriesRealm.add(newClassifiedEntry)
-                }
-                
-                _bleConn.logMsg(message: "Stored classified sample: \(newClassifiedEntry.postureLbl), \(newClassifiedEntry.posture.format(f: ".2"))")
-                print("Stored classified sample: \(newEntry.postureLbl)")
-                
-                // If bad posture detected
-                if newClassifiedEntry.posture < 0.0 {
-                    // Increment bad posture count
-                    _numBadPosturesCount += 1
-                    // Check if amount of bad postures threshold has been reached
-                    if _numBadPosturesCount >= _numBadPosturesThresh {
-                        // Buzz for 100 ms (0A = 10, which is then multiplied by 10 on ES side, in ms)
-                        _bleConn.write(msg: "7E030A")
-                        _bleConn.logMsg(message: "Should be buzzing now")
+            if !rawRealm.isEmpty {
+                // Get an array of classified PostureEntries (probably only 1 since the full window size is sent)
+                if let classificationResult = myPaoKnn?.predictSampleSoft(samplesBuffer) { // as? [PostureEntry] {
+                    // Grab the first result TODO: If we're sending the window size, it should only produce one. Otherwise change this
+                    let newClassifiedEntry:PostureEntry = PostureEntry()
+//                    newClassifiedEntry.accX = classificationResult[0].accX        // We don't need this data in the classified data
+//                    newClassifiedEntry.accY = classificationResult[0].accY
+//                    newClassifiedEntry.accZ = classificationResult[0].accZ
+//                    newClassifiedEntry.gyrX = classificationResult[0].gyrX
+//                    newClassifiedEntry.gyrY = classificationResult[0].gyrY
+//                    newClassifiedEntry.gyrZ = classificationResult[0].gyrZ
+//                    newClassifiedEntry.phi = classificationResult[0].phi
+//                    newClassifiedEntry.theta = classificationResult[0].theta
+//                    newClassifiedEntry.psi = classificationResult[0].psi
+                    newClassifiedEntry.postureLbl = classificationResult[0].postureLbl
+                    newClassifiedEntry.posture = classificationResult[0].posture
+                    
+                    try! entriesRealm.write {
+                        // Add first PostureEntry to Realm TODO: If there's more than one, we need to add those too
+                        entriesRealm.add(newClassifiedEntry)
+                    }
+                    
+                    _bleConn.logMsg(message: "Stored classified sample: \(newClassifiedEntry.postureLbl), \(newClassifiedEntry.posture.format(f: ".2"))")
+                    print("Stored classified sample: \(newEntry.postureLbl)")
+                    
+                    // If bad posture detected
+                    if newClassifiedEntry.posture < 0.0 {
+                        // Increment bad posture count
+                        _numBadPosturesCount += 1
+                        // Check if amount of bad postures threshold has been reached
+                        if _numBadPosturesCount >= _numBadPosturesThresh {
+                            // Buzz for 100 ms (0A = 10, which is then multiplied by 10 on ES side, in ms)
+                            _bleConn.write(msg: "7E030A")
+                            _bleConn.logMsg(message: "Should be buzzing now")
+                            // Reset bad postures count
+                            _numBadPosturesCount = 0
+                        }
+                    } else {
                         // Reset bad postures count
                         _numBadPosturesCount = 0
                     }
+                    // End for debugging
+                    
                 } else {
-                    // Reset bad postures count
-                    _numBadPosturesCount = 0
+                    _bleConn.logMsg(message: "classificationResult was nil")
                 }
-                // End for debugging
-                
-            } else {
-                _bleConn.logMsg(message: "classificationResult was nil")
             }
             // Empty the samples buffer
             samplesBuffer.removeAll()
