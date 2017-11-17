@@ -364,6 +364,8 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         btnConfigView.isPressed = true
     }
     @IBAction func onBtnConfigReleased(_ sender: Any) {
+        // Snooze button
+        bleConn.write(msg: "7E04")
         btnConfigView.isPressed = false
     }
     @IBAction func onBtnConfigDrag(_ sender: Any) {

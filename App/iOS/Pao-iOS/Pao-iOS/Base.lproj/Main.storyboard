@@ -201,7 +201,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="s5d-8V-1Pu" secondAttribute="trailing" id="lFW-NF-Aua"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPX-r2-PC2" customClass="PaoStandingGoalView" customModule="Pao_iOS" customModuleProvider="target">
+                                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BPX-r2-PC2" customClass="PaoStandingGoalView" customModule="Pao_iOS" customModuleProvider="target">
                                                 <rect key="frame" x="97" y="0.0" width="83" height="86"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STANDING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHM-ad-kLa">
@@ -241,7 +241,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="Ov0-3l-nLl" secondAttribute="trailing" id="mhe-CR-yBU"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cii-v5-Nvh" customClass="PaoStepsGoalView" customModule="Pao_iOS" customModuleProvider="target">
+                                            <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cii-v5-Nvh" customClass="PaoStepsGoalView" customModule="Pao_iOS" customModuleProvider="target">
                                                 <rect key="frame" x="291" y="0.0" width="83" height="86"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STEPS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g17-cp-xr2">
