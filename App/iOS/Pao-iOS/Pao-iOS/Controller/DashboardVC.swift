@@ -149,7 +149,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         }
         
         // Create a classifier
-        classifier = Classifier(numSamples: 10, bleConn: _bleConn)
+        classifier = Classifier(numSamples: 30, bleConn: _bleConn)
         
         // Round off profile picture
         profilePicImg.layer.cornerRadius = profilePicImg.frame.size.width / 2
@@ -207,12 +207,12 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         }
     }
     
-    @IBAction func onTestBtnPress(_ sender: Any) {
-//        let postureEntry = PostureEntry()
-//        let randInt = (Double(arc4random()) / Double(UINT32_MAX) ) * 2.0 - 1.0
-//        postureEntry.posture = randInt // random number between -1 and 1
-//        postureEntry.save()
-//        updateChartWithData()
+    @IBAction func onHiddenButtonPress(_ sender: Any) {
+        //        let postureEntry = PostureEntry()
+        //        let randInt = (Double(arc4random()) / Double(UINT32_MAX) ) * 2.0 - 1.0
+        //        postureEntry.posture = randInt // random number between -1 and 1
+        //        postureEntry.save()
+        //        updateChartWithData()
         
         // Reset numbers for demo
         totSit = 0
@@ -223,8 +223,16 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         currMove = 0
         
         // Reset history for demo
-        classifier.entriesRealm.deleteAll()
+        try! classifier.entriesRealm.write{
+            classifier.entriesRealm.deleteAll()
+        }
         updateChartWithData()
+    }
+    @IBAction func onHiddenEraseCalBtnPress(_ sender: Any) {
+        classifier.hasBeenTrained = false
+        try! classifier.rawRealm.write {
+            classifier.rawRealm.deleteAll()
+        }
     }
     
     func updateChartWithData() {
