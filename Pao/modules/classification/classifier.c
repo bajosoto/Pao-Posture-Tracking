@@ -6,7 +6,7 @@ static pdf_handler pdf_handlers[CLF_N] = {
 
 static train_handler train_handlers[CLF_N] = {
 	knn_train,
-}
+};
 
 static uint8_t clf = CLF_KNN;
 

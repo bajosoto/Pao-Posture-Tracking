@@ -1,6 +1,8 @@
 #ifndef POSTURE_CLASSIFIER_H
 #define POSTURE_CLASSIFIER_H
 
+#include <inttypes.h>
+
 typedef enum{
 	POSTURE_HEALTHY=0,
 	POSTURE_UNHEALTHY,
@@ -13,14 +15,14 @@ typedef enum{
 typedef enum{
 	CLF_KNN=0,
 	CLF_N
-}__attribute__((packed)) classifier_t
+}__attribute__((packed)) classifier_t;
 
 #define CLF_DIM 5
-typedef proba_t int32_t
-typedef feature_t int32_t
+typedef int32_t proba_t; 
+typedef int32_t feature_t;
 
-typedef proba_t(*pdf_handler)(feature_t*);
-typedef void(*train_handler)(uint8_t n_samples, feature_t sample[n_samples][DIM]);
+typedef proba_t(*pdf_handler)(feature_t[CLF_DIM],posture_t);
+typedef void(*train_handler)(uint8_t n_samples, feature_t sample[n_samples][CLF_DIM]);
 
 /*Classificatons that are lower than this threshold
 don't get classified at all (rejected)*/
@@ -42,7 +44,7 @@ void postc_init(classifier_t clf);
  * @param  n_samples  [number samples]
  * @param  sample     [array with training samples]
  */
-void postc_train(uint8_t n_samples, feature_t sample[n_samples][DIM]);
+void postc_train(uint8_t n_samples, feature_t sample[n_samples][CLF_DIM]);
 
 /**
  * [postc_predict returns the classified posture given
@@ -52,7 +54,7 @@ void postc_train(uint8_t n_samples, feature_t sample[n_samples][DIM]);
  * @param  sample     [vector containing sample features]
  * @return            [classified posture]
  */
-posture_t postc_predict(feature_t sample[DIM]);
+posture_t postc_predict(feature_t sample[CLF_DIM]);
 
 /**
  * [postc_predict_n wrapper for postc_predict to classify
@@ -64,6 +66,6 @@ posture_t postc_predict(feature_t sample[DIM]);
  * @param  n_samples  [number of samples]
  * 
  */
-void postc_predict_n(uint8_t n_samples, feature_t samples[n_samples][DIM],posture_t buffer[n_samples]);
+void postc_predict_n(uint8_t n_samples, feature_t samples[n_samples][CLF_DIM],posture_t buffer[n_samples]);
 
 #endif
