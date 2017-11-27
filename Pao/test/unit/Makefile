@@ -6,7 +6,7 @@ PROGRAM = test
 CMOCKA_LIB_PATH = $(abspath ../cmocka/_build/src/)
 
 CFLAGS = -g -O2 -Wall -D PC_COMPILE -D TESTING_MSG
-LDFLAGS = -L $(CMOCKA_LIB_PATH) -lcmocka
+LDFLAGS = -L $(CMOCKA_LIB_PATH) -lcmocka -lm
 
 PROJ_BASE=../../
 

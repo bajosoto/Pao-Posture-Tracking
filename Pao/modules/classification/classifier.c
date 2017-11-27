@@ -1,12 +1,26 @@
-#include "posture_classifier.h"
-#include "classifier_impl.h"
+#include "classifier.h"
 
-posture_t postc_classify(int* sample){
+static pdf_handler pdf_handlers[CLF_N] = {
+	knn_pdf,
+};
+
+static train_handler train_handlers[CLF_N] = {
+	knn_train,
+}
+
+static uint8_t clf = CLF_KNN;
+
+void postc_init(classifier_t clf_set){
+	clf = clf_set;
+}
+
+posture_t postc_predict(feature_t sample[DIM]){
+	pdf_t classifier = pdf_handlers[clf]
 	posture_t detected = (posture_t) 0;
-	float cur_pdf,max_pdf = pdf(0,sample);
+	float cur_pdf,max_pdf = classifier(0,sample);
 
-	for(int i=1;i<=POSTURE_NCLASSES;i++){
-		if((cur_pdf=pdf(0,sample)) > max_pdf){
+	for(uint8_t i=1;i<=POSTURE_NCLASSES;i++){
+		if((cur_pdf = classifier(0,sample)) > max_pdf){
 			max_pdf = cur_pdf;
 			detected = (posture_t) i;
 		}
@@ -18,8 +32,8 @@ posture_t postc_classify(int* sample){
 	}
 
 }
-void postc_classify(int** samples,posture_t* buffer,int n_samples){
-	for(int i=0;i<=n;i++){
-		buffer[i] = postc_classify(samples[i]);
+void postc_predict_n(uint8_t n_samples, feature_t samples[n_samples][DIM],posture_t buffer[n_samples]){
+	for(uint8_t i=0;i<=n;i++){
+		buffer[i] = postc_predict(samples[i]);
 	}
 }

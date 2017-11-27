@@ -8,6 +8,7 @@
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <math.h>
 #include "mat.h"
 /*
 * Test is test compiled correctly
@@ -121,6 +122,25 @@ static void test_matmult_3to2(void **state){
 		}
 	}
 }
+
+static void test_vec_sub(void **state){
+	mat_t vec1[3] = {1,2,3};
+	mat_t vec2[3] = {3,2,1};
+	mat_t res[3] = {0,0,0};
+	mat_t true_res[3] = {-2,0,2};
+
+	vec_sub(3,vec1,vec2,res);
+
+	for (int i=0; i<3; i++){
+		assert_true(res[i] == true_res[i]);
+	}
+}
+
+static void test_vec_norm(void **state){
+	mat_t vec1[3] = {2,-2};
+
+	assert_true(sqrt(7.9) <= vec_norm(2,vec1) && vec_norm(2,vec1) <= sqrt(8.1));
+}
 /*
 * Register Tests
 */
@@ -132,6 +152,8 @@ int main(void)
 		cmocka_unit_test(test_matmult_3d),
 		cmocka_unit_test(test_matmult_bad),
 		cmocka_unit_test(test_matmult_3to2),
+		cmocka_unit_test(test_vec_sub),
+		cmocka_unit_test(test_vec_norm)
 
 
 
