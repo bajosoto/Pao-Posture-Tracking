@@ -68,7 +68,7 @@ int main(void)
             //     }
             // }
         }
-        if(timer % 10 == 0) {  // Every 100ms
+        if(timer % 10 == 0) {  // Every 100ms  errr 50
             // getMpuSensors();
             sendMessageEs(MSG02_SENSOR_VALS);
             sendBleMessageEs(MSG_BLE_02_SENSOR);
