@@ -53,7 +53,7 @@ static proba_t get_score(const uint16_t neighbors[k_neighbors],class_t posture){
     return pdf;
 }
 
-proba_t knn_class_pdf(feature_t *sample, class_t posture){
+proba_t knn_class_pdf(feature_t sample[CLF_DIM], class_t posture){
 	uint16_t neighbors[k_neighbors];
 
 	find_neighbors(sample,neighbors);
@@ -61,7 +61,7 @@ proba_t knn_class_pdf(feature_t *sample, class_t posture){
     return get_score(neighbors,posture);
 }
 
-void knn_pdf(feature_t *sample,proba_t class_probas[CLASS_NCLASSES]){
+void knn_pdf(feature_t sample[CLF_DIM],proba_t class_probas[CLASS_NCLASSES]){
     uint16_t neighbors[k_neighbors];
 
     find_neighbors(sample,neighbors);

@@ -35,7 +35,7 @@ don't get classified at all (rejected)*/
  * @date   2017-11-27
  * @param  clf        [classifier to be chosen]
  */
-void postc_init(classifier_t clf);
+void clf_init(classifier_t clf);
 
 
 /**
@@ -45,7 +45,7 @@ void postc_init(classifier_t clf);
  * @param  n_samples  [number samples]
  * @param  sample     [array with training samples]
  */
-void postc_train(uint8_t n_samples, feature_t sample[n_samples][CLF_DIM]);
+void clf_train(uint8_t n_samples, feature_t sample[n_samples][CLF_DIM], class_t labels[n_samples]);
 
 /**
  * [postc_predict returns the classified posture given
@@ -55,7 +55,7 @@ void postc_train(uint8_t n_samples, feature_t sample[n_samples][CLF_DIM]);
  * @param  sample     [vector containing sample features]
  * @return            [classified posture]
  */
-class_t postc_predict(feature_t sample[CLF_DIM]);
+class_t clf_predict(feature_t *sample);
 
 /**
  * [postc_predict_n wrapper for postc_predict to classify
@@ -67,6 +67,6 @@ class_t postc_predict(feature_t sample[CLF_DIM]);
  * @param  n_samples  [number of samples]
  * 
  */
-void postc_predict_n(uint8_t n_samples, feature_t samples[n_samples][CLF_DIM],class_t buffer[n_samples]);
+void clf_predict_n(uint8_t n_samples, feature_t samples[n_samples][CLF_DIM], class_t buffer[n_samples]);
 
 #endif

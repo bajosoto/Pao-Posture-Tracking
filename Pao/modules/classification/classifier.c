@@ -30,12 +30,12 @@ static class_t class_max(const proba_t pdfs[CLASS_NCLASSES]){
 
 }
 
-void postc_init(classifier_t clf_set){
+void clf_init(classifier_t clf_set){
 	clf = clf_set;
 }
 
-class_t postc_predict(feature_t sample[CLF_DIM]){
-	pdf_handler classifier = pdf_handlers[clf]
+class_t clf_predict(feature_t sample[CLF_DIM]){
+	pdf_handler classifier = pdf_handlers[clf];
 
 	proba_t pdfs[CLASS_NCLASSES];
 	classifier(sample,pdfs);
@@ -44,8 +44,8 @@ class_t postc_predict(feature_t sample[CLF_DIM]){
 
 
 }
-void postc_predict_n(uint8_t n_samples, feature_t samples[n_samples][CLF_DIM],class_t buffer[n_samples]){
-	for(uint8_t i=0;i<=n;i++){
-		buffer[i] = postc_predict(samples[i]);
+void clf_predict_n(uint8_t n_samples, feature_t samples[n_samples][CLF_DIM], class_t buffer[n_samples]){
+	for(uint8_t i=0;i<=n_samples;i++){
+		buffer[i] = clf_predict(samples[i]);
 	}
 }

@@ -34,7 +34,10 @@ OBJS_TEST_MATMULT = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_MATMULT))
 SOURCES_TEST_KNN = knn.c test_knn.c mat.c
 OBJS_TEST_KNN = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_KNN))))
 
-SOURCES = $(SOURCES_TEST_MATMULT) $(SOURCES_TEST_KNN)
+SOURCES_TEST_CLF = classifier.c knn.c test_knn.c mat.c
+OBJS_TEST_CLF = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_CLF))))
+
+SOURCES = $(SOURCES_TEST_MATMULT) $(SOURCES_TEST_KNN) $(SOURCES_TEST_CLF)
 OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 
 # TODO: C only flags?
@@ -44,7 +47,7 @@ LINK.c = $(CC) $(CFLAGS)
 .PHONY: all objs help directories
 .SUFFIXES:
 
-all: directories test-matmult test-knn
+all: directories test-matmult test-knn test-clf
 
 run: all
 	./runtests.sh
@@ -58,6 +61,9 @@ test-matmult:$(OBJS_TEST_MATMULT)
 
 test-knn:$(OBJS_TEST_KNN)
 	$(LINK.c) $(addprefix $(BUILD_DIR)/, $(OBJS_TEST_KNN)) -o $@ $(LDFLAGS)
+
+test-clf:$(OBJS_TEST_CLF)
+	$(LINK.c) $(addprefix $(BUILD_DIR)/, $(OBJS_TEST_CLF)) -o $@ $(LDFLAGS)
 
 clean:
 	$(RM) $(addprefix $(BUILD_DIR)/, $(OBJS)) test-*
