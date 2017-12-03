@@ -1,13 +1,15 @@
 
 #include "pao.h"
 
+#define TIMER_PERIOD_MS         5
+#define TIMER5_TIMER_PERIOD     APP_TIMER_TICKS(TIMER_PERIOD_MS, 0)  // timer period is in ms
+
 int programRunning = 1;
+uint16_t timer = 0;
+volatile uint8_t sync_timer = 1;
 
-#define TIMER500_TIMER_PERIOD  APP_TIMER_TICKS(500, 0)  // timer period is in ms
-
-void timer_500ms_handler() {
-    debugMsg("timer event!");
-    buzz(10);
+void timer_5ms_handler() {
+    sync_timer = 0;
 }
 
 /**
@@ -15,7 +17,6 @@ void timer_500ms_handler() {
  */
 int main(void)
 {
-    uint16_t timer = 0;
     uint32_t err_code;
 
     /* Configure board. */
@@ -31,7 +32,7 @@ int main(void)
     // Old mpu init:
     //mpu_setup();
 
-    nrf_delay_ms(2000);
+    // nrf_delay_ms(2000);
 
     // New mpu init:
     twi_init();
@@ -49,25 +50,17 @@ int main(void)
     APP_ERROR_CHECK(err_code);
 
     /* Enable Timer */
-    APP_TIMER_DEF(timer_500ms);
-    app_timer_create(&timer_500ms, APP_TIMER_MODE_REPEATED, timer_500ms_handler);
-    app_timer_start(timer_500ms, TIMER500_TIMER_PERIOD, NULL);
-    // uint32_t time_ms = 500;
-    // uint32_t time_ticks;
+    APP_TIMER_DEF(timer_5ms);
+    app_timer_create(&timer_5ms, APP_TIMER_MODE_REPEATED, timer_5ms_handler);
+    app_timer_start(timer_5ms, TIMER5_TIMER_PERIOD, NULL);
 
-    // const nrf_drv_timer_t timer_1ms = NRF_DRV_TIMER_INSTANCE(1);
-    // nrf_drv_timer_config_t timer_1ms_config = NRF_DRV_TIMER_DEFAULT_CONFIG;
-    // nrf_drv_timer_init(&timer_1ms, &timer_1ms_config, timer_1ms_event_handler);
-    // time_ticks = nrf_drv_timer_ms_to_ticks(&timer_1ms, time_ms);
-    // nrf_drv_timer_extended_compare(&timer_1ms, NRF_TIMER_CC_CHANNEL1, 
-    //             time_ticks, NRF_TIMER_SHORT_COMPARE1_CLEAR_MASK, true);
-    // nrf_drv_timer_enable(&timer_1ms);
-
-    /* Toggle LEDs. */
+    /* Main loop */
     while (programRunning) {
 
+        while (sync_timer);
+        sync_timer = 1;
+
         uint8_t cr;
-        
         if (app_uart_get(&cr) == NRF_SUCCESS){
             setrxByte(cr);
         }
@@ -76,39 +69,31 @@ int main(void)
             getMpuSensors();
         }
 
-        if(timer % 50 == 0) {
-            if(bsp_board_button_state_get(3)) {
-                // sendMsgBle(16, "Button 3 Pressed");
-                debugMsgBle("Button pressed");
-                start_snooze();
-            }
-            // for(int i = 0; i < BUTTONS_NUMBER; i++) {
-            //     if(bsp_board_button_state_get(i)) {
-            //         printf("Pressed Button %d\r\n", i);
-            //         bsp_board_led_invert(i);
-            //     }
-            // }
-        }
-        if(timer % 10 == 0) {  // Every 100ms  errr 50
-            // getMpuSensors();
+        // @ 50ms
+        if(timer % 10 == 0) {  
             sendMessageEs(MSG02_SENSOR_VALS);
             sendBleMessageEs(MSG_BLE_02_SENSOR);
         }
-        // if(timer % 50 == 0) {
-        //     sendBleMessageEs(MSG_BLE_02_SENSOR);
-        // }
 
+        // @ 250ms
+        if(timer % 50 == 0) {
+            if(bsp_board_button_state_get(3)) {
+                debugMsgBle("Button 3 pressed");
+                start_snooze();
+            }
+        }
+
+        // @ 500ms
         if(timer % 100 == 0) {
-            // getPedo();                                   // For now I disabled pedo
+            // For now I disabled pedo
+            // getPedo();                       
             // sendBleMessageEs(MSG_BLE_04_PEDO);
             bsp_board_led_invert(0);
-            //buzz(10);        // Testing only
             timer = 0;
         }
 
-        increment_buzz_time();
+        increment_buzz_time(TIMER_PERIOD_MS);
 
-        nrf_delay_ms(5);
         timer++;
     }
 }

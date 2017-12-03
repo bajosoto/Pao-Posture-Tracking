@@ -21,6 +21,7 @@
 #include "mpu_wrapper.h"
 #include "app_timer.h"
 #include "vibrator.h"
+#include "sm.h"
 // #include "app_mpu.h"
 
 int programRunning;
