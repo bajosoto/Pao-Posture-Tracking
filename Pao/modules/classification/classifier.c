@@ -16,7 +16,7 @@ static class_t class_max(const proba_t pdfs[CLASS_NCLASSES]){
 	class_t detected = (class_t) 0;
 	proba_t cur_pdf = 0;
 	proba_t max_pdf = PROBA_T_MAX;
-	for(uint8_t i=1;i<=CLASS_NCLASSES;i++){
+	for(uint8_t i=1; i <= CLASS_NCLASSES; i++){
 		if(pdfs[i] > max_pdf){
 			max_pdf = cur_pdf;
 			detected = (class_t) i;
@@ -44,6 +44,11 @@ class_t clf_predict(feature_t sample[CLF_DIM]){
 
 
 }
+
+void clf_train(uint8_t n_samples, feature_t sample[n_samples][CLF_DIM], class_t labels[n_samples]){
+    return train_handlers[clf](n_samples,sample,labels);
+}
+
 void clf_predict_n(uint8_t n_samples, feature_t samples[n_samples][CLF_DIM], class_t buffer[n_samples]){
 	for(uint8_t i=0;i<=n_samples;i++){
 		buffer[i] = clf_predict(samples[i]);
