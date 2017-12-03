@@ -17,7 +17,7 @@ typedef enum{
 	CLF_N
 }__attribute__((packed)) classifier_t;
 
-#define CLF_DIM 5
+#define CLF_DIM 2
 typedef float proba_t; 
 typedef float feature_t;
 

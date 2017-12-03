@@ -31,7 +31,7 @@ OUT_DIR = $(BUILD_DIR)
 SOURCES_TEST_MATMULT = mat.c test_mat.c
 OBJS_TEST_MATMULT = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_MATMULT))))
 
-SOURCES_TEST_KNN = knn.c test_knn.c
+SOURCES_TEST_KNN = knn.c test_knn.c mat.c
 OBJS_TEST_KNN = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_KNN))))
 
 SOURCES = $(SOURCES_TEST_MATMULT) $(SOURCES_TEST_KNN)

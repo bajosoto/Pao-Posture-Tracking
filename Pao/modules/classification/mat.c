@@ -26,6 +26,12 @@ void mat_print(uint8_t row, uint8_t col,mat_t mat[row][col]){
 	}
 }
 
+void vec_print(uint8_t elements,mat_t vec[elements]){
+	for(uint8_t i = 0; i < elements; i++){
+			printf("| %f |\n",vec[i]);
+		}
+}
+
 mat_t vec_norm(uint8_t dim, mat_t v[dim]){
 	mat_t res = 0;
 	for (uint8_t i=0; i<dim; i++){

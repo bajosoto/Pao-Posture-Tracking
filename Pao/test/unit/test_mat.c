@@ -1,12 +1,10 @@
-#include <stdarg.h>
+
 #include <stdint.h>
 #include <stddef.h>
+#include <stdarg.h>
 #include <setjmp.h>
 #include <cmocka.h>
-
 #include <string.h>
-#include <inttypes.h>
-#include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
 #include "mat.h"
