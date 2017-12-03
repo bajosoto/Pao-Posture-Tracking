@@ -14,11 +14,10 @@ static uint8_t clf = CLF_KNN;
 
 static class_t class_max(const proba_t pdfs[CLASS_NCLASSES]){
 	class_t detected = (class_t) 0;
-	proba_t cur_pdf = 0;
-	proba_t max_pdf = PROBA_T_MAX;
-	for(uint8_t i=1; i <= CLASS_NCLASSES; i++){
+	proba_t max_pdf = -1*PROBA_T_MAX;
+	for(uint8_t i = 0; i <= CLASS_NCLASSES; i++){
 		if(pdfs[i] > max_pdf){
-			max_pdf = cur_pdf;
+			max_pdf = pdfs[i];
 			detected = (class_t) i;
 		}
 	}
