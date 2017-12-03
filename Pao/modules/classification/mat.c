@@ -37,7 +37,7 @@ mat_t vec_norm(uint8_t dim, mat_t v[dim]){
 	for (uint8_t i=0; i<dim; i++){
 		res += v[i]*v[i];
 	}
-	return sqrt(res);
+	return (mat_t)sqrt(res);
 }
 
 void vec_sub(uint8_t dim, mat_t v1[dim], mat_t v2[dim], mat_t res[dim]){
