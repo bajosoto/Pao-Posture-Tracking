@@ -18,8 +18,8 @@ typedef enum{
 }__attribute__((packed)) classifier_t;
 
 #define CLF_DIM 5
-typedef int32_t proba_t; 
-typedef int32_t feature_t;
+typedef float proba_t; 
+typedef float feature_t;
 
 typedef proba_t(*pdf_handler)(feature_t[CLF_DIM],posture_t);
 typedef void(*train_handler)(uint8_t n_samples, feature_t sample[n_samples][CLF_DIM]);

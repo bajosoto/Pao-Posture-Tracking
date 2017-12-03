@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include <setjmp.h>
 #include <cmocka.h>
+#include "classifier.h"
 
 #include <string.h>
 #include <inttypes.h>
