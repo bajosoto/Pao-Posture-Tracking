@@ -24,8 +24,6 @@ int main(void)
     // Old mpu init:
     //mpu_setup();
 
-    //nrf_delay_ms(2000);
-
     // New mpu init:
     twi_init();
     imu_init(true, 100);
@@ -49,7 +47,6 @@ int main(void)
         if (app_uart_get(&cr) == NRF_SUCCESS){
             setrxByte(cr);
         }
-        // TODO: add ble
 
         if (check_sensor_int_flag()) {
             getMpuSensors();
