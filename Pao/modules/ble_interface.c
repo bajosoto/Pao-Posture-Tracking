@@ -14,7 +14,7 @@
 #define DEVICE_NAME                     "Hello_Pao"                                 /**< Name of device. Will be included in the advertising data. */
 #define NUS_SERVICE_UUID_TYPE           BLE_UUID_TYPE_VENDOR_BEGIN                  /**< UUID type for the Nordic UART Service (vendor specific). */
 
-#define APP_ADV_INTERVAL                64                                          /**< The advertising interval (in units of 0.625 ms. This value corresponds to 40 ms). */
+#define APP_ADV_INTERVAL                800                                          /**< The advertising interval (in units of 0.625 ms. This value corresponds to 40 ms). */
 #define APP_ADV_TIMEOUT_IN_SECONDS      180                                         /**< The advertising timeout (in units of seconds). */
 
 #define APP_TIMER_PRESCALER             0                                           /**< Value of the RTC1 PRESCALER register. */
@@ -214,10 +214,13 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
     switch (ble_adv_evt)
     {
         case BLE_ADV_EVT_FAST:
+            //debugMsg("Entering FAST advertising mode");
             // err_code = bsp_indication_set(BSP_INDICATE_ADVERTISING);
             // APP_ERROR_CHECK(err_code);
             break;
         case BLE_ADV_EVT_IDLE:
+            //debugMsg("Entering IDLE advertising mode");
+            ble_advertising_start(BLE_ADV_MODE_FAST);
             // sleep_mode_enter();
             break;
         default:
@@ -233,6 +236,8 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
 static void on_ble_evt(ble_evt_t * p_ble_evt)
 {
     uint32_t err_code;
+
+    //debugMsg("BLE event: %d", p_ble_evt->header.evt_id);
 
     switch (p_ble_evt->header.evt_id)
     {

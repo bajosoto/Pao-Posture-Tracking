@@ -69,6 +69,9 @@ void msg03_ble_status() {
 		case 1:
 			dispMsg("BLE device connected");
 			break;
+		case 2:
+			dispMsg("BLE device timeout");
+			break;
 		default:
 			dispMsg("Unknown BLE status");
 			break;
