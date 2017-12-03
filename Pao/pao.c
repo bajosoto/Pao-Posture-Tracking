@@ -3,6 +3,13 @@
 
 int programRunning = 1;
 
+#define TIMER500_TIMER_PERIOD  APP_TIMER_TICKS(500, 0)  // timer period is in ms
+
+void timer_500ms_handler() {
+    debugMsg("timer event!");
+    buzz(10);
+}
+
 /**
  * @brief Function for application main entry.
  */
@@ -24,6 +31,8 @@ int main(void)
     // Old mpu init:
     //mpu_setup();
 
+    nrf_delay_ms(2000);
+
     // New mpu init:
     twi_init();
     imu_init(true, 100);
@@ -38,6 +47,21 @@ int main(void)
 
     err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
     APP_ERROR_CHECK(err_code);
+
+    /* Enable Timer */
+    APP_TIMER_DEF(timer_500ms);
+    app_timer_create(&timer_500ms, APP_TIMER_MODE_REPEATED, timer_500ms_handler);
+    app_timer_start(timer_500ms, TIMER500_TIMER_PERIOD, NULL);
+    // uint32_t time_ms = 500;
+    // uint32_t time_ticks;
+
+    // const nrf_drv_timer_t timer_1ms = NRF_DRV_TIMER_INSTANCE(1);
+    // nrf_drv_timer_config_t timer_1ms_config = NRF_DRV_TIMER_DEFAULT_CONFIG;
+    // nrf_drv_timer_init(&timer_1ms, &timer_1ms_config, timer_1ms_event_handler);
+    // time_ticks = nrf_drv_timer_ms_to_ticks(&timer_1ms, time_ms);
+    // nrf_drv_timer_extended_compare(&timer_1ms, NRF_TIMER_CC_CHANNEL1, 
+    //             time_ticks, NRF_TIMER_SHORT_COMPARE1_CLEAR_MASK, true);
+    // nrf_drv_timer_enable(&timer_1ms);
 
     /* Toggle LEDs. */
     while (programRunning) {
