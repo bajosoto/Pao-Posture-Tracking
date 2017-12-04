@@ -31,3 +31,9 @@ void stds_transform(feature_t sample[CLF_DIM]){
         sample[j] = (sample[j]-min[j])/(max[j]-min[j]);
     }
 }
+
+void stds_transform_n(uint16_t n_samples,feature_t samples[n_samples][CLF_DIM]){
+    for (int i = 0; i < n_samples; i++){
+        stds_transform(samples[i]);
+    }
+}
