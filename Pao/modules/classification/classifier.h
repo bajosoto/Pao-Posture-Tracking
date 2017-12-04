@@ -17,6 +17,14 @@ typedef enum{
 	CLF_N
 }__attribute__((packed)) classifier_t;
 
+typedef enum{
+    SCALER_STD=0,
+    SCALER_INT,
+    SCALER_N
+}__attribute__((packed)) scaler_t;
+
+#define MAX_SCALER_N 10
+
 #define CLF_DIM 2
 #define PROBA_T_MAX (float)(2.0*32768)
 #define FEATURE_T_MAX (float)(2.0*32768)
@@ -26,17 +34,21 @@ typedef float feature_t;
 typedef void (*pdf_f)(feature_t[CLF_DIM],proba_t buffer[CLASS_NCLASSES]);
 typedef void (*fit_f)(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM],class_t labels[n_samples]);
 
-/*Classificatons that are lower than this threshold
-don't get classified at all (rejected)*/
+/**
+ * Classificatons that are lower than this threshold
+ * don't get classified at all (rejected)
+ */
 #define REJECT_THRESHOLD 0.01
 
 /**
- * [clf_init choses a certain classifier and initializes the module]
+ * [clf_init choses a certain classifier, scaler and preprocessor to initialize the module]
  * @author phil
  * @date   2017-11-27
  * @param  clf        [classifier to be chosen]
+ * @param n_scalers   [number of scalers to be chosen. Must not exceed MAX_SCALER_N!]
+ * @param  scalers    [scalers to be chosen]
  */
-void clf_init(classifier_t clf);
+void clf_init(classifier_t clf,uint8_t n_scalers,scaler_t scalers[n_scalers]);
 
 
 /**

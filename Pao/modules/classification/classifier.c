@@ -1,14 +1,21 @@
+#include <lzma.h>
 #include "classifier.h"
 #include "knn.h"
-
+#include "std_scaler.h"
+#include <stdio.h>
 static uint8_t clf;
-static pdf_f pdf_handlers[CLF_N] = {
+static pdf_f pdf_fs[CLF_N] = {
 	knn_pdf,
 };
 
-static fit_f train_handlers[CLF_N] = {
+static fit_f clf_fit_fs[CLF_N] = {
 	knn_fit,
 };
+
+static fit_f scaler_fit_fs[SCALER_N] = {
+        stds_fit,
+};
+static fit_f scalers[MAX_SCALER_N] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
 
 static uint8_t clf = CLF_KNN;
 
@@ -29,12 +36,15 @@ static class_t class_max(const proba_t pdfs[CLASS_NCLASSES]){
 
 }
 
-void clf_init(classifier_t clf_set){
+void clf_init(classifier_t clf_set,uint8_t n_scalers,scaler_t scalers_set[n_scalers]){
 	clf = clf_set;
+    for (int i = 0; i < n_scalers; i++){
+        scalers[i] = scaler_fit_fs[scalers_set[i]];
+    }
 }
 
 class_t clf_predict(feature_t sample[CLF_DIM]){
-	pdf_f classifier = pdf_handlers[clf];
+	pdf_f classifier = pdf_fs[clf];
 
 	proba_t pdfs[CLASS_NCLASSES];
 	classifier(sample,pdfs);
@@ -45,7 +55,14 @@ class_t clf_predict(feature_t sample[CLF_DIM]){
 }
 
 void clf_fit(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM], class_t labels[n_samples]){
-    return train_handlers[clf](n_samples,sample,labels);
+
+    for (int i = 0; i < MAX_SCALER_N; i++){
+        if (scalers[i] != NULL){
+            scalers[i](n_samples,sample,labels);
+        }
+    }
+
+    return clf_fit_fs[clf](n_samples,sample,labels);
 }
 
 void clf_predict_n(uint16_t n_samples, feature_t samples[n_samples][CLF_DIM], class_t buffer[n_samples]){

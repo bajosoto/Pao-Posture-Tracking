@@ -21,7 +21,7 @@ static void test_train_1(void **state)
     class_t labels[2] = {CLASS_UNHEALTHY,
                          CLASS_UNHEALTHY};
     knn_init(1);
-    clf_init(CLF_KNN);
+    clf_init(CLF_KNN,0,NULL);
     clf_fit(2, samples, labels);
     assert_true(clf_predict(samples[0]) == CLASS_UNHEALTHY);
 
@@ -64,6 +64,25 @@ static void test_train_3(void **state)
 
 }
 
+static void test_scale_classify(void **state){
+    feature_t samples[4][CLF_DIM] = {{1.0,2.0},
+                                     {5.0,1.0},
+                                     {6.0,1.0},
+                                     {2.0,3.0}};
+
+    feature_t test_sample[CLF_DIM] = {1.5,2.5};
+    class_t labels[4] = {CLASS_HEALTHY,
+                         CLASS_UNHEALTHY,
+                         CLASS_UNHEALTHY,
+                         CLASS_UNHEALTHY};
+
+    knn_init(4);
+    scaler_t scalers[1] = {SCALER_STD};
+    clf_init(CLF_KNN,1,scalers);
+    clf_fit(4, samples, labels);
+    assert_true(clf_predict(test_sample) == CLASS_UNHEALTHY);
+}
+
 /*
 * Register Tests
 */
@@ -73,6 +92,7 @@ int main(void)
             cmocka_unit_test(test_train_1),
             cmocka_unit_test(test_train_2),
             cmocka_unit_test(test_train_3),
+            cmocka_unit_test(test_scale_classify)
 
     };
 
