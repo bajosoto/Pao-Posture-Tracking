@@ -60,6 +60,7 @@ static void test_train_3(void **state)
 
     knn_init(4);
     clf_fit(4, samples, labels);
+    clf_init(CLF_KNN,0,NULL);
     assert_true(clf_predict(test_sample) == CLASS_UNHEALTHY);
 
 }
@@ -77,7 +78,7 @@ static void test_scale_classify(void **state){
                          CLASS_UNHEALTHY};
 
     knn_init(4);
-    scaler_t scalers[1] = {SCALER_STD};
+    transformer_t scalers[1] = {TRANSF_SCALE_STD};
     clf_init(CLF_KNN,1,scalers);
     clf_fit(4, samples, labels);
     assert_true(clf_predict(test_sample) == CLASS_UNHEALTHY);

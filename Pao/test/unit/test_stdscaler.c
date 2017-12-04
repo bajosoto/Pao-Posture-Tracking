@@ -20,8 +20,9 @@ static void test_fit_transform(void **state)
     class_t labels[2] = {CLASS_HEALTHY,
                          CLASS_HEALTHY};
 
-    stds_fit(2,samples,labels);
-    stds_transform(2,samples,labels);
+    stds_fit(2,samples);
+    stds_transform(samples[0]);
+    stds_transform(samples[1]);
 
     assert_in_range(samples[0][0],0.0,1.0);
     assert_in_range(samples[0][1],0.0,1.0);

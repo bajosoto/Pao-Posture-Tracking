@@ -4,18 +4,23 @@
 #include "std_scaler.h"
 #include <stdio.h>
 static uint8_t clf;
+static transformer_t scalers[MAX_SCALER_N];
+static uint8_t n_scalers = 0;
 static pdf_f pdf_fs[CLF_N] = {
 	knn_pdf,
 };
 
-static fit_f clf_fit_fs[CLF_N] = {
+static clf_fit_f clf_fit_fs[CLF_N] = {
 	knn_fit,
 };
 
-static fit_f scaler_fit_fs[SCALER_N] = {
+static transf_fit_f transf_fit_fs[TRANSF_N] = {
         stds_fit,
 };
-static fit_f scalers[MAX_SCALER_N] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
+
+static transform_f transform_fs[TRANSF_N] = {
+        stds_transform
+};
 
 static uint8_t clf = CLF_KNN;
 
@@ -36,15 +41,21 @@ static class_t class_max(const proba_t pdfs[CLASS_NCLASSES]){
 
 }
 
-void clf_init(classifier_t clf_set,uint8_t n_scalers,scaler_t scalers_set[n_scalers]){
+void clf_init(classifier_t clf_set,uint8_t n_scalers_set,transformer_t scalers_set[n_scalers]){
 	clf = clf_set;
+    n_scalers = n_scalers_set;
     for (int i = 0; i < n_scalers; i++){
-        scalers[i] = scaler_fit_fs[scalers_set[i]];
+        scalers[i] = scalers_set[i];
     }
 }
 
 class_t clf_predict(feature_t sample[CLF_DIM]){
-	pdf_f classifier = pdf_fs[clf];
+
+    for (uint8_t j = 0; j < n_scalers; j++){
+        transform_fs[scalers[j]](sample);
+    }
+
+    pdf_f classifier = pdf_fs[clf];
 
 	proba_t pdfs[CLASS_NCLASSES];
 	classifier(sample,pdfs);
@@ -56,9 +67,13 @@ class_t clf_predict(feature_t sample[CLF_DIM]){
 
 void clf_fit(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM], class_t labels[n_samples]){
 
-    for (int i = 0; i < MAX_SCALER_N; i++){
-        if (scalers[i] != NULL){
-            scalers[i](n_samples,sample,labels);
+    for (int i = 0; i < n_scalers; i++){
+        transf_fit_fs[scalers[i]](n_samples,sample);
+    }
+
+    for (int i = 0; i < n_scalers; i++){
+        for (int j = 0; j < n_samples; j++){
+            transform_fs[scalers[i]](sample[j]);
         }
     }
 
@@ -66,7 +81,7 @@ void clf_fit(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM], class_t l
 }
 
 void clf_predict_n(uint16_t n_samples, feature_t samples[n_samples][CLF_DIM], class_t buffer[n_samples]){
-	for(uint8_t i=0;i<=n_samples;i++){
-		buffer[i] = clf_predict(samples[i]);
+	for(uint8_t i = 0; i <= n_samples; i++){
+        buffer[i] = clf_predict(samples[i]);
 	}
 }

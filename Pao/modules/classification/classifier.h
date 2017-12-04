@@ -18,10 +18,10 @@ typedef enum{
 }__attribute__((packed)) classifier_t;
 
 typedef enum{
-    SCALER_STD=0,
-    SCALER_INT,
-    SCALER_N
-}__attribute__((packed)) scaler_t;
+    TRANSF_SCALE_STD=0,
+    TRANSF_PREP_AVG_MAGN=0,
+    TRANSF_N
+}__attribute__((packed)) transformer_t;
 
 #define MAX_SCALER_N 10
 
@@ -32,7 +32,9 @@ typedef float proba_t;
 typedef float feature_t;
 
 typedef void (*pdf_f)(feature_t[CLF_DIM],proba_t buffer[CLASS_NCLASSES]);
-typedef void (*fit_f)(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM],class_t labels[n_samples]);
+typedef void (*clf_fit_f)(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM],class_t labels[n_samples]);
+typedef void (*transf_fit_f)(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM]);
+typedef void (*transform_f)(feature_t sample[CLF_DIM]);
 
 /**
  * Classificatons that are lower than this threshold
@@ -48,7 +50,7 @@ typedef void (*fit_f)(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM],c
  * @param n_scalers   [number of scalers to be chosen. Must not exceed MAX_SCALER_N!]
  * @param  scalers    [scalers to be chosen]
  */
-void clf_init(classifier_t clf,uint8_t n_scalers,scaler_t scalers[n_scalers]);
+void clf_init(classifier_t clf,uint8_t n_scalers,transformer_t scalers[n_scalers]);
 
 
 /**
