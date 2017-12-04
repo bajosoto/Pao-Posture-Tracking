@@ -21,7 +21,7 @@ static void test_train_1(void **state)
     class_t labels[2] = {CLASS_HEALTHY,
                            CLASS_HEALTHY};
     knn_init(1);
-	knn_train(2, samples, labels);
+    knn_fit(2, samples, labels);
     assert_true(knn_class_pdf(samples[0], CLASS_HEALTHY) == 1.0);
 
 }
@@ -36,7 +36,7 @@ static void test_train_2(void **state)
                            CLASS_UNHEALTHY};
 
     knn_init(2);
-    knn_train(2, samples, labels);
+    knn_fit(2, samples, labels);
     assert_true(knn_class_pdf(test_sample, CLASS_HEALTHY) == 0.5);
     assert_true(knn_class_pdf(test_sample, CLASS_UNHEALTHY) == 0.5);
 
@@ -56,7 +56,7 @@ static void test_train_3(void **state)
                            CLASS_UNHEALTHY};
 
     knn_init(4);
-    knn_train(4, samples, labels);
+    knn_fit(4, samples, labels);
     assert_true(knn_class_pdf(test_sample, CLASS_HEALTHY) == 0.75);
     assert_true(knn_class_pdf(test_sample, CLASS_UNHEALTHY) == 0.25);
 
@@ -76,7 +76,7 @@ static void test_train_all_classes(void **state)
                            CLASS_UNHEALTHY};
 
     knn_init(4);
-    knn_train(4, samples, labels);
+    knn_fit(4, samples, labels);
     proba_t pdfs[CLASS_NCLASSES];
     knn_pdf(test_sample, pdfs);
     assert_true(pdfs[CLASS_HEALTHY] == 0.75);

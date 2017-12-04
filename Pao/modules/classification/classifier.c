@@ -2,12 +2,12 @@
 #include "knn.h"
 
 static uint8_t clf;
-static pdf_handler pdf_handlers[CLF_N] = {
+static pdf_f pdf_handlers[CLF_N] = {
 	knn_pdf,
 };
 
-static train_handler train_handlers[CLF_N] = {
-	knn_train,
+static fit_f train_handlers[CLF_N] = {
+	knn_fit,
 };
 
 static uint8_t clf = CLF_KNN;
@@ -34,7 +34,7 @@ void clf_init(classifier_t clf_set){
 }
 
 class_t clf_predict(feature_t sample[CLF_DIM]){
-	pdf_handler classifier = pdf_handlers[clf];
+	pdf_f classifier = pdf_handlers[clf];
 
 	proba_t pdfs[CLASS_NCLASSES];
 	classifier(sample,pdfs);
@@ -44,11 +44,11 @@ class_t clf_predict(feature_t sample[CLF_DIM]){
 
 }
 
-void clf_train(uint8_t n_samples, feature_t sample[n_samples][CLF_DIM], class_t labels[n_samples]){
+void clf_fit(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM], class_t labels[n_samples]){
     return train_handlers[clf](n_samples,sample,labels);
 }
 
-void clf_predict_n(uint8_t n_samples, feature_t samples[n_samples][CLF_DIM], class_t buffer[n_samples]){
+void clf_predict_n(uint16_t n_samples, feature_t samples[n_samples][CLF_DIM], class_t buffer[n_samples]){
 	for(uint8_t i=0;i<=n_samples;i++){
 		buffer[i] = clf_predict(samples[i]);
 	}

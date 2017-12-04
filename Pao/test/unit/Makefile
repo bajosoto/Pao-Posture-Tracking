@@ -37,6 +37,9 @@ OBJS_TEST_KNN = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_KNN))))
 SOURCES_TEST_CLF = test_classifier.c classifier.c knn.c mat.c
 OBJS_TEST_CLF = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_CLF))))
 
+SOURCES_TEST_STDSCALER = test_stdscaler.c std_scaler.c
+OBJS_TEST_STDSCALER = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_STDSCALER))))
+
 SOURCES = $(SOURCES_TEST_MATMULT) $(SOURCES_TEST_KNN) $(SOURCES_TEST_CLF)
 OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 
@@ -47,7 +50,7 @@ LINK.c = $(CC) $(CFLAGS)
 .PHONY: all objs help directories
 .SUFFIXES:
 
-all: directories test-matmult test-knn test-clf
+all: directories test-matmult test-knn test-clf test-stdscaler
 
 run: all
 	./runtests.sh
@@ -64,6 +67,10 @@ test-knn:$(OBJS_TEST_KNN)
 
 test-clf:$(OBJS_TEST_CLF)
 	$(LINK.c) $(addprefix $(BUILD_DIR)/, $(OBJS_TEST_CLF)) -o $@ $(LDFLAGS)
+
+test-stdscaler:$(OBJS_TEST_STDSCALER)
+	$(LINK.c) $(addprefix $(BUILD_DIR)/, $(OBJS_TEST_STDSCALER)) -o $@ $(LDFLAGS)
+
 
 clean:
 	$(RM) $(addprefix $(BUILD_DIR)/, $(OBJS)) test-*

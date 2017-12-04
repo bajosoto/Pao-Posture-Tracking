@@ -71,7 +71,7 @@ void knn_pdf(feature_t sample[CLF_DIM],proba_t class_probas[CLASS_NCLASSES]){
     }
 }
 
-void knn_train(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM], class_t labels[n_samples]){
+void knn_fit(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM], class_t labels[CLF_DIM]){
 	n_train_samples = n_samples;
 	for(uint16_t i = 0; i<n_samples; i++ ){
 		memcpy(train_data[i],sample[i],CLF_DIM*sizeof(feature_t));
