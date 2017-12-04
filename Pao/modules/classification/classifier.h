@@ -40,7 +40,7 @@ typedef void (*transform_f)(feature_t sample[CLF_DIM]);
  * Classificatons that are lower than this threshold
  * don't get classified at all (rejected)
  */
-#define REJECT_THRESHOLD 0.01
+#define REJECT_THRESHOLD 0
 
 /**
  * [clf_init choses a certain classifier, scaler and preprocessor to initialize the module]

@@ -50,7 +50,7 @@ void clf_init(classifier_t clf_set,uint8_t n_transformer,transformer_t transform
 }
 
 class_t clf_predict(feature_t sample[CLF_DIM]){
-
+	// TODO transformations should not work on the input array
     for (uint8_t j = 0; j < n_scalers; j++){
         transform_fs[scalers[j]](sample);
     }

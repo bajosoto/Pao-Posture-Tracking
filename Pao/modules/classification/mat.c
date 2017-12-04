@@ -22,8 +22,9 @@ void mat_print(uint8_t row, uint8_t col,const mat_t mat[row][col]){
 		for(uint8_t j = 0; j < col; j++){
 			printf("| %f |",mat[i][j]);
 		}
-
+		printf("\n");
 	}
+    printf("\n");
 }
 
 void vec_print(uint8_t elements,const mat_t vec[elements]){
