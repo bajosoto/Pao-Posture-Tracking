@@ -40,7 +40,10 @@ OBJS_TEST_CLF = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_CLF))))
 SOURCES_TEST_STDSCALER = test_stdscaler.c std_scaler.c
 OBJS_TEST_STDSCALER = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_STDSCALER))))
 
-SOURCES = $(SOURCES_TEST_MATMULT) $(SOURCES_TEST_KNN) $(SOURCES_TEST_CLF)
+SOURCES_TEST_PREP = test_preprocessor.c preprocessor.c mat.c
+OBJS_TEST_PREP = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_PREP))))
+
+SOURCES = $(SOURCES_TEST_MATMULT) $(SOURCES_TEST_KNN) $(SOURCES_TEST_CLF) $(SOURCES_TEST_PREP)
 OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 
 # TODO: C only flags?
@@ -50,7 +53,7 @@ LINK.c = $(CC) $(CFLAGS)
 .PHONY: all objs help directories
 .SUFFIXES:
 
-all: directories test-matmult test-knn test-clf test-stdscaler
+all: directories test-matmult test-knn test-clf test-stdscaler test-prep
 
 run: all
 	./runtests.sh
@@ -70,6 +73,9 @@ test-clf:$(OBJS_TEST_CLF)
 
 test-stdscaler:$(OBJS_TEST_STDSCALER)
 	$(LINK.c) $(addprefix $(BUILD_DIR)/, $(OBJS_TEST_STDSCALER)) -o $@ $(LDFLAGS)
+
+test-prep:$(OBJS_TEST_PREP)
+	$(LINK.c) $(addprefix $(BUILD_DIR)/, $(OBJS_TEST_PREP)) -o $@ $(LDFLAGS)
 
 
 clean:

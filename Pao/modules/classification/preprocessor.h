@@ -15,7 +15,6 @@
 
 void prep_init(uint16_t window_size);
 
-static void prep_transform(uint16_t n_samples, feature_t samples[n_samples][RAW_DIM],
-                           uint16_t buffer_size,feature_t buffer[buffer_size][CLF_DIM]);
+void prep_transform(uint16_t n_samples, feature_t samples[n_samples][RAW_DIM],uint16_t buffer_size,feature_t buffer[buffer_size][CLF_DIM]);
 
 #endif //PAO_PREPROCESSOR_H

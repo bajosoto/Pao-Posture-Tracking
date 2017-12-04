@@ -41,11 +41,11 @@ static class_t class_max(const proba_t pdfs[CLASS_NCLASSES]){
 
 }
 
-void clf_init(classifier_t clf_set,uint8_t n_scalers_set,transformer_t scalers_set[n_scalers]){
+void clf_init(classifier_t clf_set,uint8_t n_transformer,transformer_t transformer[n_scalers]){
 	clf = clf_set;
-    n_scalers = n_scalers_set;
+    n_scalers = n_transformer;
     for (int i = 0; i < n_scalers; i++){
-        scalers[i] = scalers_set[i];
+        scalers[i] = transformer[i];
     }
 }
 

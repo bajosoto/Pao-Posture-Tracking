@@ -4,7 +4,7 @@
 
 #include "preprocessor.h"
 #include "mat.h"
-
+#include <stdio.h>
 static uint16_t window_size = 10;
 
 void prep_init(uint16_t window_size_set){
@@ -13,25 +13,23 @@ void prep_init(uint16_t window_size_set){
 static void avg(uint16_t n_samples, feature_t samples[n_samples][RAW_DIM],
                       uint16_t buffer_size,feature_t buffer[buffer_size][RAW_DIM]){
 
-    for(int i=0; i < n_samples; i+=10){
-        for(int j=i;j < buffer_size; j++){
+    for(int i=0; i < n_samples; i+=window_size){
+        for(int j=i;j < window_size; j++){
             for (int k = 0; k < RAW_DIM; k++){
-                buffer[(uint16_t )(i/10)][k] += samples[j][k];
+                buffer[(uint16_t )(i/window_size)][k] += samples[j][k];
             }
         }
         for (int k = 0; k < RAW_DIM; k++){
-            buffer[(uint16_t )(i/10)][k] /= 10.0;
+            buffer[(uint16_t )(i/window_size)][k] /= window_size;
         }
     }
 }
 
-void prep_transform(uint16_t n_samples, feature_t samples[n_samples][RAW_DIM],
-                    uint16_t buffer_size,feature_t buffer[buffer_size][CLF_DIM]){
+void prep_transform(uint16_t n_samples, feature_t samples[n_samples][RAW_DIM],uint16_t buffer_size,feature_t buffer[buffer_size][CLF_DIM]){
 
     uint16_t n_samples_new = (uint16_t)(n_samples/window_size);
     feature_t average[n_samples_new][RAW_DIM];
     avg(n_samples,samples,n_samples_new,average);
-
     for (int i = 0; i < n_samples_new; i++){
         buffer[i][0] = average[i][IDX_THETA];
         buffer[i][1] = average[i][IDX_PHI];

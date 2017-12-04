@@ -25,7 +25,7 @@ typedef enum{
 
 #define MAX_SCALER_N 10
 
-#define CLF_DIM 2
+#define CLF_DIM 3
 #define PROBA_T_MAX (float)(2.0*32768)
 #define FEATURE_T_MAX (float)(2.0*32768)
 typedef float proba_t;
@@ -47,10 +47,10 @@ typedef void (*transform_f)(feature_t sample[CLF_DIM]);
  * @author phil
  * @date   2017-11-27
  * @param  clf        [classifier to be chosen]
- * @param n_scalers   [number of scalers to be chosen. Must not exceed MAX_SCALER_N!]
- * @param  scalers    [scalers to be chosen]
+ * @param  n_transformer   [number of scalers to be chosen. Must not exceed MAX_SCALER_N!]
+ * @param  transformer    [scalers to be chosen]
  */
-void clf_init(classifier_t clf,uint8_t n_scalers,transformer_t scalers[n_scalers]);
+void clf_init(classifier_t clf,uint8_t n_transformer,transformer_t transformer[n_transformer]);
 
 
 /**
