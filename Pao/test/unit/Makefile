@@ -6,7 +6,7 @@ PROGRAM = test
 CMOCKA_LIB_PATH = $(abspath ../cmocka/_build/src/)
 
 CFLAGS = -g -O2 -Wall -D PC_COMPILE -D TESTING_MSG
-LDFLAGS = -L $(CMOCKA_LIB_PATH) -lcmocka
+LDFLAGS = -L $(CMOCKA_LIB_PATH) -lcmocka -lm
 
 PROJ_BASE=../../
 
@@ -29,9 +29,21 @@ OUT_DIR = $(BUILD_DIR)
 
 # Program sources
 SOURCES_TEST_MATMULT = mat.c test_mat.c
-OBJS_TEST_PCCOMM = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_MATMULT))))
+OBJS_TEST_MATMULT = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_MATMULT))))
 
-SOURCES = $(SOURCES_TEST_MATMULT)
+SOURCES_TEST_KNN = knn.c test_knn.c mat.c
+OBJS_TEST_KNN = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_KNN))))
+
+SOURCES_TEST_CLF = test_classifier.c classifier.c knn.c mat.c std_scaler.c preprocessor.c
+OBJS_TEST_CLF = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_CLF))))
+
+SOURCES_TEST_STDSCALER = test_stdscaler.c std_scaler.c
+OBJS_TEST_STDSCALER = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_STDSCALER))))
+
+SOURCES_TEST_PREP = test_preprocessor.c preprocessor.c mat.c
+OBJS_TEST_PREP = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_PREP))))
+
+SOURCES = $(SOURCES_TEST_MATMULT) $(SOURCES_TEST_KNN) $(SOURCES_TEST_CLF) $(SOURCES_TEST_PREP)
 OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 
 # TODO: C only flags?
@@ -41,7 +53,7 @@ LINK.c = $(CC) $(CFLAGS)
 .PHONY: all objs help directories
 .SUFFIXES:
 
-all: directories test-matmult
+all: directories test-matmult test-knn test-clf test-stdscaler test-prep
 
 run: all
 	./runtests.sh
@@ -50,8 +62,21 @@ run: all
 %.o:%.c
 	$(COMPILE.c) $< -o $(BUILD_DIR)/$@
 
-test-matmult:$(OBJS_TEST_PCCOMM)
-	$(LINK.c) $(addprefix $(BUILD_DIR)/, $(OBJS)) -o $@ $(LDFLAGS)
+test-matmult:$(OBJS_TEST_MATMULT)
+	$(LINK.c) $(addprefix $(BUILD_DIR)/, $(OBJS_TEST_MATMULT)) -o $@ $(LDFLAGS)
+
+test-knn:$(OBJS_TEST_KNN)
+	$(LINK.c) $(addprefix $(BUILD_DIR)/, $(OBJS_TEST_KNN)) -o $@ $(LDFLAGS)
+
+test-clf:$(OBJS_TEST_CLF)
+	$(LINK.c) $(addprefix $(BUILD_DIR)/, $(OBJS_TEST_CLF)) -o $@ $(LDFLAGS)
+
+test-stdscaler:$(OBJS_TEST_STDSCALER)
+	$(LINK.c) $(addprefix $(BUILD_DIR)/, $(OBJS_TEST_STDSCALER)) -o $@ $(LDFLAGS)
+
+test-prep:$(OBJS_TEST_PREP)
+	$(LINK.c) $(addprefix $(BUILD_DIR)/, $(OBJS_TEST_PREP)) -o $@ $(LDFLAGS)
+
 
 clean:
 	$(RM) $(addprefix $(BUILD_DIR)/, $(OBJS)) test-*
