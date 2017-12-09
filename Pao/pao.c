@@ -28,7 +28,7 @@ int main(void)
     init_vibrator();
 
     //NRF_LOG_INIT(NULL);  // TODO_SERGIO: Using LOG to find RAM start and end address
-    
+
     // Old mpu init:
     //mpu_setup();
 
