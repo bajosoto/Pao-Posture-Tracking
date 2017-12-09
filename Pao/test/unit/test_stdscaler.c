@@ -21,8 +21,8 @@ static void test_fit_transform(void **state)
                          CLASS_HEALTHY};
 
     stds_fit(2,samples);
-    stds_transform(samples[0]);
-    stds_transform(samples[1]);
+    stds_transform(samples[0], samples[0]);
+    stds_transform(samples[1], samples[1]);
 
     assert_in_range(samples[0][0],0.0,1.0);
     assert_in_range(samples[0][1],0.0,1.0);

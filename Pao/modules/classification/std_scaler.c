@@ -26,14 +26,15 @@ void stds_fit(uint16_t n_samples, feature_t samples[n_samples][CLF_DIM]){
 }
 
 
-void stds_transform(feature_t sample[CLF_DIM]){
+void stds_transform(const feature_t sample[CLF_DIM], feature_t sample_transformed[CLF_DIM]) {
     for (int j = 0; j < CLF_DIM; j++){
-        sample[j] = (sample[j]-min[j])/(max[j]-min[j]);
+        sample_transformed[j] = (sample[j] - min[j]) / (max[j] - min[j]);
     }
 }
 
-void stds_transform_n(uint16_t n_samples,feature_t samples[n_samples][CLF_DIM]){
+void stds_transform_n(uint16_t n_samples, const feature_t samples[n_samples][CLF_DIM],
+                      feature_t samples_transformed[n_samples][CLF_DIM]) {
     for (int i = 0; i < n_samples; i++){
-        stds_transform(samples[i]);
+        stds_transform(samples[i], samples_transformed[i]);
     }
 }

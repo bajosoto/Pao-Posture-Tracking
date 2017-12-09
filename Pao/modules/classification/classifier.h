@@ -34,7 +34,8 @@ typedef float feature_t;
 typedef void (*pdf_f)(feature_t[CLF_DIM],proba_t buffer[CLASS_NCLASSES]);
 typedef void (*clf_fit_f)(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM],class_t labels[n_samples]);
 typedef void (*transf_fit_f)(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM]);
-typedef void (*transform_f)(feature_t sample[CLF_DIM]);
+
+typedef void (*transform_f)(feature_t sample[CLF_DIM], feature_t sample_transformed[CLF_DIM]);
 
 /**
  * Classificatons that are lower than this threshold

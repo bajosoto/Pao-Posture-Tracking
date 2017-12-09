@@ -3,6 +3,8 @@
 #include "knn.h"
 #include "std_scaler.h"
 #include <stdio.h>
+#include <memory.h>
+
 static uint8_t clf;
 static transformer_t scalers[MAX_SCALER_N];
 static uint8_t n_scalers = 0;
@@ -50,9 +52,11 @@ void clf_init(classifier_t clf_set,uint8_t n_transformer,transformer_t transform
 }
 
 class_t clf_predict(feature_t sample[CLF_DIM]){
-	// TODO transformations should not work on the input array
+    feature_t sample_transformed[CLF_DIM];
+    memcpy(sample_transformed, sample, sizeof(feature_t) * CLF_DIM);
+
     for (uint8_t j = 0; j < n_scalers; j++){
-        transform_fs[scalers[j]](sample);
+        transform_fs[scalers[j]](sample_transformed, sample_transformed);
     }
 
     pdf_f classifier = pdf_fs[clf];
@@ -71,13 +75,15 @@ void clf_fit(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM], class_t l
         transf_fit_fs[scalers[i]](n_samples,sample);
     }
 
+    feature_t sample_transformed[n_samples][CLF_DIM];
+    memcpy(sample_transformed, sample, sizeof(feature_t) * CLF_DIM * n_samples);
     for (int i = 0; i < n_scalers; i++){
         for (int j = 0; j < n_samples; j++){
-            transform_fs[scalers[i]](sample[j]);
+            transform_fs[scalers[i]](sample_transformed[j], sample_transformed[j]);
         }
     }
 
-    return clf_fit_fs[clf](n_samples,sample,labels);
+    return clf_fit_fs[clf](n_samples, sample_transformed, labels);
 }
 
 void clf_predict_n(uint16_t n_samples, feature_t samples[n_samples][CLF_DIM], class_t buffer[n_samples]){

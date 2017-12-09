@@ -23,7 +23,7 @@ void stds_fit(uint16_t n_samples, feature_t samples[n_samples][CLF_DIM]);
  *
  * @param sample: sample as array in dimension of features
  */
-void stds_transform(feature_t samples[CLF_DIM]);
+void stds_transform(const feature_t sample[CLF_DIM], feature_t sample_transformed[CLF_DIM]);
 
 /**
  * Transforms the data according to the fitted parameters.
@@ -32,6 +32,7 @@ void stds_transform(feature_t samples[CLF_DIM]);
  * @param n_samples: number of samples
  * @param samples: array with nxm elements where n is n_samples and m is the feature dimension
  */
-void stds_transform_n(uint16_t n_samples,feature_t samples[n_samples][CLF_DIM]);
+void stds_transform_n(uint16_t n_samples, const feature_t samples[n_samples][CLF_DIM],
+                      feature_t samples_transformed[n_samples][CLF_DIM]);
 
 #endif //PAO_SCALER_H

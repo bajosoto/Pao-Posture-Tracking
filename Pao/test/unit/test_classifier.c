@@ -107,7 +107,7 @@ static void test_preprocess_scale_classify(void **state){
     prep_init(2);
     feature_t samples[4][CLF_DIM];
     prep_transform(8,raw_samples,4,samples);
-    mat_print(4,CLF_DIM,samples);
+    //mat_print(4,CLF_DIM,samples);
     knn_init(1);
     transformer_t scalers[1] = {TRANSF_SCALE_STD};
     clf_init(CLF_KNN,1,scalers);
