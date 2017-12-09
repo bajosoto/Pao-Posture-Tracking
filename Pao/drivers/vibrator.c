@@ -28,10 +28,10 @@ void init_vibrator(){
     // nrf_gpio_pin_clear(25);
 }
 
-void increment_buzz_time() {
+void increment_buzz_time(int ms) {
     
     if(buzzing) {
-        buzz_timer += 5;        // 5ms from main loop
+        buzz_timer += ms;        // From main loop
         if(buzz_timer >= buzz_timeout) {
             buzzing = 0;
             nrf_gpio_pin_clear(BUZZ_PORT);
@@ -41,10 +41,10 @@ void increment_buzz_time() {
     }
 
     // Decrement snooze
-    if (buzz_snooze - 5 <= 0) {
+    if (buzz_snooze - ms <= 0) {
         buzz_snooze = 0;
     } else {
-        buzz_snooze -= 5;
+        buzz_snooze -= ms;
     }
 }
 

@@ -1,14 +1,22 @@
 
 #include "pao.h"
 
+#define TIMER_PERIOD_MS         5
+#define TIMER5_TIMER_PERIOD     APP_TIMER_TICKS(TIMER_PERIOD_MS, 0)  // timer period is in ms
+
 int programRunning = 1;
+uint16_t timer = 0;
+volatile uint8_t sync_timer = 1;
+
+void timer_5ms_handler() {
+    sync_timer = 0;
+}
 
 /**
  * @brief Function for application main entry.
  */
 int main(void)
 {
-    uint16_t timer = 0;
     uint32_t err_code;
 
     /* Configure board. */
@@ -20,11 +28,11 @@ int main(void)
     init_vibrator();
 
     //NRF_LOG_INIT(NULL);  // TODO_SERGIO: Using LOG to find RAM start and end address
-    
+
     // Old mpu init:
     //mpu_setup();
 
-    //nrf_delay_ms(2000);
+    // nrf_delay_ms(2000);
 
     // New mpu init:
     twi_init();
@@ -41,53 +49,51 @@ int main(void)
     err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
     APP_ERROR_CHECK(err_code);
 
-    /* Toggle LEDs. */
+    /* Enable Timer */
+    APP_TIMER_DEF(timer_5ms);
+    app_timer_create(&timer_5ms, APP_TIMER_MODE_REPEATED, timer_5ms_handler);
+    app_timer_start(timer_5ms, TIMER5_TIMER_PERIOD, NULL);
+
+    /* Main loop */
     while (programRunning) {
 
+        while (sync_timer);
+        sync_timer = 1;
+
         uint8_t cr;
-        
         if (app_uart_get(&cr) == NRF_SUCCESS){
             setrxByte(cr);
         }
-        // TODO: add ble
 
         if (check_sensor_int_flag()) {
             getMpuSensors();
         }
 
-        if(timer % 50 == 0) {
-            if(bsp_board_button_state_get(3)) {
-                // sendMsgBle(16, "Button 3 Pressed");
-                debugMsgBle("Button pressed");
-                start_snooze();
-            }
-            // for(int i = 0; i < BUTTONS_NUMBER; i++) {
-            //     if(bsp_board_button_state_get(i)) {
-            //         printf("Pressed Button %d\r\n", i);
-            //         bsp_board_led_invert(i);
-            //     }
-            // }
-        }
-        if(timer % 10 == 0) {  // Every 100ms  errr 50
-            // getMpuSensors();
+        // @ 50ms
+        if(timer % 10 == 0) {  
             sendMessageEs(MSG02_SENSOR_VALS);
             sendBleMessageEs(MSG_BLE_02_SENSOR);
         }
-        // if(timer % 50 == 0) {
-        //     sendBleMessageEs(MSG_BLE_02_SENSOR);
-        // }
 
+        // @ 250ms
+        if(timer % 50 == 0) {
+            if(bsp_board_button_state_get(3)) {
+                debugMsgBle("Button 3 pressed");
+                start_snooze();
+            }
+        }
+
+        // @ 500ms
         if(timer % 100 == 0) {
-            // getPedo();                                   // For now I disabled pedo
+            // For now I disabled pedo
+            // getPedo();                       
             // sendBleMessageEs(MSG_BLE_04_PEDO);
             bsp_board_led_invert(0);
-            //buzz(10);        // Testing only
             timer = 0;
         }
 
-        increment_buzz_time();
+        increment_buzz_time(TIMER_PERIOD_MS);
 
-        nrf_delay_ms(5);
         timer++;
     }
 }
