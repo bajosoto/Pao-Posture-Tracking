@@ -2,6 +2,7 @@
 #include "classifier.h"
 #include "knn.h"
 #include "std_scaler.h"
+#include "mat.h"
 #include <stdio.h>
 #include <memory.h>
 
@@ -53,6 +54,7 @@ void clf_init(classifier_t clf_set,uint8_t n_transformer, const transformer_t tr
 
 class_t clf_predict(const feature_t sample[CLF_DIM]){
     proba_t probas[CLASS_NCLASSES];
+    memset(probas,0,sizeof(proba_t)*CLASS_NCLASSES);
     clf_predict_proba(sample,probas);
 	return class_max(probas);
 }
@@ -80,7 +82,7 @@ void clf_predict_n(uint16_t n_samples,const feature_t samples[n_samples][CLF_DIM
 	}
 }
 
-class_t clf_predict_proba(const feature_t sample[CLF_DIM],proba_t probas[CLASS_NCLASSES-1]){
+class_t clf_predict_proba(const feature_t sample[CLF_DIM],proba_t probas[CLASS_NCLASSES]){
 
     feature_t sample_transformed[CLF_DIM];
     memcpy(sample_transformed, sample, sizeof(feature_t) * CLF_DIM);

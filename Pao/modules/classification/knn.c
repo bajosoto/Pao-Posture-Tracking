@@ -69,9 +69,8 @@ proba_t knn_class_pdf(const feature_t sample[CLF_DIM], class_t posture){
 
 void knn_pdf(const feature_t sample[CLF_DIM],proba_t class_probas[CLASS_NCLASSES]){
     uint16_t neighbors[k_neighbors];
-
+    memset(neighbors,0,sizeof(uint16_t)*k_neighbors);
     find_neighbors(sample,neighbors);
-
     for (uint8_t i=0; i < CLASS_NCLASSES; i++){
         class_probas[i] = get_score(neighbors,(class_t)i);
     }
