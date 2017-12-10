@@ -15,7 +15,7 @@
  * @param labels: array with labels for each sample
  * @author phil
  */
-void stds_fit(uint16_t n_samples, feature_t samples[n_samples][CLF_DIM]);
+void stds_fit(uint16_t n_samples,const feature_t samples[n_samples][CLF_DIM]);
 
 /**
  * Transforms the data according to the fitted parameters.

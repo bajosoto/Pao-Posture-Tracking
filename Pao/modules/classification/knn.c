@@ -27,14 +27,13 @@ static void insert_sort(uint16_t idx, mat_t distance, uint16_t len, uint16_t nei
     }
 }
 
-
-static mat_t euclidian(feature_t *sample_1, feature_t *sample_2){
+static mat_t euclidian(const feature_t *sample_1,const feature_t *sample_2){
     mat_t sub[CLF_DIM];
     vec_sub(CLF_DIM,sample_1,sample_2,sub);
     return vec_norm(CLF_DIM,sub);
 }
 
-static void find_neighbors(feature_t sample[CLF_DIM],uint16_t neighbors[k_neighbors]){
+static void find_neighbors(const feature_t sample[CLF_DIM],uint16_t neighbors[k_neighbors]){
     mat_t distances[k_neighbors];
     for (uint16_t i = 0; i < k_neighbors; i++) {
         distances[i] = MAT_MAX;
@@ -60,7 +59,7 @@ static proba_t get_score(const uint16_t neighbors[k_neighbors],class_t posture){
     return pdf;
 }
 
-proba_t knn_class_pdf(feature_t sample[CLF_DIM], class_t posture){
+proba_t knn_class_pdf(const feature_t sample[CLF_DIM], class_t posture){
 	uint16_t neighbors[k_neighbors];
 
 	find_neighbors(sample,neighbors);
@@ -68,7 +67,7 @@ proba_t knn_class_pdf(feature_t sample[CLF_DIM], class_t posture){
     return get_score(neighbors,posture);
 }
 
-void knn_pdf(feature_t sample[CLF_DIM],proba_t class_probas[CLASS_NCLASSES]){
+void knn_pdf(const feature_t sample[CLF_DIM],proba_t class_probas[CLASS_NCLASSES]){
     uint16_t neighbors[k_neighbors];
 
     find_neighbors(sample,neighbors);
@@ -78,7 +77,7 @@ void knn_pdf(feature_t sample[CLF_DIM],proba_t class_probas[CLASS_NCLASSES]){
     }
 }
 
-void knn_fit(uint16_t n_samples, feature_t sample[n_samples][CLF_DIM], class_t labels[CLF_DIM]){
+void knn_fit(uint16_t n_samples,const feature_t sample[n_samples][CLF_DIM],const class_t labels[CLF_DIM]){
 	n_train_samples = n_samples;
 	for(uint16_t i = 0; i<n_samples; i++ ){
 		memcpy(train_data[i],sample[i],CLF_DIM*sizeof(feature_t));
