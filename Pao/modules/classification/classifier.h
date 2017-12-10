@@ -79,7 +79,7 @@ class_t clf_predict(const feature_t sample[CLF_DIM]);
  * @param probas      [return value with probability for each class, enum serves as index]
  * @return            [classified posture]
  */
-class_t clf_predict_proba(const feature_t sample[CLF_DIM],proba_t probas[CLASS_NCLASSES-1]);
+class_t clf_predict_proba(const feature_t sample[CLF_DIM],proba_t probas[CLASS_NCLASSES]);
 
 /**
  * [clf_predict_n wrapper for postc_predict to classify
