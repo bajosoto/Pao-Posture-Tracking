@@ -33,7 +33,7 @@ typedef float feature_t;
 
 typedef void (*pdf_f)(const feature_t[CLF_DIM],proba_t buffer[CLASS_NCLASSES]);
 typedef void (*clf_fit_f)(uint16_t n_samples, const feature_t sample[n_samples][CLF_DIM],const class_t labels[n_samples]);
-typedef void (*transf_fit_f)(const uint16_t n_samples, const feature_t sample[n_samples][CLF_DIM]);
+typedef void (*transf_fit_f)(uint16_t n_samples, const feature_t sample[n_samples][CLF_DIM]);
 
 typedef void (*transform_f)(const feature_t sample[CLF_DIM], feature_t sample_transformed[CLF_DIM]);
 
