@@ -11,18 +11,17 @@ typedef enum{
     CLASS_NO_CLASS,
     CLASS_REJECTED,
 	CLASS_NCLASSES
-}__attribute__((packed)) class_t;
+} class_t;
 
 typedef enum{
 	CLF_KNN=0,
 	CLF_N
-}__attribute__((packed)) classifier_t;
+} classifier_t;
 
 typedef enum{
     TRANSF_SCALE_STD=0,
-    TRANSF_PREP_AVG_MAGN=0,
     TRANSF_N
-}__attribute__((packed)) transformer_t;
+} transformer_t;
 
 #define MAX_SCALER_N 10
 

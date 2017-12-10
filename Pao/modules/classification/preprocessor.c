@@ -12,7 +12,7 @@ static uint16_t window_size = 10;
 void prep_init(uint16_t window_size_set){
     window_size = window_size_set;
 }
-static void avg(uint16_t n_samples, feature_t samples[n_samples][RAW_DIM],
+static void avg(uint16_t n_samples,const feature_t samples[n_samples][RAW_DIM],
                       uint16_t buffer_size,feature_t buffer[buffer_size][RAW_DIM]){
 
     uint16_t w = 0;
@@ -27,7 +27,7 @@ static void avg(uint16_t n_samples, feature_t samples[n_samples][RAW_DIM],
     }
 }
 
-void prep_transform(uint16_t n_samples, feature_t samples[n_samples][RAW_DIM],uint16_t buffer_size,feature_t buffer[buffer_size][CLF_DIM]){
+void prep_transform(uint16_t n_samples,const feature_t samples[n_samples][RAW_DIM],uint16_t buffer_size,feature_t buffer[buffer_size][CLF_DIM]){
 
     uint16_t n_samples_new = (uint16_t)(n_samples/window_size);
 
