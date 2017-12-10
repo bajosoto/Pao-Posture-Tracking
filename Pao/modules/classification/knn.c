@@ -8,14 +8,25 @@ static uint8_t train_labels[MAX_TRAIN];
 static uint16_t n_train_samples = 0;
 static uint16_t k_neighbors = 1;
 
-static bool contains(uint16_t element, uint16_t len, const uint16_t array[len]){
-    for(uint16_t j = 0; j < len; j++){
-        if (array[j] == element){
-            return true;
+static void shift(uint16_t idx, uint16_t len, uint16_t neighbors[len], mat_t distances[len]) {
+    for (uint16_t i = len - 1; i > idx; i--) {
+        neighbors[i] = neighbors[i - 1];
+        distances[i] = distances[i - 1];
+    }
+}
+
+static void insert_sort(uint16_t idx, mat_t distance, uint16_t len, uint16_t neighbors[len], mat_t distances[len]) {
+    mat_t distance_prev = 0;
+    for (uint16_t i = 0; i < len; i++) {
+        if (distance_prev < distance && distance < distances[i]) {
+            shift(i, len, neighbors, distances);
+            distances[i] = distance;
+            neighbors[i] = idx;
+            distance_prev = distances[i];
         }
     }
-    return false;
 }
+
 
 static mat_t euclidian(feature_t *sample_1, feature_t *sample_2){
     mat_t sub[CLF_DIM];
@@ -24,23 +35,19 @@ static mat_t euclidian(feature_t *sample_1, feature_t *sample_2){
 }
 
 static void find_neighbors(feature_t sample[CLF_DIM],uint16_t neighbors[k_neighbors]){
-	uint8_t found_neighbors = 0;
-	while(found_neighbors < k_neighbors){
-		mat_t min_dist = MAT_MAX;
-		for (uint16_t i = 0; i < n_train_samples; i++){
+    mat_t distances[k_neighbors];
+    for (uint16_t i = 0; i < k_neighbors; i++) {
+        distances[i] = MAT_MAX;
+    }
+    for (uint16_t i = 0; i < n_train_samples; i++) {
 
-            mat_t dist = euclidian(sample, train_data[i]);
-			if( dist < min_dist){
+        mat_t dist = euclidian(sample, train_data[i]);
+        if (dist < distances[k_neighbors - 1]) {
+            insert_sort(i, dist, k_neighbors, neighbors, distances);
 
-                if (!contains(i,found_neighbors,neighbors)){
-                    neighbors[found_neighbors] = i;
-                    min_dist = dist;
-                }
+        }
+    }
 
-			}
-		}
-        found_neighbors++;
-	}
 }
 
 static proba_t get_score(const uint16_t neighbors[k_neighbors],class_t posture){

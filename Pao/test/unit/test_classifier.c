@@ -20,12 +20,12 @@ static void test_train_1(void **state)
 {
     feature_t samples[2][CLF_DIM] = {{1.0,2.0},
                                      {5.0,1.0}};
-    class_t labels[2] = {CLASS_UNHEALTHY,
-                         CLASS_UNHEALTHY};
+    class_t labels[2] = {CLASS_STILL_UNHEALTHY,
+                         CLASS_STILL_UNHEALTHY};
     knn_init(1);
     clf_init(CLF_KNN,0,NULL);
     clf_fit(2, samples, labels);
-    assert_true(clf_predict(samples[0]) == CLASS_UNHEALTHY);
+    assert_true(clf_predict(samples[0]) == CLASS_STILL_UNHEALTHY);
 
 }
 static void test_train_2(void **state)
@@ -36,14 +36,14 @@ static void test_train_2(void **state)
                                      {2.0,3.0}};
 
     feature_t test_sample[CLF_DIM] = {1.5,2.5};
-    class_t labels[4] = {CLASS_HEALTHY,
-                         CLASS_HEALTHY,
-                         CLASS_HEALTHY,
-                         CLASS_UNHEALTHY};
+    class_t labels[4] = {CLASS_STILL_HEALTHY,
+                         CLASS_STILL_HEALTHY,
+                         CLASS_STILL_HEALTHY,
+                         CLASS_STILL_UNHEALTHY};
 
     knn_init(4);
     clf_fit(4, samples, labels);
-    assert_true(clf_predict(test_sample) == CLASS_HEALTHY);
+    assert_true(clf_predict(test_sample) == CLASS_STILL_HEALTHY);
 
 }
 
@@ -55,15 +55,15 @@ static void test_train_3(void **state)
                                      {2.0,3.0}};
 
     feature_t test_sample[CLF_DIM] = {1.5,2.5};
-    class_t labels[4] = {CLASS_HEALTHY,
-                         CLASS_UNHEALTHY,
-                         CLASS_UNHEALTHY,
-                         CLASS_UNHEALTHY};
+    class_t labels[4] = {CLASS_STILL_HEALTHY,
+                         CLASS_STILL_UNHEALTHY,
+                         CLASS_STILL_UNHEALTHY,
+                         CLASS_STILL_UNHEALTHY};
 
     knn_init(4);
     clf_fit(4, samples, labels);
     clf_init(CLF_KNN,0,NULL);
-    assert_true(clf_predict(test_sample) == CLASS_UNHEALTHY);
+    assert_true(clf_predict(test_sample) == CLASS_STILL_UNHEALTHY);
 
 }
 
@@ -74,16 +74,16 @@ static void test_scale_classify(void **state){
                                      {2.0,3.0}};
 
     feature_t test_sample[CLF_DIM] = {1.5,2.5};
-    class_t labels[4] = {CLASS_HEALTHY,
-                         CLASS_UNHEALTHY,
-                         CLASS_UNHEALTHY,
-                         CLASS_UNHEALTHY};
+    class_t labels[4] = {CLASS_STILL_HEALTHY,
+                         CLASS_STILL_UNHEALTHY,
+                         CLASS_STILL_UNHEALTHY,
+                         CLASS_STILL_UNHEALTHY};
 
     knn_init(4);
     transformer_t scalers[1] = {TRANSF_SCALE_STD};
     clf_init(CLF_KNN,1,scalers);
     clf_fit(4, samples, labels);
-    assert_true(clf_predict(test_sample) == CLASS_UNHEALTHY);
+    assert_true(clf_predict(test_sample) == CLASS_STILL_UNHEALTHY);
 }
 
 static void test_preprocess_scale_classify(void **state){
@@ -99,10 +99,10 @@ static void test_preprocess_scale_classify(void **state){
                                     {-1896,   5473,   3671,    904,   8221,   3144,   2457,5190,  -4494},
                                     {3199,   5523,   -639,   1002,   3565,   6418,   -432, 982,   1943}};
 
-    class_t labels[4] =  { CLASS_UNHEALTHY,
-                           CLASS_UNHEALTHY,
-                           CLASS_HEALTHY,
-                           CLASS_HEALTHY};
+    class_t labels[4] = {CLASS_STILL_UNHEALTHY,
+                         CLASS_STILL_UNHEALTHY,
+                         CLASS_STILL_HEALTHY,
+                         CLASS_STILL_HEALTHY};
 
     prep_init(2);
     feature_t samples[4][CLF_DIM];
@@ -112,10 +112,10 @@ static void test_preprocess_scale_classify(void **state){
     transformer_t scalers[1] = {TRANSF_SCALE_STD};
     clf_init(CLF_KNN,1,scalers);
     clf_fit(4, samples, labels);
-    assert_true(clf_predict(samples[0]) == CLASS_UNHEALTHY);
-    assert_true(clf_predict(samples[1]) == CLASS_UNHEALTHY);
-    assert_true(clf_predict(samples[2]) == CLASS_HEALTHY);
-    assert_true(clf_predict(samples[3]) == CLASS_HEALTHY);
+    assert_true(clf_predict(samples[0]) == CLASS_STILL_UNHEALTHY);
+    assert_true(clf_predict(samples[1]) == CLASS_STILL_UNHEALTHY);
+    assert_true(clf_predict(samples[2]) == CLASS_STILL_HEALTHY);
+    assert_true(clf_predict(samples[3]) == CLASS_STILL_HEALTHY);
 
 }
 
