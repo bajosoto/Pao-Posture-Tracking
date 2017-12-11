@@ -12,8 +12,8 @@ typedef enum TransValid_t {
 
 // Valid States
 typedef enum StateEs_t { 
-	S0_NOTCAL,						// S0 - Not calibrated, but connected
-	S1_NOTCALNOTCON,				// S1 - Not calibrated, disconnected
+	S0_NOTCAL,						// S0 - Not trained, but connected
+	S1_NOTCALNOTCON,				// S1 - Not trained, disconnected
 	S2_DISCONNECTED,				// S2 - Disconnected (no BLE connection)
 	S3_CONNECTED,					// S3 - Connected (BLE connection to smartphone)
 	S4_TRAINING,					// S4 - Training mode

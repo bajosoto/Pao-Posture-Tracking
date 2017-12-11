@@ -72,7 +72,22 @@ int main(void)
         // @ 50ms
         if(timer % 10 == 0) {  
             sendMessageEs(MSG02_SENSOR_VALS);
-            sendBleMessageEs(MSG_BLE_02_SENSOR);
+            // sendBleMessageEs(MSG_BLE_02_SENSOR);
+            if(currState == S4_TRAINING) {
+                // Add sample to training data TODO
+                process_new_sample(some_label_that_were_getting_from_BLE);
+            } else if(currState == S2_DISCONNECTED || currState == S3_CONNECTED) {
+                class_t label = process_new_sample(CLASS_NO_CLASS);
+                // If there was a classification
+                if(label != CLASS_NO_CLASS) {
+                    // Store in flash (TODO)
+                    // 
+                    if(currState == S3_CONNECTED) {
+                        // Send to phone (TODO)
+                        // sendBleMessageEs(SOME_NEW_MESSAGE);
+                    }
+                }
+            }
         }
 
         // @ 250ms
