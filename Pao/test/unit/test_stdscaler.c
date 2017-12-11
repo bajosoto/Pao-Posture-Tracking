@@ -17,8 +17,8 @@ static void test_fit_transform(void **state)
 {
     feature_t samples[2][CLF_DIM] = {{1.0,2.0},
                                      {5.0,1.0}};
-    class_t labels[2] = {CLASS_HEALTHY,
-                         CLASS_HEALTHY};
+    class_t labels[2] = {CLASS_STILL_HEALTHY,
+                         CLASS_STILL_UNHEALTHY};
 
     stds_fit(2,samples);
     stds_transform(samples[0], samples[0]);
