@@ -59,6 +59,7 @@ TransValid reCal() {
 
 /*  */
 TransValid calDoneCon() {
+	finish_training();
 	return TRANS_OK;
 }
 
@@ -95,5 +96,39 @@ TransValid bleDisconNotCal() {
 */
 TransValid switchState(StateEs smNewState) {
 
-	return esSmTable[smCurrState][smNewState].action();
+	TransValid result = esSmTable[smCurrState][smNewState].action();
+	if(result == TRANS_OK) {
+		smCurrState = smNewState;
+		debugMsgBle("Switched to state %d", smNewState);
+		debugMsg("Switched to state %d", smNewState);
+	} else {
+		debugMsgBle("Invalid trans(%d -> %d)", smCurrState, smNewState);
+		debugMsg("Invalid trans(%d -> %d)", smCurrState, smNewState);
+	}
+
+	return result;
+}
+
+TransValid switchStateDisconnect() {
+
+	if(smCurrState == S0_NOTCAL) {
+		return switchState(S1_NOTCALNOTCON);
+	} else if(smCurrState == S3_CONNECTED) {
+		return switchState(S2_DISCONNECTED);
+	} else if(smCurrState == S4_TRAINING) {
+		return switchState(S1_NOTCALNOTCON);
+	} else {
+		return TRANS_INVALID;
+	}
+}
+
+TransValid switchStateConnect() {
+
+	if(smCurrState == S1_NOTCALNOTCON) {
+		return switchState(S0_NOTCAL);
+	} else if(smCurrState == S2_DISCONNECTED) {
+		return switchState(S3_CONNECTED);
+	} else {
+		return TRANS_INVALID;
+	}
 }

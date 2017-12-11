@@ -2,6 +2,7 @@
 #define SM_H_
 
 #include "pao.h"
+#include "preprocessor.h"
 
 // Valid transition outcomes
 typedef enum TransValid_t {
@@ -32,5 +33,7 @@ typedef struct TransitionEs_t {
 StateEs smCurrState;
 
 TransValid switchState(StateEs smNewState);
+TransValid switchStateDisconnect();
+TransValid switchStateConnect();
 
 #endif /* SM_H_ */

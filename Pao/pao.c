@@ -54,6 +54,11 @@ int main(void)
     app_timer_create(&timer_5ms, APP_TIMER_MODE_REPEATED, timer_5ms_handler);
     app_timer_start(timer_5ms, TIMER5_TIMER_PERIOD, NULL);
 
+    // /* Init Classifier stuff */
+    knn_init(4);
+    transformer_t scalers[1] = {TRANSF_SCALE_STD};
+    clf_init(CLF_KNN, 1, scalers);
+
     /* Main loop */
     while (programRunning) {
 
@@ -73,16 +78,16 @@ int main(void)
         if(timer % 10 == 0) {  
             sendMessageEs(MSG02_SENSOR_VALS);
             // sendBleMessageEs(MSG_BLE_02_SENSOR);
-            if(currState == S4_TRAINING) {
+            if(smCurrState == S4_TRAINING) {
                 // Add sample to training data TODO
-                process_new_sample(some_label_that_were_getting_from_BLE);
-            } else if(currState == S2_DISCONNECTED || currState == S3_CONNECTED) {
+                process_new_sample(train_label);        // TODO Get this from BLE!
+            } else if(smCurrState == S2_DISCONNECTED || smCurrState == S3_CONNECTED) {
                 class_t label = process_new_sample(CLASS_NO_CLASS);
                 // If there was a classification
                 if(label != CLASS_NO_CLASS) {
                     // Store in flash (TODO)
                     // 
-                    if(currState == S3_CONNECTED) {
+                    if(smCurrState == S3_CONNECTED) {
                         // Send to phone (TODO)
                         // sendBleMessageEs(SOME_NEW_MESSAGE);
                     }
@@ -104,6 +109,10 @@ int main(void)
             // getPedo();                       
             // sendBleMessageEs(MSG_BLE_04_PEDO);
             bsp_board_led_invert(0);
+        }
+
+        if(timer % 200 == 0) {
+            advance_second();
             timer = 0;
         }
 

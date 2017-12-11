@@ -7,7 +7,7 @@
 static feature_t min[CLF_DIM];
 static feature_t max[CLF_DIM];
 
-void stds_fit(uint16_t n_samples, feature_t samples[n_samples][CLF_DIM]){
+void stds_fit(uint16_t n_samples,const feature_t samples[n_samples][CLF_DIM]){
     for (int j = 0; j < CLF_DIM; j++){
         min[j] = -1*FEATURE_T_MAX;
         max[j] = FEATURE_T_MAX;

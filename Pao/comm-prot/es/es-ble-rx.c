@@ -4,6 +4,8 @@
 #include "es-ble-tx.h"
 #include "vibrator.h"
 #include "mpu_wrapper.h"
+#include "sm.h"
+#include "classifier.h"
 
 // =========================================================================== //
 //								BLE Messages
@@ -17,6 +19,8 @@ void ble_msg01_dummy_data();
 void ble_msg02_dummy_signed_int32();
 void ble_msg03_vibrate();
 void ble_msg04_snooze();
+void ble_msg05_state_change();
+void ble_msg06_lbl_change();
 
 // Message table
 BleMsgType bleMsgTable[TOTAL_BLE_MESSAGES_APP] = {
@@ -26,6 +30,8 @@ BleMsgType bleMsgTable[TOTAL_BLE_MESSAGES_APP] = {
 	{ble_msg02_dummy_signed_int32, 	4},				// 02:	Dummy 32-bit signed int
 	{ble_msg03_vibrate, 			1},				// 03:	Vibrate/Buzz
 	{ble_msg04_snooze, 				0},				// 04:	Start snooze
+	{ble_msg05_state_change, 		1},				// 05:	Change State
+	{ble_msg06_lbl_change, 			1},				// 06:	Change Label (Training)
 };
 
 
@@ -54,10 +60,14 @@ void ble_msg04_snooze() {
 	start_snooze();
 }
 
+void ble_msg05_state_change() {
+	switchState((StateEs) bleRxBuff[0]);
+}
 
-
-
-
+void ble_msg06_lbl_change() {
+	train_label = bleRxBuff[0];
+	debugMsgBle("New label: %d", train_label);
+}
 
 
 
@@ -135,5 +145,7 @@ void ble_receive_data() {
 		stateBle = STATE_BLE_WAIT;								// Move to waiting state
 	}
 }
+
+
 
 
