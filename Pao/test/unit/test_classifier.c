@@ -2,7 +2,6 @@
 // Created by phil on 3-12-17.
 //
 
-
 #include <stdint.h>
 #include <stddef.h>
 #include <stdarg.h>
@@ -105,7 +104,6 @@ static void test_preprocess_scale_classify(void **state){
                          CLASS_STILL_HEALTHY,
                          CLASS_STILL_HEALTHY};
 
-    prep_init(2);
     knn_init(1);
     transformer_t scalers[1] = {TRANSF_SCALE_STD};
     clf_init(CLF_KNN,1,scalers);
@@ -132,7 +130,6 @@ static void test_scale_classify_proba(void **state)
                          CLASS_STILL_HEALTHY,
                          CLASS_STILL_UNHEALTHY};
 
-    prep_init(2);
     knn_init(4);
     transformer_t scalers[1] = {TRANSF_SCALE_STD};
     clf_init(CLF_KNN,1,scalers);

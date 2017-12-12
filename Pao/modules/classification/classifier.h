@@ -9,7 +9,6 @@ typedef enum{
     CLASS_MOVING_HEALTHY,
     CLASS_MOVING_UNHEALTHY,
     CLASS_NO_CLASS,
-    CLASS_REJECTED,
 	CLASS_NCLASSES
 } class_t;
 
@@ -25,7 +24,22 @@ typedef enum{
 
 #define MAX_SCALER_N 10
 
+#define IDX_ACCEL_0 0
+#define IDX_ACCEL_1 1
+#define IDX_ACCEL_2 2
+#define IDX_PHI 3
+#define IDX_THETA 4
+
+#ifdef PC_COMPILE
+#define RAW_DIM 9
+#define WINDOW_SIZE 2
+#define CLF_DIM 2
+#else
+#define RAW_DIM 5
+#define WINDOW_SIZE 30
 #define CLF_DIM 3
+#endif
+
 #define PROBA_T_MAX (float)(2.0*32768)
 #define FEATURE_T_MAX (float)(2.0*32768)
 typedef float proba_t;
@@ -37,7 +51,6 @@ typedef void (*transf_fit_f)(uint16_t n_samples, const feature_t sample[n_sample
 
 typedef void (*transform_f)(const feature_t sample[CLF_DIM], feature_t sample_transformed[CLF_DIM]);
 
-uint16_t train_label;
 
 /**
  * Classificatons that are lower than this threshold

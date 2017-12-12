@@ -10,7 +10,6 @@ static uint8_t clf;
 static transformer_t scalers[MAX_SCALER_N];
 static uint8_t n_scalers = 0;
 
-uint16_t train_label = CLASS_STILL_HEALTHY;
 
 static pdf_f pdf_fs[CLF_N] = {
 	knn_pdf,
@@ -43,7 +42,7 @@ static class_t class_max(const proba_t pdfs[CLASS_NCLASSES]){
 	if( max_pdf > REJECT_THRESHOLD){
 		return detected;
 	}
-	return CLASS_REJECTED;
+	return CLASS_NO_CLASS;
 
 }
 
