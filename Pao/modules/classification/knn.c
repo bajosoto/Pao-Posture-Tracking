@@ -67,11 +67,13 @@ proba_t knn_class_pdf(const feature_t sample[CLF_DIM], class_t posture){
     return get_score(neighbors,posture);
 }
 
-void knn_pdf(const feature_t sample[CLF_DIM],proba_t class_probas[CLASS_NCLASSES]){
+void knn_pdf(const feature_t sample[CLF_DIM],proba_t class_probas[CLASS_NCLASSES-1]){
     uint16_t neighbors[k_neighbors];
     memset(neighbors,0,sizeof(uint16_t)*k_neighbors);
     find_neighbors(sample,neighbors);
-    for (uint8_t i=0; i < CLASS_NCLASSES; i++){
+
+    // last class is NO_CLASS so we get scores until n-1
+    for (uint8_t i=0; i < CLASS_NCLASSES-1; i++){
         class_probas[i] = get_score(neighbors,(class_t)i);
     }
 }

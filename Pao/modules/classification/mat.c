@@ -28,9 +28,12 @@ void mat_print(uint8_t row, uint8_t col,const mat_t mat[row][col]){
 }
 
 void vec_print(uint8_t elements,const mat_t vec[elements]){
+	printf("-----------\n");
 	for(uint8_t i = 0; i < elements; i++){
-			printf("| %f |\n",vec[i]);
+			printf("| %.3f |\n",vec[i]);
 		}
+	printf("-----------\n");
+
 }
 
 mat_t vec_norm(uint8_t dim, const mat_t v[dim]){
