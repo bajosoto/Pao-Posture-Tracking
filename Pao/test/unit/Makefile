@@ -37,7 +37,7 @@ OBJS_TEST_KNN = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_KNN))))
 SOURCES_TEST_CLF = test_classifier.c classifier.c knn.c mat.c std_scaler.c preprocessor.c
 OBJS_TEST_CLF = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_CLF))))
 
-SOURCES_TEST_STDSCALER = test_stdscaler.c std_scaler.c
+SOURCES_TEST_STDSCALER = test_stdscaler.c std_scaler.c mat.c
 OBJS_TEST_STDSCALER = $(addsuffix .o, $(basename $(notdir $(SOURCES_TEST_STDSCALER))))
 
 SOURCES_TEST_PREP = test_preprocessor.c preprocessor.c mat.c
