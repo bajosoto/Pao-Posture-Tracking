@@ -90,7 +90,7 @@ class_t clf_predict_proba(const feature_t sample[CLF_DIM],proba_t probas[CLASS_N
 
     feature_t sample_transformed[CLF_DIM];
     memcpy(sample_transformed, sample, sizeof(feature_t) * CLF_DIM);
-    vec_print(CLF_DIM,sample_transformed);
+//    vec_print(CLF_DIM,sample_transformed);
 
     for (uint8_t j = 0; j < n_scalers; j++){
         transform_fs[scalers[j]](sample_transformed, sample_transformed);
@@ -98,7 +98,7 @@ class_t clf_predict_proba(const feature_t sample[CLF_DIM],proba_t probas[CLASS_N
 
     pdf_f classifier = pdf_fs[clf];
 
-    vec_print(CLF_DIM,sample_transformed);
+//    vec_print(CLF_DIM,sample_transformed);
     classifier(sample_transformed,probas);
 
     return class_max(probas);
