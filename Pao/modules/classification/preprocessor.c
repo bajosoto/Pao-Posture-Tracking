@@ -21,24 +21,30 @@ class_t training_labels[TRAINING_SET_SIZE];
 proba_t class_probabilities[CLASS_NCLASSES];
 
 int16_t counter_train = 0;
+int16_t counter_buffer = 0;
+char    training_enabled = 0;
+
+void reset_train_buffer() {
+    counter_buffer = 0;
+    counter_train = 0;
+}
 
 void finish_training() {
     clf_fit(TRAINING_SET_SIZE, training_set, training_labels);
 }
 
 class_t process_new_sample(class_t label){
-    static uint16_t count = 0;
 
-    samples_buffer[count][IDX_ACCEL_0] = getMpuVal(ACC_X);
-    samples_buffer[count][IDX_ACCEL_1] = getMpuVal(ACC_Y);
-    samples_buffer[count][IDX_ACCEL_2] = getMpuVal(ACC_Z);
-    samples_buffer[count][IDX_PHI] = getMpuVal(DMP_X);
-    samples_buffer[count][IDX_THETA] = getMpuVal(DMP_Y);
+    samples_buffer[counter_buffer][IDX_ACCEL_0] = getMpuVal(ACC_X);
+    samples_buffer[counter_buffer][IDX_ACCEL_1] = getMpuVal(ACC_Y);
+    samples_buffer[counter_buffer][IDX_ACCEL_2] = getMpuVal(ACC_Z);
+    samples_buffer[counter_buffer][IDX_PHI] = getMpuVal(DMP_X);
+    samples_buffer[counter_buffer][IDX_THETA] = getMpuVal(DMP_Y);
 
-    count += 1;
+    counter_buffer += 1;
 
     // Buffer is full
-    if(count >= WINDOW_SIZE) {
+    if(counter_buffer >= WINDOW_SIZE) {
         // Preprocess window into single sample
         prep_transform(WINDOW_SIZE, samples_buffer, 1, processed_samples_buffer);
 
@@ -53,12 +59,11 @@ class_t process_new_sample(class_t label){
 
             // Store newEntry somewhere
             // TODO
-            debugMsgBle("Lb: %d\tTime: %d", 
-                newEntry->label, newEntry->timestamp);
+            debugMsgBle("Lb: %d\tTime: %d", newEntry->label, newEntry->timestamp);
             // Free memory
             free(newEntry);
 
-        } else {
+        } else if(training_enabled) {       // Check if a label button has been pressed on the app
 
             // Calculate new pointer
             int offset = (int16_t)label * (TRAINING_SET_SIZE / 4);
@@ -78,8 +83,8 @@ class_t process_new_sample(class_t label){
         }
         
 
-        // Reset count
-        count = 0;
+        // Reset counter_buffer
+        counter_buffer = 0;
 
         // Return class
         return label;

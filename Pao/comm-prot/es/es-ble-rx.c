@@ -31,7 +31,7 @@ BleMsgType bleMsgTable[TOTAL_BLE_MESSAGES_APP] = {
 	{ble_msg03_vibrate, 			1},				// 03:	Vibrate/Buzz
 	{ble_msg04_snooze, 				0},				// 04:	Start snooze
 	{ble_msg05_state_change, 		1},				// 05:	Change State
-	{ble_msg06_lbl_change, 			1},				// 06:	Change Label (Training)
+	{ble_msg06_lbl_change, 			2},				// 06:	Change Label (Training) and enable/disable capturing
 };
 
 
@@ -65,8 +65,10 @@ void ble_msg05_state_change() {
 }
 
 void ble_msg06_lbl_change() {
+	reset_train_buffer();
 	train_label = bleRxBuff[0];
-	debugMsgBle("New label: %d", train_label);
+	training_enabled = bleRxBuff[1];
+	debugMsgBle("Label: %d, Training: %d", train_label, training_enabled);
 }
 
 

@@ -21,8 +21,10 @@
 
 void prep_transform(uint16_t n_samples,const feature_t samples[n_samples][RAW_DIM],uint16_t buffer_size,feature_t buffer[buffer_size][CLF_DIM]);
 
+void reset_train_buffer();
 void finish_training();
 
 class_t process_new_sample(class_t label);
+char    training_enabled ;
 
 #endif //PAO_PREPROCESSOR_H
