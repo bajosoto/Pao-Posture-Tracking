@@ -51,6 +51,10 @@ class_t process_new_sample(class_t label){
         // label = CLASS_NO_CLASS means we're training, otherwise we're classifying
         if(label == CLASS_NO_CLASS) {
             class_t newLabel = clf_predict_proba(processed_samples_buffer[0], class_probabilities);
+            debugMsgBle("newLabel: %d", newLabel);
+            for(int i = 0; i < CLASS_NCLASSES; i++) {
+                debugMsg("%d, ", (int16_t)(class_probabilities[i] * 100));
+            }
             proba_t highest_proba = class_probabilities[newLabel];
             entry_t* newEntry = (entry_t*)malloc(sizeof(entry_t));
             newEntry->label = newLabel;
