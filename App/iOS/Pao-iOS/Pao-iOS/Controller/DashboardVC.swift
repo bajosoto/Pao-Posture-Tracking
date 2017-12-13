@@ -365,8 +365,10 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnTrainReleased(_ sender: Any) {
         btnTrainView.isPressed = false
-        isClassifying = false
+        //isClassifying = false     // IoT
         animateTrainButtonsIn()
+        // Request ES state to S4_TRAINING
+        bleConn.write(msg: "7E0504")
     }
     @IBAction func onBtnTrainDrag(_ sender: Any) {
         btnTrainView.isPressed = false
@@ -531,10 +533,11 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnTrainBackReleased(_ sender: Any) {
         btnTrainBack.isPressed = false
-        classifier.train()
-        isClassifying = true
+//        classifier.train()    // IoT
+//        isClassifying = true  // IoT
         animateTrainButtonsOut()
-        
+        // Request ES state to S3_CONNECTED
+        bleConn.write(msg: "7E0503")
     }
     @IBAction func onBtnTrainBackDrag(_ sender: Any) {
         btnTrainBack.isPressed = false
