@@ -51,6 +51,19 @@ void prep_transform(uint16_t n_samples,const feature_t samples[n_samples][RAW_DI
     }
 
     avg(n_samples,output_buffer,n_samples_new,buffer);
+
+    feature_t min = 30000;
+    feature_t max = 0;
+    for(int i = 0; i < n_samples; i++) {
+        if(output_buffer[i][2] > max) {
+            max = output_buffer[i][2];
+        } else if(output_buffer[i][2] < min) {
+            min = output_buffer[i][2];
+        }
+    }
+    buffer[0][2] = max - min;
+
+    
     
     // for (uint16_t i = 0; i < n_samples_new; i++){
         // buffer[i][0] = average[i][IDX_THETA];

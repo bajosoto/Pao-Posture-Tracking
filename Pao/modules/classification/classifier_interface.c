@@ -11,7 +11,7 @@
 #include "nrf_delay.h"
 
 // #define WINDOW_SIZE         30
-#define TRAINING_SET_SIZE   (4 * 300) / WINDOW_SIZE
+#define TRAINING_SET_SIZE   (4 * 150) / WINDOW_SIZE 
 
 feature_t samples_buffer[WINDOW_SIZE][RAW_DIM];
 feature_t processed_samples_buffer[1][CLF_DIM];
@@ -81,7 +81,7 @@ class_t process_new_sample(class_t label){
             for(int i = 0; i < CLF_DIM; i++) {
                 training_set[counter_train][i] = processed_samples_buffer[0][i];
             }
-            debugMsg("mag: %d", (int32_t)(processed_samples_buffer[0][2]));
+            debugMsg("phi: %d\tthe: %d\tmag: %d\t", (int32_t)(processed_samples_buffer[0][0]), (int32_t)(processed_samples_buffer[0][1]), (int32_t)(processed_samples_buffer[0][2]));
 
             //debugMsgBle("lbl: %d cnt: %d", label, counter_train);
 

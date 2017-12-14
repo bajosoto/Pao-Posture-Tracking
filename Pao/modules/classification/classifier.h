@@ -36,7 +36,7 @@ typedef enum{
 #define CLF_DIM 3
 #else
 #define RAW_DIM 5
-#define WINDOW_SIZE 30
+#define WINDOW_SIZE 10
 #define CLF_DIM 3
 #endif
 

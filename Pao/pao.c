@@ -55,7 +55,7 @@ int main(void)
     app_timer_start(timer_5ms, TIMER5_TIMER_PERIOD, NULL);
 
     // /* Init Classifier stuff */
-    knn_init(7);
+    knn_init(4);
     transformer_t scalers[1] = {TRANSF_SCALE_STD};
     clf_init(CLF_KNN, 1, scalers);
 
@@ -74,8 +74,8 @@ int main(void)
             getMpuSensors();
         }
 
-        // @ 50ms
-        if(timer % 10 == 0) {  
+        // @ 50ms = 20Hz
+        if(timer % 20 == 0) {  
             sendMessageEs(MSG02_SENSOR_VALS);
             // sendBleMessageEs(MSG_BLE_02_SENSOR);
             if(smCurrState == S4_TRAINING) {
