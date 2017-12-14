@@ -6,9 +6,7 @@
 #define PAO_PREPROCESSOR_H
 
 #include "classifier.h"
-#include "mpu_interface.h"
-#include "flash-interface.h"
-#include "debug-interface.h"
+
 
 #define IDX_ACCEL_0 0
 #define IDX_ACCEL_1 1
@@ -21,10 +19,6 @@
 
 void prep_transform(uint16_t n_samples,const feature_t samples[n_samples][RAW_DIM],uint16_t buffer_size,feature_t buffer[buffer_size][CLF_DIM]);
 
-void reset_train_buffer();
-void finish_training();
 
-class_t process_new_sample(class_t label);
-char    training_enabled ;
 
 #endif //PAO_PREPROCESSOR_H

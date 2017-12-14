@@ -55,7 +55,7 @@ int main(void)
     app_timer_start(timer_5ms, TIMER5_TIMER_PERIOD, NULL);
 
     // /* Init Classifier stuff */
-    knn_init(4);
+    knn_init(7);
     transformer_t scalers[1] = {TRANSF_SCALE_STD};
     clf_init(CLF_KNN, 1, scalers);
 

@@ -8,6 +8,9 @@
 #include <memory.h>
 #include <stdlib.h>
 
+
+
+
 static void avg(uint16_t n_samples,const feature_t samples[n_samples][RAW_DIM],
 
                       uint16_t buffer_size,feature_t buffer[buffer_size][RAW_DIM]){

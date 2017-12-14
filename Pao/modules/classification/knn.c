@@ -18,19 +18,26 @@ static void shift(uint16_t idx, uint16_t len, uint16_t neighbors[len], mat_t dis
 static void insert_sort(uint16_t idx, mat_t distance, uint16_t len, uint16_t neighbors[len], mat_t distances[len]) {
     mat_t distance_prev = 0;
     for (uint16_t i = 0; i < len; i++) {
-        if (distance_prev < distance && distance < distances[i]) {
+        if (distance_prev <= distance && distance < distances[i]) {
             shift(i, len, neighbors, distances);
             distances[i] = distance;
             neighbors[i] = idx;
-            distance_prev = distances[i];
+            break;
         }
+        distance_prev = distances[i];
     }
 }
 
-static mat_t euclidian(const feature_t *sample_1,const feature_t *sample_2){
+static mat_t euclidian(const feature_t sample_1[CLF_DIM], const feature_t sample_2[CLF_DIM]) {
     mat_t sub[CLF_DIM];
     vec_sub(CLF_DIM,sample_1,sample_2,sub);
-    return vec_norm(CLF_DIM,sub);
+//    printf("Sample 1:\n");
+//    vec_print(CLF_DIM,sample_1);
+//    printf("Sample 2:\n");
+//    vec_print(CLF_DIM,sample_2);
+    mat_t norm = vec_norm(CLF_DIM, sub);
+//    printf("-->%f\n",norm);
+    return norm;
 }
 
 static void find_neighbors(const feature_t sample[CLF_DIM],uint16_t neighbors[k_neighbors]){
@@ -46,6 +53,8 @@ static void find_neighbors(const feature_t sample[CLF_DIM],uint16_t neighbors[k_
 
         }
     }
+
+//    vec_print((uint8_t )k_neighbors,distances);
 
 }
 
@@ -63,15 +72,26 @@ proba_t knn_class_pdf(const feature_t sample[CLF_DIM], class_t posture){
 	uint16_t neighbors[k_neighbors];
 
 	find_neighbors(sample,neighbors);
+    printf("Neighbors:");
+    for (uint16_t i = 0; i < k_neighbors; i++) {
+        printf("%d,", neighbors[i]);
+    }
+    printf("\n");
 
     return get_score(neighbors,posture);
 }
 
-void knn_pdf(const feature_t sample[CLF_DIM],proba_t class_probas[CLASS_NCLASSES]){
+void knn_pdf(const feature_t sample[CLF_DIM],proba_t class_probas[CLASS_NCLASSES-1]){
     uint16_t neighbors[k_neighbors];
     memset(neighbors,0,sizeof(uint16_t)*k_neighbors);
     find_neighbors(sample,neighbors);
-    for (uint8_t i=0; i < CLASS_NCLASSES; i++){
+    printf("Neighbors:");
+    for (uint16_t i = 0; i < k_neighbors; i++) {
+        printf("%d,", neighbors[i]);
+    }
+    printf("\n");
+    // last class is NO_CLASS so we get scores until n-1
+    for (uint8_t i=0; i < CLASS_NCLASSES-1; i++){
         class_probas[i] = get_score(neighbors,(class_t)i);
     }
 }

@@ -24,6 +24,7 @@
 #include "sm.h"
 #include "timestamp.h"
 #include "knn.h"
+#include "classifier_interface.h"
 // #include "app_mpu.h"
 
 int programRunning;

@@ -374,7 +374,6 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         btnTrainView.isPressed = false
     }
     
-    
     @IBAction func onBtnDebugPressed(_ sender: Any) {
         btnDebugView.isPressed = true
     }
