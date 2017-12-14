@@ -39,24 +39,24 @@ static void insert_sort(uint16_t idx, mat_t distance, uint16_t len, uint16_t nei
     }
 }
 
-static mat_t euclidian(const feature_t sample_1[CLF_DIM], const feature_t sample_2[CLF_DIM]) {
-    mat_t sub[CLF_DIM];
-    vec_sub(CLF_DIM,sample_1,sample_2,sub);
-    mat_t norm = vec_norm(CLF_DIM, sub);
-    //if it overflows we just set it to max
-    if (norm < 0){
-        norm = MAT_MAX-1;
-    }
-//    printf("Sample 1:\n");
-//    vec_print(CLF_DIM,sample_1);
-//    printf("Sample 2:\n");
-//    vec_print(CLF_DIM,sample_2);
-//    printf("Sub:\n");
-//    vec_print(CLF_DIM,sub);
-//    printf("-->%d\n",norm);
+// static mat_t euclidian(const feature_t sample_1[CLF_DIM], const feature_t sample_2[CLF_DIM]) {
+//     mat_t sub[CLF_DIM];
+//     vec_sub(CLF_DIM,sample_1,sample_2,sub);
+//     mat_t norm = vec_norm(CLF_DIM, sub);
+//     //if it overflows we just set it to max
+//     if (norm < 0){
+//         norm = MAT_MAX-1;
+//     }
+// //    printf("Sample 1:\n");
+// //    vec_print(CLF_DIM,sample_1);
+// //    printf("Sample 2:\n");
+// //    vec_print(CLF_DIM,sample_2);
+// //    printf("Sub:\n");
+// //    vec_print(CLF_DIM,sub);
+// //    printf("-->%d\n",norm);
 
-    return norm;
-}
+//     return norm;
+// }
 
 
 static mat_t manhattan(const feature_t sample_1[CLF_DIM], const feature_t sample_2[CLF_DIM]) {
