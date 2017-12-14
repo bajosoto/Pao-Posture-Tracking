@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <math.h>
+#include <printf.h>
 #include "mat.h"
 /*
 * Test is test compiled correctly
@@ -18,12 +19,12 @@ static void test_linking(void **state)
 
 static void test_matmult_2d(void **state){
 	mat_t mat1[2][2] = {
-		{10, 0},
-		{0, 10}
+		{1, 0},
+		{0, 1}
 	};
 	mat_t mat2[2][2] = {
-		{10, 0},
-		{0, 10}
+		{1, 0},
+		{0, 1}
 	};
 	mat_t buffer[2][2]= {
 		{0, 0},
@@ -50,14 +51,14 @@ static void test_matmult_3d(void **state){
 		{0, 0, 10}
 	};
     mat_t buffer[3][3] = {
-		{0.0, 0.0, 0.0},
-		{0.0, 0.0, 0.0},
-		{0.0, 0.0, 0.0}
+		{0, 0, 0},
+		{0, 0, 0},
+		{0, 0, 0}
 	};
     mat_t result[3][3] = {
-		{10, 20, 35},
-		{40, 50, 80},
-		{70, 80, 125}
+		{100, 200, 800},
+		{400, 500, 2600},
+		{700, 800, 4400}
 	};
 
 	mat_multiply(3,3,mat1,3,3,mat2,buffer);
@@ -79,9 +80,9 @@ static void test_matmult_bad(void **state){
 		{0, 10}
 	};
     mat_t buffer[3][3] = {
-		{0.0, 0.0, 0.0},
-		{0.0, 0.0, 0.0},
-		{0.0, 0.0, 0.0}
+		{0, 0, 0},
+		{0, 0, 0},
+		{0, 0, 0}
 	};
 	
 
@@ -100,8 +101,8 @@ static void test_matmult_3to2(void **state){
 		{70, 80, 90}
 	};
     mat_t mat2[3][2] = {
-		{10, 0},
-		{0, 10},
+		{1, 0},
+		{0, 1},
 		{0, 0}
 
 	};
@@ -136,8 +137,8 @@ static void test_vec_sub(void **state){
 
 static void test_vec_norm(void **state){
 	mat_t vec1[3] = {2,-2};
-
-	assert_true(sqrt(79) <= vec_norm(2,vec1) && vec_norm(2,vec1) <= sqrt(81));
+    mat_t res = vec_norm(2,vec1);
+	assert_true(res == 2);
 }
 /*
 * Register Tests

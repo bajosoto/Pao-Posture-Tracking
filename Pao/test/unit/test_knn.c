@@ -50,7 +50,7 @@ static void test_train_3(void **state)
                                      {60,10},
                                      {20,30}};
 
-    feature_t test_sample[CLF_DIM] = {15,25};
+    feature_t test_sample[CLF_DIM] = {10,20};
     class_t labels[4] = {CLASS_STILL_HEALTHY,
                          CLASS_STILL_HEALTHY,
                          CLASS_STILL_HEALTHY,
@@ -79,7 +79,7 @@ static void test_probas(void **state)
     knn_init(4);
     knn_fit(4, samples, labels);
     proba_t pdfs[CLASS_NCLASSES];
-    memset(pdfs,0,sizeof(proba_t)*CLASS_NCLASSES);
+    memset(pdfs,0,sizeof(proba_t)*CLASS_NCLASSES-1);
     knn_pdf(test_sample, pdfs);
     assert_true(pdfs[CLASS_STILL_HEALTHY] == 75);
     assert_true(pdfs[CLASS_STILL_UNHEALTHY] == 25);
@@ -90,22 +90,24 @@ static void test_4_classes(void **state) {
     /* Some random values generated with matlab
         each class follows a normal distribution around
         a different mean */
-    feature_t samples[16][CLF_DIM] = {{22228, 9660},
-                                      {41954, 41057},
-                                      {11173, 33674},
-                                      {117093, 82855},
-                                      {356157, 262373},
-                                      {301923, 297398},
-                                      {356161, 382182},
-                                      {116836, 75989},
-                                      {619742, 652277},
-                                      {697741, 665251},
-                                      {653184, 676213},
-                                      {671065, 701331},
-                                      {975190, 1005666},
-                                      {991095, 1051966},
-                                      {995829, 894978},
-                                      {988802, 1008729},
+    feature_t samples[16][CLF_DIM] = {
+            {-5010, -4980},
+            {-5000, -4990},
+            {-4990, -5010},
+            {-4990, -4990},
+            {-1, 0},
+            {-1, 0},
+            {0, -1},
+            {0, 0},
+            {499, 499},
+            {499, 499},
+            {499, 501},
+            {499, 498},
+            {2002, 2001},
+            {2000, 1999},
+            {2000, 1999},
+            {1999, 1999},
+
     };
 
 

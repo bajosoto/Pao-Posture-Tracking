@@ -2,8 +2,8 @@
 #define MAT_H
 #include <inttypes.h>
 
-#define mat_t int32_t
-#define MAT_MAX 32768
+#define mat_t int16_t
+#define MAT_MAX 32767
 
 void mat_multiply(uint8_t r1,uint8_t c1,const mat_t mat1[r1][c1],uint8_t r2,uint8_t c2,const mat_t mat2[r2][c2],mat_t buffer[r1][c2]);
 void mat_print(uint8_t row, uint8_t col,const mat_t mat[row][col]);

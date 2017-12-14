@@ -15,19 +15,20 @@
 #include "mat.h"
 static void test_fit_transform(void **state)
 {
-    feature_t samples[2][CLF_DIM] = {{10,20},
-                                     {50,10}};
+    feature_t samples[2][CLF_DIM] = {{10,40,30},
+                                     {50,10,5}};
 
     stds_fit(2,samples);
     stds_transform(samples[0], samples[0]);
     stds_transform(samples[1], samples[1]);
 //    mat_print(2,CLF_DIM,samples);
-    assert_in_range(samples[0][0],-32768,32768);
-    assert_in_range(samples[0][1],-32768,32768);
-    assert_in_range(samples[1][0],-32768,32768);
-    assert_in_range(samples[1][1],-32768,32768);
-    assert_true(samples[1][0] == 32768);
-    assert_true(samples[0][0] == -32768);
+    assert_true(-32767 <= samples[0][0] && samples[0][0] <= -30000);
+    assert_true(30000 <= samples[0][1] && samples[0][1] <= 32767);
+    assert_true(30000 <= samples[0][2] && samples[0][2] <= 32767);
+    assert_true(30000 <= samples[1][0] && samples[1][0] <= 32767);
+    assert_true(-32767 <= samples[1][1] && samples[1][1] <= -30000);
+    assert_true(-32767 <= samples[1][2] && samples[1][2] <= -30000);
+    assert_true(samples[0][0] == 0-32767);
 
 }
 

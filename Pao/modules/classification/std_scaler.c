@@ -12,9 +12,14 @@ static feature_t max[CLF_DIM];
 void stds_fit(uint16_t n_samples,const feature_t samples[n_samples][CLF_DIM]){
     for (uint16_t  j = 0; j < CLF_DIM; j++){
         min[j] = FEATURE_T_MAX;
-        max[j] = -1*FEATURE_T_MAX;
+        max[j] = (feature_t )-1*FEATURE_T_MAX;
     }
 
+//    printf("Min:\n");
+//    vec_print(CLF_DIM,min);
+//
+//    printf("Max:\n");
+//    vec_print(CLF_DIM,max);
     for (uint16_t i = 0; i < n_samples; i++){
         for (uint16_t  j = 0; j < CLF_DIM; j++){
             if(samples[i][j] < min[j]){
@@ -35,7 +40,9 @@ void stds_fit(uint16_t n_samples,const feature_t samples[n_samples][CLF_DIM]){
 
 void stds_transform(const feature_t sample[CLF_DIM], feature_t sample_transformed[CLF_DIM]) {
     for (uint16_t  j = 0; j < CLF_DIM; j++){
-        sample_transformed[j] = (sample[j] - min[j]) / (max[j] - min[j])*SCALE_RANGE+SCALE_MIN;
+        double transformed_fl = (((double)(sample[j] - min[j]) / (double)(max[j] - min[j]+1))*(double)SCALE_RANGE+(double)SCALE_MIN);
+//        printf("%d:%f\n",j,transformed_fl);
+        sample_transformed[j] = (feature_t )(transformed_fl);
     }
 }
 

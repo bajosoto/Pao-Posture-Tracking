@@ -30,18 +30,18 @@ void mat_print(uint8_t row, uint8_t col,const mat_t mat[row][col]){
 void vec_print(uint8_t elements,const mat_t vec[elements]){
 	printf("-----------\n");
 	for(uint8_t i = 0; i < elements; i++){
-			printf("| %d |\n",vec[i]);
+			printf("| %d |\n",(mat_t)vec[i]);
 		}
 	printf("-----------\n");
 
 }
 
 mat_t vec_norm(uint8_t dim, const mat_t v[dim]){
-	mat_t res = 0;
+	double res = 0;
 	for (uint8_t i=0; i<dim; i++){
 		res += v[i]*v[i];
 	}
-	return (mat_t)sqrt((double)res);
+	return (mat_t)sqrt(res);
 }
 
 void vec_sub(uint8_t dim, const mat_t v1[dim], const mat_t v2[dim], mat_t res[dim]){
