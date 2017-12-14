@@ -10,7 +10,7 @@
 #include "preprocessor.h"
 #include "nrf_delay.h"
 
-#define WINDOW_SIZE         30
+// #define WINDOW_SIZE         30
 #define TRAINING_SET_SIZE   (4 * 300) / WINDOW_SIZE
 
 feature_t samples_buffer[WINDOW_SIZE][RAW_DIM];
@@ -48,8 +48,10 @@ class_t process_new_sample(class_t label){
     if(counter_buffer >= WINDOW_SIZE) {
         // Preprocess window into single sample
         prep_transform(WINDOW_SIZE, samples_buffer, 1, processed_samples_buffer);
+        //debugMsg("b%d,%d,%d,%d", label, (int16_t)(samples_buffer[0][0]), (int16_t)(samples_buffer[0][1]), (int16_t)(samples_buffer[0][2]));
 
-        // label = CLASS_NO_CLASS means we're training, otherwise we're classifying
+
+        // label != CLASS_NO_CLASS means we're training, otherwise we're classifying
         if(label == CLASS_NO_CLASS) {
             class_t newLabel = clf_predict_proba(processed_samples_buffer[0], class_probabilities);
             proba_t highest_proba = class_probabilities[newLabel];
@@ -79,7 +81,7 @@ class_t process_new_sample(class_t label){
             for(int i = 0; i < CLF_DIM; i++) {
                 training_set[counter_train][i] = processed_samples_buffer[0][i];
             }
-            debugMsgBle("[%d,%d,%d,%d]", label, (int16_t)(processed_samples_buffer[0][0]), (int16_t)(processed_samples_buffer[0][1]), (int16_t)(processed_samples_buffer[0][2]));
+            debugMsg("mag: %d", (int32_t)(processed_samples_buffer[0][2]));
 
             //debugMsgBle("lbl: %d cnt: %d", label, counter_train);
 
