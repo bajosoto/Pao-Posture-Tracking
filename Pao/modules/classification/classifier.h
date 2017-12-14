@@ -40,10 +40,12 @@ typedef enum{
 #define CLF_DIM 3
 #endif
 
-#define PROBA_T_MAX (float)(2.0*32768)
-#define FEATURE_T_MAX (float)(2.0*32768)
-typedef float proba_t;
-typedef float feature_t;
+#define SCALE_RANGE (32768*2)
+#define SCALE_MIN (-1*32768)
+#define PROBA_T_MAX 256
+#define FEATURE_T_MAX 32768
+typedef uint8_t proba_t;
+typedef int32_t feature_t;
 
 typedef void (*pdf_f)(const feature_t[CLF_DIM], proba_t buffer[CLASS_NCLASSES - 1]);
 typedef void (*clf_fit_f)(uint16_t n_samples, const feature_t sample[n_samples][CLF_DIM],const class_t labels[n_samples]);

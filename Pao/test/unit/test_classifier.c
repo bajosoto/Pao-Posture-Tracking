@@ -18,8 +18,8 @@
 
 static void test_train_1(void **state)
 {
-    feature_t samples[2][CLF_DIM] = {{1.0,2.0},
-                                     {5.0,1.0}};
+    feature_t samples[2][CLF_DIM] = {{10,20},
+                                     {50,10}};
     class_t labels[2] = {CLASS_STILL_UNHEALTHY,
                          CLASS_STILL_UNHEALTHY};
     knn_init(1);
@@ -30,12 +30,12 @@ static void test_train_1(void **state)
 }
 static void test_train_2(void **state)
 {
-    feature_t samples[4][CLF_DIM] = {{1.0,2.0},
-                                     {5.0,1.0},
-                                     {6.0,1.0},
-                                     {2.0,3.0}};
+    feature_t samples[4][CLF_DIM] = {{10,20},
+                                     {50,10},
+                                     {60,10},
+                                     {20,30}};
 
-    feature_t test_sample[CLF_DIM] = {1.5,2.5};
+    feature_t test_sample[CLF_DIM] = {15,25};
     class_t labels[4] = {CLASS_STILL_HEALTHY,
                          CLASS_STILL_HEALTHY,
                          CLASS_STILL_HEALTHY,
@@ -49,12 +49,12 @@ static void test_train_2(void **state)
 
 static void test_train_3(void **state)
 {
-    feature_t samples[4][CLF_DIM] = {{1.0,2.0},
-                                     {5.0,1.0},
-                                     {6.0,1.0},
-                                     {2.0,3.0}};
+    feature_t samples[4][CLF_DIM] = {{10,20},
+                                     {50,10},
+                                     {60,10},
+                                     {20,30}};
 
-    feature_t test_sample[CLF_DIM] = {1.5,2.5};
+    feature_t test_sample[CLF_DIM] = {15,25};
     class_t labels[4] = {CLASS_STILL_HEALTHY,
                          CLASS_STILL_UNHEALTHY,
                          CLASS_STILL_UNHEALTHY,
@@ -68,12 +68,12 @@ static void test_train_3(void **state)
 }
 
 static void test_scale_classify(void **state){
-    feature_t samples[4][CLF_DIM] = {{1.0,2.0},
-                                     {5.0,1.0},
-                                     {6.0,1.0},
-                                     {2.0,3.0}};
+    feature_t samples[4][CLF_DIM] = {{10,20},
+                                     {50,10},
+                                     {60,10},
+                                     {20,30}};
 
-    feature_t test_sample[CLF_DIM] = {1.5,2.5};
+    feature_t test_sample[CLF_DIM] = {15,25};
     class_t labels[4] = {CLASS_STILL_HEALTHY,
                          CLASS_STILL_UNHEALTHY,
                          CLASS_STILL_UNHEALTHY,
@@ -120,10 +120,10 @@ static void test_preprocess_scale_classify(void **state){
 
 static void test_scale_classify_proba(void **state)
 {
-    feature_t samples[4][CLF_DIM] = {{1.0,2.0},
-                                     {5.0,1.0},
-                                     {6.0,1.0},
-                                     {2.0,3.0}};
+    feature_t samples[4][CLF_DIM] = {{10,20},
+                                     {50,10},
+                                     {60,10},
+                                     {20,30}};
 
     class_t labels[4] = {CLASS_STILL_HEALTHY,
                          CLASS_STILL_HEALTHY,
@@ -139,8 +139,8 @@ static void test_scale_classify_proba(void **state)
     proba_t pdfs[CLASS_NCLASSES];
     memset(pdfs,0,sizeof(proba_t)*CLASS_NCLASSES);
     class_t prediction = clf_predict_proba(samples,pdfs);
-    assert_true(pdfs[CLASS_STILL_HEALTHY] == 0.75);
-    assert_true(pdfs[CLASS_STILL_UNHEALTHY] == 0.25);
+    assert_true(pdfs[CLASS_STILL_HEALTHY] == 75);
+    assert_true(pdfs[CLASS_STILL_UNHEALTHY] == 25);
     assert_true(prediction == CLASS_STILL_HEALTHY);
 
 }
@@ -195,9 +195,9 @@ static void test_full_4_classes(void **state){
         assert_true(label == labels[i]);
         for (int j = 0; j < CLASS_NCLASSES-1; j++){
             if((class_t)j == label){
-                assert_in_range(class_probabilities[j], 0.6, 1.0);
+                assert_in_range(class_probabilities[j], 60, 100);
             }else{
-                assert_in_range(class_probabilities[j], 0, 0.4);
+                assert_in_range(class_probabilities[j], 0, 40);
             }
 
         }

@@ -17,17 +17,17 @@ static void test_linking(void **state)
 }
 
 static void test_matmult_2d(void **state){
-	float mat1[2][2] = {
-		{1.0, 0.0},
-		{0.0, 1.0}
+	mat_t mat1[2][2] = {
+		{10, 0},
+		{0, 10}
 	};
-	float mat2[2][2] = {
-		{1.0, 0.0},
-		{0.0, 1.0}
+	mat_t mat2[2][2] = {
+		{10, 0},
+		{0, 10}
 	};
-	float buffer[2][2]= {
-		{0.0, 0.0},
-		{0.0, 0.0}
+	mat_t buffer[2][2]= {
+		{0, 0},
+		{0, 0}
 	};
 
 	mat_multiply(2,2,mat1,2,2,mat2,buffer);
@@ -39,25 +39,25 @@ static void test_matmult_2d(void **state){
 }
 
 static void test_matmult_3d(void **state){
-	float mat1[3][3] = {
-		{1.0, 2.0, 3.0},
-		{4.0, 5.0, 6.0},
-		{7.0, 8.0, 9.0}
+	mat_t mat1[3][3] = {
+		{10, 20, 30},
+		{40, 50, 60},
+		{70, 80, 90}
 	};
-	float mat2[3][3] = {
-		{1.0, 0.0, 0.5},
-		{0.0, 1.0, 0.0},
-		{0.0, 0.0, 1.0}
+	mat_t mat2[3][3] = {
+		{10, 0, 50},
+		{0, 10, 0},
+		{0, 0, 10}
 	};
-	float buffer[3][3] = {
+    mat_t buffer[3][3] = {
 		{0.0, 0.0, 0.0},
 		{0.0, 0.0, 0.0},
 		{0.0, 0.0, 0.0}
 	};
-	float result[3][3] = {
-		{1.0, 2.0, 3.5},
-		{4.0, 5.0, 8.0},
-		{7.0, 8.0, 12.5}
+    mat_t result[3][3] = {
+		{10, 20, 35},
+		{40, 50, 80},
+		{70, 80, 125}
 	};
 
 	mat_multiply(3,3,mat1,3,3,mat2,buffer);
@@ -69,16 +69,16 @@ static void test_matmult_3d(void **state){
 }
 
 static void test_matmult_bad(void **state){
-	float mat1[3][3] = {
-		{1.0, 2.0, 3.0},
-		{4.0, 5.0, 6.0},
-		{7.0, 8.0, 9.0}
+    mat_t mat1[3][3] = {
+		{10, 20, 30},
+		{40, 50, 60},
+		{70, 80, 90}
 	};
-	float mat2[2][2] = {
-		{1.0, 0.0},
-		{0.0, 1.0}
+    mat_t mat2[2][2] = {
+		{10, 0},
+		{0, 10}
 	};
-	float buffer[3][3] = {
+    mat_t buffer[3][3] = {
 		{0.0, 0.0, 0.0},
 		{0.0, 0.0, 0.0},
 		{0.0, 0.0, 0.0}
@@ -94,21 +94,21 @@ static void test_matmult_bad(void **state){
 } 
 
 static void test_matmult_3to2(void **state){
-	float mat1[3][3] = {
-		{1.0, 2.0, 3.0},
-		{4.0, 5.0, 6.0},
-		{7.0, 8.0, 9.0}
+    mat_t mat1[3][3] = {
+		{10, 20, 30},
+		{40, 50, 60},
+		{70, 80, 90}
 	};
-	float mat2[3][2] = {
-		{1.0, 0.0},
-		{0.0, 1.0},
-		{0.0, 0.0}
+    mat_t mat2[3][2] = {
+		{10, 0},
+		{0, 10},
+		{0, 0}
 
 	};
-	float buffer[3][2] = {
-		{0.0, 0.0},
-		{0.0, 0.0},
-		{0.0, 0.0}
+	mat_t buffer[3][2] = {
+		{0, 0},
+		{0, 0},
+		{0, 0}
 	};
 	
 
@@ -137,7 +137,7 @@ static void test_vec_sub(void **state){
 static void test_vec_norm(void **state){
 	mat_t vec1[3] = {2,-2};
 
-	assert_true(sqrt(7.9) <= vec_norm(2,vec1) && vec_norm(2,vec1) <= sqrt(8.1));
+	assert_true(sqrt(79) <= vec_norm(2,vec1) && vec_norm(2,vec1) <= sqrt(81));
 }
 /*
 * Register Tests

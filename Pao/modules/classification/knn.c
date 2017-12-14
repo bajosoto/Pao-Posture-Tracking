@@ -62,7 +62,7 @@ static proba_t get_score(const uint16_t neighbors[k_neighbors],class_t posture){
     proba_t pdf = 0.0;
     for (uint8_t i=0;i<k_neighbors;i++){
         if(train_labels[neighbors[i]] == posture){
-            pdf += 1.0/k_neighbors;
+            pdf += 100/k_neighbors;
         }
     }
     return pdf;
@@ -72,11 +72,11 @@ proba_t knn_class_pdf(const feature_t sample[CLF_DIM], class_t posture){
 	uint16_t neighbors[k_neighbors];
 
 	find_neighbors(sample,neighbors);
-    printf("Neighbors:");
-    for (uint16_t i = 0; i < k_neighbors; i++) {
-        printf("%d,", neighbors[i]);
-    }
-    printf("\n");
+//    printf("Neighbors:");
+//    for (uint16_t i = 0; i < k_neighbors; i++) {
+//        printf("%d,", neighbors[i]);
+//    }
+//    printf("\n");
 
     return get_score(neighbors,posture);
 }
@@ -85,12 +85,12 @@ void knn_pdf(const feature_t sample[CLF_DIM],proba_t class_probas[CLASS_NCLASSES
     uint16_t neighbors[k_neighbors];
     memset(neighbors,0,sizeof(uint16_t)*k_neighbors);
     find_neighbors(sample,neighbors);
-    printf("Neighbors:");
-    for (uint16_t i = 0; i < k_neighbors; i++) {
-        printf("%d,", neighbors[i]);
-    }
-    printf("\n");
-    // last class is NO_CLASS so we get scores until n-1
+//    printf("Neighbors:");
+//    for (uint16_t i = 0; i < k_neighbors; i++) {
+//        printf("%d,", neighbors[i]);
+//    }
+//    printf("\n");
+//    // last class is NO_CLASS so we get scores until n-1
     for (uint8_t i=0; i < CLASS_NCLASSES-1; i++){
         class_probas[i] = get_score(neighbors,(class_t)i);
     }

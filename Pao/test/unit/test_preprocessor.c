@@ -18,14 +18,14 @@
 
 static void test_transform(void **state)
 {
-    feature_t raw_samples[2][RAW_DIM]={{1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0},
-                                       {2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0}};
-    feature_t samples[1][CLF_DIM] = {{0.0,0.0,0.0}};
+    feature_t raw_samples[2][RAW_DIM]={{10,10,10,10,10,10,10,10,10},
+                                       {20,20,20,20,20,20,20,20,20}};
+    feature_t samples[1][CLF_DIM] = {{0,0,0}};
 
     prep_transform(2,raw_samples,1,samples);
 
-    assert_true(samples[0][0] == 1.5);
-    assert_true(samples[0][1] == 1.5);
+    assert_true(samples[0][0] == 15);
+    assert_true(samples[0][1] == 15);
 
 }
 

@@ -20,7 +20,7 @@ void mat_multiply(uint8_t r1,uint8_t c1,const mat_t mat1[c1][c1],uint8_t r2,uint
 void mat_print(uint8_t row, uint8_t col,const mat_t mat[row][col]){
 	for(uint8_t i = 0; i < row; i++){
 		for(uint8_t j = 0; j < col; j++){
-			printf("| %f |",mat[i][j]);
+			printf("| %d |",mat[i][j]);
 		}
 		printf("\n");
 	}
@@ -30,7 +30,7 @@ void mat_print(uint8_t row, uint8_t col,const mat_t mat[row][col]){
 void vec_print(uint8_t elements,const mat_t vec[elements]){
 	printf("-----------\n");
 	for(uint8_t i = 0; i < elements; i++){
-			printf("| %.3f |\n",vec[i]);
+			printf("| %d |\n",vec[i]);
 		}
 	printf("-----------\n");
 

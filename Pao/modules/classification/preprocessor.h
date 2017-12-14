@@ -13,7 +13,6 @@
 #define IDX_ACCEL_2 2
 #define IDX_PHI 3
 #define IDX_THETA 4
-#define RAW_DIM 5
 
 // void prep_init(uint16_t window_size);
 

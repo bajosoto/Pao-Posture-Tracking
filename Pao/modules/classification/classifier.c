@@ -30,8 +30,8 @@ static transform_f transform_fs[TRANSF_N] = {
 static uint8_t clf = CLF_KNN;
 
 static class_t class_max(const proba_t pdfs[CLASS_NCLASSES-1]){
-	class_t detected = (class_t) 0;
-	proba_t max_pdf = -1.0*PROBA_T_MAX;
+	class_t detected = (class_t) CLASS_NO_CLASS;
+	proba_t max_pdf = REJECT_THRESHOLD;
 
     // last class is NO_CLASS so we get scores until n-1
     for(uint8_t i = 0; i < CLASS_NCLASSES-1; i++){
@@ -41,10 +41,7 @@ static class_t class_max(const proba_t pdfs[CLASS_NCLASSES-1]){
 		}
 	}
 
-	if( max_pdf > REJECT_THRESHOLD){
-		return detected;
-	}
-	return CLASS_NO_CLASS;
+    return detected;
 
 }
 

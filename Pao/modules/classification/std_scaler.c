@@ -35,7 +35,7 @@ void stds_fit(uint16_t n_samples,const feature_t samples[n_samples][CLF_DIM]){
 
 void stds_transform(const feature_t sample[CLF_DIM], feature_t sample_transformed[CLF_DIM]) {
     for (uint16_t  j = 0; j < CLF_DIM; j++){
-        sample_transformed[j] = (sample[j] - min[j]) / (max[j] - min[j]);
+        sample_transformed[j] = (sample[j] - min[j]) / (max[j] - min[j])*SCALE_RANGE+SCALE_MIN;
     }
 }
 
