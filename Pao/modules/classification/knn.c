@@ -58,6 +58,30 @@ static mat_t euclidian(const feature_t sample_1[CLF_DIM], const feature_t sample
     return norm;
 }
 
+
+static mat_t manhattan(const feature_t sample_1[CLF_DIM], const feature_t sample_2[CLF_DIM]) {
+    mat_t sub[CLF_DIM];
+    vec_sub(CLF_DIM,sample_1,sample_2,sub);
+    mat_t norm = 0;
+    for (uint16_t i = 0; i < CLF_DIM; i++){
+        mat_t abs = sub[i] < 0 ? sub[i]*(mat_t)-1 : sub[i];
+        norm += abs;
+    }
+    //if it overflows we just set it to max
+    if (norm < 0){
+        norm = MAT_MAX-1;
+    }
+//    printf("Sample 1:\n");
+//    vec_print(CLF_DIM,sample_1);
+//    printf("Sample 2:\n");
+//    vec_print(CLF_DIM,sample_2);
+//    printf("Sub:\n");
+//    vec_print(CLF_DIM,sub);
+//    printf("-->%d\n",norm);
+
+    return norm;
+}
+
 static void find_neighbors(const feature_t sample[CLF_DIM],uint16_t neighbors[k_neighbors]){
     mat_t distances[k_neighbors];
     for (uint16_t i = 0; i < k_neighbors; i++) {
@@ -67,7 +91,7 @@ static void find_neighbors(const feature_t sample[CLF_DIM],uint16_t neighbors[k_
 //    vec_print(k_neighbors,distances);
     for (uint16_t i = 0; i < n_train_samples; i++) {
 
-        mat_t dist = euclidian(sample, train_data[i]);
+        mat_t dist = manhattan(sample, train_data[i]);
 //        printf("dist=%d/%d\n",dist,distances[k_neighbors - 1]);
         if (dist < distances[k_neighbors - 1]) {
 
