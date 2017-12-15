@@ -93,5 +93,10 @@ void fds_data_read(uint16_t file_id, uint16_t rec_key, uint32_t *p_read_data)
             debugMsg("In fds_data_read and there was an issue with close.");
         }
     }
+    else
+    {
+        debugMsg("In fds_data_read and there was an issue with find.");
+    }
+
 
 }
