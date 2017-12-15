@@ -49,6 +49,7 @@ int main(void)
         debugMsg("Registering fds_evt_handler failed \n\r");
     }
     fds_init();
+    nrf_delay_ms(2000);
     fds_data_write(TRY_FILE_ID,TRY_REC_KEY,writesomething,1);
     nrf_delay_ms(2000);
     uint32_t *readthing = NULL;

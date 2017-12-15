@@ -15,8 +15,7 @@ void fds_evt_handler(fds_evt_t const * const p_fds_evt)
                 debugMsg("Initialization had a problem \n\r");
             }
             break;
-
-      case FDS_EVT_WRITE:
+        case FDS_EVT_WRITE:
             if (p_fds_evt->result == FDS_SUCCESS)
             {
                 debugMsg("In fds_evt_handler and write successful \n\r");
@@ -26,7 +25,16 @@ void fds_evt_handler(fds_evt_t const * const p_fds_evt)
                 debugMsg("In fds_evt_handler and there was an issue with write:%05d \n\r",p_fds_evt->result);
             }
             break;
-
+        case FDS_EVT_UPDATE:
+            if (p_fds_evt->result == FDS_SUCCESS)
+            {
+                debugMsg("In fds_evt_handler and update successful \n\r");
+            }
+            else
+            {
+                debugMsg("In fds_evt_handler and there was an issue with update:%05d \n\r",p_fds_evt->result);
+            }
+            break;
        default:
             break;
     }
@@ -46,7 +54,17 @@ void fds_data_write(uint16_t file_id, uint16_t rec_key, uint32_t input, uint16_t
     record.key                      = rec_key;
     record.data.p_chunks       = &record_chunk;
     record.data.num_chunks   = 1;
-    fds_record_write(&record_desc, &record);
+    fds_find_token_t    ftok = {0}; 
+    
+    if (fds_record_find(file_id, rec_key, &record_desc, &ftok) == FDS_SUCCESS)
+    {
+        fds_record_update(&record_desc, &record);
+    }
+    else
+    {
+        fds_record_write(&record_desc, &record);
+    }
+
 }
 
 void fds_data_read(uint16_t file_id, uint16_t rec_key, uint32_t *p_read_data)
@@ -57,7 +75,7 @@ void fds_data_read(uint16_t file_id, uint16_t rec_key, uint32_t *p_read_data)
     //uint32_t read_data = m_deadbeef;
 
     // Loop until all records with the given key and file ID have been found.
-    while (fds_record_find(file_id, rec_key, &record_desc, &ftok) == FDS_SUCCESS)
+    if (fds_record_find(file_id, rec_key, &record_desc, &ftok) == FDS_SUCCESS)
     {
         if (fds_record_open(&record_desc, &flash_record) != FDS_SUCCESS)
         {
