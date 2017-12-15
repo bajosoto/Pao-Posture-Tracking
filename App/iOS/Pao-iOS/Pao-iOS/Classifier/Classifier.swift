@@ -229,6 +229,39 @@ class Classifier {
         }
     }
     
+    public func storeReceivedEntry(label: Int16, proba: Int16, timestamp: Int16) {
+        let newEntry = PostureEntry()
+        newEntry.posture = Double(proba) / 100.0
+        
+        switch (label) {
+        case 0:
+            newEntry.postureLbl = "SITOK"
+            break
+        case 1:
+            newEntry.postureLbl = "SITNOK"
+            newEntry.posture = -newEntry.posture
+            break
+        case 2:
+            newEntry.postureLbl = "MOVOK"
+            break
+        case 3:
+            newEntry.postureLbl = "MOVNOK"
+            newEntry.posture = -newEntry.posture
+            break
+        default:
+            newEntry.postureLbl = "UNKNOWN"
+            break
+        }
+        newEntry.date = Date(timeIntervalSinceNow: TimeInterval(-timestamp))
+        
+        try! entriesRealm.write {
+            // Add first PostureEntry to Realm TODO: If there's more than one, we need to add those too
+            entriesRealm.add(newEntry)
+        }
+        
+        _bleConn.logMsg(message: "Stored classified sample: \(newEntry.postureLbl), \(newEntry.posture.format(f: ".2"))")
+    }
+    
 //    public func classifyKnn(ax:Int16, ay:Int16, az:Int16, gx:Int16, gy:Int16, gz:Int16, nNeighbours: Int) {
 //        // Accumulate value within window
 //        axBuff += Int(ax)

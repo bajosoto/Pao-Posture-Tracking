@@ -697,6 +697,12 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         goalStepsBarView.posture = CGFloat(currSteps / goalSteps)
     }
     
+    func getNewEntry(_ label: Int16, _ proba: Int16, _ timestamp: Int16) {
+        bleConn.logMsg(message: "Received l:\(label) p:\(proba) t:\(timestamp)")
+        self.classifier.storeReceivedEntry(label: label, proba: proba, timestamp: timestamp)
+        self.updateChartWithData()
+    }
+    
 }
 
 extension UIViewController: IAxisValueFormatter {

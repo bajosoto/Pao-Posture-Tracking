@@ -55,7 +55,7 @@ int main(void)
     app_timer_start(timer_5ms, TIMER5_TIMER_PERIOD, NULL);
 
     // /* Init Classifier stuff */
-    knn_init(4);
+    knn_init(8);
     transformer_t scalers[1] = {TRANSF_SCALE_STD};
     clf_init(CLF_KNN, 1, scalers);
 
@@ -80,11 +80,12 @@ int main(void)
             // sendBleMessageEs(MSG_BLE_02_SENSOR);
             
             class_t label;
+            entry_t* newEntry = (entry_t*)malloc(sizeof(entry_t));
 
             switch(smCurrState) {
 
                 case S2_DISCONNECTED:
-                    label = process_new_sample(CLASS_NO_CLASS);
+                    label = process_new_sample(CLASS_NO_CLASS, newEntry);
                     if(label != CLASS_NO_CLASS) {
                         // Store in Flash
                         // TODO
@@ -92,21 +93,27 @@ int main(void)
                     break;
 
                 case S3_CONNECTED:
-                    label = process_new_sample(CLASS_NO_CLASS);
+                    label = process_new_sample(CLASS_NO_CLASS, newEntry);
                     if(label != CLASS_NO_CLASS) {
+                        // Set timestamp to zero, since in connected mode results are real-time
+                        newEntry->timestamp = 0;
                         // Send to App
-                        // TODO
+                        sendBleEntry(newEntry);
+
+                        debugMsgBle("Lb: %d\tT: %d\tPr: %d", newEntry->label, newEntry->timestamp, (int32_t)(newEntry->proba * 100));
                     }
                     break;
 
                 case S4_TRAINING:
-                    process_new_sample(train_label);
+                    process_new_sample(train_label, NULL);
                     break;
-                    
+
                 default:
                     // Do nothing
                     break;
             }
+
+            free(newEntry);
 
             // if(smCurrState == S4_TRAINING) {
             //     // Add sample to training data TODO

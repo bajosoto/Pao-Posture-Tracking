@@ -230,4 +230,9 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
         bleConn.logMsg(message: "Got pedo... \(pedo)")
     }
     
+    func getNewEntry(_ label: Int16, _ proba: Int16, _ timestamp: Int16) {
+        bleConn.logMsg(message: "Received l:\(label) p:\(proba) t:\(timestamp)")
+        self.classifier.storeReceivedEntry(label: label, proba: proba, timestamp: timestamp)
+    }
+    
 }

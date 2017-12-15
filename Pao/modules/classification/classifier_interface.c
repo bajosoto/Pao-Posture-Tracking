@@ -1,14 +1,5 @@
-#include "classifier_interface.h"
-#include <memory.h>
-#include "timestamp.h"
-#include <stdlib.h>
 
-#include "mpu_interface.h"
-#include "flash-interface.h"
-#include "debug-interface.h"
-#include "vibrator.h"
-#include "preprocessor.h"
-#include "nrf_delay.h"
+#include "classifier_interface.h"
 
 // #define WINDOW_SIZE         30
 #define TRAINING_SET_SIZE   (4 * 150) / WINDOW_SIZE 
@@ -34,7 +25,7 @@ void finish_training() {
     clf_fit(TRAINING_SET_SIZE, training_set, training_labels);
 }
 
-class_t process_new_sample(class_t label){
+class_t process_new_sample(class_t label, entry_t* newEntry){
 
     samples_buffer[counter_buffer][IDX_ACCEL_0] = getMpuVal(ACC_X);
     samples_buffer[counter_buffer][IDX_ACCEL_1] = getMpuVal(ACC_Y);
@@ -55,7 +46,7 @@ class_t process_new_sample(class_t label){
         if(label == CLASS_NO_CLASS) {
             class_t newLabel = clf_predict_proba(processed_samples_buffer[0], class_probabilities);
             proba_t highest_proba = class_probabilities[newLabel];
-            entry_t* newEntry = (entry_t*)malloc(sizeof(entry_t));
+            //entry_t* newEntry = (entry_t*)malloc(sizeof(entry_t));    // Now initialized in main
             newEntry->label = newLabel;
             newEntry->proba = highest_proba;
             newEntry->timestamp = get_timestamp();
@@ -64,10 +55,9 @@ class_t process_new_sample(class_t label){
             // }
             // Store newEntry somewhere
             // TODO
-            debugMsgBle("Lb: %d\tTime: %d", newEntry->label, newEntry->timestamp);
             
             // Free memory
-            free(newEntry);
+            // free(newEntry);
 
         } else if(training_enabled) {       // Check if a label button has been pressed on the app
 
@@ -98,7 +88,7 @@ class_t process_new_sample(class_t label){
         counter_buffer = 0;
 
         // Return class
-        return label;
+        return newEntry->label;
 
     } else {
         // Buffer is not full
