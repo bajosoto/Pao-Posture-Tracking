@@ -1,6 +1,7 @@
 #include "pao.h"
 
-static uint32_t const writesomething = 1337;
+//static uint32_t const writesomething = 1337;
+static uint32_t m_deadbeef[2] = {0xDEADBEEF,0xBAADF00D};
 #define TRY_FILE_ID     0x1111
 #define TRY_REC_KEY     0x2222
 int programRunning = 1;
@@ -50,7 +51,7 @@ int main(void)
     }
     fds_init();
     nrf_delay_ms(2000);
-    fds_data_write(TRY_FILE_ID,TRY_REC_KEY,writesomething,1);
+    fds_data_write(TRY_FILE_ID,TRY_REC_KEY,m_deadbeef,2);
     nrf_delay_ms(2000);
     uint32_t *readthing = NULL;
     fds_data_read(TRY_FILE_ID, TRY_REC_KEY,readthing);

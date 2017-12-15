@@ -1,5 +1,4 @@
 #include "fds_interface.h"
-//static uint32_t const m_deadbeef = 0xDEADBEEF;
 
 void fds_evt_handler(fds_evt_t const * const p_fds_evt)
 {
@@ -41,13 +40,13 @@ void fds_evt_handler(fds_evt_t const * const p_fds_evt)
 }
 
 
-void fds_data_write(uint16_t file_id, uint16_t rec_key, uint32_t input, uint16_t input_length_words)
+void fds_data_write(uint16_t file_id, uint16_t rec_key, uint32_t *p_write_data, uint16_t input_length_words)
 {
     fds_record_t        record;
     fds_record_desc_t   record_desc;
     fds_record_chunk_t  record_chunk;
     // Set up data.
-    record_chunk.p_data         = &input;
+    record_chunk.p_data         = p_write_data;
     record_chunk.length_words   = input_length_words;
     // Set up record.
     record.file_id                  = file_id;
@@ -75,8 +74,7 @@ void fds_data_read(uint16_t file_id, uint16_t rec_key, uint32_t *p_read_data)
     fds_find_token_t    ftok = {0}; 
     //uint32_t read_data = m_deadbeef;
 
-    // Loop until all records with the given key and file ID have been found.
-    while (fds_record_find(file_id, rec_key, &record_desc, &ftok) == FDS_SUCCESS)
+    if (fds_record_find(file_id, rec_key, &record_desc, &ftok) == FDS_SUCCESS)
     {
         if (fds_record_open(&record_desc, &flash_record) != FDS_SUCCESS)
         {
@@ -86,7 +84,7 @@ void fds_data_read(uint16_t file_id, uint16_t rec_key, uint32_t *p_read_data)
         p_read_data = (uint32_t *) flash_record.p_data;
         for (uint16_t i=0;i<flash_record.p_header->tl.length_words;i++)
         {
-           debugMsg("Read finished, word number %d is %d", i,p_read_data[i]);
+           debugMsg("Read finished, word number %d is %08x", i,p_read_data[i]);
         }
         // Close the record when done.
         if (fds_record_close(&record_desc) != FDS_SUCCESS)
