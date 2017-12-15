@@ -12,6 +12,7 @@
 #include "uart-sm.h"
 #include "mpu_interface.h"
 #include "ble_interface.h"
+#include "fds_interface.h"
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 #include "debug-interface.h"
@@ -20,6 +21,7 @@
 #include "twi.h"
 #include "mpu_wrapper.h"
 #include "vibrator.h"
+
 // #include "app_mpu.h"
 
 int programRunning;

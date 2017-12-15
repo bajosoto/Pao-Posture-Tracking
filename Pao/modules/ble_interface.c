@@ -350,6 +350,13 @@ static void ble_evt_dispatch(ble_evt_t * p_ble_evt)
 
 }
 
+static void sys_evt_dispatch(uint32_t sys_evt)
+{
+    // Dispatch the system event to the fstorage module, where it will be
+    // dispatched to the Flash Data Storage (FDS) module.
+    fs_sys_event_handler(sys_evt);
+}
+
 
 /**@brief Function for the SoftDevice initialization.
  *
@@ -383,6 +390,10 @@ void ble_stack_init(void)
     // Subscribe for BLE events.
     err_code = softdevice_ble_evt_handler_set(ble_evt_dispatch);
     APP_ERROR_CHECK(err_code);
+
+    err_code = softdevice_sys_evt_handler_set(sys_evt_dispatch);
+    APP_ERROR_CHECK(err_code);
+
 }
 
 

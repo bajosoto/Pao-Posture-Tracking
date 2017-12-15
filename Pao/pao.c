@@ -1,6 +1,8 @@
-
 #include "pao.h"
 
+static uint32_t const writesomething = 5;
+#define TRY_FILE_ID     0x1111
+#define TRY_REC_KEY     0x2222
 int programRunning = 1;
 
 /**
@@ -27,8 +29,8 @@ int main(void)
     //nrf_delay_ms(2000);
 
     // New mpu init:
-    twi_init();
-    imu_init(true, 100);
+    // twi_init();
+    // imu_init(true, 100);
 
     // Bluetooth
     app_timer_init_sergio();
@@ -37,6 +39,20 @@ int main(void)
     services_init();
     advertising_init();
     conn_params_init();
+    ret_code_t ret = fds_register(fds_evt_handler);
+    if (ret == FDS_SUCCESS)
+    {
+        debugMsg("Registering fds_evt_handler successful \n\r");
+    }
+    if (ret != FDS_SUCCESS)
+    {
+        debugMsg("Registering fds_evt_handler failed \n\r");
+    }
+    fds_init();
+    fds_data_write(TRY_FILE_ID,TRY_REC_KEY,writesomething,1);
+    nrf_delay_ms(2000);
+    uint32_t *readthing = NULL;
+    fds_data_read(TRY_FILE_ID, TRY_REC_KEY,readthing);
 
     err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
     APP_ERROR_CHECK(err_code);
@@ -52,7 +68,7 @@ int main(void)
         // TODO: add ble
 
         if (check_sensor_int_flag()) {
-            getMpuSensors();
+            //getMpuSensors();
         }
 
         if(timer % 50 == 0) {
@@ -71,7 +87,7 @@ int main(void)
         if(timer % 10 == 0) {  // Every 100ms  errr 50
             // getMpuSensors();
             sendMessageEs(MSG02_SENSOR_VALS);
-            sendBleMessageEs(MSG_BLE_02_SENSOR);
+            sendBleMessageEs(MSG_BLE_02_SENSOR);            
         }
         // if(timer % 50 == 0) {
         //     sendBleMessageEs(MSG_BLE_02_SENSOR);

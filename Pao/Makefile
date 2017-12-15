@@ -73,6 +73,7 @@ SRC_FILES += \
   $(PROJ_DIR)/drivers/nrf_drv_mpu_twi.c \
   $(PROJ_DIR)/modules/mpu_interface.c \
   $(PROJ_DIR)/modules/ble_interface.c \
+  $(PROJ_DIR)/modules/fds_interface.c \
   $(SDK_ROOT)/components/ble/common/ble_advdata.c \
   $(SDK_ROOT)/components/ble/common/ble_conn_params.c \
   $(SDK_ROOT)/components/ble/ble_services/ble_nus/ble_nus.c \
@@ -80,6 +81,7 @@ SRC_FILES += \
   $(SDK_ROOT)/components/libraries/timer/app_timer.c \
   $(SDK_ROOT)/components/ble/common/ble_srv_common.c \
   $(SDK_ROOT)/components/libraries/fstorage/fstorage.c \
+  $(SDK_ROOT)/components/libraries/fds/fds.c \
   $(PROJ_DIR)/modules/debug-interface.c \
 
 
