@@ -239,14 +239,12 @@ class Classifier {
             break
         case 1:
             newEntry.postureLbl = "SITNOK"
-            newEntry.posture = -newEntry.posture
             break
         case 2:
             newEntry.postureLbl = "MOVOK"
             break
         case 3:
             newEntry.postureLbl = "MOVNOK"
-            newEntry.posture = -newEntry.posture
             break
         default:
             newEntry.postureLbl = "UNKNOWN"

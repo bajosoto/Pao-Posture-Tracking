@@ -699,8 +699,16 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     
     func getNewEntry(_ label: Int16, _ proba: Int16, _ timestamp: Int16) {
         bleConn.logMsg(message: "Received l:\(label) p:\(proba) t:\(timestamp)")
-        self.classifier.storeReceivedEntry(label: label, proba: proba, timestamp: timestamp)
+        var signedProba: Int16
+        if(label == 1 || label == 3) {
+            // Invert proba
+            signedProba = -proba
+        } else {
+            signedProba = proba
+        }
+        self.classifier.storeReceivedEntry(label: label, proba: signedProba, timestamp: timestamp)
         self.updateChartWithData()
+        self.postureBar.posture = CGFloat(0.5 + (Double(signedProba) / 200.0))
     }
     
 }
