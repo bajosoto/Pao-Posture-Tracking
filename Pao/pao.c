@@ -1,6 +1,6 @@
 #include "pao.h"
 
-static uint32_t const writesomething = 5;
+static uint32_t const writesomething = 6;
 #define TRY_FILE_ID     0x1111
 #define TRY_REC_KEY     0x2222
 int programRunning = 1;
