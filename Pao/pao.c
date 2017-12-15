@@ -74,8 +74,8 @@ int main(void)
             getMpuSensors();
         }
 
-        // @ 50ms
-        if(timer % 10 == 0) {  
+        // @ 50ms = 20Hz
+        if(timer % 20 == 0) {  
             sendMessageEs(MSG02_SENSOR_VALS);
             // sendBleMessageEs(MSG_BLE_02_SENSOR);
             if(smCurrState == S4_TRAINING) {

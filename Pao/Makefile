@@ -76,6 +76,7 @@ SRC_FILES += \
   $(PROJ_DIR)/modules/sm.c \
   $(PROJ_DIR)/modules/flash-interface.c \
   $(PROJ_DIR)/modules/timestamp.c \
+  $(PROJ_DIR)/modules/classification/classifier_interface.c \
   $(PROJ_DIR)/modules/classification/classifier.c \
   $(PROJ_DIR)/modules/classification/knn.c \
   $(PROJ_DIR)/modules/classification/mat.c \
