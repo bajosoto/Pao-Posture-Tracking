@@ -74,25 +74,55 @@ int main(void)
             getMpuSensors();
         }
 
-        // @ 50ms = 20Hz
+        // @ 100ms = 10Hz
         if(timer % 20 == 0) {  
             sendMessageEs(MSG02_SENSOR_VALS);
             // sendBleMessageEs(MSG_BLE_02_SENSOR);
-            if(smCurrState == S4_TRAINING) {
-                // Add sample to training data TODO
-                process_new_sample(train_label);        // TODO Get this from BLE!
-            } else if(smCurrState == S2_DISCONNECTED || smCurrState == S3_CONNECTED) {
-                class_t label = process_new_sample(CLASS_NO_CLASS);
-                // If there was a classification
-                if(label != CLASS_NO_CLASS) {
-                    // Store in flash (TODO)
-                    // 
-                    if(smCurrState == S3_CONNECTED) {
-                        // Send to phone (TODO)
-                        // sendBleMessageEs(SOME_NEW_MESSAGE);
+            
+            class_t label;
+
+            switch(smCurrState) {
+
+                case S2_DISCONNECTED:
+                    label = process_new_sample(CLASS_NO_CLASS);
+                    if(label != CLASS_NO_CLASS) {
+                        // Store in Flash
+                        // TODO
                     }
-                }
+                    break;
+
+                case S3_CONNECTED:
+                    label = process_new_sample(CLASS_NO_CLASS);
+                    if(label != CLASS_NO_CLASS) {
+                        // Send to App
+                        // TODO
+                    }
+                    break;
+
+                case S4_TRAINING:
+                    process_new_sample(train_label);
+                    break;
+                    
+                default:
+                    // Do nothing
+                    break;
             }
+
+            // if(smCurrState == S4_TRAINING) {
+            //     // Add sample to training data TODO
+            //     process_new_sample(train_label);        // TODO Get this from BLE!
+            // } else if(smCurrState == S2_DISCONNECTED || smCurrState == S3_CONNECTED) {
+            //     class_t label = process_new_sample(CLASS_NO_CLASS);
+            //     // If there was a classification
+            //     if(label != CLASS_NO_CLASS) {
+            //         // Store in flash (TODO)
+            //         // 
+            //         if(smCurrState == S3_CONNECTED) {
+            //             // Send to phone (TODO)
+            //             // sendBleMessageEs(SOME_NEW_MESSAGE);
+            //         }
+            //     }
+            // }
         }
 
         // @ 250ms
