@@ -8,7 +8,7 @@
 // =========================================================================== //
 
 // Number of messages sent from the app to pao
-#define TOTAL_BLE_MESSAGES_APP		5
+#define TOTAL_BLE_MESSAGES_APP		7
 
 // Name holder for actions (to avoid dereferencing everywhere)
 typedef void (*BleMsgAction)();

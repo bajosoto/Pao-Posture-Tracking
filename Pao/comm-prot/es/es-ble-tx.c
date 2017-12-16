@@ -80,6 +80,15 @@ void sendBleMessageEs(TxMsgBleEs msgType){
 					bleTxBuff[1], 
 					bleTxBuff[2]);
 				break;
+			case MSG_BLE_05_ENTRY:
+				sendMsgBle(7, "%c%c%c%c%c%c%c", 5, 
+					bleTxBuff[1], 
+					bleTxBuff[2],
+					bleTxBuff[3],
+					bleTxBuff[4],
+					bleTxBuff[5],
+					bleTxBuff[6]);
+				break;
 			case TOTAL_TX_BLE_MESSAGES:					// Only including this to avoid the warning [-Wswitch]
 				break;
 			default:
@@ -90,6 +99,13 @@ void sendBleMessageEs(TxMsgBleEs msgType){
 	}	
 
 	// TODO: Timeout	
+}
+
+void sendBleEntry(entry_t* entry) {
+	splitSI16Ble((int16_t)entry->label, 		1);
+	splitSI16Ble((int16_t)(entry->proba * 100),	3);
+	splitSI16Ble((int16_t)entry->timestamp, 	5);
+	sendBleMessageEs(MSG_BLE_05_ENTRY);
 }
 
 /* splitSI16(int16_t c, int index)

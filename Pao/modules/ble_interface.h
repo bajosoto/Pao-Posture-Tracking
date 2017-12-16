@@ -21,6 +21,7 @@
 #include "bsp_btn_ble.h"
 #include "es-uart-tx.h"
 #include "es-ble-rx.h"
+#include "sm.h"
 
 /**@brief Function for the GAP initialization.
  *

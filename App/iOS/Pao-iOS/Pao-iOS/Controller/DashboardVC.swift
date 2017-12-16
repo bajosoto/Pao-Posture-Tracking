@@ -365,13 +365,14 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnTrainReleased(_ sender: Any) {
         btnTrainView.isPressed = false
-        isClassifying = false
+        //isClassifying = false     // IoT
         animateTrainButtonsIn()
+        // Request ES state to S4_TRAINING
+        bleConn.write(msg: "7E0504")
     }
     @IBAction func onBtnTrainDrag(_ sender: Any) {
         btnTrainView.isPressed = false
     }
-    
     
     @IBAction func onBtnDebugPressed(_ sender: Any) {
         btnDebugView.isPressed = true
@@ -419,12 +420,18 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         if(btnTrainSitOk.takingMeasurement == false){
             btnTrainSitOk.takingMeasurement = true
             btnTrainSitOk.isPressed = true
-            isSampling = true
-            currLabel = "SitOk"
+//            isSampling = true     // IoT
+//            currLabel = "SitOk"   // IoT
+            
+            // Label 0, enable training
+            bleConn.write(msg: "7E060001")
         } else {
             btnTrainSitOk.takingMeasurement = false
             btnTrainSitOk.isPressed = false
-            isSampling = false
+//            isSampling = false    // IoT
+            
+            // Label 0, disable training
+            bleConn.write(msg: "7E060000")
         }
     }
     @IBAction func onBtnTrainSitOkDrag(_ sender: Any) {
@@ -438,12 +445,18 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         if(btnTrainSitNok.takingMeasurement == false){
             btnTrainSitNok.takingMeasurement = true
             btnTrainSitNok.isPressed = true
-            isSampling = true
-            currLabel = "SitNok"
+//            isSampling = true         // IoT
+//            currLabel = "SitNok"      // IoT
+            
+            // Label 1, enable training
+            bleConn.write(msg: "7E060101")
         } else {
             btnTrainSitNok.takingMeasurement = false
             btnTrainSitNok.isPressed = false
-            isSampling = false
+//            isSampling = false        // IoT
+            
+            // Label 1, disable training
+            bleConn.write(msg: "7E060100")
         }
     }
     @IBAction func onBtnTrainSitNokDrag(_ sender: Any) {
@@ -457,12 +470,12 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         if(btnTrainStndOk.takingMeasurement == false){
             btnTrainStndOk.takingMeasurement = true
             btnTrainStndOk.isPressed = true
-            isSampling = true
-            currLabel = "StandOk"
+//            isSampling = true         // IoT
+//            currLabel = "StandOk"     // IoT
         } else {
             btnTrainStndOk.takingMeasurement = false
             btnTrainStndOk.isPressed = false
-            isSampling = false
+//            isSampling = false        // IoT
         }
     }
     @IBAction func onBtnTrainStndOkDrag(_ sender: Any) {
@@ -476,12 +489,12 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         if(btnTrainStndNok.takingMeasurement == false){
             btnTrainStndNok.takingMeasurement = true
             btnTrainStndNok.isPressed = true
-            isSampling = true
-            currLabel = "StandNok"
+//            isSampling = true             // IoT
+//            currLabel = "StandNok"        // IoT
         } else {
             btnTrainStndNok.takingMeasurement = false
             btnTrainStndNok.isPressed = false
-            isSampling = false
+//            isSampling = false            // IoT
         }
     }
     @IBAction func onBtnTrainStndNokDrag(_ sender: Any) {
@@ -495,12 +508,18 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         if(btnTrainMvOk.takingMeasurement == false){
             btnTrainMvOk.takingMeasurement = true
             btnTrainMvOk.isPressed = true
-            isSampling = true
-            currLabel = "MovOk"
+//            isSampling = true     // IoT
+//            currLabel = "MovOk"   // IoT
+            
+            // Label 2, enable training
+            bleConn.write(msg: "7E060201")
         } else {
             btnTrainMvOk.takingMeasurement = false
             btnTrainMvOk.isPressed = false
-            isSampling = false
+//            isSampling = false    // IoT
+            
+            // Label 2, disable training
+            bleConn.write(msg: "7E060200")
         }
     }
     @IBAction func onBtnTrainMvOkDrag(_ sender: Any) {
@@ -514,12 +533,18 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         if(btnTrainMvNok.takingMeasurement == false){
             btnTrainMvNok.takingMeasurement = true
             btnTrainMvNok.isPressed = true
-            isSampling = true
-            currLabel = "MovNok"
+//            isSampling = true     // IoT
+//            currLabel = "MovNok"  // IoT
+            
+            // Label 3, enable training
+            bleConn.write(msg: "7E060301")
         } else {
             btnTrainMvNok.takingMeasurement = false
             btnTrainMvNok.isPressed = false
-            isSampling = false
+//            isSampling = false        // IoT
+            
+            // Label 3, disbale training
+            bleConn.write(msg: "7E060300")
         }
     }
     @IBAction func onBtnTrainMvNokDrag(_ sender: Any) {
@@ -531,10 +556,11 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     }
     @IBAction func onBtnTrainBackReleased(_ sender: Any) {
         btnTrainBack.isPressed = false
-        classifier.train()
-        isClassifying = true
+//        classifier.train()    // IoT
+//        isClassifying = true  // IoT
         animateTrainButtonsOut()
-        
+        // Request ES state to S3_CONNECTED
+        bleConn.write(msg: "7E0503")
     }
     @IBAction func onBtnTrainBackDrag(_ sender: Any) {
         btnTrainBack.isPressed = false
@@ -669,6 +695,20 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     func getPedo(_ pedo: Int16) {
         currSteps = Float(pedo)
         goalStepsBarView.posture = CGFloat(currSteps / goalSteps)
+    }
+    
+    func getNewEntry(_ label: Int16, _ proba: Int16, _ timestamp: Int16) {
+        bleConn.logMsg(message: "Received l:\(label) p:\(proba) t:\(timestamp)")
+        var signedProba: Int16
+        if(label == 1 || label == 3) {
+            // Invert proba
+            signedProba = -proba
+        } else {
+            signedProba = proba
+        }
+        self.classifier.storeReceivedEntry(label: label, proba: signedProba, timestamp: timestamp)
+        self.updateChartWithData()
+        self.postureBar.posture = CGFloat(0.5 + (Double(signedProba) / 200.0))
     }
     
 }
