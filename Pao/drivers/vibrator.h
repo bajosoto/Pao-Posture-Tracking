@@ -6,7 +6,7 @@
 #include "debug-interface.h"
 
 void init_vibrator();
-void increment_buzz_time();
+void increment_buzz_time(int ms);
 void buzz(char msx10);
 void start_snooze();
 

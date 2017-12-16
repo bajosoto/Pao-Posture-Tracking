@@ -9,8 +9,11 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <string.h>
-#include <mat.h>
 
+#define WINDOW_SIZE 2
+#define RAW_DIM 9
+#define CLF_DIM 3
+#include "mat.h"
 #include "preprocessor.h"
 
 static void test_transform(void **state)
@@ -19,8 +22,8 @@ static void test_transform(void **state)
                                        {2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0,2.0}};
     feature_t samples[1][CLF_DIM] = {{0.0,0.0,0.0}};
 
-    prep_init(2);
     prep_transform(2,raw_samples,1,samples);
+
     assert_true(samples[0][0] == 1.5);
     assert_true(samples[0][1] == 1.5);
 

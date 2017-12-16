@@ -19,8 +19,17 @@
 #include <math.h>
 #include "twi.h"
 #include "mpu_wrapper.h"
+#include "app_timer.h"
 #include "vibrator.h"
+#include "sm.h"
+#include "timestamp.h"
+#include "knn.h"
+#include "classifier_interface.h"
+#include "flash-interface.h"
 // #include "app_mpu.h"
+
+#define SAMPLING_FREQ	2  // Hz
+#define KNN_NEIGHBORS	2
 
 int programRunning;
 

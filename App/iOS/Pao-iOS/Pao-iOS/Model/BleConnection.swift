@@ -266,6 +266,14 @@ class BleConnection {
         case 4:
             let s0: Int16 = unfoldSI16(index: 1)
             self._responder?.getPedo(s0)
+            break
+        case 5:
+            let s0: Int16 = unfoldSI16(index: 1)
+            let s1: Int16 = unfoldSI16(index: 3)
+            let s2: Int16 = unfoldSI16(index: 5)
+            
+            self._responder?.getNewEntry(s0, s1, s2)
+            break
         default:
             self.logMsg(message: "Unknown Message received (\(bleRxBuff[0]))")
             break
@@ -332,4 +340,5 @@ protocol bleConnectionResponder: class {
     func getSensorData(_ ax: Int16, _ ay: Int16, _ az: Int16, _ gx: Int16, _ gy: Int16, _ gz: Int16,
                        _ phi: Int16, _ theta: Int16, _ psi: Int16)
     func getPedo(_ pedo: Int16)
+    func getNewEntry(_ label: Int16, _ proba: Int16, _ timestamp: Int16)
 }

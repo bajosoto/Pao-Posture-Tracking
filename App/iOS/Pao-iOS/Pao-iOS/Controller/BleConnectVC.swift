@@ -88,5 +88,9 @@ class BleConnectVC: UIViewController, UITextViewDelegate, bleConnectionResponder
         
     }
     
+    func getNewEntry(_ label: Int16, _ proba: Int16, _ timestamp: Int16) {
+        
+    }
+    
 }
 

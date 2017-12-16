@@ -76,6 +76,15 @@ SRC_FILES += \
   $(PROJ_DIR)/modules/ble_interface.c \
   $(PROJ_DIR)/modules/fds_interface.c \
   $(PROJ_DIR)/modules/classifierflashqueue_interface.c \
+  $(PROJ_DIR)/modules/sm.c \
+  $(PROJ_DIR)/modules/flash-interface.c \
+  $(PROJ_DIR)/modules/timestamp.c \
+  $(PROJ_DIR)/modules/classification/classifier_interface.c \
+  $(PROJ_DIR)/modules/classification/classifier.c \
+  $(PROJ_DIR)/modules/classification/knn.c \
+  $(PROJ_DIR)/modules/classification/mat.c \
+  $(PROJ_DIR)/modules/classification/preprocessor.c \
+  $(PROJ_DIR)/modules/classification/std_scaler.c \
   $(SDK_ROOT)/components/ble/common/ble_advdata.c \
   $(SDK_ROOT)/components/ble/common/ble_conn_params.c \
   $(SDK_ROOT)/components/ble/ble_services/ble_nus/ble_nus.c \
@@ -222,6 +231,7 @@ INC_FOLDERS += \
   $(PROJ_DIR)/comm-prot/pc \
   $(SDK_ROOT)/components/drivers_nrf/twi_master/ \
   $(PROJ_DIR)/modules/ \
+  $(PROJ_DIR)/modules/classification \
   $(SDK_ROOT)/components/ble/common \
   $(SDK_ROOT)/components/ble/ble_services/ble_nus/ \
   $(SDK_ROOT)/components/ble/ble_advertising/  \
