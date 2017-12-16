@@ -1,5 +1,7 @@
 #include<stdio.h>
-#include
+#include "flash-interface.h"
+#include "fds_interface.h"
+
 #define ENTRIES_FILE_ID     0x1111
 #define INITIAL_REC_KEY     0x0002
 #define POINTERS_FILE_ID    0x0001
@@ -19,6 +21,6 @@ uint16_t cqGetFront();
 uint16_t cqGetRear();
 void cqSetFront(uint16_t new_front);
 void cqSetRear(uint16_t new_rear);
-void cqEnqueue(entry_t write_data);
-entry_t cqDequeue();
-flash_entry_t cqDisplay();
+void cqEnqueue(entry_t* write_data);
+entry_t* cqDequeue();
+entry_t* cqDisplay();
