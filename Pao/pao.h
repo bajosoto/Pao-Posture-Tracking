@@ -28,6 +28,9 @@
 #include "flash-interface.h"
 // #include "app_mpu.h"
 
+#define SAMPLING_FREQ	2  // Hz
+#define KNN_NEIGHBORS	2
+
 int programRunning;
 
 #endif /* PAO_H__ */

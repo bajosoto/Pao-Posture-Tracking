@@ -55,7 +55,7 @@ int main(void)
     app_timer_start(timer_5ms, TIMER5_TIMER_PERIOD, NULL);
 
     // /* Init Classifier stuff */
-    knn_init(8);
+    knn_init(KNN_NEIGHBORS);
     transformer_t scalers[1] = {TRANSF_SCALE_STD};
     clf_init(CLF_KNN, 1, scalers);
 
@@ -75,7 +75,7 @@ int main(void)
         }
 
         // @ 100ms = 10Hz
-        if(timer % 20 == 0) {  
+        if(timer % (1000 / (5 * SAMPLING_FREQ)) == 0) {  
             sendMessageEs(MSG02_SENSOR_VALS);
             // sendBleMessageEs(MSG_BLE_02_SENSOR);
             
@@ -100,7 +100,7 @@ int main(void)
                         // Send to App
                         sendBleEntry(newEntry);
 
-                        debugMsgBle("Lb: %d\tT: %d\tPr: %d", newEntry->label, newEntry->timestamp, (int32_t)(newEntry->proba * 100));
+                        //debugMsgBle("Lb: %d\tT: %d\tPr: %d", newEntry->label, newEntry->timestamp, (int32_t)(newEntry->proba * 100));
                     }
                     break;
 
