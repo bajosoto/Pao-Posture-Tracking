@@ -49,6 +49,7 @@ SRC_FILES += \
   $(SDK_ROOT)/components/libraries/util/nrf_assert.c \
   $(SDK_ROOT)/components/libraries/uart/retarget.c \
   $(SDK_ROOT)/components/libraries/util/sdk_errors.c \
+  $(SDK_ROOT)/components/libraries/fds/fds.c \
   $(SDK_ROOT)/components/boards/boards.c \
   $(SDK_ROOT)/components/drivers_nrf/common/nrf_drv_common.c \
   $(SDK_ROOT)/components/drivers_nrf/uart/nrf_drv_uart.c \
@@ -73,6 +74,8 @@ SRC_FILES += \
   $(PROJ_DIR)/drivers/nrf_drv_mpu_twi.c \
   $(PROJ_DIR)/modules/mpu_interface.c \
   $(PROJ_DIR)/modules/ble_interface.c \
+  $(PROJ_DIR)/modules/fds_interface.c \
+  $(PROJ_DIR)/modules/classifierflashqueue_interface.c \
   $(SDK_ROOT)/components/ble/common/ble_advdata.c \
   $(SDK_ROOT)/components/ble/common/ble_conn_params.c \
   $(SDK_ROOT)/components/ble/ble_services/ble_nus/ble_nus.c \
@@ -81,6 +84,7 @@ SRC_FILES += \
   $(SDK_ROOT)/components/ble/common/ble_srv_common.c \
   $(SDK_ROOT)/components/libraries/fstorage/fstorage.c \
   $(PROJ_DIR)/modules/debug-interface.c \
+
 
 
   # $(SDK_ROOT)/components/drivers_nrf/twi_master/nrf_drv_twi.c \
@@ -222,7 +226,6 @@ INC_FOLDERS += \
   $(SDK_ROOT)/components/ble/ble_services/ble_nus/ \
   $(SDK_ROOT)/components/ble/ble_advertising/  \
   $(SDK_ROOT)/components/libraries/timer \
-  $(SDK_ROOT)/components/libraries/fstorage \
   $(PROJ_DIR)/drivers/mpu-motion-driver/
 
   # $(PROJ_DIR)/comm-prot/sm \
