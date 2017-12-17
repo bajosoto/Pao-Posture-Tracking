@@ -44,13 +44,15 @@ int16_t data_dump() {
 	//debugMsg("Data dump requested");
 	entry_t* entry;
 	// int count = 0;
-	if(index > 0) {
-		entry = get_entry_history();
-		// count++;
+	// if(index > 0) {
+	entry = get_entry_history();
+	if(entry != NULL) {	// count++;
+
 		entry->timestamp = get_timestamp() - entry->timestamp;
 		sendBleEntry(entry);
+		free(entry);
 		// debugMsg("Sent an entry");
-		return index;
+		return 1;
 	} else {
 		return 0;
 	}

@@ -4,7 +4,11 @@ void cqInitialize()
 {
   cqSetFront(CQ_INITIAL_REC_KEY-1);
   cqSetRear(CQ_INITIAL_REC_KEY-1);
-  debugMsg("Classifier queue initialized."); 
+  debugMsg("Classifier queue initialized.");
+  uint16_t front = cqGetFront();
+  uint16_t rear = cqGetRear();
+  debugMsg("Initial values. (%d, %d)", front, rear);
+
 }
 
 uint16_t cqGetFront()
@@ -59,12 +63,16 @@ entry_t* cqDequeue()
 {
   entry_t *out = NULL;
   
-  if((cqGetFront() == (CQ_INITIAL_REC_KEY-1)) && (cqGetFront() == (CQ_INITIAL_REC_KEY-1)))
+  uint16_t front = cqGetFront();
+  uint16_t rear = cqGetRear();
+
+  if((front == (CQ_INITIAL_REC_KEY-1)) && (rear == (CQ_INITIAL_REC_KEY-1)))
   {
     debugMsg("Queue is empty, dequeue not possible.");
   }
   else
   {
+    debugMsg("Queue is not empty. (%d, %d)", front, rear);
     flash_entry_t old_front = *((flash_entry_t *) fds_data_read(CQ_ENTRIES_FILE_ID, cqGetFront()));
     out = (entry_t*)malloc(sizeof(entry_t));
     out->proba = (proba_t) old_front.value;

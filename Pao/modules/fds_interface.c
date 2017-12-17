@@ -17,7 +17,7 @@ void fds_evt_handler(fds_evt_t const * const p_fds_evt)
         case FDS_EVT_WRITE:
             if (p_fds_evt->result == FDS_SUCCESS)
             {
-                //debugMsg("In fds_evt_handler and write successful \n\r");
+                debugMsg("In fds_evt_handler and write successful \n\r");
             }
             else
             {
@@ -27,7 +27,7 @@ void fds_evt_handler(fds_evt_t const * const p_fds_evt)
         case FDS_EVT_UPDATE:
             if (p_fds_evt->result == FDS_SUCCESS)
             {
-                //debugMsg("In fds_evt_handler and update successful \n\r");
+                debugMsg("In fds_evt_handler and update successful \n\r");
             }
             else
             {

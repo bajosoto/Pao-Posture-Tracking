@@ -47,6 +47,19 @@ int main(void)
     services_init();
     advertising_init();
     conn_params_init();
+    nrf_delay_ms(2000);
+    ret_code_t ret = fds_register(fds_evt_handler);
+    if (ret == FDS_SUCCESS)
+    {
+        debugMsg("Registering fds_evt_handler successful \n\r");
+    }
+    if (ret != FDS_SUCCESS)
+    {
+        debugMsg("Registering fds_evt_handler failed \n\r");
+    }
+    fds_init();
+    nrf_delay_ms(2000);
+    cqInitialize();
 
     err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
     APP_ERROR_CHECK(err_code);
