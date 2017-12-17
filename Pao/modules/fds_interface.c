@@ -73,7 +73,7 @@ void const *fds_data_read(uint16_t file_id, uint16_t rec_key)
     fds_record_desc_t   record_desc;
     fds_find_token_t    ftok = {0}; 
     void const * out = NULL;
-    uint32_t *p_read_data = NULL;
+    //uint32_t *p_read_data = NULL;
 
     if (fds_record_find(file_id, rec_key, &record_desc, &ftok) == FDS_SUCCESS)
     {
@@ -83,11 +83,11 @@ void const *fds_data_read(uint16_t file_id, uint16_t rec_key)
         }
         // Access the record through the flash_record structure.
         out = flash_record.p_data;
-        p_read_data = (uint32_t *) flash_record.p_data;
-        for (uint16_t i=0;i<flash_record.p_header->tl.length_words;i++)
-        {
-           debugMsg("Read finished, word number %d is %08x", i,p_read_data[i]);
-        }
+        // p_read_data = (uint32_t *) flash_record.p_data;
+        // for (uint16_t i=0;i<flash_record.p_header->tl.length_words;i++)
+        // {
+        //    debugMsg("Read finished, word number %d is %08x", i,p_read_data[i]);
+        // }
         // Close the record when done.
         if (fds_record_close(&record_desc) != FDS_SUCCESS)
         {
