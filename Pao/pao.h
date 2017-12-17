@@ -14,6 +14,7 @@
 #include "ble_interface.h"
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
+#include "flash-interface.h"
 #include "debug-interface.h"
 #include "es-ble-tx.h"
 #include <math.h>
@@ -24,8 +25,9 @@
 #include "sm.h"
 #include "timestamp.h"
 #include "knn.h"
+
 #include "classifier_interface.h"
-#include "flash-interface.h"
+
 // #include "app_mpu.h"
 
 #define SAMPLING_FREQ		10  // Hz

@@ -3,6 +3,8 @@
 
 #include "pao.h"
 #include "preprocessor.h"
+#include "flash-interface.h"
+#include "es-ble-tx.h"
 
 // Valid transition outcomes
 typedef enum TransValid_t {

@@ -3,12 +3,18 @@
 
 #include "classifier.h"
 #include <inttypes.h>
+// #include "debug-interface.h"
 
 typedef struct entry {
 	proba_t proba;
 	class_t label;
 	uint16_t timestamp;
 } entry_t;
+
+
+void store_entry(entry_t* newEntry);
+entry_t* get_entry_history();
+void data_dump();
 
 #endif /* FLASH_INTERFACE_H */
 

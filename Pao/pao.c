@@ -88,7 +88,7 @@ int main(void)
                     label = process_new_sample(CLASS_NO_CLASS, newEntry);
                     if(label != CLASS_NO_CLASS) {
                         // Store in Flash
-                        // TODO
+                        store_entry(newEntry);
                     }
                     break;
 

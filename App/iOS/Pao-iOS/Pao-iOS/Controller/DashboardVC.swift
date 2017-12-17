@@ -160,6 +160,9 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         axisFormatDelegate = self
         // Plot data
         updateChartWithData()
+        
+        // Request data dump
+        bleConn.write(msg: "7E07")
 
     }
     
@@ -229,10 +232,10 @@ class DashboardVC: UIViewController, bleConnectionResponder {
         updateChartWithData()
     }
     @IBAction func onHiddenEraseCalBtnPress(_ sender: Any) {
-        classifier.hasBeenTrained = false
-        try! classifier.rawRealm.write {
-            classifier.rawRealm.deleteAll()
-        }
+//        classifier.hasBeenTrained = false
+//        try! classifier.rawRealm.write {
+//            classifier.rawRealm.deleteAll()
+//        }
     }
     
     func updateChartWithData() {
@@ -341,7 +344,7 @@ class DashboardVC: UIViewController, bleConnectionResponder {
 //        } catch let error as NSError {
 //            fatalError(error.localizedDescription)
 //        }
-        return self.classifier.entriesRealm.objects(PostureEntry.self)
+        return self.classifier.entriesRealm.objects(PostureEntry.self).sorted(byKeyPath: "date", ascending: true)
         
     }
     

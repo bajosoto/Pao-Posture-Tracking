@@ -6,6 +6,7 @@
 #include "mpu_wrapper.h"
 #include "sm.h"
 #include "classifier.h"
+#include "flash-interface.h"
 
 // =========================================================================== //
 //								BLE Messages
@@ -21,6 +22,7 @@ void ble_msg03_vibrate();
 void ble_msg04_snooze();
 void ble_msg05_state_change();
 void ble_msg06_lbl_change();
+void ble_msg07_data_dump();
 
 // Message table
 BleMsgType bleMsgTable[TOTAL_BLE_MESSAGES_APP] = {
@@ -32,6 +34,7 @@ BleMsgType bleMsgTable[TOTAL_BLE_MESSAGES_APP] = {
 	{ble_msg04_snooze, 				0},				// 04:	Start snooze
 	{ble_msg05_state_change, 		1},				// 05:	Change State
 	{ble_msg06_lbl_change, 			2},				// 06:	Change Label (Training) and enable/disable capturing
+	{ble_msg07_data_dump, 			0},				// 06:	Request to send offline data dump
 };
 
 
@@ -71,7 +74,9 @@ void ble_msg06_lbl_change() {
 	debugMsgBle("Label: %d, Training: %d", train_label, training_enabled);
 }
 
-
+void ble_msg07_data_dump() {
+	data_dump();
+}
 
 // =========================================================================== //
 //								BLE State Machine
