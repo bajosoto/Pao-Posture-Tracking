@@ -71,7 +71,7 @@ class_t process_new_sample(class_t label, entry_t* newEntry){
             for(int i = 0; i < CLF_DIM; i++) {
                 training_set[counter_train][i] = processed_samples_buffer[0][i];
             }
-            debugMsg("phi: %d\tthe: %d\tmag: %d\t", (int32_t)(processed_samples_buffer[0][0]), (int32_t)(processed_samples_buffer[0][1]), (int32_t)(processed_samples_buffer[0][2]));
+            //debugMsg("phi: %d\tthe: %d\tmag: %d\t", (int32_t)(processed_samples_buffer[0][0]), (int32_t)(processed_samples_buffer[0][1]), (int32_t)(processed_samples_buffer[0][2]));
 
             //debugMsgBle("lbl: %d cnt: %d", label, counter_train);
 

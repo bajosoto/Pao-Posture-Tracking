@@ -22,14 +22,18 @@ TransValid bleConNotCal();
 TransValid bleDiscon();
 TransValid bleDisconNotCal();
 
+TransValid dumpDone();
+TransValid startDump();
+
 // Machine state transitions from ROW to COL
 TransitionEs esSmTable[NUM_STATES_ES][NUM_STATES_ES] = {	
-		/*S0_NOTCALIBRATED*/	/*S1_NOTCALNOTCON*/		/*S2_DISCONNECTED*/		/*S3_CONNECTED*/	/*S4_TRAINING*/	
-/*S0*/	{{noTrans}, 			{bleDisconNotCal},		{invTrans}, 			{invTrans}, 		{startCal}},
-/*S1*/	{{bleConNotCal}, 		{noTrans},				{invTrans}, 			{invTrans}, 		{invTrans}}, 	
-/*S2*/	{{invTrans}, 			{invTrans},				{noTrans}, 				{bleCon}, 			{invTrans}}, 
-/*S3*/	{{invTrans}, 			{invTrans},				{bleDiscon}, 			{noTrans}, 			{reCal}}, 
-/*S4*/	{{cancelCal}, 			{cancelCal},			{calDoneNotCon}, 		{calDoneCon}, 		{noTrans}}, 	
+		/*S0_NOTCALIBRATED*/	/*S1_NOTCALNOTCON*/		/*S2_DISCONNECTED*/		/*S3_CONNECTED*/	/*S4_TRAINING*/		/*S5_DUMPING*/
+/*S0*/	{{noTrans}, 			{bleDisconNotCal},		{invTrans}, 			{invTrans}, 		{startCal}, 		{invTrans}},
+/*S1*/	{{bleConNotCal}, 		{noTrans},				{invTrans}, 			{invTrans}, 		{invTrans}, 		{invTrans}}, 	
+/*S2*/	{{invTrans}, 			{invTrans},				{noTrans}, 				{bleCon}, 			{invTrans}, 		{invTrans}}, 
+/*S3*/	{{invTrans}, 			{invTrans},				{bleDiscon}, 			{noTrans}, 			{reCal}, 			{startDump}}, 
+/*S4*/	{{cancelCal}, 			{cancelCal},			{calDoneNotCon}, 		{calDoneCon}, 		{noTrans}, 			{invTrans}},
+/*S5*/	{{invTrans}, 			{invTrans},				{invTrans}, 			{dumpDone}, 		{invTrans}, 		{invTrans}}, 	
 };
 
 /*  */
@@ -85,6 +89,14 @@ TransValid bleDiscon() {
 
 /*  */
 TransValid bleDisconNotCal() {
+	return TRANS_OK;
+}
+
+TransValid dumpDone() {
+	return TRANS_OK;
+}
+
+TransValid startDump() {
 	return TRANS_OK;
 }
 

@@ -73,7 +73,7 @@ void prep_transform(uint16_t n_samples,const feature_t samples[n_samples][RAW_DI
         // accel[1] = average[i][IDX_ACCEL_1];
         // accel[2] = average[i][IDX_ACCEL_2];
         // buffer[i][2] = average
-    debugMsg("accel> %d, %d, %d", (int16_t)buffer[0][0], (int16_t)buffer[0][1], (int16_t)buffer[0][2]);
+    // debugMsg("accel> %d, %d, %d", (int16_t)buffer[0][0], (int16_t)buffer[0][1], (int16_t)buffer[0][2]);
     // }
 
 }

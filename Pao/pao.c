@@ -1,5 +1,7 @@
 
 #include "pao.h"
+#include "flash-interface.h"
+#include "sm.h"
 
 #define TIMER_PERIOD_MS         5
 #define TIMER5_TIMER_PERIOD     APP_TIMER_TICKS(TIMER_PERIOD_MS, 0)  // timer period is in ms
@@ -108,6 +110,13 @@ int main(void)
                     process_new_sample(train_label, NULL);
                     break;
 
+                case S5_DUMPING:
+                    if(data_dump()) {
+                        debugMsg("sent entry");
+                    } else {
+                        switchState(S3_CONNECTED);
+                    }
+                    break;
                 default:
                     // Do nothing
                     break;
