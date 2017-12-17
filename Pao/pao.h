@@ -26,7 +26,7 @@
 #include "sm.h"
 #include "timestamp.h"
 #include "knn.h"
-
+#include "classifierflashqueue_interface.h"
 #include "classifier_interface.h"
 
 // #include "app_mpu.h"

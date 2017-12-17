@@ -74,6 +74,7 @@ SRC_FILES += \
   $(PROJ_DIR)/modules/mpu_interface.c \
   $(PROJ_DIR)/modules/ble_interface.c \
   $(PROJ_DIR)/modules/fds_interface.c \
+  $(PROJ_DIR)/modules/classifierflashqueue_interface.c \
   $(PROJ_DIR)/modules/sm.c \
   $(PROJ_DIR)/modules/flash-interface.c \
   $(PROJ_DIR)/modules/timestamp.c \
