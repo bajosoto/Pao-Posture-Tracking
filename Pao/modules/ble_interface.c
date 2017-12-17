@@ -1,3 +1,4 @@
+
 #include "ble_interface.h"
 
 #define IS_SRVC_CHANGED_CHARACT_PRESENT 0                                           /**< Include the service_changed characteristic. If not enabled, the server's database cannot be changed for the lifetime of the device. */
@@ -246,8 +247,6 @@ static void on_ble_evt(ble_evt_t * p_ble_evt)
             //APP_ERROR_CHECK(err_code);
             ble_conn_status = 1;
             sendMessageEs(MSG03_BLE_STATUS);
-            switchStateConnect();
-
             m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
             break; // BLE_GAP_EVT_CONNECTED
 
@@ -256,7 +255,6 @@ static void on_ble_evt(ble_evt_t * p_ble_evt)
             //APP_ERROR_CHECK(err_code);
             ble_conn_status = 0;
             sendMessageEs(MSG03_BLE_STATUS);
-            switchStateDisconnect();
             m_conn_handle = BLE_CONN_HANDLE_INVALID;
             break; // BLE_GAP_EVT_DISCONNECTED
 
@@ -353,6 +351,13 @@ static void ble_evt_dispatch(ble_evt_t * p_ble_evt)
 
 }
 
+static void sys_evt_dispatch(uint32_t sys_evt)
+{
+    // Dispatch the system event to the fstorage module, where it will be
+    // dispatched to the Flash Data Storage (FDS) module.
+    fs_sys_event_handler(sys_evt);
+}
+
 
 /**@brief Function for the SoftDevice initialization.
  *
@@ -386,6 +391,10 @@ void ble_stack_init(void)
     // Subscribe for BLE events.
     err_code = softdevice_ble_evt_handler_set(ble_evt_dispatch);
     APP_ERROR_CHECK(err_code);
+
+    err_code = softdevice_sys_evt_handler_set(sys_evt_dispatch);
+    APP_ERROR_CHECK(err_code);
+
 }
 
 
@@ -584,4 +593,3 @@ void sendMsgBle(int length, const char* format, ... ) {
 
     ble_nus_string_send(&m_nus, (uint8_t *)msg, length);
 }
-

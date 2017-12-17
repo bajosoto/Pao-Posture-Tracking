@@ -61,6 +61,92 @@ int main(void)
            debugMsg("In main, word number %d is %08x", i,readthing[i]);
         }
 
+    entry_t writeentry;
+
+    writeentry.proba = (proba_t)1.5;
+    writeentry.label = 1;
+    writeentry.timestamp = 1000;
+
+    entry_t writeentry2;
+
+    writeentry2.proba = (proba_t)2.5;
+    writeentry2.label = 2;
+    writeentry2.timestamp = 2000;
+
+    entry_t writeentry3;
+
+    writeentry3.proba = (proba_t)3.5;
+    writeentry3.label = 3;
+    writeentry3.timestamp = 3000;
+    
+    cqInitialize();
+    nrf_delay_ms(3000);
+
+    cqEnqueue(&writeentry);
+    nrf_delay_ms(3000);
+
+    cqEnqueue(&writeentry2);
+    nrf_delay_ms(3000);
+
+    entry_t *readentry = (entry_t*)malloc(sizeof(entry_t));
+    readentry = cqDequeue();
+    nrf_delay_ms(3000);
+
+    debugMsg("Reading the entry, proba:%.2f",readentry->proba);
+    debugMsg("Reading the entry, label:%d",readentry->label);
+    debugMsg("Reading the entry, timestamp:%d",readentry->timestamp);
+
+    entry_t *readentry2 = (entry_t*)malloc(sizeof(entry_t));
+    readentry2 = cqDequeue();
+    nrf_delay_ms(3000);
+
+    debugMsg("Reading the entry, proba:%.2f",readentry2->proba);
+    debugMsg("Reading the entry, label:%d",readentry2->label);
+    debugMsg("Reading the entry, timestamp:%d",readentry2->timestamp);
+
+    entry_t *readentry3 = (entry_t*)malloc(sizeof(entry_t));
+    readentry3 = cqDequeue();
+    nrf_delay_ms(3000);
+    debugMsg("Reading the entry, label:%.2f",readentry3->label);
+
+    cqEnqueue(&writeentry);
+    nrf_delay_ms(3000);
+
+    cqEnqueue(&writeentry2);
+    nrf_delay_ms(3000);
+
+    cqEnqueue(&writeentry3);
+    nrf_delay_ms(3000);
+
+    entry_t *readentry4 = (entry_t*)malloc(sizeof(entry_t));
+    readentry4 = cqDequeue();
+    nrf_delay_ms(3000);
+
+    debugMsg("Reading the entry, proba:%.2f",readentry4->proba);
+    debugMsg("Reading the entry, label:%d",readentry4->label);
+    debugMsg("Reading the entry, timestamp:%d",readentry4->timestamp);
+
+    entry_t *readentry5 = (entry_t*)malloc(sizeof(entry_t));
+    readentry5 = cqDequeue();
+    nrf_delay_ms(3000);
+
+    debugMsg("Reading the entry, proba:%.2f",readentry5->proba);
+    debugMsg("Reading the entry, label:%d",readentry5->label);
+    debugMsg("Reading the entry, timestamp:%d",readentry5->timestamp);
+
+    entry_t *readentry6 = (entry_t*)malloc(sizeof(entry_t));
+    readentry6 = cqDequeue();
+    nrf_delay_ms(3000);
+
+    debugMsg("Reading the entry, proba:%.2f",readentry6->proba);
+    debugMsg("Reading the entry, label:%d",readentry6->label);
+    debugMsg("Reading the entry, timestamp:%d",readentry6->timestamp);
+
+    entry_t *readentry7 = (entry_t*)malloc(sizeof(entry_t));
+    readentry7 = cqDequeue();
+    debugMsg("Reading the entry, label:%.2f",readentry7->label);
+
+
     err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
     APP_ERROR_CHECK(err_code);
 
