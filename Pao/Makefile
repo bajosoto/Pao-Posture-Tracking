@@ -73,6 +73,7 @@ SRC_FILES += \
   $(PROJ_DIR)/drivers/nrf_drv_mpu_twi.c \
   $(PROJ_DIR)/modules/mpu_interface.c \
   $(PROJ_DIR)/modules/ble_interface.c \
+  $(PROJ_DIR)/modules/fds_interface.c \
   $(PROJ_DIR)/modules/sm.c \
   $(PROJ_DIR)/modules/flash-interface.c \
   $(PROJ_DIR)/modules/timestamp.c \
@@ -89,6 +90,7 @@ SRC_FILES += \
   $(SDK_ROOT)/components/libraries/timer/app_timer.c \
   $(SDK_ROOT)/components/ble/common/ble_srv_common.c \
   $(SDK_ROOT)/components/libraries/fstorage/fstorage.c \
+  $(SDK_ROOT)/components/libraries/fds/fds.c \
   $(PROJ_DIR)/modules/debug-interface.c \
 
 
@@ -232,7 +234,6 @@ INC_FOLDERS += \
   $(SDK_ROOT)/components/ble/ble_services/ble_nus/ \
   $(SDK_ROOT)/components/ble/ble_advertising/  \
   $(SDK_ROOT)/components/libraries/timer \
-  $(SDK_ROOT)/components/libraries/fstorage \
   $(PROJ_DIR)/drivers/mpu-motion-driver/
 
   # $(PROJ_DIR)/comm-prot/sm \

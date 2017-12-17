@@ -12,6 +12,7 @@
 #include "uart-sm.h"
 #include "mpu_interface.h"
 #include "ble_interface.h"
+#include "fds_interface.h"
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 #include "flash-interface.h"
