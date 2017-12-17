@@ -247,6 +247,7 @@ static void on_ble_evt(ble_evt_t * p_ble_evt)
             //APP_ERROR_CHECK(err_code);
             ble_conn_status = 1;
             sendMessageEs(MSG03_BLE_STATUS);
+            switchStateConnect();
             m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
             break; // BLE_GAP_EVT_CONNECTED
 
@@ -255,6 +256,7 @@ static void on_ble_evt(ble_evt_t * p_ble_evt)
             //APP_ERROR_CHECK(err_code);
             ble_conn_status = 0;
             sendMessageEs(MSG03_BLE_STATUS);
+            switchStateDisconnect();
             m_conn_handle = BLE_CONN_HANDLE_INVALID;
             break; // BLE_GAP_EVT_DISCONNECTED
 
