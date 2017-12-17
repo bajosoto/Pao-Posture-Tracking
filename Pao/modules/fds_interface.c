@@ -7,31 +7,31 @@ void fds_evt_handler(fds_evt_t const * const p_fds_evt)
         case FDS_EVT_INIT:
             if (p_fds_evt->result == FDS_SUCCESS)
             {
-                debugMsg("In fds_evt_handler and initialization successful \n\r");
+                debugMsg("In fds_evt_handler and initialization successful.");
             }
             if (p_fds_evt->result != FDS_SUCCESS)
             {
-                debugMsg("Initialization had a problem \n\r");
+                debugMsg("Initialization had a problem.");
             }
             break;
         case FDS_EVT_WRITE:
             if (p_fds_evt->result == FDS_SUCCESS)
             {
-                debugMsg("In fds_evt_handler and write successful \n\r");
+                //debugMsg("In fds_evt_handler and write successful \n\r");
             }
             else
             {
-                debugMsg("In fds_evt_handler and there was an issue with write:%05d \n\r",p_fds_evt->result);
+                debugMsg("In fds_evt_handler and there was an issue with write:%05d",p_fds_evt->result);
             }
             break;
         case FDS_EVT_UPDATE:
             if (p_fds_evt->result == FDS_SUCCESS)
             {
-                debugMsg("In fds_evt_handler and update successful \n\r");
+                //debugMsg("In fds_evt_handler and update successful \n\r");
             }
             else
             {
-                debugMsg("In fds_evt_handler and there was an issue with update:%05d \n\r",p_fds_evt->result);
+                debugMsg("In fds_evt_handler and there was an issue with update:%05d",p_fds_evt->result);
             }
             break;
        default:

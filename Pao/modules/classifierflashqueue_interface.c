@@ -34,7 +34,7 @@ void cqSetRear(uint16_t new_rear)
 void cqEnqueue(entry_t* write_data)
 {   
    flash_entry_t new_entry;
-   new_entry.value = (uint32_t) write_data->proba;
+   new_entry.value = (proba_t) write_data->proba;
    new_entry.label = (uint32_t) write_data->label;
    new_entry.timestamp = (uint32_t) write_data->timestamp;
 
@@ -51,7 +51,7 @@ void cqEnqueue(entry_t* write_data)
     cqSetRear(cqGetRear()+1);
     uint32_t *p_new_entry_32 = (uint32_t*)&new_entry;
     fds_data_write(CQ_ENTRIES_FILE_ID, cqGetRear(), p_new_entry_32, 3);
-    debugMsg("Enqueued element.");
+    //debugMsg("Enqueued element.");
    }
  }
 
@@ -75,7 +75,7 @@ entry_t* cqDequeue()
     {
       cqInitialize();
     }
-    debugMsg("Dequeued element.");
+    //debugMsg("Dequeued element.");
    }
    return out;
 }
