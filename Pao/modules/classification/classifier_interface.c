@@ -2,8 +2,7 @@
 #include "classifier_interface.h"
 #include "pao.h"
 
-// #define WINDOW_SIZE         30
-#define TRAINING_SET_SIZE   (4 * 5 * SAMPLING_FREQ) / WINDOW_SIZE 
+#define TRAINING_SET_SIZE   (4 * TRAINING_TIME * SAMPLING_FREQ) / WINDOW_SIZE 
 
 feature_t samples_buffer[WINDOW_SIZE][RAW_DIM];
 feature_t processed_samples_buffer[1][CLF_DIM];

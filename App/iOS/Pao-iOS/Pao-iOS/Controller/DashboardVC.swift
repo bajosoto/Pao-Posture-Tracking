@@ -707,8 +707,45 @@ class DashboardVC: UIViewController, bleConnectionResponder {
             signedProba = proba
         }
         self.classifier.storeReceivedEntry(label: label, proba: signedProba, timestamp: timestamp)
+        
+        // Update chart with new data
         self.updateChartWithData()
+        
+        // Update real-time posture feedback bar
         self.postureBar.posture = CGFloat(0.5 + (Double(signedProba) / 200.0))
+        
+        // Update goals
+        switch label {
+        case 0:
+            self.totSit += 1.0
+            self.currSit += 1.0
+            self.goalSitBarView.posture = CGFloat((self.currSit / self.totSit) / self.goalSit)
+            break
+        case 1:
+            self.totSit += 1.0
+            self.goalSitBarView.posture = CGFloat((self.currSit / self.totSit) / self.goalSit)
+            break
+        case 4:
+            self.totStand += 1.0
+            self.currStand += 1.0
+            // self.goalStandingBarView.posture = CGFloat((self.currStand / self.totStand) / self.goalStand)
+            break
+        case 5:
+            self.totStand += 1.0
+            // self.goalStandingBarView.posture = CGFloat((self.currStand / self.totStand) / self.goalStand)
+            break
+        case 2:
+            self.totMove += 1.0
+            self.currMove += 1.0
+            self.goalMovingBarView.posture = CGFloat((self.currMove / self.totMove) / self.goalMove)
+            break
+        case 3:
+            self.totMove += 1.0
+            self.goalMovingBarView.posture = CGFloat((self.currMove / self.totMove) / self.goalMove)
+            break
+        default:
+            break
+        }
     }
     
 }

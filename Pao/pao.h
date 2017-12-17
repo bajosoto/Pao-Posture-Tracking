@@ -28,8 +28,9 @@
 #include "flash-interface.h"
 // #include "app_mpu.h"
 
-#define SAMPLING_FREQ	2  // Hz
-#define KNN_NEIGHBORS	2
+#define SAMPLING_FREQ		10  // Hz
+#define KNN_NEIGHBORS		8
+#define TRAINING_TIME		10	// Seconds
 
 int programRunning;
 
