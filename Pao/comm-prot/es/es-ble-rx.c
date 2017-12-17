@@ -42,7 +42,7 @@ BleMsgType bleMsgTable[TOTAL_BLE_MESSAGES_APP] = {
 void ble_msg00_ping(){
 	bsp_board_led_invert(1);
 	sendBleMessageEs(MSG_BLE_00_PONG);
-	//calibrate_mpu();
+	calibrate_mpu();
 	//sendBleMessageEs(MSG_BLE_02_SENSOR);
 	//debugMsgBle("Hello! %d", -4673);        // Example of how to use debugMsgBle
 }
@@ -75,7 +75,7 @@ void ble_msg06_lbl_change() {
 }
 
 void ble_msg07_data_dump() {
-	data_dump();
+	switchState(S5_DUMPING);
 }
 
 // =========================================================================== //

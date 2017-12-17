@@ -20,6 +20,7 @@ typedef enum StateEs_t {
 	S2_DISCONNECTED,				// S2 - Disconnected (no BLE connection)
 	S3_CONNECTED,					// S3 - Connected (BLE connection to smartphone)
 	S4_TRAINING,					// S4 - Training mode
+	S5_DUMPING,						// S5 - Performing data dump
 	NUM_STATES_ES,
 } StateEs;
 

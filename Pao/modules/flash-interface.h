@@ -14,7 +14,7 @@ typedef struct entry {
 
 void store_entry(entry_t* newEntry);
 entry_t* get_entry_history();
-void data_dump();
+int16_t data_dump();
 
 #endif /* FLASH_INTERFACE_H */
 

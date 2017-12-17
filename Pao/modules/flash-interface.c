@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include "timestamp.h"
 #include "es-ble-tx.h"
+#include "debug-interface.h"
 
 #define MAX_ENTRIES		300
 
@@ -27,7 +28,7 @@ entry_t* get_entry_history() {
 
 	// If history is not empty
 	if(index > 0) {
-		// debugMsg("Retrieved entry at index %d", index);
+		// debugMsg("%d", index);
 		entry_t* entry = &entry_history[index];
 		index -= 1;
 		return entry;
@@ -37,12 +38,19 @@ entry_t* get_entry_history() {
 }
 
 
-void data_dump() {
-	// debugMsg("Data dump requested");
+int16_t data_dump() {
+	//debugMsg("Data dump requested");
 	entry_t* entry;
-	while((entry = get_entry_history()) != NULL) {
+	// int count = 0;
+	if(index > 0) {
+		entry = get_entry_history();
+		// count++;
 		entry->timestamp = get_timestamp() - entry->timestamp;
 		sendBleEntry(entry);
 		// debugMsg("Sent an entry");
+		return index;
+	} else {
+		return 0;
 	}
+	// debugMsg("Data dump finished. Sent %d entries", count);
 }
