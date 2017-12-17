@@ -67,12 +67,13 @@ void fds_data_write(uint16_t file_id, uint16_t rec_key, uint32_t *p_write_data, 
 
 }
 
-void fds_data_read(uint16_t file_id, uint16_t rec_key, uint32_t *p_read_data)
+void const *fds_data_read(uint16_t file_id, uint16_t rec_key)
 {
     fds_flash_record_t  flash_record;
     fds_record_desc_t   record_desc;
     fds_find_token_t    ftok = {0}; 
-    //uint32_t read_data = m_deadbeef;
+    void const * out = NULL;
+    uint32_t *p_read_data = NULL;
 
     if (fds_record_find(file_id, rec_key, &record_desc, &ftok) == FDS_SUCCESS)
     {
@@ -81,6 +82,7 @@ void fds_data_read(uint16_t file_id, uint16_t rec_key, uint32_t *p_read_data)
             debugMsg("In fds_data_read and there was an issue with open.");
         }
         // Access the record through the flash_record structure.
+        out = flash_record.p_data;
         p_read_data = (uint32_t *) flash_record.p_data;
         for (uint16_t i=0;i<flash_record.p_header->tl.length_words;i++)
         {
@@ -97,5 +99,6 @@ void fds_data_read(uint16_t file_id, uint16_t rec_key, uint32_t *p_read_data)
         debugMsg("In fds_data_read and there was an issue with find.");
     }
 
+    return out;
 
 }

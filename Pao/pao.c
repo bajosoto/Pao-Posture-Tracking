@@ -53,8 +53,12 @@ int main(void)
     nrf_delay_ms(2000);
     fds_data_write(TRY_FILE_ID,TRY_REC_KEY,m_deadbeef,2);
     nrf_delay_ms(2000);
-    uint32_t *readthing = NULL;
-    fds_data_read(TRY_FILE_ID, TRY_REC_KEY,readthing);
+    uint32_t *readthing = (uint32_t *) fds_data_read(TRY_FILE_ID, TRY_REC_KEY);
+
+    for (uint16_t i=0;i<2;i++)
+        {
+           debugMsg("In main, word number %d is %08x", i,readthing[i]);
+        }
 
     err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
     APP_ERROR_CHECK(err_code);
