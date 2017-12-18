@@ -57,7 +57,9 @@ void fds_data_write(uint16_t file_id, uint16_t rec_key, uint32_t *p_write_data, 
     
     if (fds_record_find(file_id, rec_key, &record_desc, &ftok) == FDS_SUCCESS)
     {
-        fds_record_update(&record_desc, &record);
+        fds_record_delete(&record_desc);
+        fds_record_write(&record_desc, &record);
+        // fds_record_update(&record_desc, &record);
     }
     else
     {
