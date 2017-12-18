@@ -2,13 +2,14 @@
 
 void cqInitialize()
 {
+  fds_file_delete(CQ_POINTERS_FILE_ID);
+  fds_file_delete(CQ_ENTRIES_FILE_ID); 
   cqSetFront(CQ_INITIAL_REC_KEY-1);
   cqSetRear(CQ_INITIAL_REC_KEY-1);
   debugMsg("Classifier queue initialized.");
   uint16_t front = cqGetFront();
   uint16_t rear = cqGetRear();
   debugMsg("Initial values. (%d, %d)", front, rear);
-
 }
 
 uint16_t cqGetFront()
