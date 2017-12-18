@@ -3091,17 +3091,17 @@
 #if  FDS_ENABLED
 // <o> FDS_OP_QUEUE_SIZE - Size of the internal queue. 
 #ifndef FDS_OP_QUEUE_SIZE
-#define FDS_OP_QUEUE_SIZE 4
+#define FDS_OP_QUEUE_SIZE 8//4
 #endif
 
 // <o> FDS_CHUNK_QUEUE_SIZE - Determines how many @ref fds_record_chunk_t structures can be buffered at any time. 
 #ifndef FDS_CHUNK_QUEUE_SIZE
-#define FDS_CHUNK_QUEUE_SIZE 8
+#define FDS_CHUNK_QUEUE_SIZE 16//8
 #endif
 
 // <o> FDS_MAX_USERS - Maximum number of callbacks that can be registered. 
 #ifndef FDS_MAX_USERS
-#define FDS_MAX_USERS 8
+#define FDS_MAX_USERS 3
 #endif
 
 // <o> FDS_VIRTUAL_PAGES - Number of virtual flash pages to use. 
@@ -3144,7 +3144,7 @@
 // <i> @ref FS_ERR_QUEUE_FULL errors when calling @ref fs_store or @ref fs_erase.
 
 #ifndef FS_QUEUE_SIZE
-#define FS_QUEUE_SIZE 4
+#define FS_QUEUE_SIZE 8//4
 #endif
 
 // <o> FS_OP_MAX_RETRIES - Number attempts to execute an operation if the SoftDevice fails. 
@@ -3152,7 +3152,7 @@
 // <i> error often. The SoftDevice may fail to schedule flash access due to high BLE activity.
 
 #ifndef FS_OP_MAX_RETRIES
-#define FS_OP_MAX_RETRIES 3
+#define FS_OP_MAX_RETRIES 6//3
 #endif
 
 // <o> FS_MAX_WRITE_SIZE_WORDS - Maximum number of words to be written to flash in a single operation. 

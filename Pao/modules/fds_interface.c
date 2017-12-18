@@ -17,8 +17,23 @@ void fds_evt_handler(fds_evt_t const * const p_fds_evt)
         case FDS_EVT_WRITE:
             if (p_fds_evt->result == FDS_SUCCESS)
             {
-                debugMsg("In fds_evt_handler and write successful \n\r");
+                write_flag = 1;
+                debugMsg("In fds_evt_handler and write successful.");
             }
+            if (p_fds_evt->result == FDS_ERR_NO_SPACE_IN_FLASH)
+            {
+                debugMsg("In fds_evt_handler and garbage collection for write needed.");
+                ret_code_t gc_ret = fds_gc();
+                if(gc_ret == FDS_SUCCESS)
+                {
+                    write_flag =1;
+                    debugMsg("In fds_evt_handler and garbage collection for write done.");
+                }
+                else
+                {
+                    debugMsg("In fds_evt_handler and garbage collection for wrie failed.");
+                }    
+            }  
             else
             {
                 debugMsg("In fds_evt_handler and there was an issue with write:%05d",p_fds_evt->result);
@@ -27,8 +42,23 @@ void fds_evt_handler(fds_evt_t const * const p_fds_evt)
         case FDS_EVT_UPDATE:
             if (p_fds_evt->result == FDS_SUCCESS)
             {
-                debugMsg("In fds_evt_handler and update successful \n\r");
+                write_flag = 1;
+                debugMsg("In fds_evt_handler and update successful.");
             }
+            if (p_fds_evt->result == FDS_ERR_NO_SPACE_IN_FLASH)
+            {
+                debugMsg("In fds_evt_handler and garbage collection for update needed.");
+                ret_code_t gc_ret = fds_gc();
+                if(gc_ret == FDS_SUCCESS)
+                {
+                    write_flag =1;
+                    debugMsg("In fds_evt_handler and garbage collection for update done.");
+                }
+                else
+                {
+                    debugMsg("In fds_evt_handler and garbage collection for update failed.");
+                }                                
+            }   
             else
             {
                 debugMsg("In fds_evt_handler and there was an issue with update:%05d",p_fds_evt->result);
@@ -57,13 +87,17 @@ void fds_data_write(uint16_t file_id, uint16_t rec_key, uint32_t *p_write_data, 
     
     if (fds_record_find(file_id, rec_key, &record_desc, &ftok) == FDS_SUCCESS)
     {
+        write_flag = 0;
         fds_record_update(&record_desc, &record);
+        while (write_flag == 0);
     }
     else
     {
+        write_flag = 0;
         fds_record_write(&record_desc, &record);
+        while (write_flag == 0);
     }
-    nrf_delay_ms(5);
+    nrf_delay_ms(10);
 
 }
 
