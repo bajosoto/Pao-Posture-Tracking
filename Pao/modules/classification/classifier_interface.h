@@ -23,6 +23,7 @@ uint16_t train_label;
 void reset_train_buffer();
 void finish_training();
 
+void notify_posture(class_t label);
 class_t process_new_sample(class_t label, entry_t* newEntry);
 char    training_enabled ;
 

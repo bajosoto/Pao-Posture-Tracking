@@ -1,8 +1,10 @@
 
 #include "classifier_interface.h"
 #include "pao.h"
+#include "vibrator.h"
 
-#define TRAINING_SET_SIZE   (4 * TRAINING_TIME * SAMPLING_FREQ) / WINDOW_SIZE 
+#define TRAINING_SET_SIZE       (4 * TRAINING_TIME * SAMPLING_FREQ) / WINDOW_SIZE 
+#define SECS_IN_BAD_POSTURE     5
 
 feature_t samples_buffer[WINDOW_SIZE][RAW_DIM];
 feature_t processed_samples_buffer[1][CLF_DIM];
@@ -23,6 +25,25 @@ void reset_train_buffer() {
 
 void finish_training() {
     clf_fit(TRAINING_SET_SIZE, training_set, training_labels);
+}
+
+void notify_posture(class_t label) {
+    static int16_t badPostCnt = 0;
+    static class_t prevPost = CLASS_NO_CLASS;
+
+    if(label != prevPost) {
+        prevPost = label;
+        badPostCnt = 0;
+    } else {
+        if(label == CLASS_STILL_UNHEALTHY || label == CLASS_MOVING_UNHEALTHY) {
+            badPostCnt += 1;
+        }
+        if(badPostCnt >= SECS_IN_BAD_POSTURE) {
+            badPostCnt = 1;
+            buzz(25);
+        }
+    }
+    // debugMsgBle("Bad Cnt: %d", badPostCnt);
 }
 
 class_t process_new_sample(class_t label, entry_t* newEntry){

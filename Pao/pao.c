@@ -91,6 +91,8 @@ int main(void)
                     if(label != CLASS_NO_CLASS) {
                         // Store in Flash
                         store_entry(newEntry);
+                        // Vibrate if bad posture is detected
+                        notify_posture(label);
                     }
                     break;
 
@@ -101,6 +103,8 @@ int main(void)
                         newEntry->timestamp = 0;
                         // Send to App
                         sendBleEntry(newEntry);
+                        // Vibrate if bad posture is detected
+                        notify_posture(label);
 
                         //debugMsgBle("Lb: %d\tT: %d\tPr: %d", newEntry->label, newEntry->timestamp, (int32_t)(newEntry->proba * 100));
                     }
