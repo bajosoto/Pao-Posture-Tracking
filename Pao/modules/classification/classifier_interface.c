@@ -31,6 +31,8 @@ void notify_posture(class_t label) {
     static int16_t badPostCnt = 0;
     static class_t prevPost = CLASS_NO_CLASS;
 
+    // label = label % 2;
+
     if(label != prevPost) {
         prevPost = label;
         badPostCnt = 0;
