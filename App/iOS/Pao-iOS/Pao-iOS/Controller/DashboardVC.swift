@@ -369,9 +369,10 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     @IBAction func onBtnTrainReleased(_ sender: Any) {
         btnTrainView.isPressed = false
         //isClassifying = false     // IoT
-        animateTrainButtonsIn()
-        // Request ES state to S4_TRAINING
-        bleConn.write(msg: "7E0504")
+//        animateTrainButtonsIn()
+//        // Request ES state to S4_TRAINING
+//        bleConn.write(msg: "7E0504")
+        performSegue(withIdentifier: "toDebug", sender: bleConn)
     }
     @IBAction func onBtnTrainDrag(_ sender: Any) {
         btnTrainView.isPressed = false
@@ -408,8 +409,9 @@ class DashboardVC: UIViewController, bleConnectionResponder {
     @IBAction func onBtnHelpReleased(_ sender: Any) {
         btnHelpView.isPressed = false
         // Send ping message (which also calibrates)
-        bleConn.write(msg: "7E00")
-        classifier.train()
+//        bleConn.write(msg: "7E00")
+//        classifier.train()
+        animateGoalViewIn()
     }
     @IBAction func onBtnHelpDrag(_ sender: Any) {
         btnHelpView.isPressed = false

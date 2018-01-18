@@ -10,6 +10,27 @@ import UIKit
 
 class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
 
+    @IBOutlet weak var segmentedThingie: UISegmentedControl!
+    @IBOutlet weak var img1: UIImageView!
+    @IBOutlet weak var img2: UIImageView!
+    @IBOutlet weak var img3: UIImageView!
+    @IBOutlet weak var img4: UIImageView!
+    @IBOutlet weak var img5: UIImageView!
+    @IBOutlet weak var img6: UIImageView!
+    
+    @IBOutlet weak var title1: UILabel!
+    @IBOutlet weak var text1: UILabel!
+    @IBOutlet weak var title2: UILabel!
+    @IBOutlet weak var text2: UILabel!
+    @IBOutlet weak var title3: UILabel!
+    @IBOutlet weak var text3: UILabel!
+    @IBOutlet weak var title4: UILabel!
+    @IBOutlet weak var text4: UILabel!
+    @IBOutlet weak var title5: UILabel!
+    @IBOutlet weak var text5: UILabel!
+    @IBOutlet weak var title6: UILabel!
+    @IBOutlet weak var text6: UILabel!
+    
     @IBOutlet weak var consoleTextView: UITextView!
     @IBOutlet weak var msgHexValueTxtFld: UITextField!
     @IBOutlet weak var btnPing: AssetBtnPing!
@@ -69,17 +90,19 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
             bleConn.responder = bleConnResp
         }
         
-        // Set self as delegate for the text field
-        self.msgHexValueTxtFld.delegate = self
+        segChanged(self)
         
-        // Do any additional setup after loading the view.
-        
-        // Text view stuff
-        consoleTextView.layoutManager.allowsNonContiguousLayout = false
+//        // Set self as delegate for the text field
+//        self.msgHexValueTxtFld.delegate = self
+//
+//        // Do any additional setup after loading the view.
+//
+//        // Text view stuff
+//        consoleTextView.layoutManager.allowsNonContiguousLayout = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        consoleTextView.attributedText = bleConn.consoleMessages;
+//        consoleTextView.attributedText = bleConn.consoleMessages;
     }
     
     // Hide keyboard when pressing outside the keyboard
@@ -235,4 +258,45 @@ class DebugVC: UIViewController, UITextFieldDelegate, bleConnectionResponder {
         self.classifier.storeReceivedEntry(label: label, proba: proba, timestamp: timestamp)
     }
     
+    @IBAction func segChanged(_ sender: Any) {
+        if segmentedThingie.selectedSegmentIndex == 0 {
+            img1.image = UIImage(named: "video1")
+            title1.text = "Sitting Posture Introduction"
+            text1.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet."
+            img2.image = UIImage(named: "video2")
+            title2.text = "Sitting Posture Techniques"
+            text2.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet."
+            img3.image = UIImage(named: "video3")
+            title3.text = "Standing Posture Introduction"
+            text3.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet."
+            img4.image = UIImage(named: "video4")
+            title4.text = "Power Posing Introduction"
+            text4.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet."
+            img5.image = UIImage(named: "video5")
+            title5.text = "Power Posing Techniques"
+            text5.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet."
+            img6.image = UIImage(named: "video6")
+            title6.text = "Advanced Posture"
+            text6.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet."
+        } else {
+            img1.image = UIImage(named: "video7")
+            title1.text = "Introduction To Meditation"
+            text1.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet."
+            img2.image = UIImage(named: "video8")
+            title2.text = "Breathing Meditations"
+            text2.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet."
+            img3.image = UIImage(named: "video9")
+            title3.text = "Meditation Exercises Level 1"
+            text3.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet."
+            img4.image = UIImage(named: "video10")
+            title4.text = "Meditation Exercises Level 2"
+            text4.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet."
+            img5.image = UIImage(named: "video11")
+            title5.text = "Meditation Exercises Level 3"
+            text5.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet."
+            img6.image = UIImage(named: "video12")
+            title6.text = "Meditation Exercises Level 4"
+            text6.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet."
+        }
+    }
 }

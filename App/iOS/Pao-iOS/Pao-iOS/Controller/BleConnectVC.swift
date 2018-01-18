@@ -37,6 +37,8 @@ class BleConnectVC: UIViewController, UITextViewDelegate, bleConnectionResponder
         
         // Setup the Pao Finding animation timer @ 30Hz
         clockTimer = Timer.scheduledTimer( timeInterval: 0.03, target: self, selector: #selector(BleConnectVC.advancePaoFindingAnimation), userInfo: nil, repeats: true)
+        
+        performSegue(withIdentifier: "toDashboard", sender: bleConn)
     }
     
     // Advance the finding pao animation
